@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  feishu-bot:
+    build: .
+    container_name: feishu-doc-bot
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped

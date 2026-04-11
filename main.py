@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Entry point for the Feishu Document Bot.
+Entry point for the Feishu Document Bot (Long-Connection mode).
 
 Usage:
-    python main.py              # Start the webhook server
-    python main.py --sync       # Run a one-time document sync
+    python main.py              # Start the bot (WebSocket long-connection)
+    python main.py --sync       # Run a one-time document sync only
 """
 
 import sys
@@ -20,10 +20,14 @@ def main():
         logger.info("Sync complete.")
         return
 
-    logger.info("Starting Feishu Doc Bot on %s:%s", Config.HOST, Config.PORT)
-    from feishu_bot.app import create_app
-    app = create_app()
-    app.run(host=Config.HOST, port=Config.PORT, debug=False)
+    logger.info("=" * 50)
+    logger.info("  Feishu Doc Bot — Long-Connection Mode")
+    logger.info("  App ID: %s", Config.APP_ID[:8] + "..." if Config.APP_ID else "NOT SET")
+    logger.info("  Doc sync interval: %ds", Config.DOC_SYNC_INTERVAL)
+    logger.info("=" * 50)
+
+    from feishu_bot.app import start_bot
+    start_bot()
 
 
 if __name__ == "__main__":

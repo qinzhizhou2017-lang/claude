@@ -9,6 +9,4 @@ COPY . .
 
 RUN mkdir -p data logs
 
-EXPOSE 8080
-
 CMD ["python", "main.py"]

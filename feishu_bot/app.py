@@ -8,7 +8,6 @@ import re
 import threading
 
 import lark_oapi as lark
-from lark_oapi.adapter.flask import *
 from lark_oapi.api.im.v1 import *
 
 from apscheduler.schedulers.background import BackgroundScheduler

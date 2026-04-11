@@ -1,0 +1,142 @@
+# ============================================================
+#  Hermes Agent Configuration Template
+#  Copy to ~/.hermes/config/settings.yaml and customize
+# ============================================================
+
+# --- LLM Provider Configuration ---
+provider:
+  # Supported providers:
+  #   nous        - Nous Portal (recommended)
+  #   openrouter  - OpenRouter (200+ models)
+  #   openai      - OpenAI API
+  #   zai         - z.ai / GLM
+  #   kimi        - Kimi / Moonshot
+  #   minimax     - MiniMax
+  #   custom      - Custom OpenAI-compatible endpoint
+  name: openrouter
+
+  # Model name (provider-specific format)
+  # Examples:
+  #   openrouter: nousresearch/hermes-3-llama-3.1-405b
+  #   openai:     gpt-4
+  #   nous:       hermes-3-405b
+  model: nousresearch/hermes-3-llama-3.1-405b
+
+  # API key - can also be set via environment variables:
+  #   OPENROUTER_API_KEY, OPENAI_API_KEY, NOUS_API_KEY, etc.
+  # api_key: sk-your-key-here
+
+  # Custom endpoint (only for provider: custom)
+  # base_url: https://your-endpoint.com/v1
+
+# --- Terminal Backend ---
+terminal:
+  # Supported backends:
+  #   local       - Run commands on this machine
+  #   docker      - Isolated Docker containers
+  #   ssh         - Remote SSH server
+  #   daytona     - Daytona serverless (near-zero idle cost)
+  #   singularity - Singularity containers (HPC)
+  #   modal       - Modal serverless (GPU support)
+  backend: local
+
+  # Docker-specific settings
+  # docker:
+  #   image: ubuntu:22.04
+  #   mount_home: false
+
+  # SSH-specific settings
+  # ssh:
+  #   host: your-server.com
+  #   user: ubuntu
+  #   key: ~/.ssh/id_rsa
+
+# --- Memory & Learning ---
+memory:
+  enabled: true
+  # Periodically prompt user to refresh/update memory
+  auto_refresh: true
+  # Full-text search across session history
+  search_enabled: true
+
+# --- Skills (Procedural Memory) ---
+skills:
+  # Automatically learn new skills from complex tasks
+  auto_learn: true
+  # Enable agentskills.io marketplace integration
+  marketplace: true
+  # Custom skills directory
+  # path: ~/.hermes/skills
+
+# --- Messaging Gateways ---
+# Configure one or more messaging platforms
+
+# gateway:
+#   telegram:
+#     token: your-telegram-bot-token
+#     allowed_users:
+#       - your_telegram_username
+#
+#   discord:
+#     token: your-discord-bot-token
+#     allowed_guilds:
+#       - 123456789
+#
+#   slack:
+#     app_token: xapp-your-app-token
+#     bot_token: xoxb-your-bot-token
+#
+#   whatsapp:
+#     phone_id: your-phone-number-id
+#     token: your-whatsapp-token
+#
+#   signal:
+#     phone: +1234567890
+#
+#   email:
+#     imap_server: imap.gmail.com
+#     smtp_server: smtp.gmail.com
+#     address: you@gmail.com
+#     password: your-app-password
+
+# --- Cron Scheduler ---
+# cron:
+#   enabled: false
+#   jobs:
+#     - name: daily-summary
+#       schedule: "0 9 * * *"
+#       task: "Summarize my unread messages and calendar"
+#     - name: weekly-report
+#       schedule: "0 18 * 5"
+#       task: "Generate weekly project status report"
+
+# --- MCP Servers ---
+# mcp:
+#   servers:
+#     - name: filesystem
+#       command: npx
+#       args: ["-y", "@modelcontextprotocol/server-filesystem", "/home/user"]
+#     - name: github
+#       command: npx
+#       args: ["-y", "@modelcontextprotocol/server-github"]
+#       env:
+#         GITHUB_TOKEN: your-github-token
+
+# --- Voice (optional) ---
+# voice:
+#   transcription:
+#     provider: whisper
+#     model: base
+#   tts:
+#     provider: elevenlabs
+#     voice_id: your-voice-id
+#     api_key: your-elevenlabs-key
+
+# --- Advanced ---
+# agent:
+#   # Maximum tokens in context before auto-compression
+#   max_context_tokens: 128000
+#   # Enable subagent spawning for parallel tasks
+#   subagents: true
+#   # Maximum concurrent subagents
+#   max_subagents: 3

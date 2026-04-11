@@ -120,3 +120,14 @@ SDK 长连接收到事件 (WebSocket)
        ↓
 构建卡片消息 → 回复群聊
 ```
+
+## Hermes Agent
+
+本仓库同时包含 [Hermes Agent](https://github.com/NousResearch/hermes-agent) 的搭建配置，详见 [hermes-agent/README.md](hermes-agent/README.md)。
+
+Hermes Agent 是 Nous Research 开发的自我进化 AI Agent，支持自主技能学习、持久化记忆、多平台消息接入。
+
+快速安装：
+```bash
+bash hermes-agent/scripts/install.sh
+```

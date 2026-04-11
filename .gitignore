@@ -12,3 +12,7 @@ dist/
 build/
 .idea/
 .vscode/
+
+# Hermes Agent
+hermes-agent-dev/
+.hermes/

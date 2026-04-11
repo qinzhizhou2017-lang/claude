@@ -1,0 +1,37 @@
+# Hermes Agent - Docker Compose
+# Usage: docker-compose up -d
+#
+# Make sure to set your API keys in .env or environment variables
+
+services:
+  hermes-agent:
+    image: python:3.11-slim
+    container_name: hermes-agent
+    restart: unless-stopped
+    working_dir: /app
+    volumes:
+      - hermes-data:/root/.hermes
+      - ./config:/app/config:ro
+    environment:
+      - HERMES_HOME=/root/.hermes
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN:-}
+      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN:-}
+    command: >
+      bash -c "
+        pip install uv &&
+        git clone https://github.com/NousResearch/hermes-agent.git /app/hermes-agent &&
+        cd /app/hermes-agent &&
+        uv venv /app/venv --python 3.11 &&
+        . /app/venv/bin/activate &&
+        uv pip install -e '.[all]' &&
+        cp /app/config/settings.example.yaml /root/.hermes/config/settings.yaml 2>/dev/null || true &&
+        hermes gateway
+      "
+    ports:
+      - "8080:8080"
+
+volumes:
+  hermes-data:
+    driver: local

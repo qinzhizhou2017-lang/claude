@@ -9,11 +9,13 @@ Usage:
 
 import os
 import sys
+import urllib.request
 
-# Force clear all proxy settings before any network library loads
+# Completely bypass all proxy detection (env vars + macOS system proxy)
 for _key in list(os.environ.keys()):
     if "proxy" in _key.lower():
         del os.environ[_key]
+urllib.request.getproxies = lambda: {}
 
 from feishu_bot.config import Config
 from feishu_bot.utils.logger import logger

@@ -7,7 +7,14 @@ Usage:
     python main.py --sync       # Run a one-time document sync only
 """
 
+import os
 import sys
+
+# Force clear all proxy settings before any network library loads
+for _key in list(os.environ.keys()):
+    if "proxy" in _key.lower():
+        del os.environ[_key]
+
 from feishu_bot.config import Config
 from feishu_bot.utils.logger import logger
 

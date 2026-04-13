@@ -1,5 +1,5 @@
 """
-Document indexer: sync Feishu wiki documents into a local searchable index.
+Document indexer: sync documents from Feishu Wiki spaces AND Drive folders.
 """
 
 import json
@@ -56,7 +56,7 @@ doc_index = DocumentIndex()
 
 
 class DocumentSyncer:
-    """Sync documents from all Feishu wiki spaces."""
+    """Sync documents from Wiki spaces AND Drive folders."""
 
     def __init__(self):
         self._syncing = False
@@ -68,14 +68,13 @@ class DocumentSyncer:
         start = time.time()
         logger.info("Starting document sync...")
 
+        total = 0
         try:
-            spaces = self._fetch_all_spaces()
-            total = 0
-            for space in spaces:
-                sid = space.get("space_id", "")
-                sname = space.get("name", "Unknown")
-                logger.info("Syncing space: %s (%s)", sname, sid)
-                total += self._sync_space(sid, sname)
+            # 1. Sync Wiki spaces
+            total += self._sync_wiki()
+
+            # 2. Sync Drive folders
+            total += self._sync_drive()
 
             doc_index.save()
             logger.info("Sync completed: %d docs in %.1fs",
@@ -85,13 +84,25 @@ class DocumentSyncer:
         finally:
             self._syncing = False
 
+    # ── Wiki sync ──
+
+    def _sync_wiki(self) -> int:
+        spaces = self._fetch_all_spaces()
+        total = 0
+        for space in spaces:
+            sid = space.get("space_id", "")
+            sname = space.get("name", "Unknown")
+            logger.info("Syncing wiki space: %s (%s)", sname, sid)
+            total += self._sync_wiki_space(sid, sname)
+        return total
+
     def _fetch_all_spaces(self) -> list:
         spaces = []
         page_token = ""
         while True:
             data = api_client.list_wiki_spaces(page_token=page_token)
             if data.get("code") != 0:
-                logger.error("Failed to list spaces: %s", data.get("msg"))
+                logger.error("Failed to list wiki spaces: %s", data.get("msg"))
                 break
             items = data.get("data", {}).get("items", [])
             spaces.extend(items)
@@ -100,8 +111,8 @@ class DocumentSyncer:
             page_token = data["data"].get("page_token", "")
         return spaces
 
-    def _sync_space(self, space_id: str, space_name: str,
-                    parent_node_token: str = "") -> int:
+    def _sync_wiki_space(self, space_id: str, space_name: str,
+                         parent_node_token: str = "") -> int:
         count = 0
         page_token = ""
         while True:
@@ -110,8 +121,6 @@ class DocumentSyncer:
                 page_token=page_token,
             )
             if data.get("code") != 0:
-                logger.warning("Failed to list nodes in space %s: %s",
-                               space_id, data.get("msg"))
                 break
 
             for node in data.get("data", {}).get("items", []):
@@ -120,18 +129,17 @@ class DocumentSyncer:
                 obj_type = node.get("obj_type", "")
                 title = node.get("title", "")
 
-                content_preview = ""
+                content = ""
                 if obj_type in ("doc", "docx"):
-                    content_preview = self._fetch_content(obj_token)
+                    content = self._fetch_content(obj_token)
 
                 doc_index.upsert(node_token, {
-                    "node_token": node_token,
-                    "obj_token": obj_token,
+                    "token": node_token,
                     "title": title,
                     "obj_type": obj_type,
-                    "space_id": space_id,
+                    "source": "wiki",
                     "space_name": space_name,
-                    "content_preview": content_preview[:2000],
+                    "content_preview": content[:2000],
                     "url": node.get("url", ""),
                     "updated_at": node.get("edit_time", ""),
                     "synced_at": int(time.time()),
@@ -139,12 +147,83 @@ class DocumentSyncer:
                 count += 1
 
                 if node.get("has_child", False):
-                    count += self._sync_space(space_id, space_name, node_token)
+                    count += self._sync_wiki_space(space_id, space_name, node_token)
 
             if not data.get("data", {}).get("has_more", False):
                 break
             page_token = data["data"].get("page_token", "")
         return count
+
+    # ── Drive folder sync ──
+
+    def _sync_drive(self) -> int:
+        folder_tokens = Config.DRIVE_FOLDER_TOKENS
+        if not folder_tokens:
+            logger.info("No FEISHU_FOLDER_TOKENS configured, skipping drive sync")
+            return 0
+
+        total = 0
+        for folder_token in folder_tokens:
+            logger.info("Syncing drive folder: %s", folder_token)
+            total += self._sync_drive_folder(folder_token, folder_name="")
+        return total
+
+    def _sync_drive_folder(self, folder_token: str, folder_name: str,
+                           depth: int = 0) -> int:
+        if depth > 10:  # prevent infinite recursion
+            return 0
+
+        count = 0
+        page_token = ""
+        while True:
+            data = api_client.list_drive_files(
+                folder_token, page_token=page_token,
+            )
+            if data.get("code") != 0:
+                logger.warning("Failed to list drive folder %s: %s",
+                               folder_token, data.get("msg"))
+                break
+
+            files = data.get("data", {}).get("files", [])
+            for f in files:
+                token = f.get("token", "")
+                name = f.get("name", "")
+                ftype = f.get("type", "")
+                url = f.get("url", "")
+
+                # Recurse into subfolders
+                if ftype == "folder":
+                    sub_name = f"{folder_name}/{name}" if folder_name else name
+                    logger.info("  Entering subfolder: %s", sub_name)
+                    count += self._sync_drive_folder(token, sub_name, depth + 1)
+                    continue
+
+                # Index documents
+                content = ""
+                if ftype in ("doc", "docx"):
+                    content = self._fetch_content(token)
+
+                display_path = f"{folder_name}/{name}" if folder_name else name
+                doc_index.upsert(f"drive_{token}", {
+                    "token": token,
+                    "title": name,
+                    "obj_type": ftype,
+                    "source": "drive",
+                    "space_name": folder_name or "云盘",
+                    "content_preview": content[:2000],
+                    "url": url,
+                    "updated_at": f.get("modified_time", ""),
+                    "synced_at": int(time.time()),
+                })
+                count += 1
+
+            if not data.get("data", {}).get("has_more", False):
+                break
+            page_token = data["data"].get("page_token", "")
+
+        return count
+
+    # ── Shared ──
 
     def _fetch_content(self, document_id: str) -> str:
         data = api_client.get_document_raw_content(document_id)

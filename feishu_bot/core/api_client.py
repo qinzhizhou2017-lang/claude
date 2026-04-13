@@ -42,6 +42,19 @@ class FeishuAPIClient:
         url = Config.DOC_RAW_CONTENT_URL.format(document_id=document_id)
         return self._get(url)
 
+    def list_drive_files(self, folder_token: str, page_size=200,
+                         page_token=""):
+        """List files in a Drive folder."""
+        params = {
+            "folder_token": folder_token,
+            "page_size": page_size,
+            "order_by": "EditedTime",
+            "direction": "DESC",
+        }
+        if page_token:
+            params["page_token"] = page_token
+        return self._get(Config.DRIVE_FILE_LIST_URL, params=params)
+
     def _get(self, url, params=None):
         try:
             resp = requests.get(

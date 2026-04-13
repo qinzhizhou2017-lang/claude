@@ -18,6 +18,13 @@ class Config:
     WIKI_SPACE_LIST_URL = f"{FEISHU_HOST}/open-apis/wiki/v2/spaces"
     WIKI_NODE_LIST_URL = f"{FEISHU_HOST}/open-apis/wiki/v2/spaces/{{space_id}}/nodes"
     DOC_RAW_CONTENT_URL = f"{FEISHU_HOST}/open-apis/docx/v1/documents/{{document_id}}/raw_content"
+    DRIVE_FILE_LIST_URL = f"{FEISHU_HOST}/open-apis/drive/v1/files"
+
+    # Drive folder tokens to scan (comma-separated)
+    DRIVE_FOLDER_TOKENS = [
+        t.strip() for t in os.getenv("FEISHU_FOLDER_TOKENS", "").split(",")
+        if t.strip()
+    ]
 
     DOC_SYNC_INTERVAL = int(os.getenv("DOC_SYNC_INTERVAL", "3600"))
     LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")

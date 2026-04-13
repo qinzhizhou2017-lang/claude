@@ -174,6 +174,7 @@ def run_oauth_flow():
         f"{Config.OAUTH_AUTHORIZE_URL}"
         f"?app_id={Config.APP_ID}"
         f"&redirect_uri={Config.OAUTH_REDIRECT_URI}"
+        f"&scope=drive:drive:readonly%20wiki:wiki:readonly%20docx:document:readonly%20space:document:retrieve%20drive:drive"
         f"&state=auth"
     )
 

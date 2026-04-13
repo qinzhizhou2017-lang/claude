@@ -60,11 +60,13 @@ class DocumentSyncer:
 
     def __init__(self):
         self._syncing = False
+        self._counter = 0  # running count for periodic save
 
     def sync_all(self):
         if self._syncing:
             return
         self._syncing = True
+        self._counter = 0
         start = time.time()
         logger.info("Starting document sync...")
 
@@ -81,8 +83,18 @@ class DocumentSyncer:
                         total, time.time() - start)
         except Exception as e:
             logger.error("Sync failed: %s", e, exc_info=True)
+            # Save whatever we got so far
+            doc_index.save()
+            logger.info("Partial save: %d docs indexed before error", self._counter)
         finally:
             self._syncing = False
+
+    def _tick(self):
+        """Increment counter, save every 50 docs."""
+        self._counter += 1
+        if self._counter % 50 == 0:
+            doc_index.save()
+            logger.info("Progress: %d docs indexed so far...", self._counter)
 
     # ── Wiki sync ──
 
@@ -145,6 +157,7 @@ class DocumentSyncer:
                     "synced_at": int(time.time()),
                 })
                 count += 1
+                self._tick()
 
                 if node.get("has_child", False):
                     count += self._sync_wiki_space(space_id, space_name, node_token)
@@ -216,6 +229,7 @@ class DocumentSyncer:
                     "synced_at": int(time.time()),
                 })
                 count += 1
+                self._tick()
 
             if not data.get("data", {}).get("has_more", False):
                 break

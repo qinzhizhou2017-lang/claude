@@ -3,12 +3,25 @@ from feishu_bot.config import Config
 from feishu_bot.core.auth import token_manager
 from feishu_bot.utils.logger import logger
 
-# Explicitly bypass proxy for all API calls
 _NO_PROXY = {"http": None, "https": None}
 
 
 class FeishuAPIClient:
-    """Feishu API client for messaging and document access."""
+    """Feishu API client.
+
+    Uses tenant_access_token for messaging (bot identity).
+    Uses user_access_token for document access (user identity).
+    """
+
+    def _get_user_headers(self):
+        """Get headers with user_access_token for doc APIs."""
+        from feishu_bot.core.user_auth import user_token_manager
+        if user_token_manager.is_authorized:
+            return user_token_manager.get_headers()
+        # Fallback to tenant token
+        return token_manager.get_headers()
+
+    # ── Messaging (uses tenant/bot identity) ──
 
     def reply_message(self, message_id: str, msg_type: str, content: str):
         url = f"{Config.SEND_MESSAGE_URL}/{message_id}/reply"
@@ -22,11 +35,13 @@ class FeishuAPIClient:
             params={"receive_id_type": receive_id_type},
         )
 
+    # ── Documents (uses user identity) ──
+
     def list_wiki_spaces(self, page_size=50, page_token=""):
         params = {"page_size": page_size}
         if page_token:
             params["page_token"] = page_token
-        return self._get(Config.WIKI_SPACE_LIST_URL, params=params)
+        return self._get_as_user(Config.WIKI_SPACE_LIST_URL, params=params)
 
     def list_wiki_nodes(self, space_id: str, parent_node_token="",
                         page_size=50, page_token=""):
@@ -36,15 +51,14 @@ class FeishuAPIClient:
             params["parent_node_token"] = parent_node_token
         if page_token:
             params["page_token"] = page_token
-        return self._get(url, params=params)
+        return self._get_as_user(url, params=params)
 
     def get_document_raw_content(self, document_id: str):
         url = Config.DOC_RAW_CONTENT_URL.format(document_id=document_id)
-        return self._get(url)
+        return self._get_as_user(url)
 
     def list_drive_files(self, folder_token: str, page_size=200,
                          page_token=""):
-        """List files in a Drive folder."""
         params = {
             "folder_token": folder_token,
             "page_size": page_size,
@@ -53,12 +67,22 @@ class FeishuAPIClient:
         }
         if page_token:
             params["page_token"] = page_token
-        return self._get(Config.DRIVE_FILE_LIST_URL, params=params)
+        return self._get_as_user(Config.DRIVE_FILE_LIST_URL, params=params)
+
+    # ── HTTP helpers ──
 
     def _get(self, url, params=None):
+        """GET with tenant (bot) token."""
+        return self._do_get(url, token_manager.get_headers(), params)
+
+    def _get_as_user(self, url, params=None):
+        """GET with user token (falls back to tenant token)."""
+        return self._do_get(url, self._get_user_headers(), params)
+
+    def _do_get(self, url, headers, params=None):
         try:
             resp = requests.get(
-                url, headers=token_manager.get_headers(),
+                url, headers=headers,
                 params=params, timeout=30, proxies=_NO_PROXY,
             )
             data = resp.json()
@@ -70,6 +94,7 @@ class FeishuAPIClient:
             return {"code": -1, "msg": str(e)}
 
     def _post(self, url, payload, params=None):
+        """POST with tenant (bot) token."""
         try:
             resp = requests.post(
                 url, headers=token_manager.get_headers(),

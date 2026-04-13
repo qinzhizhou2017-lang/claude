@@ -207,7 +207,8 @@ class DocumentSyncer:
                 # Recurse into subfolders
                 if ftype == "folder":
                     sub_name = f"{folder_name}/{name}" if folder_name else name
-                    logger.info("  Entering subfolder: %s", sub_name)
+                    logger.info("  [depth=%d] Entering subfolder: %s (已索引 %d 篇)",
+                                depth, sub_name, self._counter)
                     count += self._sync_drive_folder(token, sub_name, depth + 1)
                     continue
 

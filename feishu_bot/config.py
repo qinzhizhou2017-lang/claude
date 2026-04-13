@@ -5,13 +5,11 @@ load_dotenv()
 
 
 class Config:
-    # Feishu credentials
     APP_ID = os.getenv("FEISHU_APP_ID", "")
     APP_SECRET = os.getenv("FEISHU_APP_SECRET", "")
     VERIFICATION_TOKEN = os.getenv("FEISHU_VERIFICATION_TOKEN", "")
     ENCRYPT_KEY = os.getenv("FEISHU_ENCRYPT_KEY", "")
 
-    # Feishu API base URL
     FEISHU_HOST = "https://open.feishu.cn"
 
     # API endpoints
@@ -20,16 +18,10 @@ class Config:
     WIKI_SPACE_LIST_URL = f"{FEISHU_HOST}/open-apis/wiki/v2/spaces"
     WIKI_NODE_LIST_URL = f"{FEISHU_HOST}/open-apis/wiki/v2/spaces/{{space_id}}/nodes"
     DOC_RAW_CONTENT_URL = f"{FEISHU_HOST}/open-apis/docx/v1/documents/{{document_id}}/raw_content"
-    DOC_CONTENT_URL = f"{FEISHU_HOST}/open-apis/docx/v1/documents/{{document_id}}/blocks"
-    DRIVE_FILE_LIST_URL = f"{FEISHU_HOST}/open-apis/drive/v1/files"
 
-    # Document sync interval (seconds)
     DOC_SYNC_INTERVAL = int(os.getenv("DOC_SYNC_INTERVAL", "3600"))
-
-    # Log level
     LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 
-    # Data paths
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     DATA_DIR = os.path.join(BASE_DIR, "data")
     LOG_DIR = os.path.join(BASE_DIR, "logs")

@@ -10,24 +10,25 @@ def setup_logger(name="feishu_bot"):
     logger = logging.getLogger(name)
     logger.setLevel(getattr(logging, Config.LOG_LEVEL, logging.INFO))
 
-    formatter = logging.Formatter(
+    if logger.handlers:
+        return logger
+
+    fmt = logging.Formatter(
         "[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s"
     )
 
-    # Console handler
     console = logging.StreamHandler()
-    console.setFormatter(formatter)
+    console.setFormatter(fmt)
     logger.addHandler(console)
 
-    # File handler with rotation
-    file_handler = RotatingFileHandler(
+    fh = RotatingFileHandler(
         os.path.join(Config.LOG_DIR, "bot.log"),
-        maxBytes=10 * 1024 * 1024,  # 10MB
+        maxBytes=10 * 1024 * 1024,
         backupCount=5,
         encoding="utf-8",
     )
-    file_handler.setFormatter(formatter)
-    logger.addHandler(file_handler)
+    fh.setFormatter(fmt)
+    logger.addHandler(fh)
 
     return logger
 

@@ -15,7 +15,7 @@ class TokenManager:
 
     def get_token(self) -> str:
         with self._lock:
-            if time.time() >= self._expire_time - 300:  # Refresh 5 min early
+            if time.time() >= self._expire_time - 300:
                 self._refresh_token()
             return self._token
 
@@ -23,11 +23,9 @@ class TokenManager:
         try:
             resp = requests.post(
                 Config.TENANT_ACCESS_TOKEN_URL,
-                json={
-                    "app_id": Config.APP_ID,
-                    "app_secret": Config.APP_SECRET,
-                },
+                json={"app_id": Config.APP_ID, "app_secret": Config.APP_SECRET},
                 timeout=10,
+                proxies={"http": None, "https": None},
             )
             data = resp.json()
             if data.get("code") == 0:
@@ -35,7 +33,7 @@ class TokenManager:
                 self._expire_time = time.time() + data.get("expire", 7200)
                 logger.info("Tenant access token refreshed successfully")
             else:
-                logger.error("Failed to get tenant_access_token: %s", data)
+                logger.error("Failed to get token: %s", data)
         except Exception as e:
             logger.error("Token refresh error: %s", e)
 

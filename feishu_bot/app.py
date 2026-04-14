@@ -17,6 +17,10 @@ from feishu_bot.handlers.message_handler import message_handler
 from feishu_bot.services.doc_indexer import doc_syncer
 from feishu_bot.utils.logger import logger
 
+# Dedup: track recently processed message IDs
+_processed_msgs = set()
+_processed_lock = threading.Lock()
+
 
 def _on_message(data: P2ImMessageReceiveV1) -> None:
     """Callback when a message is received via the SDK."""
@@ -24,6 +28,18 @@ def _on_message(data: P2ImMessageReceiveV1) -> None:
         event = data.event
         message = event.message
         sender = event.sender
+
+        msg_id = message.message_id or ""
+
+        # Deduplicate: skip if already processed
+        with _processed_lock:
+            if msg_id in _processed_msgs:
+                logger.debug("Skipping duplicate message: %s", msg_id)
+                return
+            _processed_msgs.add(msg_id)
+            # Keep set from growing forever (max 1000)
+            if len(_processed_msgs) > 1000:
+                _processed_msgs.clear()
 
         if message.message_type != "text":
             return

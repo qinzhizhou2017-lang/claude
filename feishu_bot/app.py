@@ -6,6 +6,7 @@ No public IP / domain / SSL required.
 import json
 import re
 import threading
+from collections import OrderedDict
 
 import lark_oapi as lark
 from lark_oapi.api.im.v1 import P2ImMessageReceiveV1
@@ -17,9 +18,10 @@ from feishu_bot.handlers.message_handler import message_handler
 from feishu_bot.services.doc_indexer import doc_syncer
 from feishu_bot.utils.logger import logger
 
-# Dedup: track recently processed message IDs
-_processed_msgs = set()
+# Dedup: track recently processed message IDs (LRU via OrderedDict)
+_processed_msgs = OrderedDict()
 _processed_lock = threading.Lock()
+_MAX_DEDUP = 1000
 
 
 def _on_message(data: P2ImMessageReceiveV1) -> None:
@@ -36,10 +38,10 @@ def _on_message(data: P2ImMessageReceiveV1) -> None:
             if msg_id in _processed_msgs:
                 logger.debug("Skipping duplicate message: %s", msg_id)
                 return
-            _processed_msgs.add(msg_id)
-            # Keep set from growing forever (max 1000)
-            if len(_processed_msgs) > 1000:
-                _processed_msgs.clear()
+            _processed_msgs[msg_id] = True
+            # Evict oldest entries (LRU), keep recent ones intact
+            while len(_processed_msgs) > _MAX_DEDUP:
+                _processed_msgs.popitem(last=False)
 
         if message.message_type != "text":
             return

@@ -49,20 +49,25 @@ class MessageHandler:
     def _reply_smart(self, mid: str, query: str):
         """Search documents, then use LLM to generate intelligent response."""
         query = query[:200]
-        results = search_engine.search(query, top_k=10)
 
-        # Try LLM response
+        # LLM path: send more candidates (top 30) for LLM to filter intelligently
         if Config.DOUBAO_API_KEY and Config.DOUBAO_ENDPOINT_ID:
+            results = search_engine.search(query, top_k=30)
             llm_answer = ask_doubao(query, results)
             if llm_answer:
                 self._send(mid, llm_answer)
                 return
 
-        # Fallback: plain search results (no LLM)
+        # Fallback: plain search results (no LLM or LLM failed)
+        results = search_engine.search(query, top_k=10)
+
         if not results:
             self._send(mid, (
                 f"未找到与「**{query}**」相关的文档。\n\n"
-                "建议：尝试不同的关键词，或输入 `帮助` 查看功能。"
+                "建议：\n"
+                "- 尝试不同的关键词\n"
+                "- 用英文机构名搜索（如 Goldman Sachs）\n"
+                "- 输入 `帮助` 查看功能"
             ))
             return
 

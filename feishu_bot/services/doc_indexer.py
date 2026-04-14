@@ -177,7 +177,9 @@ class DocumentSyncer:
 
             files = data.get("data", {}).get("files", [])
             has_more = data.get("data", {}).get("has_more", False)
-            next_token = data.get("data", {}).get("page_token", "")
+            # Feishu Drive API uses "next_page_token", other APIs use "page_token"
+            next_token = (data.get("data", {}).get("next_page_token", "")
+                          or data.get("data", {}).get("page_token", ""))
 
             logger.info("  [d=%d] %s: page %d got %d items, has_more=%s",
                         depth, folder_name or "ROOT", page_num, len(files), has_more)

@@ -1,17 +1,18 @@
 """
 Message handler: route user queries and generate replies.
+Uses Doubao LLM for natural language understanding when available.
 """
 
 import json
 from feishu_bot.core.api_client import api_client
 from feishu_bot.services.search_engine import search_engine
+from feishu_bot.services.llm_client import ask_doubao
+from feishu_bot.config import Config
 from feishu_bot.utils.logger import logger
 
 HELP_KW = {"帮助", "help", "指令", "功能", "菜单", "怎么用"}
-SEARCH_KW = {"搜索", "查找", "查询", "找", "搜", "search"}
-LATEST_KW = {"最新", "最近", "今日", "今天", "latest", "recent"}
-SUMMARY_KW = {"总结", "概览", "统计", "summary", "文档库"}
-REPORT_KW = {"研报", "报告", "研究", "report"}
+SUMMARY_KW = {"概览", "统计", "summary", "文档库"}
+LATEST_KW = {"最新", "最近", "latest", "recent"}
 
 
 class MessageHandler:
@@ -34,44 +35,30 @@ class MessageHandler:
         logger.info("Query: '%s' from chat=%s", text, msg.get("chat_id"))
         tl = text.lower()
 
+        # Simple keyword commands (no LLM needed)
         if any(k in tl for k in HELP_KW):
             self._reply_help(mid)
         elif any(k in tl for k in SUMMARY_KW):
             self._reply_summary(mid)
         elif any(k in tl for k in LATEST_KW):
-            if any(k in tl for k in REPORT_KW):
-                self._reply_latest(mid, doc_type="doc", label="研报")
-            else:
-                self._reply_latest(mid)
-        elif any(k in tl for k in REPORT_KW):
-            q = text
-            for k in REPORT_KW:
-                q = q.replace(k, "").strip()
-            self._reply_search(mid, q) if q else self._reply_latest(mid, label="研报")
-        elif any(k in tl for k in SEARCH_KW):
-            q = text
-            for k in SEARCH_KW:
-                q = q.replace(k, "").strip()
-            self._reply_search(mid, q) if q else self._reply_help(mid)
+            self._reply_latest(mid)
         else:
-            self._reply_search(mid, text)
+            # For all other queries: search + LLM
+            self._reply_smart(mid, text)
 
-    def _reply_help(self, mid: str):
-        self._send(mid, (
-            "**你好！我是文档助手机器人**\n\n"
-            "你可以 @我 + 指令来使用以下功能：\n\n"
-            "**搜索文档** — `@机器人 关键词`\n"
-            "**最新文档** — `@机器人 最新`\n"
-            "**最新研报** — `@机器人 最新研报`\n"
-            "**文档库概览** — `@机器人 概览`\n"
-            "**帮助** — `@机器人 帮助`\n\n"
-            "直接 @我 输入任何关键词，即可在文档库中搜索！"
-        ))
+    def _reply_smart(self, mid: str, query: str):
+        """Search documents, then use LLM to generate intelligent response."""
+        query = query[:200]
+        results = search_engine.search(query, top_k=10)
 
-    def _reply_search(self, mid: str, query: str):
-        query = query[:200]  # limit query length
-        results = search_engine.search(query, top_k=5)
+        # Try LLM response
+        if Config.DOUBAO_API_KEY and Config.DOUBAO_ENDPOINT_ID:
+            llm_answer = ask_doubao(query, results)
+            if llm_answer:
+                self._send(mid, llm_answer)
+                return
 
+        # Fallback: plain search results (no LLM)
         if not results:
             self._send(mid, (
                 f"未找到与「**{query}**」相关的文档。\n\n"
@@ -83,33 +70,44 @@ class MessageHandler:
         for i, r in enumerate(results, 1):
             title = r["title"] or "无标题"
             url = r.get("url", "")
-            space = r.get("space_name", "")
-            preview = r.get("content_preview", "")[:100].replace("\n", " ")
-
-            line = f"**{i}. [{title}]({url})**"
-            if space:
-                line += f"  | {space}"
-            if preview:
-                line += f"\n> {preview}..."
+            line = f"**{i}. [{title}]({url})**" if url else f"**{i}. {title}**"
             lines.append(line)
-
         self._send(mid, "\n\n".join(lines))
 
-    def _reply_latest(self, mid: str, doc_type: str = "", label: str = "文档"):
-        results = search_engine.get_latest_docs(count=5, doc_type=doc_type)
+    def _reply_help(self, mid: str):
+        has_ai = bool(Config.DOUBAO_API_KEY and Config.DOUBAO_ENDPOINT_ID)
+        if has_ai:
+            self._send(mid, (
+                "**你好！我是AI研报助手**\n\n"
+                "你可以直接 @我 用自然语言提问，例如：\n\n"
+                "- `帮我找1月份Goldman Sachs的宏观研报`\n"
+                "- `最近有什么新能源相关的报告`\n"
+                "- `搜索 人工智能`\n"
+                "- `最新` — 查看最近文档\n"
+                "- `概览` — 文档库统计\n\n"
+                "我能理解你的问题，智能搜索文档库！"
+            ))
+        else:
+            self._send(mid, (
+                "**你好！我是文档助手机器人**\n\n"
+                "你可以 @我 + 关键词来搜索文档：\n\n"
+                "- `@机器人 关键词` — 搜索文档\n"
+                "- `@机器人 最新` — 最新文档\n"
+                "- `@机器人 概览` — 文档库统计\n"
+                "- `@机器人 帮助` — 查看帮助"
+            ))
 
+    def _reply_latest(self, mid: str):
+        results = search_engine.get_latest_docs(count=5)
         if not results:
-            self._send(mid, f"暂无{label}记录。文档库可能还在同步中，请稍后再试。")
+            self._send(mid, "暂无文档记录。文档库可能还在同步中，请稍后再试。")
             return
 
-        lines = [f"最新{label}（Top 5）：\n"]
+        lines = ["**最新文档（Top 5）：**\n"]
         for i, r in enumerate(results, 1):
             title = r["title"] or "无标题"
             url = r.get("url", "")
-            space = r.get("space_name", "")
-            line = f"**{i}. [{title}]({url})**"
-            if space:
-                line += f"  | {space}"
+            line = f"**{i}. [{title}]({url})**" if url else f"**{i}. {title}**"
             lines.append(line)
         self._send(mid, "\n\n".join(lines))
 
@@ -117,12 +115,13 @@ class MessageHandler:
         s = search_engine.get_summary()
         type_labels = {
             "doc": "文档", "docx": "新版文档", "sheet": "表格",
-            "bitable": "多维表格", "mindnote": "思维导图", "slides": "幻灯片",
+            "bitable": "多维表格", "mindnote": "思维导图",
+            "slides": "幻灯片", "pdf": "PDF",
         }
         lines = [
             "**文档库概览**\n",
             f"总文档数：**{s['total_docs']}**",
-            f"知识空间：{', '.join(s['spaces']) if s['spaces'] else '暂无'}",
+            f"知识空间：{', '.join(s['spaces'][:10]) if s['spaces'] else '暂无'}",
             "\n**文档类型分布：**",
         ]
         for t, c in sorted(s["type_counts"].items(), key=lambda x: -x[1]):

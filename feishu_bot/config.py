@@ -36,6 +36,11 @@ class Config:
     DOC_SYNC_INTERVAL = int(os.getenv("DOC_SYNC_INTERVAL", "3600"))
     LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 
+    # Doubao (豆包) LLM API
+    DOUBAO_API_KEY = os.getenv("DOUBAO_API_KEY", "")
+    DOUBAO_ENDPOINT_ID = os.getenv("DOUBAO_ENDPOINT_ID", "")
+    DOUBAO_API_URL = "https://ark.cn-beijing.volces.com/api/v3/chat/completions"
+
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     DATA_DIR = os.path.join(BASE_DIR, "data")
     LOG_DIR = os.path.join(BASE_DIR, "logs")

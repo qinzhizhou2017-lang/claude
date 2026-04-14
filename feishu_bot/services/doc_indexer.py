@@ -1,5 +1,8 @@
 """
 Document indexer: sync documents from Feishu Wiki spaces AND Drive folders.
+
+Optimization: only index titles/metadata during sync (fast).
+Content is fetched on-demand when user searches.
 """
 
 import json
@@ -42,6 +45,10 @@ class DocumentIndex:
         with self._lock:
             self._docs[token] = doc_info
 
+    def get(self, token: str) -> dict:
+        with self._lock:
+            return self._docs.get(token, {})
+
     def get_all_docs(self) -> list:
         with self._lock:
             return list(self._docs.values())
@@ -56,19 +63,25 @@ doc_index = DocumentIndex()
 
 
 class DocumentSyncer:
-    """Sync documents from Wiki spaces AND Drive folders."""
+    """Sync documents from Wiki spaces AND Drive folders.
+
+    Only indexes titles and metadata (no content fetch) for speed.
+    A full sync of thousands of files should complete in minutes, not hours.
+    """
 
     def __init__(self):
         self._syncing = False
-        self._counter = 0  # running count for periodic save
+        self._counter = 0
+        self._folder_counter = 0
 
     def sync_all(self):
         if self._syncing:
             return
         self._syncing = True
         self._counter = 0
+        self._folder_counter = 0
         start = time.time()
-        logger.info("Starting document sync...")
+        logger.info("Starting document sync (metadata only, no content fetch)...")
 
         total = 0
         try:
@@ -79,22 +92,19 @@ class DocumentSyncer:
             total += self._sync_drive()
 
             doc_index.save()
-            logger.info("Sync completed: %d docs in %.1fs",
-                        total, time.time() - start)
+            elapsed = time.time() - start
+            logger.info("=" * 50)
+            logger.info("  Sync completed!")
+            logger.info("  Documents indexed: %d", total)
+            logger.info("  Folders scanned: %d", self._folder_counter)
+            logger.info("  Time: %.1f seconds", elapsed)
+            logger.info("=" * 50)
         except Exception as e:
             logger.error("Sync failed: %s", e, exc_info=True)
-            # Save whatever we got so far
             doc_index.save()
             logger.info("Partial save: %d docs indexed before error", self._counter)
         finally:
             self._syncing = False
-
-    def _tick(self):
-        """Increment counter, save every 50 docs."""
-        self._counter += 1
-        if self._counter % 50 == 0:
-            doc_index.save()
-            logger.info("Progress: %d docs indexed so far...", self._counter)
 
     # ── Wiki sync ──
 
@@ -137,13 +147,8 @@ class DocumentSyncer:
 
             for node in data.get("data", {}).get("items", []):
                 node_token = node.get("node_token", "")
-                obj_token = node.get("obj_token", "")
                 obj_type = node.get("obj_type", "")
                 title = node.get("title", "")
-
-                content = ""
-                if obj_type in ("doc", "docx"):
-                    content = self._fetch_content(obj_token)
 
                 doc_index.upsert(node_token, {
                     "token": node_token,
@@ -151,7 +156,7 @@ class DocumentSyncer:
                     "obj_type": obj_type,
                     "source": "wiki",
                     "space_name": space_name,
-                    "content_preview": content[:2000],
+                    "content_preview": "",
                     "url": node.get("url", ""),
                     "updated_at": node.get("edit_time", ""),
                     "synced_at": int(time.time()),
@@ -183,9 +188,10 @@ class DocumentSyncer:
 
     def _sync_drive_folder(self, folder_token: str, folder_name: str,
                            depth: int = 0) -> int:
-        if depth > 10:  # prevent infinite recursion
+        if depth > 5:
             return 0
 
+        self._folder_counter += 1
         count = 0
         page_token = ""
         while True:
@@ -207,24 +213,19 @@ class DocumentSyncer:
                 # Recurse into subfolders
                 if ftype == "folder":
                     sub_name = f"{folder_name}/{name}" if folder_name else name
-                    logger.info("  [depth=%d] Entering subfolder: %s (已索引 %d 篇)",
-                                depth, sub_name, self._counter)
+                    logger.info("  [depth=%d] Entering: %s (docs=%d, folders=%d)",
+                                depth, sub_name, self._counter, self._folder_counter)
                     count += self._sync_drive_folder(token, sub_name, depth + 1)
                     continue
 
-                # Index documents
-                content = ""
-                if ftype in ("doc", "docx"):
-                    content = self._fetch_content(token)
-
-                display_path = f"{folder_name}/{name}" if folder_name else name
+                # Index document metadata only (no content fetch!)
                 doc_index.upsert(f"drive_{token}", {
                     "token": token,
                     "title": name,
                     "obj_type": ftype,
                     "source": "drive",
                     "space_name": folder_name or "云盘",
-                    "content_preview": content[:2000],
+                    "content_preview": "",
                     "url": url,
                     "updated_at": f.get("modified_time", ""),
                     "synced_at": int(time.time()),
@@ -238,9 +239,18 @@ class DocumentSyncer:
 
         return count
 
-    # ── Shared ──
+    def _tick(self):
+        """Increment counter, save every 100 docs."""
+        self._counter += 1
+        if self._counter % 100 == 0:
+            doc_index.save()
+            logger.info("Progress: %d docs indexed so far...", self._counter)
 
-    def _fetch_content(self, document_id: str) -> str:
+    # ── On-demand content fetch ──
+
+    @staticmethod
+    def fetch_content(document_id: str) -> str:
+        """Fetch document content on demand (called during search)."""
         data = api_client.get_document_raw_content(document_id)
         if data.get("code") == 0:
             return data.get("data", {}).get("content", "")

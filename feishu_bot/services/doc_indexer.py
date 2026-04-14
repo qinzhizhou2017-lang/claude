@@ -1,8 +1,6 @@
 """
 Document indexer: sync documents from Feishu Wiki spaces AND Drive folders.
-
 Optimization: only index titles/metadata during sync (fast).
-Content is fetched on-demand when user searches.
 """
 
 import json
@@ -15,8 +13,6 @@ from feishu_bot.utils.logger import logger
 
 
 class DocumentIndex:
-    """Thread-safe in-memory document index backed by JSON on disk."""
-
     def __init__(self):
         self._docs = {}
         self._lock = threading.Lock()
@@ -41,20 +37,16 @@ class DocumentIndex:
             except Exception as e:
                 logger.error("Failed to save index: %s", e)
 
-    def upsert(self, token: str, doc_info: dict):
+    def upsert(self, token, doc_info):
         with self._lock:
             self._docs[token] = doc_info
 
-    def get(self, token: str) -> dict:
-        with self._lock:
-            return self._docs.get(token, {})
-
-    def get_all_docs(self) -> list:
+    def get_all_docs(self):
         with self._lock:
             return list(self._docs.values())
 
     @property
-    def count(self) -> int:
+    def count(self):
         with self._lock:
             return len(self._docs)
 
@@ -63,16 +55,11 @@ doc_index = DocumentIndex()
 
 
 class DocumentSyncer:
-    """Sync documents from Wiki spaces AND Drive folders.
-
-    Only indexes titles and metadata (no content fetch) for speed.
-    A full sync of thousands of files should complete in minutes, not hours.
-    """
-
     def __init__(self):
         self._syncing = False
         self._counter = 0
         self._folder_counter = 0
+        self._visited_folders = set()  # Prevent re-scanning same folder
 
     def sync_all(self):
         if self._syncing:
@@ -80,93 +67,73 @@ class DocumentSyncer:
         self._syncing = True
         self._counter = 0
         self._folder_counter = 0
+        self._visited_folders = set()
         start = time.time()
-        logger.info("Starting document sync (metadata only, no content fetch)...")
-
+        logger.info("Starting document sync (metadata only)...")
         total = 0
         try:
-            # 1. Sync Wiki spaces
             total += self._sync_wiki()
-
-            # 2. Sync Drive folders
             total += self._sync_drive()
-
             doc_index.save()
             elapsed = time.time() - start
             logger.info("=" * 50)
             logger.info("  Sync completed!")
-            logger.info("  Documents indexed: %d", total)
+            logger.info("  Documents indexed: %d (unique)", total)
             logger.info("  Folders scanned: %d", self._folder_counter)
+            logger.info("  Duplicate folders skipped: %d",
+                        len(self._visited_folders) - self._folder_counter
+                        if len(self._visited_folders) > self._folder_counter else 0)
             logger.info("  Time: %.1f seconds", elapsed)
             logger.info("=" * 50)
         except Exception as e:
             logger.error("Sync failed: %s", e, exc_info=True)
             doc_index.save()
-            logger.info("Partial save: %d docs indexed before error", self._counter)
         finally:
             self._syncing = False
 
     # ── Wiki sync ──
 
-    def _sync_wiki(self) -> int:
-        spaces = self._fetch_all_spaces()
-        total = 0
-        for space in spaces:
-            sid = space.get("space_id", "")
-            sname = space.get("name", "Unknown")
-            logger.info("Syncing wiki space: %s (%s)", sname, sid)
-            total += self._sync_wiki_space(sid, sname)
-        return total
-
-    def _fetch_all_spaces(self) -> list:
+    def _sync_wiki(self):
         spaces = []
         page_token = ""
         while True:
             data = api_client.list_wiki_spaces(page_token=page_token)
             if data.get("code") != 0:
-                logger.error("Failed to list wiki spaces: %s", data.get("msg"))
                 break
             items = data.get("data", {}).get("items", [])
             spaces.extend(items)
             if not data.get("data", {}).get("has_more", False):
                 break
             page_token = data["data"].get("page_token", "")
-        return spaces
+        total = 0
+        for space in spaces:
+            sid = space.get("space_id", "")
+            sname = space.get("name", "Unknown")
+            total += self._sync_wiki_space(sid, sname)
+        return total
 
-    def _sync_wiki_space(self, space_id: str, space_name: str,
-                         parent_node_token: str = "") -> int:
+    def _sync_wiki_space(self, space_id, space_name, parent_node_token=""):
         count = 0
         page_token = ""
         while True:
             data = api_client.list_wiki_nodes(
                 space_id, parent_node_token=parent_node_token,
-                page_token=page_token,
-            )
+                page_token=page_token)
             if data.get("code") != 0:
                 break
-
             for node in data.get("data", {}).get("items", []):
                 node_token = node.get("node_token", "")
-                obj_type = node.get("obj_type", "")
-                title = node.get("title", "")
-
                 doc_index.upsert(node_token, {
-                    "token": node_token,
-                    "title": title,
-                    "obj_type": obj_type,
-                    "source": "wiki",
-                    "space_name": space_name,
-                    "content_preview": "",
+                    "token": node_token, "title": node.get("title", ""),
+                    "obj_type": node.get("obj_type", ""), "source": "wiki",
+                    "space_name": space_name, "content_preview": "",
                     "url": node.get("url", ""),
                     "updated_at": node.get("edit_time", ""),
                     "synced_at": int(time.time()),
                 })
                 count += 1
-                self._tick()
-
                 if node.get("has_child", False):
                     count += self._sync_wiki_space(space_id, space_name, node_token)
-
             if not data.get("data", {}).get("has_more", False):
                 break
             page_token = data["data"].get("page_token", "")
@@ -174,87 +141,80 @@ class DocumentSyncer:
 
     # ── Drive folder sync ──
 
-    def _sync_drive(self) -> int:
+    def _sync_drive(self):
         folder_tokens = Config.DRIVE_FOLDER_TOKENS
         if not folder_tokens:
-            logger.info("No FEISHU_FOLDER_TOKENS configured, skipping drive sync")
             return 0
-
         total = 0
-        for folder_token in folder_tokens:
-            logger.info("Syncing drive folder: %s", folder_token)
-            total += self._sync_drive_folder(folder_token, folder_name="")
+        for ft in folder_tokens:
+            logger.info("Syncing drive folder: %s", ft)
+            total += self._sync_drive_folder(ft, "")
         return total
 
-    def _sync_drive_folder(self, folder_token: str, folder_name: str,
-                           depth: int = 0) -> int:
-        if depth > 5:
+    def _sync_drive_folder(self, folder_token, folder_name, depth=0):
+        if depth > 10:
             return 0
+
+        # Skip already-visited folders (prevent circular scanning)
+        if folder_token in self._visited_folders:
+            logger.info("  SKIP already visited folder: %s (%s)", folder_name, folder_token[:8])
+            return 0
+        self._visited_folders.add(folder_token)
 
         self._folder_counter += 1
         count = 0
+        page_num = 0
         page_token = ""
+
         while True:
-            data = api_client.list_drive_files(
-                folder_token, page_token=page_token,
-            )
+            page_num += 1
+            data = api_client.list_drive_files(folder_token, page_token=page_token)
+
             if data.get("code") != 0:
-                logger.warning("Failed to list drive folder %s: %s",
-                               folder_token, data.get("msg"))
+                logger.warning("Failed to list folder %s (page %d): %s",
+                               folder_token[:8], page_num, data.get("msg"))
                 break
 
             files = data.get("data", {}).get("files", [])
+            has_more = data.get("data", {}).get("has_more", False)
+            next_token = data.get("data", {}).get("page_token", "")
+
+            logger.info("  [d=%d] %s: page %d got %d items, has_more=%s",
+                        depth, folder_name or "ROOT", page_num, len(files), has_more)
+
             for f in files:
                 token = f.get("token", "")
                 name = f.get("name", "")
                 ftype = f.get("type", "")
                 url = f.get("url", "")
 
-                # Recurse into subfolders
                 if ftype == "folder":
-                    sub_name = f"{folder_name}/{name}" if folder_name else name
-                    logger.info("  [depth=%d] Entering: %s (docs=%d, folders=%d)",
-                                depth, sub_name, self._counter, self._folder_counter)
-                    count += self._sync_drive_folder(token, sub_name, depth + 1)
+                    sub = f"{folder_name}/{name}" if folder_name else name
+                    count += self._sync_drive_folder(token, sub, depth + 1)
                     continue
 
-                # Index document metadata only (no content fetch!)
+                # Index file
                 doc_index.upsert(f"drive_{token}", {
-                    "token": token,
-                    "title": name,
-                    "obj_type": ftype,
-                    "source": "drive",
-                    "space_name": folder_name or "云盘",
-                    "content_preview": "",
-                    "url": url,
+                    "token": token, "title": name, "obj_type": ftype,
+                    "source": "drive", "space_name": folder_name or "云盘",
+                    "content_preview": "", "url": url,
                     "updated_at": f.get("modified_time", ""),
                     "synced_at": int(time.time()),
                 })
                 count += 1
-                self._tick()
+                self._counter += 1
+                if self._counter % 500 == 0:
+                    doc_index.save()
+                    logger.info("Progress: %d unique docs indexed...", doc_index.count)
 
-            if not data.get("data", {}).get("has_more", False):
+            if not has_more:
                 break
-            page_token = data["data"].get("page_token", "")
+            if not next_token:
+                logger.warning("  has_more=True but no page_token! Stopping pagination.")
+                break
+            page_token = next_token
 
         return count
-
-    def _tick(self):
-        """Increment counter, save every 100 docs."""
-        self._counter += 1
-        if self._counter % 100 == 0:
-            doc_index.save()
-            logger.info("Progress: %d docs indexed so far...", self._counter)
-
-    # ── On-demand content fetch ──
-
-    @staticmethod
-    def fetch_content(document_id: str) -> str:
-        """Fetch document content on demand (called during search)."""
-        data = api_client.get_document_raw_content(document_id)
-        if data.get("code") == 0:
-            return data.get("data", {}).get("content", "")
-        return ""
 
 
 doc_syncer = DocumentSyncer()

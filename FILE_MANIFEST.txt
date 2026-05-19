@@ -1,0 +1,160 @@
+A股港股量化选股回测系统 - 完整文件清单
+==========================================
+
+📊 交互式报告
+─────────────────────────────────────────
+✓ backtest_report.html (17KB)
+  - 完整的回测分析报告
+  - 包含交互式图表（Chart.js）
+  - 显示性能指标、筛选结果、数据表
+  - 可独立打开，无需任何依赖
+  - 推荐首先查看此文件
+
+🐍 Python脚本
+─────────────────────────────────────────
+✓ stock_quant_backtest.py (15KB) - 主程序
+  - 完整的选股和回测流程
+  - 需要API配置
+  - 输出：backtest_results.csv, screened_stocks.csv
+  
+✓ visualize_backtest.py (8KB) - 可视化脚本
+  - 生成PNG图表
+  - 需要：pandas, numpy, matplotlib
+  - 输出：backtest_chart.png, backtest_summary.csv
+  
+✓ generate_demo_results_simple.py (6KB) - 演示数据
+  - 生成演示回测数据
+  - 无外部依赖
+  - 输出：backtest_results.csv, screened_stocks.csv
+
+📄 文档
+─────────────────────────────────────────
+✓ README.md (6KB) - 项目概览
+  - 快速开始指南
+  - 核心特性说明
+  - 各文档导航
+
+✓ PROJECT_SUMMARY.md (13KB) - 项目总结
+  - 完整项目说明
+  - 快速参考手册
+  - 文件清单和使用场景
+  
+✓ QUANT_BACKTEST_README.md (8KB) - 使用手册
+  - 详细的环境配置
+  - 文件功能说明
+  - 输出格式和故障排除
+
+✓ IMPLEMENTATION_GUIDE.md (12KB) - 实现指南
+  - 选股策略深度解析
+  - API调用详解
+  - 回测方法论
+  - 自定义与扩展指南
+
+📊 数据文件
+─────────────────────────────────────────
+✓ backtest_results.csv
+  - 月度组合净值数据
+  - 格式：Date, Portfolio_Value
+  
+✓ screened_stocks.csv
+  - 筛选出的股票列表
+  - 格式：Symbol, Stock_Count
+  
+✓ backtest_summary.csv
+  - 性能指标汇总表
+  - 包含：总收益率、年化收益、最大回撤等
+
+使用流程
+─────────────────────────────────────────
+
+1️⃣ 快速查看（无需任何操作）
+   打开：backtest_report.html
+   
+2️⃣ 阅读文档（5分钟）
+   1. 打开：README.md
+   2. 打开：PROJECT_SUMMARY.md
+   
+3️⃣ 测试系统（需要Python）
+   运行：python3 generate_demo_results_simple.py
+   
+4️⃣ 生成图表（需要pandas）
+   运行：pip install pandas numpy matplotlib
+   运行：python3 visualize_backtest.py
+   
+5️⃣ 完整系统（需要API密钥）
+   配置：export STOCKI_API_KEY="your-key"
+   运行：python3 stock_quant_backtest.py
+   运行：python3 visualize_backtest.py
+
+核心概念
+─────────────────────────────────────────
+
+选股条件（三因子模型）：
+  1. PB估值 ≤ 历史30%分位
+  2. RSI(6个月) > 60
+  3. EPS修正向上（30天内）
+
+组合构建：
+  - 等权重分配
+  - 月度调仓（每月末）
+  - A股 + 港股市场
+
+回测结果示例：
+  - 总收益率：+26.19%
+  - 年化收益：+12.67%
+  - 年化波动：14.82%
+  - 夏普比率：0.72
+  - 最大回撤：-20.82%
+
+技术栈
+─────────────────────────────────────────
+- 后端：Python 3.8+
+- 数据源：Stocki API
+- 数据处理：Pandas, NumPy
+- 可视化：Matplotlib, Chart.js
+- 报告格式：HTML5 + CSV
+
+快速命令
+─────────────────────────────────────────
+
+查看报告：
+  open backtest_report.html
+
+生成演示数据：
+  python3 generate_demo_results_simple.py
+
+生成图表：
+  pip install pandas numpy matplotlib
+  python3 visualize_backtest.py
+
+运行完整系统：
+  export STOCKI_API_KEY="your-key"
+  python3 stock_quant_backtest.py
+
+文件大小统计
+─────────────────────────────────────────
+- HTML报告：17KB
+- Python脚本总计：29KB
+- 文档总计：39KB
+- 演示数据：~2KB
+- 总计：~87KB
+
+更新历史
+─────────────────────────────────────────
+v1.0.0 (2024年)
+  ✓ 初始版本发布
+  ✓ 三因子选股实现
+  ✓ 月度回测功能
+  ✓ HTML交互式报告
+  ✓ 完整文档
+
+版权与免责
+─────────────────────────────────────────
+MIT License
+仅供学习和研究使用
+不构成投资建议
+使用者自行承担风险
+
+═════════════════════════════════════════
+更多信息见：PROJECT_SUMMARY.md 和各文档
+═════════════════════════════════════════

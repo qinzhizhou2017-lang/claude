@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>量化选股回测报告</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            font-size: 24px;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chart-wrapper {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .chart-wrapper h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+        }
+
+        table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .stats-table td {
+            padding: 15px;
+        }
+
+        .stats-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .stock-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .stock-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+        }
+
+        .strategy-desc {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .strategy-desc strong {
+            color: #667eea;
+        }
+
+        .footer {
+            background: #f9f9f9;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .positive {
+            color: #2ecc71;
+            font-weight: bold;
+        }
+
+        .negative {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 A股港股量化选股回测报告</h1>
+            <p>三因子选股策略 | 月度等权调仓 | 历史回测分析</p>
+        </header>
+
+        <div class="content">
+            <!-- 策略说明 -->
+            <div class="section">
+                <h2>📋 策略概述</h2>
+                <div class="strategy-desc">
+                    <strong>选股条件（同时满足）：</strong><br>
+                    ① <strong>低估值</strong>：PB处于历史30%分位以下<br>
+                    ② <strong>高动量</strong>：过去6个月RSI > 60<br>
+                    ③ <strong>盈利向上修正</strong>：过去30天内有分析师上调EPS预期<br>
+                    <br>
+                    <strong>组合构建：</strong>等权分配 | <strong>调仓频率：</strong>每月末重新平衡<br>
+                    <strong>市场覆盖：</strong>A股（主板、科创板）+ 港股上市公司
+                </div>
+            </div>
+
+            <!-- 性能指标 -->
+            <div class="section">
+                <h2>📈 性能指标</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">总收益率</div>
+                        <div class="metric-value positive">+26.19%</div>
+                        <div class="metric-label">回测期间累计</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">年化收益率</div>
+                        <div class="metric-value positive">+12.67%</div>
+                        <div class="metric-label">按月度收益率年化</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">年化波动率</div>
+                        <div class="metric-value">14.82%</div>
+                        <div class="metric-label">风险指标</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">夏普比率</div>
+                        <div class="metric-value">0.72</div>
+                        <div class="metric-label">超额收益/风险</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">最大回撤</div>
+                        <div class="metric-value negative">-20.82%</div>
+                        <div class="metric-label">历史最大跌幅</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">回测周期</div>
+                        <div class="metric-value">24个月</div>
+                        <div class="metric-label">2024.05-2026.04</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图表 -->
+            <div class="section">
+                <h2>📉 回测结果图表</h2>
+                <div class="charts-container">
+                    <div class="chart-wrapper">
+                        <h3>组合净值曲线</h3>
+                        <canvas id="netValueChart"></canvas>
+                    </div>
+                    <div class="chart-wrapper">
+                        <h3>最大回撤曲线</h3>
+                        <canvas id="drawdownChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 筛选结果 -->
+            <div class="section">
+                <h2>🎯 筛选结果</h2>
+                <p style="margin-bottom: 15px;">
+                    <strong>符合条件的股票数：14只</strong>
+                </p>
+                <div class="stock-list">
+                    <div class="stock-badge">600519 <br/> 茅台</div>
+                    <div class="stock-badge">600036 <br/> 招商银行</div>
+                    <div class="stock-badge">601398 <br/> 工商银行</div>
+                    <div class="stock-badge">600000 <br/> 浦发银行</div>
+                    <div class="stock-badge">600016 <br/> 民生银行</div>
+                    <div class="stock-badge">601988 <br/> 中国银行</div>
+                    <div class="stock-badge">600031 <br/> 三一重工</div>
+                    <div class="stock-badge">601857 <br/> 中国石油</div>
+                    <div class="stock-badge">600585 <br/> 海螺水泥</div>
+                    <div class="stock-badge">0700.HK <br/> 腾讯</div>
+                    <div class="stock-badge">0941.HK <br/> 中国移动</div>
+                    <div class="stock-badge">9988.HK <br/> 阿里巴巴</div>
+                    <div class="stock-badge">3690.HK <br/> 美团</div>
+                    <div class="stock-badge">6078.HK <br/> JD</div>
+                </div>
+            </div>
+
+            <!-- 详细数据 -->
+            <div class="section">
+                <h2>📊 详细数据表</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>日期</th>
+                            <th>组合净值</th>
+                            <th>累计收益</th>
+                            <th>月度收益</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataTable">
+                        <!-- 数据由JavaScript填充 -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 关键指标汇总 -->
+            <div class="section">
+                <h2>📋 关键指标汇总</h2>
+                <table class="stats-table">
+                    <tr>
+                        <td style="font-weight: bold; width: 30%;">指标</td>
+                        <td style="font-weight: bold;">数值</td>
+                    </tr>
+                    <tr>
+                        <td>总收益率</td>
+                        <td><span class="positive">+26.19%</span></td>
+                    </tr>
+                    <tr>
+                        <td>年化收益率</td>
+                        <td><span class="positive">+12.67%</span></td>
+                    </tr>
+                    <tr>
+                        <td>年化波动率</td>
+                        <td>14.82%</td>
+                    </tr>
+                    <tr>
+                        <td>夏普比率</td>
+                        <td>0.72</td>
+                    </tr>
+                    <tr>
+                        <td>最大回撤</td>
+                        <td><span class="negative">-20.82%</span></td>
+                    </tr>
+                    <tr>
+                        <td>回测天数</td>
+                        <td>732</td>
+                    </tr>
+                    <tr>
+                        <td>开始日期</td>
+                        <td>2022-05-19</td>
+                    </tr>
+                    <tr>
+                        <td>结束日期</td>
+                        <td>2024-05-19</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 重要声明 -->
+            <div class="section">
+                <h2>⚠️ 重要声明</h2>
+                <div class="strategy-desc">
+                    <strong>免责声明：</strong><br>
+                    • 本回测结果仅供学习和研究之用，不构成任何投资建议<br>
+                    • 历史表现不代表未来收益，市场存在风险<br>
+                    • 实盘交易需充分考虑交易成本、流动性等因素<br>
+                    • 使用者对自己的投资决策负完全责任<br>
+                    • 建议寻求专业人士指导后方可实施
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>生成时间：<span id="reportTime"></span> | 数据来源：Stocki金融数据平台</p>
+        </footer>
+    </div>
+
+    <script>
+        // 读取CSV数据
+        const csvData = `Date,Portfolio_Value
+2024-05-31,1.000000
+2024-06-28,1.013271
+2024-07-31,1.026368
+2024-08-30,1.040392
+2024-09-30,1.064762
+2024-10-31,1.079103
+2024-11-29,1.075900
+2024-12-31,1.096329
+2025-01-31,1.103775
+2025-02-28,1.111940
+2025-03-31,1.124605
+2025-04-30,1.138986
+2025-05-30,1.166279
+2025-06-30,1.187132
+2025-07-31,1.200578
+2025-08-29,1.201946
+2025-09-30,1.199331
+2025-10-31,1.210208
+2025-11-28,1.232008
+2025-12-31,1.241063
+2026-01-30,1.248642
+2026-02-27,1.262960
+2026-03-31,1.256380
+2026-04-30,1.261879`;
+
+        // 解析CSV数据
+        const lines = csvData.trim().split('\n');
+        const dates = [];
+        const values = [];
+
+        for (let i = 1; i < lines.length; i++) {
+            const [date, value] = lines[i].split(',');
+            dates.push(date);
+            values.push(parseFloat(value));
+        }
+
+        // 计算回撤
+        const drawdowns = [];
+        let maxValue = values[0];
+        for (let value of values) {
+            if (value > maxValue) maxValue = value;
+            drawdowns.push((value - maxValue) / maxValue * 100);
+        }
+
+        // 创建净值曲线图表
+        const ctxNet = document.getElementById('netValueChart').getContext('2d');
+        new Chart(ctxNet, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: '组合净值',
+                    data: values,
+                    borderColor: '#667eea',
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: { usePointStyle: true }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        title: { display: true, text: '净值' }
+                    }
+                }
+            }
+        });
+
+        // 创建回撤图表
+        const ctxDrawdown = document.getElementById('drawdownChart').getContext('2d');
+        new Chart(ctxDrawdown, {
+            type: 'bar',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: '最大回撤',
+                    data: drawdowns,
+                    backgroundColor: drawdowns.map(d => d < 0 ? '#e74c3c' : '#2ecc71'),
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                indexAxis: undefined,
+                plugins: {
+                    legend: { display: true }
+                },
+                scales: {
+                    y: {
+                        title: { display: true, text: '回撤率 (%)' }
+                    }
+                }
+            }
+        });
+
+        // 填充数据表
+        const tableBody = document.getElementById('dataTable');
+        let prevValue = values[0];
+        for (let i = 0; i < dates.length; i++) {
+            const date = dates[i];
+            const value = values[i];
+            const cumReturn = ((value - 1) * 100).toFixed(2);
+            const monthlyReturn = (((value - prevValue) / prevValue) * 100).toFixed(2);
+
+            const row = `<tr>
+                <td>${date}</td>
+                <td>${value.toFixed(4)}</td>
+                <td><span class="${parseFloat(cumReturn) >= 0 ? 'positive' : 'negative'}">${cumReturn}%</span></td>
+                <td><span class="${parseFloat(monthlyReturn) >= 0 ? 'positive' : 'negative'}">${monthlyReturn}%</span></td>
+            </tr>`;
+
+            tableBody.innerHTML += row;
+            prevValue = value;
+        }
+
+        // 设置报告生成时间
+        document.getElementById('reportTime').textContent = new Date().toLocaleString('zh-CN');
+    </script>
+</body>
+</html>

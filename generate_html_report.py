@@ -37,10 +37,19 @@ def generate_html_report():
     roe_values = [float(d['ROE(%)']) for d in data]
     margin_values = [float(d['毛利率(%)']) for d in data]
 
-    pe_median = sorted(pe_values)[len(pe_values)//2]
-    roe_median = sorted(roe_values)[len(roe_values)//2]
-    pb_median = sorted(pb_values)[len(pb_values)//2]
-    margin_median = sorted(margin_values)[len(margin_values)//2]
+    # 正确计算中位数（对于偶数个元素，取中间两个的平均值）
+    def get_median(values):
+        sorted_vals = sorted(values)
+        n = len(sorted_vals)
+        if n % 2 == 0:
+            return (sorted_vals[n//2 - 1] + sorted_vals[n//2]) / 2
+        else:
+            return sorted_vals[n//2]
+
+    pe_median = get_median(pe_values)
+    roe_median = get_median(roe_values)
+    pb_median = get_median(pb_values)
+    margin_median = get_median(margin_values)
 
     html_content = f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -480,95 +489,95 @@ def generate_html_report():
 
         // PE Chart
         const peCtx = document.getElementById('peChart').getContext('2d');
-        new Chart(peCtx, {{
+        new Chart(peCtx, {
             type: 'bar',
-            data: {{
+            data: {
                 labels: companies,
-                datasets: [{{
+                datasets: [{
                     label: 'PE(TTM)',
                     data: data.pe,
                     backgroundColor: '#667eea',
                     borderColor: '#667eea',
                     borderWidth: 1
-                }}]
-            }},
-            options: {{
+                }]
+            },
+            options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: {{
-                    y: {{ beginAtZero: true }}
-                }}
-            }}
-        }});
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
 
         // ROE Chart
         const roeCtx = document.getElementById('roeChart').getContext('2d');
-        new Chart(roeCtx, {{
+        new Chart(roeCtx, {
             type: 'bar',
-            data: {{
+            data: {
                 labels: companies,
-                datasets: [{{
+                datasets: [{
                     label: 'ROE(%)',
                     data: data.roe,
                     backgroundColor: '#764ba2',
                     borderColor: '#764ba2',
                     borderWidth: 1
-                }}]
-            }},
-            options: {{
+                }]
+            },
+            options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: {{
-                    y: {{ beginAtZero: true }}
-                }}
-            }}
-        }});
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
 
         // 四象限图
         const quadrantCtx = document.getElementById('quadrantChart').getContext('2d');
-        new Chart(quadrantCtx, {{
+        new Chart(quadrantCtx, {
             type: 'scatter',
-            data: {{
+            data: {
                 datasets: [
-                    {{
+                    {
                         label: '优质股',
                         data: data.quality,
                         backgroundColor: '#28a745',
                         pointRadius: 8
-                    }},
-                    {{
+                    },
+                    {
                         label: '成长股',
                         data: data.growth,
                         backgroundColor: '#ffc107',
                         pointRadius: 8
-                    }},
-                    {{
+                    },
+                    {
                         label: '困难股',
                         data: data.cheap,
                         backgroundColor: '#fd7e14',
                         pointRadius: 8
-                    }},
-                    {{
+                    },
+                    {
                         label: '泡沫股',
                         data: data.bubble,
                         backgroundColor: '#dc3545',
                         pointRadius: 8
-                    }}
+                    }
                 ]
-            }},
-            options: {{
+            },
+            options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: {{
-                    x: {{
-                        title: {{ display: true, text: 'PE(倍)' }}
-                    }},
-                    y: {{
-                        title: {{ display: true, text: 'ROE(%)' }}
-                    }}
-                }}
-            }}
-        }});
+                scales: {
+                    x: {
+                        title: { display: true, text: 'PE(倍)' }
+                    },
+                    y: {
+                        title: { display: true, text: 'ROE(%)' }
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>

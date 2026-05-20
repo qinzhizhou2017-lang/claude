@@ -222,22 +222,22 @@
                     <div class="stat-card">
                         <h3>PE(TTM)</h3>
                         <div class="value">37.66x</div>
-                        <div style="font-size: 0.8em; margin-top: 5px;">中位数: 43.25x</div>
+                        <div style="font-size: 0.8em; margin-top: 5px;">中位数: 40.47x</div>
                     </div>
                     <div class="stat-card">
                         <h3>PB</h3>
                         <div class="value">2.97x</div>
-                        <div style="font-size: 0.8em; margin-top: 5px;">中位数: 3.01x</div>
+                        <div style="font-size: 0.8em; margin-top: 5px;">中位数: 2.90x</div>
                     </div>
                     <div class="stat-card">
                         <h3>ROE</h3>
                         <div class="value">15.25%</div>
-                        <div style="font-size: 0.8em; margin-top: 5px;">中位数: 15.17%</div>
+                        <div style="font-size: 0.8em; margin-top: 5px;">中位数: 14.73%</div>
                     </div>
                     <div class="stat-card">
                         <h3>毛利率</h3>
                         <div class="value">37.26%</div>
-                        <div style="font-size: 0.8em; margin-top: 5px;">中位数: 41.80%</div>
+                        <div style="font-size: 0.8em; margin-top: 5px;">中位数: 35.55%</div>
                     </div>
                 </div>
             </div>
@@ -261,7 +261,7 @@
             <!-- PE vs ROE 四象限 -->
             <div class="section">
                 <h2 class="section-title">🎯 四象限分析：PE vs ROE</h2>
-                <p style="color: #666; margin-bottom: 20px;">中位线：PE=43.25x | ROE=15.17%</p>
+                <p style="color: #666; margin-bottom: 20px;">中位线：PE=40.47x | ROE=14.73%</p>
                 <div class="chart-container">
                     <canvas id="quadrantChart"></canvas>
                 </div>
@@ -278,6 +278,11 @@
                     </div>
                     <div class="quadrant">
                         <h4 style="color: #ffc107;">⚡ 成长股（高PE高ROE）</h4>
+
+                        <div class="company-item">
+                            <div class="company-name">中芯国际 (688981)</div>
+                            <div class="company-metrics">PE: 46.23x | ROE: 15.17% | 毛利率: 21.2%</div>
+                        </div>
 
                         <div class="company-item">
                             <div class="company-name">沪硅产业 (688126)</div>
@@ -321,11 +326,6 @@
                     </div>
                     <div class="quadrant">
                         <h4 style="color: #dc3545;">✗ 泡沫股（高PE低ROE）</h4>
-
-                        <div class="company-item">
-                            <div class="company-name">中芯国际 (688981)</div>
-                            <div class="company-metrics">PE: 46.23x | ROE: 15.17% | 毛利率: 21.2%</div>
-                        </div>
 
                         <div class="company-item">
                             <div class="company-name">睿创微纳 (688012)</div>
@@ -524,102 +524,102 @@
         pe: [15.93, 22.98, 37.25, 37.38, 37.68, 43.25, 43.33, 44.03, 46.23, 48.5],
         roe: [19.05, 9.36, 14.29, 12.68, 10.91, 17.12, 21.7, 22.65, 15.17, 9.58],
         quality: [{x: 15.93, y: 19.05}],
-        growth: [{x: 43.33, y: 21.7}, {x: 43.25, y: 17.12}, {x: 44.03, y: 22.65}],
+        growth: [{x: 46.23, y: 15.17}, {x: 43.33, y: 21.7}, {x: 43.25, y: 17.12}, {x: 44.03, y: 22.65}],
         cheap: [{x: 37.38, y: 12.68}, {x: 22.98, y: 9.36}, {x: 37.25, y: 14.29}, {x: 37.68, y: 10.91}],
-        bubble: [{x: 46.23, y: 15.17}, {x: 48.5, y: 9.58}]
+        bubble: [{x: 48.5, y: 9.58}]
     };
 
         // PE Chart
         const peCtx = document.getElementById('peChart').getContext('2d');
-        new Chart(peCtx, {{
+        new Chart(peCtx, {
             type: 'bar',
-            data: {{
+            data: {
                 labels: companies,
-                datasets: [{{
+                datasets: [{
                     label: 'PE(TTM)',
                     data: data.pe,
                     backgroundColor: '#667eea',
                     borderColor: '#667eea',
                     borderWidth: 1
-                }}]
-            }},
-            options: {{
+                }]
+            },
+            options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: {{
-                    y: {{ beginAtZero: true }}
-                }}
-            }}
-        }});
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
 
         // ROE Chart
         const roeCtx = document.getElementById('roeChart').getContext('2d');
-        new Chart(roeCtx, {{
+        new Chart(roeCtx, {
             type: 'bar',
-            data: {{
+            data: {
                 labels: companies,
-                datasets: [{{
+                datasets: [{
                     label: 'ROE(%)',
                     data: data.roe,
                     backgroundColor: '#764ba2',
                     borderColor: '#764ba2',
                     borderWidth: 1
-                }}]
-            }},
-            options: {{
+                }]
+            },
+            options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: {{
-                    y: {{ beginAtZero: true }}
-                }}
-            }}
-        }});
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
 
         // 四象限图
         const quadrantCtx = document.getElementById('quadrantChart').getContext('2d');
-        new Chart(quadrantCtx, {{
+        new Chart(quadrantCtx, {
             type: 'scatter',
-            data: {{
+            data: {
                 datasets: [
-                    {{
+                    {
                         label: '优质股',
                         data: data.quality,
                         backgroundColor: '#28a745',
                         pointRadius: 8
-                    }},
-                    {{
+                    },
+                    {
                         label: '成长股',
                         data: data.growth,
                         backgroundColor: '#ffc107',
                         pointRadius: 8
-                    }},
-                    {{
+                    },
+                    {
                         label: '困难股',
                         data: data.cheap,
                         backgroundColor: '#fd7e14',
                         pointRadius: 8
-                    }},
-                    {{
+                    },
+                    {
                         label: '泡沫股',
                         data: data.bubble,
                         backgroundColor: '#dc3545',
                         pointRadius: 8
-                    }}
+                    }
                 ]
-            }},
-            options: {{
+            },
+            options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                scales: {{
-                    x: {{
-                        title: {{ display: true, text: 'PE(倍)' }}
-                    }},
-                    y: {{
-                        title: {{ display: true, text: 'ROE(%)' }}
-                    }}
-                }}
-            }}
-        }});
+                scales: {
+                    x: {
+                        title: { display: true, text: 'PE(倍)' }
+                    },
+                    y: {
+                        title: { display: true, text: 'ROE(%)' }
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>

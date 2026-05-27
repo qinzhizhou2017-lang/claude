@@ -2,28 +2,21 @@
 
 ## Install
 
-Try the following methods in order until one succeeds.
-
-### Option 1: ClawHub (recommended)
+### SkillHub (recommended)
 
 ```bash
-clawhub install stocki-financial-reader --force
+curl -fsSL https://skillhub.cn/install/install.sh | bash
+skillhub install stocki-financial-reader
 ```
 
-### Option 2: SkillHub
-
-```bash
-skillhub install stocki-financial-reader --force
-```
-
-If all methods fail, see latest instructions at the project repo.
+If the installation fails, see latest instructions at the project repo.
 
 ## Configure
 
 Set the required environment variables in `~/.bashrc` (or `~/.zshrc`):
 
 ```bash
-export STOCKI_GATEWAY_URL="https://api.stocki.com.cn"
+export STOCKI_GATEWAY_URL="https://skill.stocki.com.cn"
 export STOCKI_API_KEY="sk_your_key_here"
 ```
 
@@ -56,7 +49,7 @@ Expected: both exit 0. Exit codes:
 ## Update
 
 ```bash
-clawhub install stocki-financial-reader --force
+skillhub install stocki-financial-reader
 ```
 
 ## API Key & Privacy

@@ -62,7 +62,7 @@ curl -X POST "$STOCKI_GATEWAY_URL/api/v3/financial_context/cn" \
 ```
 Expected: 11 sections. Key fields:
 - `meta.{symbol, name, area, report_period, report_date, query_date, data_freshness}`
-- `valuation` with 5y percentiles (e.g. `pe_ttm_percentile_5y`) — use this when the user asks "is it expensive"
+- `valuation` with 5y percentiles (后缀 `percentile_5y` 的字段;实际字段名以响应为准) — use this when the user asks "is it expensive"
 - `income / balance_sheet / cashflow / indicator` are each a dict containing the latest report-period values + YoY + QoQ
 
 **(b) L2 business structure — "which Moutai segment grows fastest"**:
@@ -95,32 +95,36 @@ curl -X POST "$STOCKI_GATEWAY_URL/api/v3/financial_context/cn" \
   -H "Authorization: Bearer $STOCKI_API_KEY" -H "Content-Type: application/json" \
   -d '{"symbol":"999999","layer":1}'
 ```
-Expected: 4xx / error JSON; the skill surfaces the error message to the user and suggests first confirming the symbol exists via `industry-and-symbols.md` `get_symbols`.
+Expected: HTTP **200** + `{"action":"error","error":"...","symbol":"...","suggestion":"..."}`(此 endpoint 用 envelope 而非 HTTP status 表达错误)。**判错按 `action == "error"`,不要按 status code**。skill 把 `error` 和 `suggestion` 透传给用户,并建议先用 `industry-and-symbols.md` `get_symbols` 确认 symbol 存在。
 
-## Response Fields — Raw → User-Facing Label
+## Response Shape
 
-The response is a single JSON object with 11 top-level sections; depth scales with `layer`. The tables below break out the sections by layer (L1 always returned; L2 adds segment detail; L3 adds full consensus time series). Note: switching `layer` never introduces a new endpoint, only changes return depth — the LLM always makes ONE curl call.
+Single JSON object. 11 stable top-level sections (cn/hk × L1/L2/L3 全部 6 组合实测齐全):
 
-### Always returned (regardless of layer)
+| Section | Semantics |
+|---|---|
+| `meta` | 元信息:symbol / name / area / report_period / `data_freshness.*` (PIT critical,含 `indicator_is_fallback` flag) |
+| `valuation` | 估值:当期 PE/PB/PS/PCF + 5y 分位(`valuation` 段里 key 后缀含 `percentile_5y` 的字段即是);字段集随市场/股票浮动 |
+| `income` / `balance_sheet` / `cashflow` | 三表(最新报告期)dict + YoY + QoQ |
+| `indicator` | 财务指标(ROE / margins / turnover 等);可能 fallback 到上一期(看 `meta.data_freshness.indicator_is_fallback`) |
+| `consensus` | 一致预期:L1 ≤2 records (current_fy + next_fy) / L2 ≤3 / L3 ≥100 (full time series, ascending by date) |
+| `segments` | 业务分部:**cn 为 dict** (L1 stub 仅 `available_at_layer=2` + `dimensions[]`; L2 9-field records + `by_dimension` 按 `channel/product/region/industry` 分组; L3 16-field 加 cost/profit/cost_yoy 等);**hk 始终为 null**(L1/L2/L3 均无) |
+| `field_descriptions` | **CN 标签权威源**:dict 形式 raw key → 中文 gloss;len 随 layer 增长(cn ~43/127/212, hk ~34/114/193) |
+| `_source_map` | **debug only, NEVER 给用户**:内部 routing metadata,无 user-facing 契约,格式随版本可能变 |
+| `history` | 预留, 当前未使用 |
 
-| Raw key | EN label | CN label | Note |
-|---|---|---|---|
-| `meta.symbol` | Symbol | 代码 | |
-| `meta.name` | Stock name (CN) | 中文名 | |
-| `meta.name_eng` | Stock name (EN) | 英文名 | hk only |
-| `meta.area` | Market | 市场 | enum: cn / hk |
-| `meta.report_period` | Report period | 报告期 | most recent financial period end |
-| `meta.report_date` | Report date | 报告日期 | |
-| `meta.query_date` | Query date | 查询日期 | |
-| `meta.data_freshness.financial_report_date` | Financial PIT | 财报披露日 | PIT-critical |
-| `meta.data_freshness.indicator_report_date` | Indicator PIT | 指标披露日 | PIT-critical |
-| `meta.data_freshness.indicator_is_fallback` | Indicator fallback flag | 指标 fallback 标志 | true = indicator uses previous period; surface to user as "indicators are one period behind financials" |
-| `meta.data_freshness.valuation_data_date` | Valuation date | 估值日期 | |
-| `field_descriptions` | Field descriptions (CN) | 字段说明 | upstream-supplied CN gloss per returned field; **prefer this as the authoritative CN label source over hand-mapping** |
-| `_source_map` | Source map | 数据源映射 | **debug-only** (contains internal table names like `AShareIncome` / `wind_*`); NEVER show to user |
-| `history` | History | 历史 | reserved for future expansion |
+### Field 解读纪律
 
-**HK 币种不可见(数据缺口必须主动告知)**:HK `income / balance_sheet / cashflow / valuation` 各 dict **无 `currency` 字段**;且 hk financial_context response 的 `segments` 字段**始终为 `null`**(layer 1/2/3 均测过——不同于 cn 端 layer ≥ 2 segments.data 实存且带 currency=CNY)。**HK 端没有任何 currency 信号可取**——LLM 必须按公司归属 / 股票类型推断币种:
+具体字段名随**市场 / 股票 / layer / 报告期**浮动:实测 cn `valuation.dividend_yield` 有 hk 同位置无;hk 银行 `valuation` 多 `float_share / net_assets / turnover / oper_rev_ttm` 等扩展字段。**不要按硬编码字段清单消费**:
+
+- **CN 标签源**:取 `field_descriptions[raw_key]`,缺时按英文 raw key 含义意译,不直接吐 raw key
+- **5y 分位**:`valuation` 段里 key 含 `percentile_5y` 后缀的字段即是;不假定固定前缀
+- **缺字段**:不假装存在,告诉用户该期无此项
+- **路由判断**:看 section 是否存在 / 是否空,不看具体字段名
+
+### 已知陷阱(必须主动告知用户)
+
+**HK 无 currency 信号(数据缺口必须主动告知)** —— hk `income / balance_sheet / cashflow / valuation` 各 dict **无 `currency` 字段**;且 hk `segments` 字段**始终为 `null`**(layer 1/2/3 均测过——不同于 cn 端 layer ≥ 2 segments.data 实存且带 currency=CNY)。**HK 端没有任何 currency 信号可取**——LLM 必须按公司归属 / 股票类型推断币种:
 
 - H 股内地公司(如腾讯 00700、中广核电力 01816)按 IFRS 用 **RMB** 报表
 - 本港公司(如汇丰 00005)用 **HKD**
@@ -128,58 +132,24 @@ The response is a single JSON object with 11 top-level sections; depth scales wi
 
 **展示数值时必须标注币种**;若不确定,显式告知用户"币种基于公司归属推断,请核对最新年报披露",**不要默认 HKD**——默认 HKD 给 H 股内地公司会出大错(RMB 与 HKD 相差近 10% + 长期趋势)。
 
-### L1 / L2 / L3 — Valuation, Income, Balance Sheet, Cashflow, Indicator
+**Segments YoY 口径陷阱(数据缺口必须主动告知)** —— `segments.data[*].sales_yoy` 在公司**并购 / 分拆 / 业务线重组**的当期可能产生**非业务原因**的数字断层。当 `|sales_yoy|` 异常(如 > 200% 或 < -50%)或某 segment 名前期有当期无 / 前期无当期有,展示给用户时**必须主动提示** "该 segment 同比可能因口径变化(并购 / 分拆 / 重组),请核对当期公告",**不要直接解读为业务剧变**。数据层无法自动识别"是否口径变化"——只能识别"数字异常 / segment 名变更"作为触发信号。最终解读需用户自行核对公告;LLM 的职责是 surface 触发信号,**不**默认按业务逻辑下结论。
 
-| Raw key | EN label | CN label | Note |
-|---|---|---|---|
-| `valuation.pe_ttm` / `valuation.pb` / `valuation.ps_ttm` | Current PE / PB / PS | 当前 市盈率 / 市净率 / 市销率 | trailing-12-month for TTM variants |
-| `valuation.pe_ttm_percentile_5y` | PE 5y Percentile | 市盈率 5 年分位 | 5-year rolling rank; surface as "current PE sits at X% of the past 5 years" |
-| `valuation.pb_percentile_5y` | PB 5y Percentile | 市净率 5 年分位 | same |
-| `valuation.ps_ttm_percentile_5y` | PS 5y Percentile | 市销率 5 年分位 | same |
-| `income.*` | Income statement (latest) | 利润表(最新) | dict; latest report period + YoY + QoQ |
-| `balance_sheet.*` | Balance sheet (latest) | 资产负债表(最新) | dict; latest snapshot |
-| `cashflow.*` | Cash flow statement (latest) | 现金流量表(最新) | dict; latest |
-| `indicator.*` | Indicators (latest) | 财务指标(最新) | dict; ROE / margins / turnover etc. |
+**Indicator fallback** —— `meta.data_freshness.indicator_is_fallback=true`(hk 常见)表示指标用了上一期 fallback。主动告知用户"指标数据较财报落后一期"。
 
-### L1 (consensus light)
+### Routing & 5y-window 约束
 
-| Raw key | EN label | CN label | Note |
-|---|---|---|---|
-| `consensus[*]` | Consensus records | 一致预期记录 | ≤ 2 records (current_fy + next_fy) |
-| `segments` | Segments (stub) | 业务分部(stub) | only `available_at_layer=2` + `dimensions[]` placeholders |
+**5y 窗口排他性**:本 endpoint 仅暴露固定 5 年分位字段(`valuation` 段 `percentile_5y` 后缀)。**不**计算任意窗口分位。用户问 3y / 10y / 自定义窗口 → fall back to `fundamentals-panel.md` 拉 `data_type=valuation` 原始日频序列 client-side 计算,并明确告知用户"基于原始序列估算"。
 
-### L2 (segments expanded)
+**Routing discipline**:L1 已经能回答 generic "analyze X" / "is X expensive" / "X fundamentals" prompts。**不要**习惯性 chain `fundamentals-panel.md` 多 endpoint 回答这类问题。
 
-| Raw key | EN label | CN label | Note |
-|---|---|---|---|
-| `consensus[*]` | Consensus records | 一致预期记录 | ≤ 3 records |
-| `segments.data[*]` | Segment records (9 fields) | 业务分部记录(9 字段) | each record: ann_dt, currency, segment, segment_type, sales, sales_percentage, sales_yoy, profit_percentage, gross_profit_margin |
-| `segments.by_dimension` | Segments grouped by dimension | 按维度分组 | groups by `segment_type` ∈ channel / product / region / industry |
+### Output Discipline(endpoint 特异)
 
-**Segments YoY 口径陷阱(数据缺口必须主动告知)**:`segments.data[*].sales_yoy` 在公司**并购 / 分拆 / 业务线重组**的当期可能产生**非业务原因**的数字断层。当 `|sales_yoy|` 异常(如 > 200% 或 < -50%)或某 segment 名前期有当期无 / 前期无当期有,展示给用户时**必须主动提示** "该 segment 同比可能因口径变化(并购 / 分拆 / 重组),请核对当期公告",**不要直接解读为业务剧变**。
+总纪律见 SKILL.md `## Output Discipline`。fin-context 额外:
 
-数据层无法自动识别"是否口径变化"——只能识别"数字异常 / segment 名变更"作为触发信号。最终解读需用户自行核对公告;LLM 的职责是 surface 触发信号,**不**默认按业务逻辑下结论。
-
-### L3 (full consensus time series + 16-field segments)
-
-| Raw key | EN label | CN label | Note |
-|---|---|---|---|
-| `consensus[*]` | Consensus time series | 一致预期时序 | ≥ 100 records, ascending by date; DO NOT additionally call `consensus-and-target.md` |
-| `segments.data[*]` | Segment records (16 fields) | 业务分部记录(16 字段) | adds cost / profit / cost_yoy / profit_yoy / cost_percentage / gross_profit_margin_yoy for cross-validation |
-
-**5y-window exclusivity**: this endpoint exposes ONLY fixed 5-year percentile fields (`pe_ttm_percentile_5y` etc.). It does NOT compute arbitrary-window percentiles. For 3y / 10y / custom-window questions, fall back to `fundamentals-panel.md` to pull the raw valuation series and compute client-side, and clearly tell the user the figure is an approximation.
-
-**Routing discipline**: L1 already answers generic "analyze X" / "is X expensive" / "X fundamentals" prompts. Do NOT instinctively call `fundamentals-panel.md` and chain multiple endpoints for these questions.
-
-**Field-label sourcing**: prefer `field_descriptions` from the response as the authoritative CN label per field. The hand-mapped section names below cover the high-frequency top-level keys when speed is wanted.
-
-**Top-level section names**: `meta` → 元信息; `valuation` → 估值; `income` → 利润表; `balance_sheet` → 资产负债表; `cashflow` → 现金流量表; `indicator` → 财务指标; `consensus` → 一致预期; `segments` → 业务分部; `field_descriptions` → 字段说明; `_source_map` → 数据源映射 (debug); `history` → 历史.
-
-**Segment-prefix discipline**: segment text with `申万-` / `wind-` / `sw_` / `中信-` prefix MUST be stripped before showing to the user (same rule as `industry-and-symbols.md`).
-
-**Debug-field discipline**: `_source_map`, `_source`, and any other underscore-prefixed internal fields are debug-only — NEVER surface to the user (they contain underlying table names like `AShareIncome` / `wind_*` which would leak data-supplier identity).
-
-**Output discipline**: never pass raw key (`pe_ttm_percentile_5y`, `indicator_is_fallback`, `_source_map`, pipe-delim symbol like `AAPL|ST|USA`, `wind-`/`sw-`/`申万-`/`中信-` industry prefix) to user-visible text. Agent picks EN or CN label based on the user's language; if the response's `field_descriptions` covers a field, prefer that label.
+- `_source_map` / `_source` / 任何下划线开头字段 —— debug only,内部 routing metadata,无 user-facing 契约且格式随版本可能变,**绝不**进用户文本
+- segment 文本带形如 `<src>-<category>` 的来源前缀 —— 剥掉前缀再展示(同 `industry-and-symbols.md`)
+- CN 标签源:优先 `field_descriptions[raw_key]`,无对应时按 raw key 英文含义意译,不直接吐 raw key
+- 顶级 section 名 CN 速查:`meta` → 元信息;`valuation` → 估值;`income` → 利润表;`balance_sheet` → 资产负债表;`cashflow` → 现金流量表;`indicator` → 财务指标;`consensus` → 一致预期;`segments` → 业务分部;`field_descriptions` → 字段说明;`_source_map` → 数据源映射(debug);`history` → 历史
 
 ## Cross-ref
 
@@ -188,4 +158,4 @@ The response is a single JSON object with 11 top-level sections; depth scales wi
 - Full consensus time series → use this skill's **L3**, not `consensus-and-target.md` (avoid duplicate calls)
 - Realtime price + current PE → `realtime-quote.md`
 - Industry mapping / company profile → `industry-and-symbols.md`
-- us single-stock is currently unavailable on v3 and will return error; check live via `market-calendar.md` `/availability`
+- us single-stock returns HTTP 404 on v3 (no payload). Route through `market-calendar.md` `/availability` to check liveness before calling.

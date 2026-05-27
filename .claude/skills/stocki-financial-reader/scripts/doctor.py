@@ -3,7 +3,7 @@
 
 [1/4] Env vars       — STOCKI_GATEWAY_URL + STOCKI_API_KEY presence + key format check + masked display
 [2/4] Skill version  — read local SKILL.md frontmatter version; optional remote compare
-[3/4] File integrity — SHA256 against scripts/checksums.sha256
+[3/4] File integrity — optional SHA256 verification (skipped if scripts/checksums.sha256 absent)
 [4/4] Workspace      — does NOT create ~/stocki/; reports OK only
 
 Exit: 0 = all ok, 1 = anything failed (or auth-class problem).
@@ -34,8 +34,8 @@ def check_env():
     missing = [n for n, v in (("STOCKI_GATEWAY_URL", base), ("STOCKI_API_KEY", key)) if not v]
     if missing:
         return False, f"{', '.join(missing)} not set"
-    if not (key.startswith("sk_") or key.startswith("eyJ")):
-        return False, f"STOCKI_API_KEY must start with 'sk_' (legacy) or 'eyJ' (JWT) (got: {mask_key(key)})"
+    if not (key.startswith("sk_") or key.startswith("sk-") or key.startswith("eyJ")):
+        return False, f"STOCKI_API_KEY must start with 'sk_' (legacy), 'sk-' (PAT), or 'eyJ' (JWT) (got: {mask_key(key)})"
     return True, f"{base} + {mask_key(key)}"
 
 

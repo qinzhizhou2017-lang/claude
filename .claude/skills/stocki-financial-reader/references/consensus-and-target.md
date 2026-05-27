@@ -160,7 +160,7 @@ Expected: `action=error`; the skill teaches the LLM that on seeing this error it
 | `data[*].date` | Date | 日期 | |
 | `data[*].ann_dt` | Announcement Date | 公告披露日 | PIT-critical |
 | `data[*].currency` | Currency | 币种 | |
-| `data[*].segment` | Segment name | 分部名称 | strip `wind-` / `sw-` / `申万-` prefix if present |
+| `data[*].segment` | Segment name | 分部名称 | strip 形如 `<src>-<category>` 的来源前缀 if present |
 | `data[*].segment_type` | Segment type | 分部维度 | enum: channel / product / region / industry |
 | `data[*].segment_itemcode` | Segment item code | 分部代码 | |
 | `data[*].sales` | Sales | 销售额 | unit: 元 |
@@ -184,9 +184,9 @@ Expected: `action=error`; the skill teaches the LLM that on seeing this error it
 
 **Target-price presentation discipline**: when comparing `con_target_price` to current close, surface "implied upside +X%" / "implied downside −X%" prose rather than echoing the raw field name.
 
-**Segment-prefix discipline**: if `segment` values carry `申万-` / `wind-` / `sw-` prefix, strip the prefix before showing to the user (same rule as `industry-and-symbols.md`).
+**Segment-prefix discipline**: if `segment` values carry 形如 `<src>-<category>` 的来源前缀, strip the prefix before showing to the user (same rule as `industry-and-symbols.md`).
 
-**Output discipline**: never pass raw key (`con_or`, `con_target_price`, `segment_type`, pipe-delim symbol like `AAPL|ST|USA`, `wind-`/`sw-`/`申万-` industry prefix) to user-visible text. Agent picks EN or CN label based on the user's language.
+**Output discipline**: never pass raw key (`con_or`, `con_target_price`, `segment_type`, pipe-delim symbol like `AAPL|ST|USA`, source-tagged industry prefix 形如 `<src>-<category>`) to user-visible text. Agent picks EN or CN label based on the user's language.
 
 ## Cross-ref
 

@@ -30,7 +30,7 @@ Availability matrix (measured 2026-05-08; re-check with `market-calendar.md` `/a
 - `hk:stock × {financial, indicator, market_cap, valuation}` ✅
 - `us:stock × market_cap` ✅; most other us combos are unavailable — pass server `error + warnings` through to the user
 
-<!-- These sections document the upstream API payload contract; canonical metric names below are intentional and not user-visible. -->
+<!-- These sections document the upstream API payload contract; raw column keys (e.g. `oper_rev`) appear here intentionally and are not user-visible. -->
 <!-- lint:disable rule=canonical-metric -->
 ## Input schema
 
@@ -40,7 +40,7 @@ Availability matrix (measured 2026-05-08; re-check with `market-calendar.md` `/a
   "asset_type": "stock",
   "data_type": "financial",
   "symbols": ["600519"],
-  "metrics": ["OPER_REV","NET_PROFIT"],
+  "metrics": ["oper_rev","net_profit"],
   "start_date": "2024-01-01",
   "end_date": "2025-12-31",
   "extra": {"report_type": "Q4", "daily": false}
@@ -51,7 +51,7 @@ Availability matrix (measured 2026-05-08; re-check with `market-calendar.md` `/a
 |---|---|---|
 | `area / asset_type / data_type / symbols` | yes | Same as the v3 datareader common contract |
 | `start_date / end_date` | **yes** | The docs say some `data_type`s ignore these, but in practice **omitting them crashes** (NaTType bug, see notes) |
-| `metrics` | no | Omit → server returns the default column set; if passed → must be the canonical symbol (not the Chinese name, not a colloquial English name), a miss yields a MySQL `Unknown column` error |
+| `metrics` | no | Omit → server returns the default column set; if passed → must be a column key from the Response Fields cheatsheet below (e.g. `oper_rev`). A semantic name like "ROE" / "营业收入" / "revenue" / "净资产收益率" yields a MySQL `Unknown column` error — resolve through `metric-resolver.md` first |
 | `extra.report_type` | no | `Q1 / Q2 / Q3 / Q4 / Y` (financial / indicator) |
 | `extra.daily` | no | true = **PIT daily frequency** (most recent report period announced as of that day); false = quarterly panel (default) |
 | `extra.pit` | no | A different PIT flag from `daily`; mainly affects segments and is generally unused by this skill |
@@ -60,20 +60,20 @@ Availability matrix (measured 2026-05-08; re-check with `market-calendar.md` `/a
 
 ⚠️ **`extra.daily=true` failure handling**: the server returns a regular `error + suggestion`. The skill teaches the LLM to pass the error through to the user; **do not silently retry with daily=false** — this is a client-side convention, the gateway endpoint does not make decisions for the client.
 
-## Mandatory two-step flow (when metrics is semantic, not canonical)
+## Mandatory two-step flow (when metrics is semantic, not a known column key)
 
-The `metrics` field of `/api/v3/datareader/read` **only accepts canonical symbols** (e.g. `OPER_REV` / `WAA_ROE`). Passing Chinese ("营业收入") or colloquial English ("ROE" / "revenue") → the server's MySQL reports `Unknown column`, the response has `action=error`, and the user sees a failure with no obvious cause.
+The `metrics` field of `/api/v3/datareader/read` accepts only column keys from the Response Fields cheatsheet below (e.g. `oper_rev`, `waa_roe`, `roe_deducted`). A semantic name (Chinese "营业收入" / "净资产收益率" / colloquial English "revenue" / "net income") → the server's MySQL reports `Unknown column`, the response has `action=error`, and the user sees a failure with no obvious cause.
 
 | Step | Action | Skip consequence |
 |---|---|---|
-| **1** | Scan the cheatsheet section below. Hit → take the canonical symbol directly. **Miss** → cross-ref `metric-resolver.md` to query the registry and pick one | Skipping `metric-resolver` and passing Chinese directly → guaranteed failure |
-| **2** | Put the canonical symbol into `metrics=[...]` and call this skill | — |
+| **1** | Scan the cheatsheet section below. Hit → take the key directly. **Miss** → cross-ref `metric-resolver.md` to query the registry and pick one | Skipping `metric-resolver` and passing a Chinese / colloquial name directly → guaranteed failure |
+| **2** | Put the resolved key into `metrics=[...]` and call this skill | — |
 
 > ⚠️ Omitting `metrics` is also legal (the server returns the default column set), but when the user explicitly names a metric you **must resolve** it — do not fall back to default columns and make the user pick.
 
 ## `use_ytd_value` 累计/单季陷阱 + CN/HK 默认相反(b1 caveat)
 
-`/api/v3/datareader/read` 对**普通财务 metric**(`OPER_REV` / `NET_PROFIT` / `ROE` / `S_FA_*` 等)走 panel 查询时:
+`/api/v3/datareader/read` 对**普通财务 metric**(`oper_rev` / `net_profit` / `waa_roe` 等)走 panel 查询时:
 
 | 市场 | `use_ytd_value` 默认 | 含义 |
 |---|---|---|
@@ -84,10 +84,10 @@ LLM 路由决策:
 
 - **用户问"全年 / 年报 / 累计营收"** → 必须显式传 `extra.use_ytd_value=true`(CN 必传,HK 默认即是)。否则 CN 拿到 Q4 单季当年报,数字差 ~4 倍。
 - **用户问"Q4 单季营收"** → CN 走默认(False)直接拿到;HK 必须显式传 `use_ytd_value=false` + `report_type="Q4"`。
-- **`S_QFA_*` 系列在 `data_type=financial` 下不可用**(如 `S_QFA_OPER_REV` / `S_QFA_NET_PROFIT`;实测返 `data=[] + error="No data found"`)——CN 拿单季营收 / 净利润 **直接用 `OPER_REV` / `NET_PROFIT` 默认** 即可。**注意范围**:`S_QFA_*` 在 `data_type=indicator` 下**可用**(如 `S_QFA_ROE_DEDUCTED`,2026-05-12 实测返非空),caveat 边界**仅限 financial reader**,不要扩到 indicator。
+- **单季 metric(`q_*` 前缀)在 `data_type=financial` 下不可用** —— CN 拿单季营收 / 净利润直接用 `oper_rev` / `net_profit` 默认即可。**注意范围**:`q_*` 在 `data_type=indicator` 下**可用**(如 `q_roe_deducted`),caveat 边界**仅限 financial reader**,不要扩到 indicator。
 - **`report_type` 参数是 HK-only**:CN reader **不解析**该字段(`Q1`/`Q2`/`Q3`/`Q4` 行由 panel 时间窗 + `use_ytd_value` 决定);HK 必须传以选报告期。
 
-**LLM 路由这类 query 时必须显式声明累计/单季并传对应 `use_ytd_value`,不依赖隐式默认。** 向用户回复时只说"单季营收 / 全年累计营收 / 年报营收"等中文表述,**不**把 `OPER_REV` / `S_QFA_*` / `use_ytd_value` / `report_type` 等 canonical 名 / 参数名出现在 user-visible response。
+**LLM 路由这类 query 时必须显式声明累计/单季并传对应 `use_ytd_value`,不依赖隐式默认。** 向用户回复时只说"单季营收 / 全年累计营收 / 年报营收"等中文表述,**不**把 `oper_rev` / `q_*` / `use_ytd_value` / `report_type` 等 raw key / 参数名出现在 user-visible response。
 
 ## E2E examples
 
@@ -95,7 +95,7 @@ LLM 路由决策:
 ```bash
 curl -X POST "$STOCKI_GATEWAY_URL/api/v3/datareader/read" \
   -H "Authorization: Bearer $STOCKI_API_KEY" -H "Content-Type: application/json" \
-  -d '{"area":"cn","asset_type":"stock","data_type":"financial","symbols":["600519"],"metrics":["OPER_REV","NET_PROFIT"],"start_date":"2024-01-01","end_date":"2025-12-31","extra":{"report_type":"Q4"}}'
+  -d '{"area":"cn","asset_type":"stock","data_type":"financial","symbols":["600519"],"metrics":["oper_rev","net_profit"],"start_date":"2024-01-01","end_date":"2025-12-31","extra":{"report_type":"Q4"}}'
 ```
 Expected: `data[*] = {code, date, report_period, oper_rev, net_profit, avail_date}`. **Note**: `avail_date` is the announcement date (a PIT-critical field), use it to tell the user when a report "became visible".
 
@@ -126,53 +126,51 @@ Expected: `action=error`, `metadata.warnings` carries the reason. Pass warnings 
 ```bash
 curl -X POST "$STOCKI_GATEWAY_URL/api/v3/datareader/read" \
   -H "Authorization: Bearer $STOCKI_API_KEY" -H "Content-Type: application/json" \
-  -d '{"area":"cn","asset_type":"stock","data_type":"indicator","symbols":["600519"],"metrics":["ROE"],"start_date":"2024-01-01","end_date":"2025-12-31"}'
+  -d '{"area":"cn","asset_type":"stock","data_type":"indicator","symbols":["600519"],"metrics":["净资产收益率"],"start_date":"2024-01-01","end_date":"2025-12-31"}'
 ```
-Expected: `metadata.warnings` contains `MySqlError ... Unknown column 'ROE' in 'field list'`. The skill teaches the LLM: on seeing this error → cross-ref `metric-resolver.md` to resolve "ROE" into `WAA_ROE` and retry; **do not just tell the user "not found"**.
+Expected: `metadata.warnings` contains `MySqlError ... Unknown column '净资产收益率' in 'field list'`. The skill teaches the LLM: on seeing this error → cross-ref `metric-resolver.md` to resolve "净资产收益率" / "ROE" into a recognized column key (`waa_roe`) and retry; **do not just tell the user "not found"**.
 
 <!-- lint:enable -->
 
-## Response Fields — Raw → User-Facing Label
+## Response Fields — Key → User-Facing Label
 
-Each `data_type` has its own field set; the canonical symbol you put into `metrics=[...]` matches the response key in `data[*]`. Hit the table below → take the canonical symbol; miss → fall back to `metric-resolver.md` (per the two-step flow above).
+Each `data_type` has its own field set. The `Key` column below is both the **response field name** (what comes back in `data[i]`) and the form to pass into `metrics=[...]`. Cheatsheet hit → take the `Key` directly; miss → fall back to `metric-resolver.md` (per the two-step flow above).
 
 ### data_type=financial (quarterly panel)
 
-| Raw key | EN label | CN label | Note |
+| Key | EN label | CN label | Note |
 |---|---|---|---|
-| `OPER_REV` | Total Revenue | 营业总收入 | unit: 元 |
-| ~~`S_QFA_OPER_REV`~~ | ⚠️ Unavailable in `data_type=financial` | (已下架 — 实测返 `data=[]+error`) | CN 单季营收直接用 `OPER_REV` + `extra.use_ytd_value=False`(默认即是); see b1 caveat above |
-| `NET_PROFIT` | Net Profit | 净利润 | unit: 元 |
-| `NET_PROFIT_INCL_MIN_INT_INC` | Net Profit Incl. Minority | 净利润含少数股东 | unit: 元 |
-| ~~`S_QFA_NET_PROFIT`~~ | ⚠️ Unavailable in `data_type=financial` | (已下架 — 实测返 `data=[]+error`) | CN 单季净利润直接用 `NET_PROFIT` + `extra.use_ytd_value=False`(默认即是); see b1 caveat |
-| `LESS_OPER_COST` | Operating Cost | 营业成本 | unit: 元 |
-| `OPER_PROFIT` | Operating Profit | 营业利润 | unit: 元 |
-| `TOT_PROFIT` | Total Profit | 利润总额 | unit: 元 |
-| `TOT_ASSETS` | Total Assets | 总资产 | unit: 元 |
-| `TOT_LIAB` | Total Liabilities | 总负债 | unit: 元 |
-| `TOT_EQUITY` | Total Equity | 所有者权益 | unit: 元 |
-| `NET_CASH_FLOWS_OPER_ACT` | Net OCF | 经营活动现金流净额 | unit: 元 |
-| `NET_CASH_FLOWS_INV_ACT` | Net Investing CF | 投资活动现金流 | unit: 元 |
+| `oper_rev` | Total Revenue | 营业总收入 | unit: 元 |
+| `net_profit` | Net Profit | 净利润 | unit: 元 |
+| `net_profit_incl_min_int_inc` | Net Profit Incl. Minority | 净利润含少数股东 | unit: 元 |
+| `less_oper_cost` | Operating Cost | 营业成本 | unit: 元 |
+| `oper_profit` | Operating Profit | 营业利润 | unit: 元 |
+| `tot_profit` | Total Profit | 利润总额 | unit: 元 |
+| `tot_assets` | Total Assets | 总资产 | unit: 元 |
+| `tot_liab` | Total Liabilities | 总负债 | unit: 元 |
+| `tot_equity` | Total Equity | 所有者权益 | unit: 元 |
+| `net_cash_flows_oper_act` | Net OCF | 经营活动现金流净额 | unit: 元 |
+| `net_cash_flows_inv_act` | Net Investing CF | 投资活动现金流 | unit: 元 |
+
+⚠️ Single-quarter revenue / net profit: do **not** try to pass a single-quarter variant key here — under `data_type=financial` they return `data=[]+error="No data found"`. Use `oper_rev` / `net_profit` + `extra.use_ytd_value=False` (CN default) instead. See b1 caveat above.
 
 ### data_type=indicator (quarterly panel)
 
-| Raw key | EN label | CN label | Note |
+| Key | EN label | CN label | Note |
 |---|---|---|---|
-| `WAA_ROE` | Weighted ROE | 加权平均净资产收益率 | percent |
-| `S_FA_ROE_DEDUCTED` | Deducted ROE | ROE(扣非) | percent |
-| `S_QFA_ROE_DEDUCTED` | Single-Quarter Deducted ROE | 单季 ROE(扣非) | percent |
-| `S_FA_ROA` | ROA | ROA | percent |
-| `S_FA_GROSSPROFITMARGIN` | Gross Margin | 毛利率 | percent |
-| `S_FA_NETPROFITMARGIN` | Net Margin | 净利率 | percent |
-| `S_FA_DEBTTOASSETS` | Debt-to-Assets | 资产负债率 | percent |
-| `S_FA_CURRENT` | Current Ratio | 流动比率 | ratio |
-| `S_FA_QUICK` | Quick Ratio | 速动比率 | ratio |
-| `S_FA_YOYOR` | Revenue YoY | 营收同比 | percent |
-| `S_FA_YOY_NETPROFIT` | Net Profit YoY | 净利同比 | percent |
+| `waa_roe` | Weighted ROE | 加权平均净资产收益率 | percent |
+| `roe_deducted` | Deducted ROE | ROE(扣非) | percent |
+| `q_roe_deducted` | Single-Quarter Deducted ROE | 单季 ROE(扣非) | percent |
+| `roa` | ROA | ROA | percent |
+| `grossprofitmargin` | Gross Margin | 毛利率 | percent |
+| `netprofitmargin` | Net Margin | 净利率 | percent |
+| `debttoassets` | Debt-to-Assets | 资产负债率 | percent |
+| `current` | Current Ratio | 流动比率 | ratio |
+| `quick` | Quick Ratio | 速动比率 | ratio |
 
 ### data_type=valuation (daily panel — default columns suffice; do not pass `metrics`)
 
-| Raw key | EN label | CN label | Note |
+| Key | EN label | CN label | Note |
 |---|---|---|---|
 | `pe` | PE | 市盈率 | static |
 | `pe_ttm` | PE (TTM) | 市盈率(TTM) | trailing-12-month |
@@ -196,7 +194,7 @@ Each `data_type` has its own field set; the canonical symbol you put into `metri
 
 ### data_type=market_cap (daily)
 
-| Raw key | EN label | CN label | Note |
+| Key | EN label | CN label | Note |
 |---|---|---|---|
 | `code` | Symbol code | 代码 | |
 | `date` | Date | 日期 | YYYY-MM-DD |
@@ -206,7 +204,7 @@ Each `data_type` has its own field set; the canonical symbol you put into `metri
 
 ### Common envelope fields (all data_type)
 
-| Raw key | EN label | CN label | Note |
+| Key | EN label | CN label | Note |
 |---|---|---|---|
 | `data[*].code` | Symbol code | 代码 | |
 | `data[*].date` | Date | 日期 | |
@@ -215,7 +213,7 @@ Each `data_type` has its own field set; the canonical symbol you put into `metri
 | `metadata.data_path` | CSV Path | CSV 路径 | triggered when `total_records > inline_threshold` (default 50). CSV not directly fetchable from the runtime — **prefer raising `inline_threshold` (max 1000) on the request** rather than relying on this path. |
 | `metadata.warnings` | Warnings | 警告 | upstream errors / truncation; MUST be surfaced to the user |
 
-**Output discipline**: never pass raw key (`OPER_REV`, `WAA_ROE`, `pe_ttm`, pipe-delim symbol like `AAPL|ST|USA`, `wind-`/`sw-`/`申万-` industry prefix) to user-visible text. For metrics not covered by the tables above, look up the canonical symbol in `metric-resolver.md` and use its `name` field as the display label. Use readable units (e.g. "Revenue 2.3亿元 (+15% YoY)") rather than raw integers in 元. Agent picks EN or CN label based on the user's language.
+**Output discipline**: never pass any raw column key (e.g. `oper_rev`, `waa_roe`, `roe_deducted`, `pe_ttm`), pipe-delim symbol (`AAPL|ST|USA`), or source-tagged industry prefix 形如 `<src>-<category>` to user-visible text. For metrics not covered by the tables above, look up the key in `metric-resolver.md` and use its `name` field as the display label. Use readable units (e.g. "Revenue 2.3亿元 (+15% YoY)") rather than raw integers in 元. Agent picks EN or CN label based on the user's language.
 
 ## Cross-ref
 

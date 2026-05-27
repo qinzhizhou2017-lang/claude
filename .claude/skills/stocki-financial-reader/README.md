@@ -1,6 +1,6 @@
 # stocki-financial-reader
 
-OpenClaw aggregate skill for institutional-grade financial data. Routes user queries about real-time quotes, financials, valuation time series, OHLCV history, industry membership, consensus forecasts, and composite analysis to 8 reference contracts that drive the stocki gateway (`api.stocki.com.cn`).
+OpenClaw aggregate skill for institutional-grade financial data. Routes user queries about real-time quotes, financials, valuation time series, OHLCV history, industry membership, consensus forecasts, and composite analysis to 8 reference contracts that drive the stocki gateway (`skill.stocki.com.cn`).
 
 For ClawBot (WeChat / Lark / WhatsApp / ...) end users via OpenClaw agents.
 

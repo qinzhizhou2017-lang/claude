@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>卓锐证券 · 四模块 Opportunity Solution Trees 总览</title>
+<style>
+  :root{
+    --bg:#0b1020;--panel:#141b30;--panel2:#1b2440;--ink:#e8edf7;--muted:#9aa6c4;
+    --line:#2c3760;--accent:#6ea8fe;--good:#43d39e;--poc:#7c5cff;--chip:#223056;--warn:#ffc857;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+       background:linear-gradient(160deg,#0b1020,#0e1428 60%,#0b1020);color:var(--ink);line-height:1.55}
+  .wrap{max-width:1200px;margin:0 auto;padding:30px 22px 70px}
+  header.hero{background:linear-gradient(135deg,#1a2547,#221a47);border:1px solid var(--line);
+       border-radius:18px;padding:24px 28px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.12em;color:var(--accent);
+       background:var(--chip);padding:4px 10px;border-radius:999px;text-transform:uppercase}
+  h1{margin:12px 0 6px;font-size:25px}
+  .sub{color:var(--muted);font-size:14px;margin:0}
+
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 8px}
+  .tab{cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--muted);
+       padding:9px 16px;border-radius:10px;font-size:14px;font-weight:600;transition:.15s}
+  .tab:hover{color:var(--ink);border-color:#3a4a7e}
+  .tab.active{background:linear-gradient(135deg,#21406b,#2a2160);color:#fff;border-color:#4663a8}
+  .tab .em{font-size:15px;margin-right:6px}
+
+  .view{display:none;animation:fade .25s ease}
+  .view.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0 6px}
+  @media(max-width:880px){.metrics,.opps{grid-template-columns:1fr!important}}
+  .metric{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+  .metric .k{font-size:12px;color:var(--muted)}
+  .metric .v{font-size:18px;font-weight:700;margin-top:4px}
+  .metric .v b{color:var(--good)}
+  .why{margin:14px 0 6px;color:var(--muted);font-size:13px;border-left:3px solid var(--accent);padding-left:12px}
+
+  .outcome{margin:18px auto 8px;max-width:580px;text-align:center;
+       background:linear-gradient(135deg,#21406b,#1b2c57);border:1px solid #345089;border-radius:14px;padding:13px 18px}
+  .outcome .lab{font-size:11px;letter-spacing:.1em;color:#9fc1ff}
+  .outcome .txt{font-weight:700;margin-top:3px}
+  .stem{width:2px;height:20px;background:var(--line);margin:0 auto}
+
+  .opps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+  .opp{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .opp .head{padding:12px 14px;background:var(--panel2);border-bottom:1px solid var(--line)}
+  .opp .oid{font-size:11px;color:var(--warn);letter-spacing:.08em;font-weight:700}
+  .opp .otitle{font-weight:700;margin-top:3px;font-size:14px}
+  .opp .eviden{font-size:12px;color:var(--muted);margin-top:7px}
+  .sols{padding:11px 12px;display:flex;flex-direction:column;gap:9px}
+  .sol{background:#0f1730;border:1px solid var(--line);border-radius:11px;padding:10px 12px;position:relative}
+  .sol.poc{border-color:var(--poc);box-shadow:0 0 0 1px var(--poc),0 8px 24px rgba(124,92,255,.26);
+       background:linear-gradient(180deg,#1a1540,#0f1730)}
+  .sol .stitle{font-weight:600;font-size:13px}
+  .sol .hyp{font-size:12px;color:var(--muted);margin-top:5px}
+  .pocbadge{position:absolute;top:-9px;right:10px;background:var(--poc);color:#fff;font-size:10px;
+       font-weight:700;letter-spacing:.06em;padding:2px 8px;border-radius:999px}
+  .scores{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;align-items:center}
+  .pill{font-size:11px;padding:2px 7px;border-radius:6px;border:1px solid var(--line);color:var(--muted)}
+  .pill b{color:var(--ink)}
+  .total{margin-left:auto;font-size:12px;font-weight:700;background:var(--chip);padding:3px 9px;border-radius:7px}
+  .total.hi{background:rgba(67,211,158,.16);color:var(--good)}
+  .pocline{margin-top:14px;background:rgba(124,92,255,.1);border:1px solid var(--poc);border-radius:11px;
+       padding:12px 15px;font-size:13px}
+  .pocline b{color:#b9a8ff}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:14px 2px 0}
+  .legend span b{color:var(--ink)}
+
+  /* overview tab */
+  .ovcards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px}
+  @media(max-width:880px){.ovcards{grid-template-columns:1fr}}
+  .ovcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;cursor:pointer;transition:.15s}
+  .ovcard:hover{border-color:#3a4a7e;transform:translateY(-2px)}
+  .ovcard h3{margin:0 0 4px;font-size:16px}
+  .ovcard .em{font-size:18px;margin-right:6px}
+  .ovcard .poc{font-size:12px;color:#b9a8ff;margin-top:8px}
+  .ovcard .mtr{font-size:12px;color:var(--muted);margin-top:6px}
+  .insight{margin-top:20px;background:linear-gradient(135deg,#1b1640,#141b30);border:1px solid var(--poc);
+       border-radius:14px;padding:18px 22px;font-size:14px}
+  .insight b{color:#b9a8ff}
+  footer{margin-top:34px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="tag">Opportunity Solution Trees · best-guess</span>
+    <h1>卓锐证券 — 四模块机会-方案树总览</h1>
+    <p class="sub">基于公开信息推断 · 评分(易/效/合 1–5,满分 15)与目标数值为示意,需真实埋点校准</p>
+  </header>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div id="overview" class="view active">
+    <div class="ovcards" id="ovcards"></div>
+    <div class="insight">
+      <b>跨树洞察:</b> 四棵树反复指向同一根因 —— 卓锐各能力都强,但<b>彼此孤立</b>(AI↔交易、行情↔社区、合规↔体验)。
+      <br><br>
+      <b>若只押一个 POC:</b> 选「AI 投研」树的 <b>AI 摘要 + 一键下单</b> —— 它同时打通"投研→交易"闭环、撬动最强差异化卖点、F/I/M 综合最高,组件还能复用到其它模块。
+    </div>
+  </div>
+
+  <div id="trees"></div>
+
+  <footer>
+    来源:卓锐证券官网 zr.hk · Google Play / App Store 应用页 · 百度百科(卓锐证券香港 / Zircon Securities HK)· 美股之家 mg21.com · 知乎深度盘点 · WikiStock 券商档案。<br>
+    本页为基于公开信息的产品分析推断,非内部资料。
+  </footer>
+</div>
+
+<script>
+const DATA = [
+  {
+    id:"ai", em:"🤖", name:"AI 投研层",
+    metrics:[["AI 周活渗透率","~20% → <b>40%</b>"],["用过 AI 的次月留存","<b>+15pct</b>"],["AI→交易转化(24h)","建基线 <b>+10pct</b>"]],
+    why:"AI 分析+投资指引是卓锐最强差异点,但深度分析是营销口径,留存/转化闭环未验证。做成行为闭环可撬动护城河,能力复用到社区与智能交易。",
+    outcome:"让 AI 投研从“噱头”变成留存与活跃的发动机",
+    opps:[
+      {oid:"O1",title:"散户被“千亿级消息”淹没,看不懂、抓不到重点",ev:"官方主打“千亿级消息 AI 深度分析”;测评指出散户“信息多但不会用”。",
+       sols:[{t:"S1 个股「一句话 AI 摘要」+ 多空信号卡",h:"降维成 3 秒可读结论。AI 渗透 20%→35%。",s:[4,4,5],poc:true},
+             {t:"S2 自选股每日 AI 早报(推送)",h:"个性化要点提升回访与粘性。",s:[4,3,4]},
+             {t:"S3 自然语言问股",h:"对话式投研,降门槛、提探索深度。",s:[2,5,4]}]},
+      {oid:"O2",title:"AI 给了观点,用户不信、不敢行动",ev:"测评普遍质疑 AI 荐股“准不准、敢不敢信”,缺可信度背书。",
+       sols:[{t:"S1 信号可追溯证据链(出处+命中率)",h:"透明化提升信任→转化。",s:[3,5,4]},
+             {t:"S2 AI 观点公开战绩看板",h:"赢认输也认,长期信任资产。",s:[4,3,4]},
+             {t:"S3 模拟盘「跟随 AI 信号」回测",h:"零风险验证后更敢实盘跟随。",s:[3,4,4]}]},
+      {oid:"O3",title:"AI 与交易割裂,看完就走,价值没闭环",ev:"公开信息中 AI/行情/交易并列,未见“投研→下单”一键闭环。",
+       sols:[{t:"S1 AI 卡片一键带参数下单/建条件单",h:"消除手动找标的填参数的断点。",s:[3,5,4]},
+             {t:"S2 AI 触发盯盘提醒→直达下单",h:"提醒到行动一跳直达。",s:[3,4,4]},
+             {t:"S3 AI 荐股→加入智投策略",h:"接到既有智投/定投能力。",s:[2,4,3]}]}
+    ],
+    poc:"O1·S1「AI 摘要+多空信号卡」— 个股页 50% 灰度 A/B,2 周,看 AI 渗透/停留/次留。"
+  },
+  {
+    id:"trade", em:"⚙️", name:"智能交易层",
+    metrics:[["开通智能工具用户占比","5% → <b>15%</b>"],["该群体月交易频次","<b>+30%</b>"],["启动成功率","建基线"]],
+    why:"网格/智能订单/盯盘/开放 API 面向中重度与程序化用户,是锁住高价值用户的抓手,但门槛与风控是关键阻力。",
+    outcome:"用程序化/算法能力锁住中重度用户",
+    opps:[
+      {oid:"O1",title:"散户想做网格/定投但门槛高",ev:"智能工具存在,但参数复杂、散户难上手。",
+       sols:[{t:"S1 网格交易向导式模板(选股→给参数→一键启动)",h:"工具开通率 5%→12%。",s:[4,4,5],poc:true},
+             {t:"S2 智能订单可视化预览(成交前模拟)",h:"降低不确定感。",s:[3,4,4]},
+             {t:"S3 策略商店(抄热门参数)",h:"借社交降低决策成本。",s:[3,4,4]}]},
+      {oid:"O2",title:"量化用户嫌 API 文档/生态弱",ev:"公开 API 存在,但开发者生态未见成熟。",
+       sols:[{t:"S1 API Sandbox + 示例策略 + SDK",h:"降低接入成本。",s:[3,4,3]},
+             {t:"S2 Webhook / TradingView 信号接入",h:"借外部生态引流量化用户。",s:[3,5,4]},
+             {t:"S3 开发者社区 + 策略分润",h:"长期生态飞轮。",s:[2,4,3]}]},
+      {oid:"O3",title:"用户怕算法失控/亏损",ev:"算法交易的信任与风控是普遍顾虑。",
+       sols:[{t:"S1 每个智能单强制风控参数(止损/总额上限)",h:"兜底降低失控恐惧。",s:[4,5,4],poc:true},
+             {t:"S2 实盘前必经模拟盘试跑",h:"先验证再上实盘。",s:[4,3,4]},
+             {t:"S3 异常自动熔断 + 推送",h:"极端行情保护。",s:[3,4,4]}]}
+    ],
+    poc:"O1·S1 网格向导 + O3·S1 风控兜底(配套上线)— 新入口灰度,2–4 周看开通转化+启动成功率。"
+  },
+  {
+    id:"community", em:"💬", name:"社区 / 内容层",
+    metrics:[["社区月活渗透","? → <b>25%</b>"],["有社区行为者次留","<b>+20%</b>"],["内容带来自然新增","<b>+10pct</b>"]],
+    why:"社区/模拟交易已存在,但公开信息里成熟度最低 → 机会最大。用内容降获客成本、提自然留存,关键是冷启动与合规。",
+    outcome:"用内容降获客成本、提自然留存",
+    opps:[
+      {oid:"O1",title:"冷启动:没人发、没人看(空城)",ev:"社区功能存在,但活跃度/内容生态未见规模。",
+       sols:[{t:"S1 持仓/战绩自动生成帖(晒单半自动化)",h:"降低发帖门槛。",s:[4,4,4]},
+             {t:"S2 KOL/分析师入驻 + 官方每日话题",h:"供给侧冷启动。",s:[3,4,4]},
+             {t:"S3 模拟交易大赛→晒榜引流社区",h:"用既有模拟盘造话题。",s:[4,4,5],poc:true}]},
+      {oid:"O2",title:"行情↔社区↔交易彼此孤立",ev:"模块并列,缺乏内容到交易的顺滑链路。",
+       sols:[{t:"S1 个股页内嵌“该股讨论流”",h:"行情用户顺手进社区,渗透+8pct。",s:[4,4,5],poc:true},
+             {t:"S2 帖子内个股一键自选/下单",h:"内容直接转交易。",s:[3,4,4]},
+             {t:"S3 大V 调仓→关注者推送",h:"社交信号驱动行动。",s:[3,4,3]}]},
+      {oid:"O3",title:"内容质量低/荐股合规风险",ev:"券商社区的喊单与合规是硬约束。",
+       sols:[{t:"S1 发帖合规校验 + 风险提示水印",h:"合规护栏。",s:[4,3,5]},
+             {t:"S2 战绩可验证徽章(绑实盘/模拟)",h:"真实性背书。",s:[3,4,4]},
+             {t:"S3 反垃圾/反喊单审核",h:"内容质量底线。",s:[3,3,4]}]}
+    ],
+    poc:"O2·S1「个股页内嵌讨论流」— 个股页 A/B 加讨论 Tab,2 周看社区进入率+次留(配 O3·S1 合规校验)。"
+  },
+  {
+    id:"crypto", em:"₿", name:"虚拟资产 / 加密",
+    metrics:[["VA 出入金开通占比","? → <b>20%</b>"],["加密 AUM 占比","<b>+X%</b>"],["首充转化","建基线"]],
+    why:"2025-08 获批 VA 出入金,是稀缺合规牌照。把牌照变现的关键是消除信任顾虑、给股民配置加密的桥。",
+    outcome:"把稀缺的 VA 合规牌照变现",
+    opps:[
+      {oid:"O1",title:"用户对 VA 出入金不懂/不敢(合规疑虑)",ev:"VA 业务新,散户对合规与安全有顾虑。",
+       sols:[{t:"S1 合规背书引导流(牌照可视化+分步)",h:"信任是第一障碍,开通+6pct。",s:[4,4,5],poc:true},
+             {t:"S2 小额首充体验 + 教育内容",h:"低门槛试水。",s:[4,3,4]},
+             {t:"S3 法币↔币种费率前置透明",h:"消除费用疑虑。",s:[4,3,4]}]},
+      {oid:"O2",title:"股民不知如何配置加密",ev:"传统股民缺加密配置认知。",
+       sols:[{t:"S1 比特币 ETF 作为“加密入门桥”主推",h:"用熟悉的 ETF 切入。",s:[4,4,4]},
+             {t:"S2 股+币统一组合视图与配置建议",h:"一个账户管理两类资产。",s:[3,4,4]},
+             {t:"S3 加密版定投(月供币)",h:"复用月供股心智。",s:[3,4,4]}]},
+      {oid:"O3",title:"出入金体验/到账慢致流失",ev:"出入金摩擦是加密留存的关键卡点。",
+       sols:[{t:"S1 出入金状态实时追踪+预计到账",h:"降低焦虑与客诉。",s:[4,4,5],poc:true},
+             {t:"S2 稳定币通道优化降摩擦",h:"提升到账速度。",s:[2,4,3]},
+             {t:"S3 异常自动客服介入",h:"兜底体验。",s:[3,3,4]}]}
+    ],
+    poc:"O1·S1「合规背书引导流」— 出入金入口 A/B,2 周看开通完成率+首充率。"
+  }
+];
+
+const SLABEL=["易","效","合"];
+function solHTML(s){
+  const tot=s.s.reduce((a,b)=>a+b,0);
+  const pills=s.s.map((v,i)=>`<span class="pill">${SLABEL[i]} <b>${v}</b></span>`).join("");
+  return `<div class="sol${s.poc?' poc':''}">${s.poc?'<span class="pocbadge">★ POC</span>':''}
+    <div class="stitle">${s.t}</div><div class="hyp">${s.h}</div>
+    <div class="scores">${pills}<span class="total${tot>=13?' hi':''}">${tot}</span></div></div>`;
+}
+function treeHTML(d){
+  const metrics=d.metrics.map(m=>`<div class="metric"><div class="k">${m[0]}</div><div class="v">${m[1]}</div></div>`).join("");
+  const opps=d.opps.map(o=>`<div class="opp"><div class="head">
+      <div class="oid">OPPORTUNITY ${o.oid.slice(1)}</div><div class="otitle">${o.title}</div>
+      <div class="eviden"><b style="color:#b9c5e6">证据:</b>${o.ev}</div></div>
+      <div class="sols">${o.sols.map(solHTML).join("")}</div></div>`).join("");
+  return `<div id="view-${d.id}" class="view">
+    <div class="metrics">${metrics}</div>
+    <div class="why"><b style="color:#cdd8f5">为什么重要:</b> ${d.why}</div>
+    <div class="outcome"><div class="lab">DESIRED OUTCOME</div><div class="txt">${d.outcome}</div></div>
+    <div class="stem"></div>
+    <div class="opps">${opps}</div>
+    <div class="legend"><span><b>易</b> 易实现度</span><span><b>效</b> 对目标撬动</span><span><b>合</b> 用户契合度</span><span>总分=三项之和(满分15)</span></div>
+    <div class="pocline"><b>★ 选定 POC:</b> ${d.poc}</div></div>`;
+}
+
+document.getElementById("trees").innerHTML = DATA.map(treeHTML).join("");
+
+// tabs
+const tabsEl=document.getElementById("tabs");
+const tabs=[{id:"overview",em:"🗂",name:"总览"}].concat(DATA.map(d=>({id:d.id,em:d.em,name:d.name})));
+tabsEl.innerHTML=tabs.map((t,i)=>`<div class="tab${i===0?' active':''}" data-t="${t.id}"><span class="em">${t.em}</span>${t.name}</div>`).join("");
+
+// overview cards
+document.getElementById("ovcards").innerHTML=DATA.map(d=>{
+  const pocSol=d.opps.flatMap(o=>o.sols).find(s=>s.poc);
+  return `<div class="ovcard" data-go="${d.id}"><h3><span class="em">${d.em}</span>${d.name}</h3>
+    <div class="mtr">${d.metrics[0][0]}:${d.metrics[0][1]}</div>
+    <div class="poc">★ POC:${pocSol?pocSol.t:''}</div></div>`;
+}).join("");
+
+function show(id){
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  document.getElementById(id==="overview"?"overview":"view-"+id).classList.add("active");
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.t===id));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+tabsEl.addEventListener("click",e=>{const t=e.target.closest(".tab");if(t)show(t.dataset.t);});
+document.getElementById("ovcards").addEventListener("click",e=>{const c=e.target.closest(".ovcard");if(c)show(c.dataset.go);});
+</script>
+</body>
+</html>

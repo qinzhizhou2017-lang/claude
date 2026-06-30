@@ -1,0 +1,1 @@
+../../pm-skills/commands/write-prd.md

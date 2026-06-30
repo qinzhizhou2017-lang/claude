@@ -1,0 +1,1 @@
+../../pm-skills/commands/prioritize.md

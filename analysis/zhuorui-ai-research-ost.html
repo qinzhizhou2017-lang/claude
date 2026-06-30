@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>卓锐证券 · AI 投研层 Opportunity Solution Tree</title>
+<style>
+  :root{
+    --bg:#0b1020; --panel:#141b30; --panel2:#1b2440; --ink:#e8edf7; --muted:#9aa6c4;
+    --line:#2c3760; --accent:#6ea8fe; --good:#43d39e; --warn:#ffc857; --bad:#ff7a85;
+    --poc:#7c5cff; --chip:#223056;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
+       background:linear-gradient(160deg,#0b1020,#0e1428 60%,#0b1020);color:var(--ink);line-height:1.55}
+  .wrap{max-width:1180px;margin:0 auto;padding:32px 22px 70px}
+  header.hero{background:linear-gradient(135deg,#1a2547,#221a47);border:1px solid var(--line);
+       border-radius:18px;padding:26px 28px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.12em;color:var(--accent);
+       background:var(--chip);padding:4px 10px;border-radius:999px;text-transform:uppercase}
+  h1{margin:12px 0 6px;font-size:26px}
+  .sub{color:var(--muted);font-size:14px;margin:0}
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:20px}
+  .metric{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .metric .k{font-size:12px;color:var(--muted)}
+  .metric .v{font-size:20px;font-weight:700;margin-top:4px}
+  .metric .v b{color:var(--good)}
+  .why{margin-top:16px;color:var(--muted);font-size:13px;border-left:3px solid var(--accent);padding-left:12px}
+
+  .treelabel{display:flex;align-items:center;gap:10px;margin:34px 2px 14px}
+  .treelabel .dot{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+  .treelabel h2{font-size:17px;margin:0}
+
+  /* Outcome node */
+  .outcome{position:relative;margin:0 auto 8px;max-width:560px;text-align:center;
+       background:linear-gradient(135deg,#21406b,#1b2c57);border:1px solid #345089;border-radius:14px;padding:14px 18px}
+  .outcome .lab{font-size:11px;letter-spacing:.1em;color:#9fc1ff}
+  .outcome .txt{font-weight:700;margin-top:3px}
+  .stem{width:2px;height:22px;background:var(--line);margin:0 auto}
+
+  /* Opportunities grid */
+  .opps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start}
+  @media(max-width:880px){.opps,.metrics{grid-template-columns:1fr}}
+  .opp{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .opp .head{padding:13px 15px;background:var(--panel2);border-bottom:1px solid var(--line)}
+  .opp .oid{font-size:11px;color:var(--warn);letter-spacing:.08em;font-weight:700}
+  .opp .otitle{font-weight:700;margin-top:3px;font-size:14px}
+  .opp .eviden{font-size:12px;color:var(--muted);margin-top:7px}
+  .opp .eviden b{color:#b9c5e6;font-weight:600}
+  .sols{padding:12px 13px;display:flex;flex-direction:column;gap:10px}
+
+  .sol{background:#0f1730;border:1px solid var(--line);border-radius:11px;padding:11px 12px;position:relative}
+  .sol.poc{border-color:var(--poc);box-shadow:0 0 0 1px var(--poc),0 8px 26px rgba(124,92,255,.28);
+       background:linear-gradient(180deg,#1a1540,#0f1730)}
+  .sol .stitle{font-weight:600;font-size:13px;display:flex;gap:6px;align-items:flex-start}
+  .sol .hyp{font-size:12px;color:var(--muted);margin-top:6px}
+  .pocbadge{position:absolute;top:-9px;right:10px;background:var(--poc);color:#fff;font-size:10px;
+       font-weight:700;letter-spacing:.06em;padding:2px 8px;border-radius:999px}
+  .scores{display:flex;gap:6px;margin-top:9px;flex-wrap:wrap;align-items:center}
+  .pill{font-size:11px;padding:2px 7px;border-radius:6px;border:1px solid var(--line);color:var(--muted)}
+  .pill b{color:var(--ink)}
+  .total{margin-left:auto;font-size:12px;font-weight:700;background:var(--chip);padding:3px 9px;border-radius:7px}
+  .total.hi{background:rgba(67,211,158,.16);color:var(--good)}
+
+  /* POC plan */
+  .poc-plan{margin-top:30px;background:linear-gradient(135deg,#1b1640,#141b30);border:1px solid var(--poc);
+       border-radius:16px;padding:22px 24px}
+  .poc-plan h3{margin:0 0 4px;font-size:18px}
+  .poc-plan .pid{font-size:12px;color:#b9a8ff;letter-spacing:.08em}
+  .poc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+  @media(max-width:880px){.poc-grid{grid-template-columns:1fr}}
+  .box{background:#0f1730;border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+  .box .bk{font-size:11px;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+  .box .bv{margin-top:6px;font-size:13px}
+  .hypbox{background:rgba(110,168,254,.08);border:1px solid #2c4a86;border-radius:11px;padding:13px 15px;margin-top:14px;font-size:14px}
+  .hypbox b{color:var(--accent)}
+  .steps{margin:14px 0 0;padding-left:18px;font-size:13px;color:#c7d1ec}
+  .steps li{margin:5px 0}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:14px 2px 0}
+  .legend span b{color:var(--ink)}
+  footer{margin-top:34px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:16px}
+  a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <span class="tag">Opportunity Solution Tree · best-guess</span>
+    <h1>卓锐证券 — AI 投研层</h1>
+    <p class="sub">基于公开信息(官网 / 应用商店 / 第三方测评)推断 · 数值为示意基线,需真实埋点校准</p>
+
+    <div class="metrics">
+      <div class="metric"><div class="k">AI 功能周活渗透率</div><div class="v">~20% → <b>40%</b></div></div>
+      <div class="metric"><div class="k">用过 AI 的用户次月留存</div><div class="v"><b>+15<span style="font-size:13px">pct</span></b></div></div>
+      <div class="metric"><div class="k">AI → 交易转化(24h 内下单)</div><div class="v">建基线 <b>+10pct</b></div></div>
+    </div>
+
+    <div class="why">
+      <b style="color:#cdd8f5">为什么重要:</b> AI 分析 + 投资指引是卓锐公开宣传里最强的差异点,但"千亿级消息深度分析"是营销口径,真实的<b style="color:#cdd8f5">留存与转化闭环未被验证</b>。把投研做成行为闭环,直接撬动差异化护城河,且能力可复用到社区与智能交易模块。
+    </div>
+  </header>
+
+  <div class="treelabel"><span class="dot"></span><h2>机会-方案树</h2></div>
+
+  <div class="outcome">
+    <div class="lab">DESIRED OUTCOME</div>
+    <div class="txt">让 AI 投研从"噱头"变成留存与活跃的发动机</div>
+  </div>
+  <div class="stem"></div>
+
+  <div class="opps">
+
+    <!-- O1 -->
+    <div class="opp">
+      <div class="head">
+        <div class="oid">OPPORTUNITY 1</div>
+        <div class="otitle">散户被"千亿级消息"淹没,看不懂、抓不到重点</div>
+        <div class="eviden"><b>证据:</b>官方主打"千亿级市场消息 AI 深度分析";测评普遍指出散户"信息多但不会用"。</div>
+      </div>
+      <div class="sols">
+        <div class="sol poc">
+          <span class="pocbadge">★ POC</span>
+          <div class="stitle">S1 · 个股「一句话 AI 摘要」+ 多空信号卡</div>
+          <div class="hyp">把深度报告降维成 3 秒可读结论(利多/利空 + 一句理由)。假设:AI 周活渗透 20%→35%。</div>
+          <div class="scores"><span class="pill">易 <b>4</b></span><span class="pill">效 <b>4</b></span><span class="pill">合 <b>5</b></span><span class="total hi">13</span></div>
+        </div>
+        <div class="sol">
+          <div class="stitle">S2 · 自选股每日 AI 早报(推送)</div>
+          <div class="hyp">开盘前针对持仓/自选生成个性化要点,提升回访与粘性。</div>
+          <div class="scores"><span class="pill">易 <b>4</b></span><span class="pill">效 <b>3</b></span><span class="pill">合 <b>4</b></span><span class="total">11</span></div>
+        </div>
+        <div class="sol">
+          <div class="stitle">S3 · 自然语言问股("台积电为什么跌?")</div>
+          <div class="hyp">对话式投研入口,降低门槛、提升探索深度。</div>
+          <div class="scores"><span class="pill">易 <b>2</b></span><span class="pill">效 <b>5</b></span><span class="pill">合 <b>4</b></span><span class="total">11</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- O2 -->
+    <div class="opp">
+      <div class="head">
+        <div class="oid">OPPORTUNITY 2</div>
+        <div class="otitle">AI 给了观点,用户不信、不敢据此行动</div>
+        <div class="eviden"><b>证据:</b>测评对 AI 荐股普遍质疑"准不准、敢不敢信",行业通病;缺可信度背书。</div>
+      </div>
+      <div class="sols">
+        <div class="sol">
+          <div class="stitle">S1 · 信号可追溯证据链(出处 + 历史命中率)</div>
+          <div class="hyp">透明化提升信任 → AI→交易转化提升。</div>
+          <div class="scores"><span class="pill">易 <b>3</b></span><span class="pill">效 <b>5</b></span><span class="pill">合 <b>4</b></span><span class="total">12</span></div>
+        </div>
+        <div class="sol">
+          <div class="stitle">S2 · AI 观点公开战绩看板</div>
+          <div class="hyp">历史判断与走势公开,赢认输也认 → 长期信任资产。</div>
+          <div class="scores"><span class="pill">易 <b>4</b></span><span class="pill">效 <b>3</b></span><span class="pill">合 <b>4</b></span><span class="total">11</span></div>
+        </div>
+        <div class="sol">
+          <div class="stitle">S3 · 模拟盘「跟随 AI 信号」回测</div>
+          <div class="hyp">零风险验证有效性后,更敢实盘跟随。</div>
+          <div class="scores"><span class="pill">易 <b>3</b></span><span class="pill">效 <b>4</b></span><span class="pill">合 <b>4</b></span><span class="total">11</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- O3 -->
+    <div class="opp">
+      <div class="head">
+        <div class="oid">OPPORTUNITY 3</div>
+        <div class="otitle">AI 与交易割裂,用户"看完就走",价值没闭环</div>
+        <div class="eviden"><b>证据:</b>公开信息中 AI 分析、行情、交易为并列模块,未见"投研→下单"一键闭环。</div>
+      </div>
+      <div class="sols">
+        <div class="sol">
+          <div class="stitle">S1 · AI 卡片一键带参数下单 / 建条件单</div>
+          <div class="hyp">消除"看完再手动找标的填参数"的断点流失。</div>
+          <div class="scores"><span class="pill">易 <b>3</b></span><span class="pill">效 <b>5</b></span><span class="pill">合 <b>4</b></span><span class="total">12</span></div>
+        </div>
+        <div class="sol">
+          <div class="stitle">S2 · AI 触发的盯盘提醒 → 直达下单</div>
+          <div class="hyp">从提醒到行动一跳直达,提升转化。</div>
+          <div class="scores"><span class="pill">易 <b>3</b></span><span class="pill">效 <b>4</b></span><span class="pill">合 <b>4</b></span><span class="total">11</span></div>
+        </div>
+        <div class="sol">
+          <div class="stitle">S3 · AI 荐股 → 一键加入智投策略</div>
+          <div class="hyp">把投研结论接到既有智投/定投能力上。</div>
+          <div class="scores"><span class="pill">易 <b>2</b></span><span class="pill">效 <b>4</b></span><span class="pill">合 <b>3</b></span><span class="total">9</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="legend">
+    <span><b>易</b> Feasibility 易实现度</span>
+    <span><b>效</b> Impact 对目标的撬动</span>
+    <span><b>合</b> Market Fit 用户契合度</span>
+    <span>评分 1–5,总分 = 三项之和(满分 15)</span>
+  </div>
+
+  <!-- POC -->
+  <div class="poc-plan">
+    <div class="pid">SELECTED POC · O1 → S1</div>
+    <h3>个股「一句话 AI 摘要」+ 多空信号卡</h3>
+
+    <div class="hypbox">
+      <b>假设:</b> 如果在个股页加入秒懂的 AI 摘要与多空信号卡,那么 AI 功能周活渗透率会从 <b>~20% 提升到 ~35%</b>,因为它把"深度报告"降维成散户 3 秒可读、可直接行动的结论。
+    </div>
+
+    <div class="poc-grid">
+      <div class="box"><div class="bk">实验类型</div><div class="bv">A/B 测试(个股页 50% 灰度)</div></div>
+      <div class="box"><div class="bk">周期</div><div class="bv">2 周</div></div>
+      <div class="box"><div class="bk">参与对象</div><div class="bv">访问个股页的活跃用户</div></div>
+      <div class="box"><div class="bk">成功标准</div><div class="bv">AI 模块曝光→停留↑、AI 周活渗透↑、次留有正向差异</div></div>
+    </div>
+
+    <div class="box" style="margin-top:14px">
+      <div class="bk">为什么是它</div>
+      <div class="bv">易实现度高(成熟 UI 模式,数周可上线)· 直接撬动卓锐最强的 AI 差异化卖点 · 用户契合度满分(散户最需要"秒懂") · 组件可复用到社区与智能交易模块。综合 F/I/M = <b style="color:var(--good)">13/15</b>,全树最高。</div>
+    </div>
+
+    <ol class="steps">
+      <li><b>Build:</b> 设计 AI 摘要卡 + 多空信号卡线框,接入资讯/AI 分析数据源</li>
+      <li><b>Run:</b> 个股页灰度 50%,跑 2 周</li>
+      <li><b>Measure:</b> 对比实验组 vs 对照组的 AI 渗透率、停留、次留、AI→下单转化</li>
+      <li><b>Decide:</b> 达标 → 扩量并叠加 O2-S1 证据链增强信任;不达标 → 转测 O1-S3 对话式问股</li>
+    </ol>
+  </div>
+
+  <footer>
+    来源:卓锐证券官网 zr.hk · Google Play / App Store 应用页 · 百度百科(卓锐证券香港 / Zircon Securities HK)· 美股之家 mg21.com · 知乎深度盘点 · WikiStock 券商档案。<br>
+    本页为基于公开信息的产品分析推断,非内部资料;评分与目标数值为示意,需以真实数据校准。
+  </footer>
+
+</div>
+</body>
+</html>

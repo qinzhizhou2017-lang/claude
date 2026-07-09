@@ -1,0 +1,1866 @@
+
+===== PAGE 1/36 =====
+多源行情系统使用说明书
+
+纳斯达克 Nasdaq Basic & NLS Plus
+
+FIU 金融数据服务
+
+===== PAGE 2/36 =====
+FIU 金融数据服务
+
+2
+
+版本号 生效日期 修订说明
+
+V0.1 2018-08-17 单线版初版
+
+V0.2 2019-03-01 1， 更新码表接口；
+
+2， 更新 EOD 接口；
+
+3， 支持双站点自动切换功能。
+
+V1.0 2019-04-02 增加支持 bin 二进制流格式
+
+V1.2 2019-04-24 优化双线自动切换机制
+
+V1.4 2019-12-01 快照 snapshot 协议增加买卖方向字段 direction
+
+V1.5 2020-11-05 优化 bin 版本的多个客户端连接
+
+V1.6 2020-11-17 优化兼容全美行情的负数情况
+
+V1.7 2021-03-31 1）优化下游解析程序的重连规则。
+
+2）BRK.A 自定义第一笔成交为 open
+
+V1.8 2021-07-07 1）snapshot 中的开高低收价格使用全美 EOD 分三次调整：
+
+16:15,17:00,20:15（均为美东时间）。
+
+2）config.ini 中增加是否打印日志控制参数 enablelog
+
+V1.9 2021-11-30 1) 增加 eod 协议 endofday
+
+2）增加 systemevent 协议
+
+3）美股交易日期切换时间点改为 15:00（之前是 12:00）
+
+V1.10 2022-05-24 1） 快照协议中的 sessionid 增加返回值-3，盘前初始化美
+
+东 03:00-04:00 之间的为 sessionid = -3；
+
+===== PAGE 3/36 =====
+FIU 金融数据服务
+
+3
+
+2） tradetype 增加返回值 eod（表示为全美 eod 修正数
+
+据）。
+
+3） 启用 pb 格式的快照协议的 market 字段。
+
+V1.11 公测 2022-06-29 1）调整 snapshot 协议与 eod 协议合并规则。
+
+V1.12 2022-07-11 1）修复和优化 snapshot 协议与 eod 协议合并规则。
+
+2）修复 v1.11 版本的问题。
+
+V1.13 2022-07-18 1）pb 格式的 snapshot 协议增加 pflag 字段
+
+V1.14 2022-11-02 1）增加缓存 sessionid = -3 记录
+
+V1.15 2023-11-14 1）优化快照协议的 pflag 字段
+
+2）其他优化
+
+V1.16 2024-09-20 1）代码优化
+
+V1.17 2024-11-19 1）优化断开重连
+
+===== PAGE 4/36 =====
+FIU 金融数据服务
+
+4
+
+目 录
+
+一、FIU
+多源行情系统概述 .................................................................................. 6
+
+1.1 系统背景 .............................................................................................................. 6
+
+1.2 工作原理 .............................................................................................................. 6
+
+二、接收服务的部署及配置 ................................................................................ 7
+
+2.1 接收服务的部署环境............................................................................................ 7
+
+2.2 接收服务的功能 ................................................................................................... 8
+
+2.3 接收服务的配置 ................................................................................................... 8
+
+2.4 守护程序的使用 ................................................................................................. 10
+
+三、接收服务的使用 ..........................................................................................10
+
+3.1 用户程序的部署 ................................................................................................. 10
+
+3.2 建立会话 ............................................................................................................ 11
+
+3.3 接收数据 ............................................................................................................ 11
+
+3.4 断开连接 ............................................................................................................ 12
+
+四、接口方式介绍 ..............................................................................................12
+
+===== PAGE 5/36 =====
+FIU 金融数据服务
+
+5
+
+4.1 json 格式的字符串流方式 .................................................................................. 12
+
+4.1.1 码表接口.............................................................................................................................. 12
+
+4.1.2 挂单协议.............................................................................................................................. 15
+
+4.1.3 快照协议.............................................................................................................................. 15
+
+4.1.4 心跳协议.............................................................................................................................. 19
+
+4.1.5 统一收盘/EOD 收盘数据 .................................................................................................... 19
+
+4.2 protobuf 格式的二进制流方式 ......................................................................... 21
+
+4.2.1 消息结构.............................................................................................................................. 21
+
+4.2.2 消息头.................................................................................................................................. 21
+
+4.2.3 消息说明.............................................................................................................................. 22
+
+4.2.4 心跳包.................................................................................................................................. 22
+
+4.2.5 快照协议.............................................................................................................................. 22
+
+4.2.6 挂单协议.............................................................................................................................. 25
+
+五、开发中常见问题 .......................................................................................... 27
+
+六、附录 .............................................................................................................29
+
+===== PAGE 6/36 =====
+FIU 金融数据服务
+
+6
+
+一、FIU 多源行情系统概述
+
+1.1 系统背景
+
+用户接入境外交易所行情面临着跨境专线投入高、业务沟通成本大、技术对接难度大、
+
+行情稳定性和时效性保障低等现实困难，FIU 多源行情致力于为用户提供稳定、高效、低成
+
+本、低门槛的海外行情接入解决方案。
+
+FIU 多源行情系统由位于海外的采集服务器经本地专线接收交易所原始行情数据，经过
+
+高效压缩处理后经全程跨境及境内专线分发到位于用户本地的行情接收服务器，最终通过接
+
+收服务（客户端网关）以 Json/protobuf 数据流方式将行情数据转发给用户的行情处理程
+
+序。
+
+1.2 工作原理
+
+FIU 多源行情是在原始行情基础上实现功能增强，提供极速、稳定、兼容性强的海外行
+
+情服务。整个极速海外行情系统主要由三个集群组成：采集服务集群、转发服务集群、接收
+
+服务集群。
+
+ 数据化采集，格式转换
+
+===== PAGE 7/36 =====
+FIU 金融数据服务
+
+7
+
+单个市场的原始行情数据结构非常的复杂， 使用的内部变量多达 1000 个左右， 同一
+
+个值经常根据条件可能有几个内部变量控制， 因此解析困难易错， 我们首先将原始数
+
+据去除程序内部变量， 进行初步的简化。
+
+ 数据压缩
+
+以 NASDAQ 美股行情为例，原始数据通过增量的方式发送也达到了大概每天有 20G
+
+左右， 如果直接转发给用户，数据量太大。我们对数据进行初步加工， 去除程序内部
+
+数据， 然后通过特有的算法将数据压缩到原始数据的十分之一左右， 同时保证因为压
+
+缩解压造成的延迟在 5ms 以内。
+
+ 数据解析
+
+接收服务接收到来自采集服务的压缩数据后， 将压缩数据解压，并将原始增量数据还
+
+原成完整的股票数据， 然后以简单易处理的协议通过多种途径发送给用户。目前我们
+
+提供以下 4 种途径：（本文档仅介绍 json 及 protobuf 流方式）
+
+a. json 格式的字符串流方式
+
+b.protobuf 格式的二进制串流方式
+
+c. dbf 方式
+
+d. api 方式（用户通过 http 协议请求获取指定数据（返回 json 格式）
+
+二、接收服务的部署及配置
+
+2.1 接收服务的部署环境
+
+本配置规范描述了接收服务部署（即用户需要部署的服务器）的配置要求，包括用户服
+
+务器的操作系统、数量、硬件等的推荐配置。
+
+类别 子类 要求
+
+软件 操作系统
+
+Centos7.x 64 位
+
+需要支持 killall 功能
+
+服务器时区要求：UTC+8（北京时间）
+
+硬件
+
+数量 一台物理服务器或云服务器
+
+CPU（Central 最低配置：64-bit x86（4core，2.00GHz）
+
+===== PAGE 8/36 =====
+FIU 金融数据服务
+
+8
+
+Processing Unit） 推荐配置：64-bit x86（8core，2.00GHz）
+
+内存
+
+最低配置：DDR（Double Data Rate）8GB 内存
+
+推荐配置：DDR 16GB 内存
+
+硬盘空闲空间
+
+最低配置：100GB
+
+推荐配置：300GB
+
+为确保软件正常运行，节点中需要存在以下分区目录，空
+
+闲空间满足要求：程序所在的目录容量>200G
+
+网络 下行网络带宽
+
+最低配置：5Mbit/s
+
+推荐配置：10Mbit/s
+
+2.2 接收服务的功能
+
+ 通过接收服务程序，将从转发服务推送来的数据通过特定的算法解压
+
+ 通过 tcp/ip 协议将解压数据推送给用户自己的行情服务程序
+
+2.3 接收服务的配置
+
+接收服务需要通过 TCP/IP 连接到转发服务，连接成功以后会自动接收转发服务发送的
+
+行情数据；连接失败则会在屏幕以及日志中输出可能的失败原因。
+
+我们会提供给用户接收服务程序，对于用户而言，需要处理的是在接收服务的配置文件
+
+中配置转发服务的 ip、端口、日志存放路径及保存天数、重启时间点、以及监听用户行情
+
+服务程序的端口。
+
+具体接收服务配置 config.ini 如下所示：
+
+===== PAGE 9/36 =====
+FIU 金融数据服务
+
+9
+
+[system]
+
+name = nasfiuhq
+
+serviceid = 填用户自身 ip:侦听端口
+
+protocol = json 【说明：配置协议格式，protobuf 或者 json】
+
+logpath = ./ 【说明：可设定 log 及 csv 日志文件的存放路径,需要手动创建目录】
+
+restarttime = 15:31 【每天接收程序重启时间，北京时间】
+
+logsavedays = 5 【说明：日志保存天数，可根据硬盘大小来设置】
+
+enablelog = 0【说明：1 为打印所有股票日志；0 为只打印 AAPL、BABA、SPY
+
+三只股票日志】
+
+datasource = 119.28.19.***:20116; 119.28.19.***:20116 【说明：填写我公司
+
+服务器 ip 和端口,支持双站点自动切换,具体 ip 和端口请联系我司】
+
+其中， servceid 配置接收服务在本地侦听用户行情服务程序建立连接的 IP 地址及端
+
+口，datasource 配置转发服务器的 ip XXX.XXX.XXX.***和 端口 20116。
+
+接收服务运行期间如果出现断线，会自动重连转发服务，用户需要关注的是做好正确的
+
+配置，以及注意屏幕或者日志中是否输出了重要的错误信息。
+
+===== PAGE 10/36 =====
+FIU 金融数据服务
+
+10
+
+2.4 守护程序的使用
+
+接收服务的守护(guard_nasfiu)说明
+
+config.ini中的logsavedays， 比如设置保留5天日志：
+
+logsavedays = 5
+
+使用方法：
+
+1. 修改文件属性
+
+chmod a+x guard_nasfiu (守护程序)
+
+chmod a+x nasfiuhq （接收程序）
+
+2. 设置core文件大小
+
+需要修改配置文件，如 .bash_profile。新增一行：ulimit -c unlimited
+
+3. 启动方式
+
+a. 默认启动方法：运行 ./guard_nasfiu -bg， 程序会后台启动。启动后， 应查看进程
+
+确认存在guard_nasfiu, nasfiuhq两个进程。
+
+b. 直接在程序目录下运行./nasfiuhq，以调试状态运行，屏幕上会打印部分调试信息。
+
+三、接收服务的使用
+
+3.1 用户程序的部署
+
+建议用户程序和我们的接收服务部署在同一内网。用户程序与接收服务之间连接为标准
+
+的 TCP/IP 点对点连接，连接建立成功以后，接收服务会主动推送码表、快照、挂单等消息。
+
+===== PAGE 11/36 =====
+FIU 金融数据服务
+
+11
+
+3.2 建立会话
+
+1.用户通过 socket 连接到指定的端口（由用户自行在配置文件 serviceid 中设定）
+
+2.用户程序必须在接收服务重启时间之后建立连接。restarttime = 15:31 之后
+
+3.连接成功以后，接收服务如果接收到行情数据，将主动推送给用户的解析程序
+
+3.如果连接失败，请检查网络配置，并重新连接
+
+4.用户程序如果在运行期间出现问题，请重新连接
+
+ 心跳包
+
+1.为了接收服务和用户程序能够实时监测通信链路状态，接收服务将会发送心跳包；
+
+2.当用户程序没有接收到数据包的时间超过 1 秒的心跳间隔时，则可认为是数据链路发
+
+生故障，用户程序可以断开此链接，并重新连接；
+
+3.接收服务每 1 秒发送一个心跳包；
+
+4.心跳包检测发现故障后，请重新连接接收服务。
+
+3.3 接收数据
+
+1、接收服务缓存所有用户程序未收到数据的说明
+
+为保证用户不丢数据，接收服务将缓存所有用户未收到的数据， 所以如果用户程序接收处
+
+理慢，将会导致接收服务内存占用很大。
+
+2、接收服务不保证每次发的数据都是完整消息包的说明
+
+===== PAGE 12/36 =====
+FIU 金融数据服务
+
+12
+
+接收服务并不保证每次都发送给用户程序的数据都是一个完整的消息包（json或者
+
+protobuf），比如， 用户某次调用 read 函数从socket读到的数据可能是100个完整的消
+
+息包 外加另外半个消息包。在这种情况下用户应当处理完前100个完整包以后， 缓存收到
+
+的半个消息包， 等待后续未完数据全部收到后继续处理。
+
+3.4 断开连接
+
+1、休市期间（周末）可断开连接，以免收到交易所发出的测试数据。
+
+2、交易日的收市后至第二天开盘前，也可以断开与接收服务的连接。
+
+美股交易时间段（美东时间）：
+
+盘前交易：04:00—09:30
+
+常规交易：09:30—16:00
+
+盘后交易：16:00—20:00 （20:15 会更新 NASDAQ 的最终一笔数据）
+
+四、接口方式介绍
+
+4.1 json 格式的字符串流方式
+
+每一条协议都是由 json 字符串 + 结束符（字符“0”）组成。下面介绍协议的几种类
+
+型和使用示例。（其中码表接口和 EOD 接口是 API 方式提供）
+
+4.1.1 码表接口
+
+码表接口url地址：http://info.szfuit.com:####/us_codetable
+
+码表获取建议每天5次（北京时间）：16:00、17:00、21:00、22:00、23:00（因为新股
+
+===== PAGE 13/36 =====
+FIU 金融数据服务
+
+13
+
+发行价或者经调整的昨收价会有盘中更新的可能），可酌情调整，但不要频繁请求。
+
+字段 中文名称 说明 示例
+
+symbol 证券代码 1
+
+纳 斯 达 克 交 易 所 编 码 （ NASDAQ Integrated
+
+Platform），nasdaq 实时行情所使用该代码。
+
+BABA
+
+cqs 证券代码 2
+
+通常用于 Consolidated Quotation System (CQS)
+
+and Consolidated Tape System (CTS) 数据源.
+
+BABA
+
+region 证券代码 3 证券代码带地区，是主流数据供应商编码 BABA-US
+
+exchange 上市交易所
+
+由 NASDAQ 提供，标识股票的上市市场或市场等级
+
+Q Nasdaq全球精选市场
+
+G Nasdaq全球市场
+
+S Nasdaq资本市场
+
+N NYSE纽约交易所
+
+A NYSE MKT（AMEX）
+
+P NYSE Arca
+
+Z BATS交易所
+
+V Investor's Exchange，LLC
+
+空格 无效
+
+Q
+
+isin 国际证券编码 仅供参考使用，注意需要授权牌照 US01609W1027
+
+chinese 中文简称 供参考。如无中文名称，则为空 阿里巴巴
+
+english 英文名称
+
+Alibaba Group
+
+Holding Ltd.
+
+===== PAGE 14/36 =====
+FIU 金融数据服务
+
+14
+
+Sponsored ADR
+
+type 证券类型 由纳斯达克综合交易所提供（详细参见：附录 1） A
+
+subtype 证券子类型 由纳斯达克综合交易所提供（详细参见：附录 1） Z
+
+etf ETF 标识
+
+标识证券是否 ETF
+
+Y 是
+
+N 否
+
+N
+
+kind 公司分类
+
+由 FIU 内部分类
+
+C 中概股
+
+F 知名美股
+
+B 既是中概股又是知名美股
+
+O 其它
+
+B
+
+size 每手股数 每手为 100 股,10 股,1 股等 100
+
+state 证券状态
+
+标识证券在 Nasdaq 系统中的状态：生产/存活/测试/
+
+演示（通常用户应该在公开场所只展示生产&存活状
+
+态的证券报价）
+
+P 生产/存活
+
+T 测试
+
+P
+
+preclose 昨收价
+
+北京时间 12：00 分更新当天昨收价(跟随交易日期);
+
+为空时，则从实时行情快照协议(snapshot)中获取，
+
+建议使用码表接口中的昨收价（因为该昨收价会考虑
+
+公司分红或者拆合股的行为而调整）。
+
+180.41
+
+===== PAGE 15/36 =====
+FIU 金融数据服务
+
+15
+
+tradedate 交易日期 美股交易日期，通常在北京时间中午 12 点切换 20190312
+
+4.1.2 挂单协议
+
+协议号对应为order。一个协议只发送一只股票数据。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol order
+
+2 证券代码 symbol aapl
+
+3 时间 time 年月日时分秒毫秒（美东时间）
+
+4 买一价 bidprice 元【精确到 4 位小数】
+
+5 买一量 bidvol 股
+
+6 卖一价 askprice 元【精确到 4 位小数】
+
+7 卖一量 askvol 股
+
+9 结尾符 \0
+
+协议内容示例：
+
+{"protocol":"order","symbol":"KRE","time":"20181019103222308","bidprice":"55
+
+3400","bidvol":"400","askprice":"553500","askvol":"500"}\0
+
+4.1.3 快照协议
+
+协议号对应为snapshot。一个协议只发送一只股票数据。
+
+===== PAGE 16/36 =====
+FIU 金融数据服务
+
+16
+
+序号 名称 字段 说明
+
+1 协议类型 protocol snapshot
+
+2 证券代码 symbol aapl
+
+3 时间 time 年月日时分秒毫秒（美东时间）
+
+4 昨收价 preclose 元【精确到 4 位小数】
+
+5 现价 lastprice 是经处理过的有效价格，用于画分时图/计
+
+算涨跌（留意：区别于最新成交价）:
+
+盘中：建议使用 lastprice 画图
+
+盘前/盘后：建议使用 lasttradeprice 画图
+
+6 开盘价 open 元【精确到 4 位小数】
+
+7 最高价 high 元【仅盘中时段统计】
+
+8 最低价 low 元【仅盘中时段统计】
+
+9 收盘价 close 元【精确到 4 位小数】
+
+10 成交量 totalvol 股（Nasdaq 交易所,统计全天盘前盘中盘后
+
+三个时段的所有成交）
+
+11 总成交金额 totalamount 元（全美成交额估算值，统计全天盘前盘中
+
+盘后三个时段）
+
+12 最新成交价 lasttradeprice 元
+
+13 最新成交量 lasttradeqty 股（当为负数，则表示撤单;当为 0，则表示
+
+开盘、收盘或 EOD 或者其他，可以过滤掉
+
+该笔逐笔）
+
+===== PAGE 17/36 =====
+FIU 金融数据服务
+
+17
+
+（留意：当为负数时，此时的现价需要过滤，
+
+不计入分时图或现价）
+
+14 全美总成交量 allmarketvol 股（全美交易所累计，统计全天盘前盘中盘
+
+后三个时段）
+
+15 卖空标识
+
+(可为空)
+
+regsho 表示消息发布时证券的卖空价格限制状态
+
+数字 ASCII 码 说明
+
+48 0 卖空限制解除
+
+49 1 卖空限制生效
+
+50 2 卖空限制继续
+
+16 交易状态
+
+(可为空)
+
+state 标识证券的当前交易状态（如出现停止交
+
+易，则带停牌原因，例如：H:LUDP）。
+
+原因列表参见附录 3
+
+（请留意：BRK.A 的状态为空，它只在黑池
+
+市场交易，没在 nasdaq baisc 交易）
+
+H: 停止交易（全美范围）
+
+P: 暂停交易（Nasdaq 上市的
+
+证券）
+
+Q: 仅有效期报价（全美范围）
+
+T: 交易中（Nasdaq 市场）
+
+17 交易时段 sessionid 标识该笔交易发生的时段
+
+-3 准备 03:00-04:00
+
+===== PAGE 18/36 =====
+FIU 金融数据服务
+
+18
+
+-1 盘前 04:00-09:30
+
+1 盘中 09:30-16:00
+
+-2 盘后 16:00-20:00
+
+0 无发生交易或不适用
+
+18 成交类型 tradetype 详细说明请见附录 2 部分，tradetype 若显
+
+示为 eod 则为全美 eod 修正数据。(另可为
+
+空)（留意：有些类型的成交价格不影响现
+
+价）
+
+19 买卖方向 direction 估算值，仅供参考！
+
+1 主动买入
+
+0 中性盘
+
+-1 主动卖出
+
+20 结尾符 \0
+
+说明：开盘，最高，最低，收盘均为盘中时段的统计值；盘前和盘后时段的高开收低需
+
+要自行统计。
+
+协议内容示例：
+
+{"protocol":"snapshot","symbol":"A","time":"20181019103028944","preclose":"
+
+657500","lastprice":"659600","open":"657500","high":"662200","low":"656800","clo
+
+se":"0","totalvol":"375","totalamount":"0","lasttradeprice":"659500","lasttradeqty":"
+
+50","allmarketvol":"300596","regsho":"0","state":"T:","sessionid":"1","tradetype":"@
+
+o"，“direction”:”1”}\0
+
+===== PAGE 19/36 =====
+FIU 金融数据服务
+
+19
+
+4.1.4 心跳协议
+
+协议号对应：heartbeat。每秒发送一条。
+
+{"protocol":"heartbeat"}\0
+
+4.1.5 统一收盘/EOD 收盘数据
+
+从 V1.8 版本开始，全美 EOD 会在实时 snapshot 快照协议分三次推送：
+
+第一次：美东 16:15 分
+
+第二次：美东 17:00 分
+
+第三次：美东 20:15 分
+
+修正字段：开盘、最高、最低、收盘、全美总成交量。
+
+4.1.6 EOD 收盘数据协议
+
+协议号对应为endofday。一个协议只发送一只股票数据。
+
+每天分三次时间推送：16:15/17:00/20:15(美东时间)
+
+留意：有些股票的高开低收都可能为0（空值），代表它当天没产生数值。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol endofday
+
+2 证券代码 symbol aapl
+
+3 市场 market
+
+4 时间 time 年月日时分秒毫秒（美东时间）
+
+===== PAGE 20/36 =====
+FIU 金融数据服务
+
+20
+
+5 开盘价 open 元（需除以 10000）
+
+6 最高价 high 元（需除以 10000）
+
+7 最低价 low 元（需除以 10000）
+
+8 收盘价 close 元（需除以 10000）
+
+9 成交量 vol 股
+
+10 结尾符 \0
+
+4.1.7 系统事件协议
+
+协议号对应为systemevent。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol systemevent
+
+2 时间 time 年月日时分秒毫秒（美东时间）
+
+3 事件 event O 传输开始时间：代表纳斯达克交易所系
+
+统新的一天准备开始数据传输：例如：
+
+20211201020035502
+
+S 系统开始时间：代表开始接受交易订单。
+
+例如：20211201040000000
+
+Q 市场开始时间：代表常规交易时段开始。
+
+例如：20211201093000000
+
+M 市场结束时间：代表常规交易时段结束。
+
+===== PAGE 21/36 =====
+FIU 金融数据服务
+
+21
+
+例如：20211201160000000
+
+E 系统结束时间：代表不再接受新订单。
+
+例如：20211201200000000
+
+C 传输结束时间：代表纳斯达克交易所系
+
+统结束数据传输。例如：
+
+20211201203000000
+
+4 结尾符 \0
+
+4.2 protobuf 格式的二进制流方式
+
+4.2.1 消息结构
+
+每一条消息由消息头、消息体组成。消息采用单字节对齐方式。本接口规范中的所有整数类
+
+型字段都采用低字节序（LITTLE-ENDIAN）编码方式。如用 java 开发客户端接收程序，
+
+需要转整数字段换字节序。
+
+4.2.2 消息头
+
+消息头定义了消息类型，消息长度，C++定义如下:
+
+#include<stdint.h>
+
+enum
+
+{
+
+FIU_STOCK = 100,
+
+FIU_ORDER = 101,
+
+FIU_CLIENT_HEARTBEAT = 102，
+
+FIU_ENDOFDAY = 61,
+
+FIU_SYSTEMEVENT = 62
+
+};
+
+#pragmapack(push,1)
+
+===== PAGE 22/36 =====
+FIU 金融数据服务
+
+22
+
+Struct MsgHeader
+
+{
+
+uint16_t usLength;
+
+uint8_t btType;
+
+};
+
+#pragmapack(pop)
+
+4.2.3 消息说明
+
+usLength表示整个消息长度，包括消息头，消息体。btType表示消息类型。
+
+4.2.4 心跳包
+
+只有消息头，无消息体，btType = FIU_CLIENT_HEARTBEAT。
+
+4.2.5 快照协议
+
+消息id FIU_STOCK，消息体 UsaStock
+
+序号 名称 字段 类型
+
+1 id id int64
+
+2 证券代码 symbol string
+
+3 时间 time sint64（美东时间）
+
+4 昨收价 preclose int64（需除以 10000）
+
+5 现价 lastprice int64（需除以 10000）
+
+6 开盘价 open int64（需除以 10000）
+
+7 最高价 high int64（需除以 10000）
+
+8 最低价 low int64（需除以 10000）
+
+9 收盘价 close int64（需除以 10000）
+
+10 全美总成交量 allmarketvol int64（全美交易所累计）
+
+11 最新成交价 lasttradeprice sint64（需除以 10000）
+
+===== PAGE 23/36 =====
+FIU 金融数据服务
+
+23
+
+12 最新成交量 lasttradeqty sint64（当为负数，则表示撤单;当为 0，则
+
+表示开盘、收盘或 EOD 或者其他，可以过
+
+滤掉该笔逐笔）
+
+（留意：当为负数时，此时的现价需要过滤，
+
+不计入分时图或现价）
+
+13 卖空标识
+
+(可为空)
+
+regsho int32 表示消息发布时证券的卖空价格限制
+
+状态
+
+数字 ASCII 码 说明
+
+48 0 卖空限制解除
+
+49 1 卖空限制生效
+
+50 2 卖空限制继续
+
+14 交易状态
+
+(可为空)
+
+state string 标识证券的当前交易状态（如出现停
+
+止交易，则带停牌原因，例如：H:LUDP）。
+
+原因列表参见附录 3
+
+（请留意：BRK.A 的状态为空，它只在黑池
+
+市场交易，没在 nasdaq baisc 交易）
+
+H: 停止交易（全美范围）
+
+P: 暂停交易（Nasdaq 上市的
+
+证券）
+
+Q: 仅有效期报价（全美范围）
+
+T: 交易中（Nasdaq 市场）
+
+===== PAGE 24/36 =====
+FIU 金融数据服务
+
+24
+
+15 交易时段 sessionid int32 标识该笔交易发生的时段
+
+-3 准备 03:00-04:00
+
+-1 盘前 04:00-09:30
+
+1 盘中 09:30-16:00
+
+-2 盘后 16:00-20:00
+
+0 无发生交易或不适用
+
+16 成交量 totalvol int64（Nasdaq 交易所）
+
+17 总成交金额 totalamount int64（全美成交额估算值）
+
+（需除以 10000）
+
+18 市场 market 表示该笔交易发生哪个市场：
+
+数字 ASCII 码 说明
+
+81 Q The Nasdaq
+
+Stock Market
+
+76 L Nasdaq/FINRA
+
+Trade Reporting
+
+Facility (TRF)
+
+Cartaret
+
+50 2 Nasdaq/FINRA
+
+Trade Reporting
+
+Facility (TRF)
+
+Chicago
+
+===== PAGE 25/36 =====
+FIU 金融数据服务
+
+25
+
+66 B Nasdaq BX (BX)
+
+88 X Nasdaq PSX
+
+(PSX)
+
+19 成交类型 tradetype string 详细说明请见附录 2 部分，(可为空)
+
+全美 eod 数据那一笔的成交类型为：eod
+
+20 买卖方向 direction sint64
+
+21 价格标识 pflag 标识该笔最新价 last 是否用做画分时
+
+图（分 K）
+
+Y 是
+
+N 否
+
+4.2.6 挂单协议
+
+消息 id FIU_ORDER, 消息体 UsaOrder
+
+序号 名称 字段 类型
+
+1 id id int64
+
+2 证券代码 symbol string
+
+3 时间 time sint64（美东时间）
+
+4 买一价 bidprice sint64（需除以 10000）
+
+5 买一量 bidvol int64
+
+6 卖一价 askprice sint64（需除以 10000）
+
+7 卖一量 askvol int64
+
+===== PAGE 26/36 =====
+FIU 金融数据服务
+
+26
+
+4.2.7 EOD 收盘数据协议
+
+消息 id FIU_ENDOFDAY, 消息体 PBEndOfDay
+
+每天分三次时间推送：16:15/17:00/20:15(美东时间)
+
+留意：有些股票的高开低收都可能为 0（空值），代表它当天没产生数值。
+
+序号 名称 字段 类型
+
+1 id id int64
+
+2 证券代码 symbol string
+
+3 时间 time sint64（美东时间）
+
+4 最高价 High int64
+
+5 最低价 Low int64
+
+6 收盘价 Close int64
+
+7 全美成交量 allmarketvol int64
+
+8 开盘价 Open int64
+
+9 市场 Market String（预留字段）
+
+4.2.8 系统事件协议
+
+消息 id FIU_SYSTEMEVENT, 消息体 PBSystemEvent
+
+序号 名称 字段 类型
+
+1 id id int64
+
+2 事件 event String
+
+===== PAGE 27/36 =====
+FIU 金融数据服务
+
+27
+
+O 传输开始时间：代表纳斯达克交易所系
+
+统新的一天准备开始数据传输：例如：
+
+20211201000000000
+
+S 系统开始时间：代表开始接受交易订单。
+
+例如：20211201040000000
+
+Q 市场开始时间：代表常规交易时段开始。
+
+例如：20211201093000000
+
+M 市场结束时间：代表常规交易时段结束。
+
+例如：20211201160000000
+
+E 系统结束时间：代表不再接受新订单。
+
+例如：20211201200000000
+
+C 传输结束时间：代表纳斯达克交易所系
+
+统结束数据传输。例如：
+
+20211201203000000
+
+3 时间 time sint64（美东时间）
+
+五、开发中常见问题
+
+1.协议不全，需要用户拼包
+
+通过 tcp 发送的协议，用户某一次 read 的时候，可能只读到了 1.5 个协议之后丢了剩下
+
+===== PAGE 28/36 =====
+FIU 金融数据服务
+
+28
+
+的 0.5 个协议，因为不全，所以后面数据群全错了。对于 json 协议用‘\0’来判断结束，
+
+可以少错， 但要想完美的解决问题需要用户拼包。 对于 protobuf 协议， 必须根据消
+
+息头中的长度字段以及实际收到的字节数进行拼包。
+
+2. 没有数据
+
+首先检查接收程序是否存在：
+
+ps -ef | grep nasfiuhq
+
+如果存在， 那么检查网络连接是否正常， 需要保证 nasfiuhq 连接采集、用户程序
+
+连接 nasfiuhq 都正常：
+
+netstat -anp | grep nasfiuhq
+
+查看日志文件 debug_####.txt， 日志中每隔一段时间会打印接收及发送情况。
+
+3. 数据延迟较大
+
+查看日志文件 debug_####.txt， 看看数据接收速度是否正常， 还需要重点查看是否存
+
+在发送缓冲区数据
+
+日志示例：
+
+01/09/2017:15:40:14-> INFO total recv bytes : 3078126983, recv speed :
+
+926.221KB/S, total send bytes : 0, send speed : 0KB/S, send buffer : 0 -
+
+statinfo.cpp:61
+
+如果 send buffer : 不为 0， 说明用户程序接收速度过慢
+
+===== PAGE 29/36 =====
+FIU 金融数据服务
+
+29
+
+4.为何一笔成交发生在 16 时 24 分（美股 16 点收市），但它仍标记为属于常规交易时段
+
+（sessionid=1）？
+
+这是因为个别交易报告晚的原因（已跟交易所确认），但它确实属于常规交易时段的交易。
+
+六、附录
+
+附录 1 证券类型和子类型说明
+
+证券类型
+
+Code 含义 中文参考
+
+A American Depositary Share 美国存托股票
+
+B Bond 债券
+
+C Common Stock 普通股票
+
+F Depository Receipt 存托凭证
+
+I 144A 144A 存托凭证
+
+L Limited Partnership 有限合伙
+
+N Notes 票据
+
+O Ordinary Share 普通股
+
+P Preferred Stock 优先股
+
+Q Other Securities 其它证券
+
+R Right 认股权
+
+S Shares of Beneficial Interest 受益权股份
+
+T Convertible Debenture 可转换债券
+
+U Unit 有多个权益组成的股票
+
+V Units/Benif Int
+
+W Warrant 认股权证（涡轮）
+
+证券子类型
+
+Code 含义 Code 含义
+
+A Preferred Trust Securities LL Identifies securities of
+
+companies that are set up as a
+
+Limited Liability Company (LLC)
+
+===== PAGE 30/36 =====
+FIU 金融数据服务
+
+30
+
+AI Alpha Index ETNs M Equity-Based Derivative
+
+B Index Based Derivative MF Managed Fund Shares
+
+C Common Shares ML ETN-Multi-Factor Index-Linked
+
+Securities
+
+CB Commodity Based Trust Shares MT Managed Trust Securities
+
+CF Commodity Futures Trust Shares N NY Registry Shares
+
+CL Commodity-Linked Securities O Open Ended Mutual Fund
+
+CM Commodity Index Trust Shares P Privately Held Security
+
+CO Collateralized Mortgage Obligation PP Poison Pill
+
+CT Currency Trust Shares PU Partnership Units
+
+CU Commodity-Currency-Linked Securities Q Closed-End Funds
+
+CW Currency Warrants R Reg-S
+
+D Global Depositary Shares RC Commodity-Redeemable
+
+Commodity-Linked Securities
+
+E ETF-Portfolio Depositary Receipt RF ETN-Redeemable
+
+Futures-Linked Securities
+
+EG Equity Gold Shares RT REIT
+
+EI ETN-Equity Index-Linked Securities RU Commodity-Redeemable
+
+Currency-Linked Securities
+
+EM Exchange Traded Managed Funds S SEED
+
+EN Exchange Traded Notes SC Spot Rate Closing
+
+EU Equity Units SI Spot Rate Intraday
+
+F HOLDRS T Tracking Stock
+
+FI ETN-Fixed Income-Linked Securities TC Trust Certificates
+
+FL ETN-Futures-Linked Securities TU Trust Units
+
+G Global Shares U Portal
+
+I ETF-Index Fund Shares V Contingent Value Right
+
+IR Interest Rate W Trust Issued Receipts
+
+IW Index Warrant WC World Currency Option
+
+IX Index-Linked Exchangeable Notes X Trust
+
+J Corporate Backed Trust Security Y Other
+
+L Contingent Litigation Right Z Not Applicable
+
+附录 2 成交类型说明
+
+Cod
+
+e
+
+Description 中文描述 英文描述
+
+Level 1
+
+@ Regular Settlement 常规结算
+
+C Cash Settlement 现金结算 A transaction that calls for the delivery of
+
+===== PAGE 31/36 =====
+FIU 金融数据服务
+
+31
+
+securities and payment on the same day the
+
+trade took place.
+
+N Next Day Settlement 隔天结算 A transaction that calls for the delivery of
+
+securities between one and four days (to be
+
+agreed by both parties to the trade – the
+
+number of days are not noted with the
+
+transaction) after the trade date.
+
+R Seller Settlement 卖方结算 A Seller’s option transaction is a special
+
+transaction that gives the seller the right
+
+to deliver the stock at any time within a
+
+specific period, ranging from not less than
+
+four calendar days to not more than sixty
+
+calendar days.
+
+Level 2
+
+F Intermarket Sweep 跨市场交易 Intermarket sweep order means a limit order
+
+for an NMS stock that meets the following
+
+requirements:
+
+When routed to a trading center, the limit
+
+order is identified as an intermarket sweep
+
+order; and
+
+Simultaneously with the routing of the
+
+limit order identified as an intermarket
+
+sweep order, one or more additional limit
+
+orders, as necessary, are routed to execute
+
+against the full displayed size of any
+
+protected bid, in the case of a limit order
+
+to sell, or the full displayed size of any
+
+protected offer, in the case of a limit order
+
+to buy, for the NMS stock with a price that
+
+is superior to the limit price of the limit
+
+order identified as an intermarket sweep
+
+order. These additional routed orders also
+
+must be marked as intermarket sweep orders.
+
+O Opening Print 因开盘活动的交易 The transaction or group of transactions
+
+reported as a result of a single-priced
+
+opening event by the Market Center.
+
+4 Derivative Priced 衍生产品定价 A transaction that constituted the
+
+trade-through was the execution of an order
+
+at a price that was not based, directly or
+
+indirectly, on the quoted price of the NMS
+
+stock at the time of execution and for which
+
+the material terms were not reasonably
+
+determinable at the time the commitment to
+
+execute the order was made.
+
+===== PAGE 32/36 =====
+FIU 金融数据服务
+
+32
+
+5 Re-Opening Print 再开盘定价 The transaction or group of transactions
+
+reported as a result of a single-priced
+
+re-opening event by the Market Center.
+
+6 Closing Print 因收盘活动的交易 The transaction or group of transactions
+
+reported as a result of a single-priced
+
+closing event by the Market Center.
+
+7 Qualified Contingent
+
+Trade(QCT)
+
+合单交易
+
+Empty Not applicable <空格>看下一个 level
+
+Level 3
+
+T Extended Hours
+
+Trade
+
+延长时段成交 A trade executed before or after the regular
+
+US market hours. Please note that the Dot-T
+
+modifier should be appended to all
+
+transactions that occur during the pre- and
+
+post-market sessions. The volume of Form-T
+
+trades will be included in the calculation
+
+of consolidated and market center volume.
+
+The price information in Dot-T trades will
+
+not be used to update high, low and last sale
+
+data for individual securities or indices
+
+since they occur outside of normal trade
+
+reporting hours.
+
+U Extended Hours
+
+Trade – Reported
+
+Late or Out of
+
+Sequence
+
+延长时段成交-报告延
+
+误
+
+Trade reports used to identify extended
+
+trading hours trades that are reported more
+
+than 30 seconds after execution. Currently,
+
+the extended trading hours are comprised of
+
+pre-market trading from 7 a.m. to 9:30 a.m.,
+
+Eastern Time (ET), and post-market trading
+
+from 4 p.m. to 8:00 p.m., ET.
+
+This sale condition would be similar to the
+
+existing “T” sale condition in that trades
+
+executed outside of market hours will not
+
+impact market center or consolidated high,
+
+low, or last sale prices for an issue. The
+
+transactions would, however, count toward
+
+issue and market volume.
+
+L Sold Last – Reported
+
+Late But In Sequence
+
+卖出-报告延误 Sold Last sale condition modifier is used
+
+when a trade prints in sequence but is
+
+reported late. A Sold Last transaction
+
+should only impact the consolidated last
+
+sale price for an issue if the market center
+
+reporting the sold last transaction also
+
+reported the transaction setting the current
+
+last sale price.
+
+===== PAGE 33/36 =====
+FIU 金融数据服务
+
+33
+
+Z Sold – Out of
+
+Sequence
+
+卖出-报告时间不按序 Sold Out of Sequence is used when a trade is
+
+printed (reported) out of sequence and at a
+
+time different from the actual transaction
+
+time.
+
+Empty Not applicable <空格>看下一个 level
+
+Level 4
+
+A Acquisition 因收购的交易 A transaction made on the Exchange as a
+
+result of an acquisition.
+
+B Bunched 批量交易 A trade representing an aggregate of two or
+
+more regular trades in a security occurring
+
+at the same price either simultaneously or
+
+within the same 60-second period, with no
+
+individual trade exceeding 10,000 shares.
+
+D Distribution 大手交易 Sale of a large block of stock in such a
+
+manner that the price is not adversely
+
+affected.
+
+H Price Variation Trade 离价交易 The Price Variation Trade sale condition
+
+code is used to denote a regular market
+
+session trade transaction that carries a
+
+price that is significantly away from the
+
+prevailing consolidated or primary market
+
+value at the time of the transaction.
+
+M NASDAQ Official
+
+Close Price(NOCP)
+
+NASDAQ 官方收市价 Indicates the “Official” closing value as
+
+determined by a Market Center. This
+
+transaction report will contain the market
+
+center generated closing price. The “M”
+
+(Market Center Close Price) sale condition
+
+modifier shall only affect the Market Center
+
+Closing/Last Sale value and will not affect
+
+the consolidated market value.
+
+o Odd lot execution 碎股交易 The Odd Lot sale condition modifier
+
+indicates that the execution size for a
+
+transaction was less than one round lot for
+
+the security.
+
+Please note that the consolidated trade
+
+feeds offered by the UTP Security
+
+Information Processor (UTP SIP) and the
+
+Securities Information Automation
+
+Corporation (SIAC) do not include odd lot
+
+execution data at this time.
+
+P Prior Reference Price 前参考价 An executed trade that relates to an
+
+obligation to trade at an earlier point in
+
+the trading day or that refers to a prior
+
+referenced price. This may be the result of
+
+===== PAGE 34/36 =====
+FIU 金融数据服务
+
+34
+
+an order that was lost or misplaced or was
+
+not executed on a timely basis.
+
+Q NASDAQ Official
+
+Opening Price
+
+(NOOP)
+
+NASDAQ 官方开市价 Indicates the “Official” opening value as
+
+determined by a Market Center. This
+
+transaction report will contain the market
+
+center generated opening price. The “Q”
+
+(Market Center Open Price) sale condition
+
+modifier shall only affect the Market Center
+
+Opening value and will not affect the
+
+consolidated market value. Direct data
+
+recipients that maintain individual market
+
+center open values should use this value as
+
+the official market center opening value and
+
+populate data displays accordingly
+
+S Split Trade 拆分交易 An execution in two markets when the
+
+specialist or Market Maker in the market
+
+first receiving the order agrees to execute
+
+a portion of it at whatever price is realized
+
+in another market to which the balance of the
+
+order is forwarded for execution.
+
+V Contingent Trade 合单交易
+
+W Average Price trade 平均价格交易 A trade where the price reported is based
+
+upon an average of the prices for
+
+transactions in a security during all or any
+
+portion of the trading day.
+
+Please note that the Nasdaq market center
+
+also uses this value to report stopped stock
+
+situations.
+
+For NLS Plus processing, Nasdaq will use
+
+the sale condition modifier of “W” for all
+
+Average Price Trades regardless of the
+
+listing market center. While the UTP SIP
+
+uses the same sale condition modifier code
+
+for Nasdaq-listed issues, it should be noted
+
+that SIAC / CTA SIP uses a “B” sale
+
+condition modifier for Average Price Trades
+
+for NYSE-, NYSE MKT-, NYSE Arca and
+
+BATS-listed securities.
+
+X Cross Trade 竞价时段交易 A Cross Trade a trade transaction resulting
+
+from a market center's crossing session.
+
+x Odd lot Cross Trade 竞价时段碎股交易
+
+Empty Not applicable <空格>看其它 level
+
+补充：tradetype 若显示为 eod 则为全美 eod 修正数据。
+
+===== PAGE 35/36 =====
+FIU 金融数据服务
+
+35
+
+附录 3 停牌原因
+
+REASON CODES FOR TRADING HALT ACTIONS
+
+Code Value
+
+T1 Halt News Pending
+
+T2 Halt News Disseminated
+
+T5 Single Stock Trading Pause In Effect
+
+T6 Regulatory Halt — Extraordinary Market Activity
+
+T8 Halt ETF
+
+T12 Trading Halted; For Information Requested by Listing Market
+
+H4 Halt Non-Compliance
+
+H9 Halt Filings Not Current
+
+H10 Halt SEC Trading Suspension
+
+H11 Halt Regulatory Concern
+
+O1 Operations Halt; Contact Market Operations
+
+LUDP Volatility Trading Pause
+
+LUDS Volatility Trading Pause – Straddle Condition
+
+MWC1 Market Wide Circuit Breaker Halt – Level 1
+
+MWC2 Market Wide Circuit Breaker Halt – Level 2
+
+MWC3 Market Wide Circuit Breaker Halt – Level 3
+
+MWC0 Market Wide Circuit Breaker Halt – Carry over from previous day
+
+IPO1 IPO Issue Not Yet Trading
+
+M1 Corporate Action
+
+M2 Quotation Not Available
+
+<space> Reason Not Available
+
+REASON CODES FOR QUOTATION/TRADING RESUMPTION ACTIONS
+
+Code Value
+
+T3 News and Resumption Times
+
+T7 Single Stock Trading Pause / Quotation Only Period
+
+R4 Qualifications Issues Reviewed/Resolved; Quotations/Trading to Resume
+
+R9 Filing Requirements Satisfied/Resolved; Quotations/Trading To Resume
+
+C3 Issuer News Not Forthcoming; Quotations/Trading To Resume
+
+C4 Qualifications Halt ended; Maintenance Requirements Met; Resume
+
+C9 Qualifications Halt Concluded; Filings Met; Quotes/Trades To Resume
+
+C11 
+Trade Halt Concluded By Other Regulatory Auth.; Quotes/Trades Resume
+
+MWCQ Market Wide Circuit Breaker Resumption
+
+===== PAGE 36/36 =====
+FIU 金融数据服务
+
+36
+
+R1 New Issue Available
+
+R2 Issue Available
+
+IPOQ IPO Security Released for Quotation (Nasdaq Securities Only)
+
+IPOE IPO Security — Positioning Window Extension (Nasdaq Securities Only)
+
+<space> Reason Not Available

@@ -1,0 +1,3163 @@
+
+===== PAGE 1/40 =====
+多源行情系统使用说明书
+
+香港证券交易所 OMD 标准证券数据(SS)
+
+FIU 金融数据服务
+
+===== PAGE 2/40 =====
+FIU 金融数据服务
+
+2
+
+目 录
+一、FIU
+多源行情系统概述 ................................................................................... 5
+
+1.1 系统背景 ...............................................................................................................5
+
+1.2 工作原理 ...............................................................................................................5
+二、接收服务的部署及配置 ..................................................................................6
+
+2.1 接收服务的部署环境 ............................................................................................ 6
+
+2.2 接收服务的功能 ....................................................................................................7
+
+2.3 接收服务的配置 ....................................................................................................7
+
+2.4 守护程序的使用 ....................................................................................................7
+三、接收服务的使用 .............................................................................................8
+
+3.1 用户程序的部署 ....................................................................................................8
+
+3.2 建立会话 ...............................................................................................................8
+
+3.3 接收数据 ...............................................................................................................9
+
+3.4 断开连接 ...............................................................................................................9
+四、接口方式介绍 .................................................................................................9
+
+4.1 json 格式的字符串流方式 ...................................................................................... 9
+
+4.1.1 股票码表 ................................................................................................................................. 9
+
+4.1.2 证券状态 ............................................................................................................................... 12
+
+4.1.3 股票快照 ............................................................................................................................... 12
+
+4.1.4 逐笔成交 ............................................................................................................................... 13
+
+4.1.5 委托挂单 ............................................................................................................................... 14
+
+4.1.6 经纪席位 ............................................................................................................................... 14
+
+===== PAGE 3/40 =====
+FIU 金融数据服务
+
+3
+
+4.1.7 北向每日额度剩余 ............................................................................................................... 15
+
+4.1.8 港股通成交额 ....................................................................................................................... 15
+
+4.1.9 熔断机制 ............................................................................................................................... 16
+
+4.1.10 指数码表 ............................................................................................................................. 16
+
+4.1.11 指数行情快照 ..................................................................................................................... 17
+
+4.1.12 参考价 ................................................................................................................................. 18
+
+4.1.13 交易时段状态 ..................................................................................................................... 18
+
+4.1.14 参考平衡价格 IEP ............................................................................................................... 19
+
+4.1.15 订单不平衡（未匹配量） ................................................................................................. 20
+
+4.1.16 碎股挂单协议 ..................................................................................................................... 20
+
+4.1.17 心跳包 ................................................................................................................................ 21
+
+4.2 protobuf 格式的二进制流方式 ............................................................................. 21
+
+4.2.1 消息结构 .............................................................................................................................. 21
+
+4.2.2 消息头 .................................................................................................................................. 21
+
+4.2.3 消息说明 .............................................................................................................................. 22
+
+4.2.4 心跳包 .................................................................................................................................. 22
+
+4.2.5 股票码表 ............................................................................................................................... 22
+
+4.2.6 证券状态 ............................................................................................................................... 25
+
+4.2.7 股票快照 ............................................................................................................................... 25
+
+4.2.8 逐笔成交 ............................................................................................................................... 25
+
+4.2.9 委托挂单 ............................................................................................................................... 26
+
+4.2.10 经纪席位 ............................................................................................................................. 26
+
+4.2.11 北向每日额度剩余 ............................................................................................................. 27
+
+4.2.12 港股通成交额 ..................................................................................................................... 27
+
+4.2.13 熔断机制 ............................................................................................................................. 28
+
+4.2.14 指数码表 ............................................................................................................................. 28
+
+4.2.15 指数行情快照 ..................................................................................................................... 28
+
+4.2.16 参考价 ................................................................................................................................. 29
+
+4.2.17 交易时段状态 ..................................................................................................................... 29
+
+4.2.18 参考平衡价格 IEP ............................................................................................................... 30
+
+4.2.19 订单不平衡（未匹配量） ................................................................................................. 31
+
+===== PAGE 4/40 =====
+FIU 金融数据服务
+
+4
+
+4.2.20 碎股挂单协议 ..................................................................................................................... 31
+
+五、开发中常见问题 ........................................................................................... 32
+
+六、附录 ..............................................................................................................33
+
+附录 1：指数明细表 ..................................................................................................................... 33
+
+附录 2：产品类型 ......................................................................................................................... 37
+
+附录 3：成交类型 ......................................................................................................................... 38
+
+七、发版记录 ...................................................................................................... 38
+
+===== PAGE 5/40 =====
+FIU 金融数据服务
+
+5
+
+一、FIU 多源行情系统概述
+
+1.1 系统背景
+
+用户接入境外交易所行情面临着跨境专线投入高、业务沟通成本大、技术对接难度大、
+
+行情稳定性和时效性保障低等现实困难，FIU 多源行情致力于为用户提供稳定、高效、低成
+
+本、低门槛的海外行情接入解决方案。
+
+FIU 多源行情系统由位于海外的采集服务器经本地专线接收交易所原始行情数据，经过
+
+高效压缩处理后经全程跨境及境内专线分发到位于用户本地的行情接收服务器，最终通过接
+
+收服务（客户端网关）以 Json/protobuf 数据流方式将行情数据转发给用户的行情处理程序。
+
+1.2 工作原理
+
+FIU 多源行情是在原始行情基础上实现功能增强，提供极速、稳定、兼容性强的海外行
+
+情服务。整个极速海外行情系统主要由三个集群组成：采集服务集群、转发服务集群、接收
+
+服务集群。
+
+ 数据化采集，格式转换
+
+单个市场的原始行情数据结构非常的复杂， 使用的内部变量多达 1000 个左右， 同一
+
+个值经常根据条件可能有几个内部变量控制， 因此解析困难易错， 我们首先将原始数
+
+据去除程序内部变量， 进行初步的简化。
+
+ 数据压缩
+
+以 NASDAQ 美股行情为例，原始数据通过增量的方式发送也达到了大概每天有 20G 左
+
+右， 如果直接转发给用户，数据量太大。我们对数据进行初步加工， 去除程序内部数
+
+据， 然后通过特有的算法将数据压缩到原始数据的十分之一左右， 同时保证因为压缩
+
+解压造成的延迟在 5ms 以内。
+
+===== PAGE 6/40 =====
+FIU 金融数据服务
+
+6
+
+ 数据解析
+
+接收服务接收到来自采集服务的压缩数据后， 将压缩数据解压，并将原始增量数据还
+
+原成完整的股票数据， 然后以简单易处理的协议通过多种途径发送给用户。目前我们
+
+提供以下 4 种途径：（本文档仅介绍 json 及 protobuf 流方式）
+
+a. json 格式的字符串流方式
+
+b.protobuf 格式的二进制串流方式
+
+c. api 方式（用户通过 http 协议请求获取指定数据（返回 json 格式）
+
+二、接收服务的部署及配置
+
+2.1 接收服务的部署环境
+
+本配置规范描述了接收服务部署（即用户需要部署的服务器）的配置要求，包括用户服
+
+务器的操作系统、数量、硬件等的推荐配置。
+
+类别 子类 要求
+
+软件 操作系统
+
+Centos7.x 64 位
+
+需要支持 killall 功能
+
+服务器时区要求：UTC+8（北京时间）
+
+硬件
+
+数量 一台物理服务器或云服务器
+
+CPU（Central
+
+Processing Unit）
+
+最低配置：64-bit x86（4core，2.00GHz）
+
+推荐配置：64-bit x86（8core，2.00GHz）
+
+内存 
+最低配置：DDR（Double Data Rate）8GB 内存
+
+推荐配置：DDR 16GB 内存
+
+硬盘空闲空间
+
+最低配置：100GB
+
+推荐配置：300GB
+
+为确保软件正常运行，节点中需要存在以下分区目录，空
+
+闲空间满足要求：程序所在的目录容量>200G
+
+网络 下行网络带宽 
+最低配置：5Mbit/s
+
+推荐配置：10Mbit/s
+
+===== PAGE 7/40 =====
+FIU 金融数据服务
+
+7
+
+2.2 接收服务的功能
+
+ 通过接收服务程序，将从转发服务推送来的数据通过特定的算法解压
+
+ 通过 tcp/ip 协议将解压数据推送给用户自己的行情服务程序
+
+2.3 接收服务的配置
+
+接收服务需要通过 TCP/IP 连接到转发服务，连接成功以后会自动接收转发服务发送的
+
+行情数据；连接失败则会在屏幕以及日志中输出可能的失败原因。
+
+我们会提供给用户接收服务程序，对于用户而言，需要处理的是在接收服务的配置文件
+
+中配置转发服务的 ip、端口、日志存放路径及保存天数、重启时间点、以及监听用户行情服
+
+务程序的端口。
+
+具体接收服务配置 config.ini 如下所示：
+
+[system]
+
+name = hkfiuhq
+
+serviceid = 填用户自身 ip:侦听端口
+
+protocol = json 【说明：配置协议格式 protobuf 或者 json】
+
+logpath = ./ 【说明：可设定 log 及 csv 日志文件的存放路径,需要手动创建目录】
+
+restarttime = 08:31 【每天接收程序重启时间，北京时间】
+
+logsavedays = 5 【说明：日志保存天数，可根据硬盘大小来设置】
+
+enablelog = 1 #配置是否打印全量日志或部分日志：1 为全部；0 为部分
+
+newpb = 1 #控制 PBOrderBroker 字段 2 和 PBOrder 字段 3 和 4 是否有值：1 无值，
+
+0 有值。
+
+datasource = 119.28.19.***:50116; 119.28.19.***:50116 【说明：填写我公司服务器
+
+ip 和端口,支持双站点自动切换,具体 ip 和端口请联系我司】
+
+其中，servceid 配置接收服务在本地侦听用户行情服务程序建立连接的 IP 地址及端口，
+
+datasource 配置转发服务器的 ip XXX.XXX.XXX.***和 端口 50116。
+
+接收服务运行期间如果出现断线，会自动重连转发服务，用户需要关注的是做好正确的
+
+配置，以及注意屏幕或者日志中是否输出了重要的错误信息。
+
+2.4 守护程序的使用
+
+接收服务的守护(guard_hkfiu)说明
+
+config.ini中的logsavedays， 比如设置保留5天日志：
+
+logsavedays = 5
+
+===== PAGE 8/40 =====
+FIU 金融数据服务
+
+8
+
+使用方法：
+
+1. 修改文件属性
+
+chmod a+x guard_hkfiu (守护程序)
+
+chmod a+x hkfiuhq （接收程序）
+
+2. 设置core文件大小
+
+需要修改配置文件，如 .bash_profile。新增一行：ulimit -c unlimited
+
+3. 启动方式
+
+a. 默认启动方法：运行 ./guard_hkfiu -bg， 程序会后台启动。启动后， 应查看进程确认
+
+存在guard_hkfiu, hkfiuhq两个进程。
+
+b. 直接在程序目录下运行./hkfiuhq，以调试状态运行，屏幕上会打印部分调试信息。
+
+三、接收服务的使用
+
+3.1 用户程序的部署
+
+建议用户程序和我们的接收服务部署在同一内网。用户程序与接收服务之间连接为标准
+
+的 TCP/IP 点对点连接，连接建立成功以后，接收服务会主动推送码表、快照、挂单等消息。
+
+3.2 建立会话
+
+1.用户通过 socket 连接到指定的端口（由用户自行在配置文件 serviceid 中设定）
+
+2.用户程序必须在接收服务重启时间之后建立连接。restarttime = 08:31 之后
+
+3.连接成功以后，接收服务如果接收到行情数据，将主动推送给用户的解析程序
+
+3.如果连接失败，请检查网络配置，并重新连接
+
+4.用户程序如果在运行期间出现问题，请重新连接
+
+ 心跳包
+
+1.为了接收服务和用户程序能够实时监测通信链路状态，接收服务将会发送心跳包；
+
+2.当用户程序没有接收到数据包的时间超过 5 秒的心跳间隔时，则可认为是数据链路发
+
+生故障，用户程序可以断开此链接，并重新连接；
+
+===== PAGE 9/40 =====
+FIU 金融数据服务
+
+9
+
+3.接收服务每 5 秒发送一个心跳包；
+
+4.心跳包检测发现故障后，请重新连接接收服务。
+
+3.3 接收数据
+
+1、接收服务缓存所有用户程序未收到数据的说明
+
+为保证用户不丢数据，接收服务将缓存所有用户未收到的数据， 所以如果用户程序接收处
+
+理慢，将会导致接收服务内存占用很大。
+
+2、接收服务不保证每次发的数据都是完整消息包的说明
+
+接收服务并不保证每次都发送给用户程序的数据都是一个完整的消息包（json或者
+
+protobuf），比如， 用户某次调用 read 函数从socket读到的数据可能是100个完整的消息包
+
+外加另外半个消息包。在这种情况下用户应当处理完前100个完整包以后， 缓存收到的半个
+
+消息包， 等待后续未完数据全部收到后继续处理。
+
+3.4 断开连接
+
+1、休市期间（含周末）可断开连接，以免收到交易所发出的测试数据。
+
+2、交易日的收市后至第二天开盘前，也可以断开与接收服务的连接。
+
+港股交易时间段（北京时间）：
+
+盘前时段：09:00—09:30
+
+常规交易：09:30—12:00,13:00—16:00
+
+盘后竞价：16:00—16:10
+
+四、接口方式介绍
+
+4.1 json 格式的字符串流方式
+
+每一条协议都是由 json 字符串 + 结束符（字符“0”）组成。下面介绍协议的几种类
+
+型和使用示例。
+
+4.1.1 股票码表
+
+协议号对应为 stockdefine。一个协议只发送一只股票数据。（如有需要则转成 ASCII 码，
+
+比如： 89-> Y；78-> N）
+
+===== PAGE 10/40 =====
+FIU 金融数据服务
+
+10
+
+序号 名称 字段 说明
+
+1 协议类型 protocol stockdefine
+
+2 证券代码 code 00700
+
+3 证券中文名称 name 腾讯控股（建议使用自己维护的名
+
+称）
+
+4 证券英文简称 shortname TENCENT
+
+5 市场代号 marketcode MAIN (主板)
+
+GEM（创业板）
+
+ETS(扩充交易证券)
+
+NASD(NASDAQ AMX市场)
+
+6 币种 currency
+
+7 ISIN码 isincode
+
+8 品种 instrument BOND 债券
+
+EQTY 股票
+
+TRST 信托产品
+
+WRNT 权证
+
+9 产品类型 producttype 参见附录2
+
+10 价差标识 spread 01 Part A*
+
+03 Part B*
+
+04 For Inline Warrant (same as
+
+Part A up to and include HK$ 1.00
+
+as per SEHK)
+
+05 Part D*
+
+06 Part E*
+
+11 每手股数 lotsize
+
+12 昨收价 preclose 1元（单位是1）
+
+13 VCM标识 vcmflag Y--是VCM范畴
+
+N--非VCM范畴
+
+14 沽空标识 shortsell Y--可沽空
+
+N--不可沽空
+
+15 CAS标识 casflag Y--是收盘竞价
+
+N--非收盘竞价
+
+16 CCASS（中央结算
+
+系统）标识
+
+ccassflag Y-- 是CCASS证券
+
+N-- 非CCASS证券
+
+17 虚拟证券标识
+
+（交易所测试所
+
+用）
+
+dummyflag Y-- Dummy security
+
+N-- Normal security
+
+18 测试代码标识 testflag 0否/1是
+
+19 印花税标识 stampdutyflag Y --Stamp duty required
+
+===== PAGE 11/40 =====
+FIU 金融数据服务
+
+11
+
+N --Stamp duty not required
+
+20 上市日期 listingdate 年月日（由港交所定义）通常不太适
+
+用
+
+21 退市日期 delistingdate
+
+22 空闲文本 freetext Free text associated to the
+
+security
+
+23 POS标识 posflag Y POS applicable
+
+N POS not applicable
+
+24 POS最高限价 posupper 元
+
+25 POS最低限价 poslower 元
+
+26 EFN标识 enfflag Y--EFN
+
+N-- Non-EFN
+
+27 债券利息 accured
+
+28 债券担保息票率 （债券字段）
+
+couponrate
+
+29 兑换比率 counversionratio
+
+30 行使价1 Strikeprice1 元
+
+31 行使价2 Strikeprice2 元
+
+32 到期日 maturitydate 年月日
+
+33 认购认沽标识 callput For衍生认股权证 :
+
+C-- Call
+
+P-- Put
+
+O-- Others
+
+For ELI & CBBC:
+
+C-- Bull
+
+P-- Bear / Rang
+
+34 权证类型 style A--美式权证
+
+E--欧式权证
+
+35 涡轮类型 warrenttype N Normal instrument
+
+X Exotic instrument
+
+“0” Not available
+
+36 回收价 callprice 解析时注意要根据decimalprice字
+
+段确定小数位
+
+37 回收价小数位 decimalprice Not applicable if CallPrice = 0
+
+38 认股证的权利 entitlement 解析时注意要根据
+
+decimalentitlement字段确定小数
+
+位
+
+39 认股证的权利的
+
+小数位
+
+decimalentitlemen
+
+t
+
+40 每个权利的认股
+
+证数量
+
+nowarrants
+
+===== PAGE 12/40 =====
+FIU 金融数据服务
+
+12
+
+41 标的证券的数量 nounderlying 0 不属于码表定义的证券；
+
+1 属于码表定义的证券。
+
+42 标的物代码 underlyingsecurit
+
+ycode
+
+43 繁体名称 securitynamegccs
+
+44 主要交收柜台的
+
+证券代码
+
+domainstmtsecurit
+
+ycode
+
+对应主要交收柜台的证券代码。（比
+
+如89988.hk对应主要交收柜台的是
+
+9988.hk）
+
+45 结尾符 \0
+
+协议内容示例：
+
+{"protocol":"stockdefine","code":"1","name":"长和","shortname":"CKH
+
+HOLDINGS","marketcode":"MAIN","currency":"HKD","isincode":"KYG217651051","instr
+
+ument":"EQTY","producttype":"1","spread":"01","lotsize":"500","preclose":"83200
+
+","vcmflag":"Y","shortsell":"Y","casflag":"Y","ccassflag":"Y","dummyflag":"N","
+
+testflag":"0","stampdutyflag":"Y","listingdate":"20150318","delistingdate":"0",
+
+"freetext":"","posflag":"","posupper":"","poslower":"","enfflag":"0","accured":"0
+
+","couponrate":"0","counversionratio":"0","strikeprice1":"0","strikeprice2":"0",
+
+"maturitydate":"0","callput":"0","style":"0","warrenttype":"","callprice":"0","
+
+decimalprice":"0","entitlement":"0","decimalentitlement":"0","nowarrants":"0","
+
+nounderlying":"0"}\0
+
+4.1.2 证券状态
+
+协议号对应securitystatus。一个协议只发送一只证券数据。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol securitystatus
+
+2 证券代码 code 00700
+
+3 停牌标识 suspension 2-暂停交易或者停牌
+
+3-复牌
+
+说明：只标记那些停牌或者刚复牌的证券。
+
+4.1.3 股票快照
+
+协议号对应snapshot。一个协议只发送一只股票数据。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol snapshot
+
+2 证券代码 code 00700
+
+3 证券中文名称 name 腾讯控股
+
+4 行情时间 time 年月日时分秒毫秒
+
+5 昨收价 preclose 元【精确到 3 位小数】
+
+===== PAGE 13/40 =====
+FIU 金融数据服务
+
+13
+
+6 开盘价 open 元【精确到 3 位小数】
+
+7 最高价 high 元【精确到 3 位小数】
+
+8 最低价 low 元【精确到 3 位小数】
+
+9 收市价 close 元【精确到 3 位小数】
+
+10 最新价 last 元
+
+11 平均价 vwap 空值，交易所不再提供
+
+12 成交量 sharestraded 股
+
+13 成交额 turnover 元
+
+14 沽空量 shortshares 股
+
+15 沽空额 shortturnover 元
+
+16 价格标识 pflag 标识该笔最新价 last 是否用做画分时
+
+图（分 K）
+
+Y 是
+
+N 否
+
+17 结尾符 \0
+
+协议内容示例：
+
+{"protocol":"snapshot","code":"64","name":"结好控股
+
+","time":"19700101080000000","preclose":"0.28","open":"0","high":"0","low":"0",
+
+"close":"0","last":"0.28","vwap":"0","sharestraded":"0","turnover":"0","shortsh
+
+ares":"0","shortturnover":"0","pflag":"Y"}\0
+
+4.1.4 逐笔成交
+
+协议号对应trade。一个协议只发送一只股票数据。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol trade
+
+2 证券代码 code 00700
+
+3 证券中文名称 name 腾讯控股
+
+4 行情时间 time 年月日时分秒毫秒
+
+5 序号 tickerid
+
+6 成交价 price 元【精确到 3 位小数】
+
+7 成交量 qty 股
+
+8 成交类型 type 参照附录 3
+
+9 撤单标识 cancelflag Y 是/N 否
+
+10 买卖方向 direction 预估值，仅供参考
+
+B 主动买入
+
+- 中性盘
+
+S 主动卖出
+
+===== PAGE 14/40 =====
+FIU 金融数据服务
+
+14
+
+11 结尾符 \0
+
+协议内容示例：
+
+{"protocol":"trade","code":"6886","name":"HTSC","time":"20180703090000000",
+
+"tickerid":"1","price":"12.503","qty":"17160","type":"4","cancelflag":"N","dire
+
+ction":"B"}\0
+
+4.1.5 委托挂单
+
+协议号对应order。一个协议只发送一只股票数据。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol order
+
+2 时间 time 20191201093008000
+
+3 证券代码 code 00700
+
+4 买单序列 bidlist
+
+5 卖单序列 asklist
+
+6 结尾符 \0
+
+协议内容示例：【买卖单序列中：price是挂单价格、qty是挂单数量、num是挂单经纪
+
+席位数目】
+
+{"protocol":"order","time":"20191201093008000","code":"700","bidlist":[{"pr
+
+ice":"375.4","qty":"627300","num":"278"},{"price":"375.2","qty":"3800","num":"1
+
+2"},{"price":"375","qty":"202400","num":"139"},{"price":"374.8","qty":"5500","n
+
+um":"5"},{"price":"374.6","qty":"100","num":"1"},{"price":"374.4","qty":"700","
+
+num":"2"},{"price":"374.2","qty":"1700","num":"5"},{"price":"374","qty":"12400",
+
+"num":"18"},{"price":"373.8","qty":"500","num":"5"},{"price":"373.6","qty":"200
+
+","num":"1"}],
+
+"asklist":[{"price":"375.4","qty":"589500","num":"120"},{"price":"375.6","qty":
+
+"1500","num":"3"},{"price":"375.8","qty":"0","num":"0"},{"price":"376","qty":"4
+
+00","num":"2"},{"price":"376.2","qty":"0","num":"0"},{"price":"376.4","qty":"20
+
+0","num":"1"},{"price":"376.6","qty":"8700","num":"1"},{"price":"376.8","qty":"
+
+200","num":"1"},{"price":"377","qty":"2600","num":"4"},{"price":"377.2","qty":"
+
+200","num":"1"}]}\0
+
+4.1.6 经纪席位
+
+协议号对应orderbroker。一个协议只发送一只股票的数据。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol orderbroker
+
+2 证券代码 code 00700
+
+===== PAGE 15/40 =====
+FIU 金融数据服务
+
+15
+
+3 明细 detail 1 股票代码
+
+2 时间
+
+3 买方经纪/卖方经纪
+
+4 Y/N 是否还有未展示完
+
+的席位排位
+
+5 #### 代表 4 位数席位号
+
+6 -1 代表买一
+
+-2 代表买二
+
+……
+
++1 代表卖一
+
++2 代表买二
+
+……
+
+4 结尾符 \0
+
+协议内容示例：
+
+{"protocol":"orderbroker","code":"64","detail":"64,20180703085958000,买方经
+
+纪,N,\n4838\n8328\n\n"}
+
+4.1.7 北向每日额度剩余
+
+协议号对应connectbalance。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol connectbalance
+
+2 市场 market SH-- 上海交易所
+
+SZ-- 深圳交易所
+
+3 交易方向 direction NB--北向交易
+
+4 时间 time
+
+5 额度剩余 balance 元（RMB）
+
+4 结尾符 \0
+
+协议内容示例
+
+{"protocol":"connectbalance","market":"SH","direction":"NB","time":"20180703080
+
+000000","balance":"5.2e+07"}
+
+4.1.8 港股通成交额
+
+协议号对应connectturnover。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol connectturnover
+
+2 市场 market SH--上海交易所
+
+===== PAGE 16/40 =====
+FIU 金融数据服务
+
+16
+
+SZ-- 深圳交易所
+
+3 交易方向 direction 
+NB-- 北向交易
+
+SB-- 南向交易
+
+4 时间 time
+
+5 买入额 buyturnover 
+北向交易成交额单位是 RMB；
+
+南向交易成交额单位是 HKD；
+
+6 卖出额 sellturnover 
+北向交易成交额单位是 RMB；
+
+南向交易成交额单位是 HKD；
+
+7 买卖总额 buysell 
+北向交易成交额单位是 RMB；
+
+南向交易成交额单位是 HKD；
+
+8 结尾符 \0
+
+协议内容示例
+
+{"protocol":"connectturnover","market":"SH","direction":"NB","time":"2018070308
+
+3000000","buyturnover":"0","sellturnover":"0","buysell":"0"}
+
+4.1.9 熔断机制
+
+协议号对应vcmtrigger。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol vcmtrigger
+
+2 证券代码 code 00700
+
+3 冷却期开始 coolingoffstarttime
+
+4 冷却期结束 coolingoffendtime
+
+5 冷却期参考价 vcmprice
+
+6 冷却期最低价 vcmlowerprice
+
+7 冷却期最高价 vcmupperprice
+
+8 结尾符 \0
+
+协议内容示例
+
+4.1.10 指数码表
+
+协议号对应indexdefine。（指数列表名称参考附录1）
+
+序号 名称 字段 说明
+
+1 协议类型 protocol indexdefine
+
+2 指数代码 code 0000100
+
+3 指数来源 indexsource
+
+C--CSI系列
+
+H--恒生系列
+
+S--标普系列
+
+===== PAGE 17/40 =====
+FIU 金融数据服务
+
+17
+
+T-- TR
+
+4 币种 currency
+
+5 结尾符 \0
+
+协议内容示例
+
+{"protocol":"indexdefine","code":"000001","indexsource":"C","currency":"CNY"}
+
+4.1.11 指数行情快照
+
+协议号对应index。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol index
+
+2 指数代码 code 0000100
+
+3 行情时间 time 年月日时分秒毫秒
+
+4 指数状态 indexstatus 可能返回的值：返回数字，可转为 ASCII
+
+码。（指数状态可以为空）
+
+数字 ASCII
+
+码
+
+说明
+
+67 C 收市价
+
+73 I Indicative 指示
+
+79 O 指数开盘
+
+80 P 昨收价格
+
+82 R Preliminary close
+
+预备收盘
+
+83 S Stop loss index
+
+止损指数
+
+84 T 指数现价
+
+5 昨收价 preclose
+
+6 开盘价 open
+
+7 最高价 high
+
+8 最低价 low
+
+9 收市价 close
+
+10 最新价 last
+
+11 成交量 totalvol
+
+12 成交额 turnover
+
+13 涨跌 netchgpreday
+
+14 涨跌% netchgpredaypct
+
+15 预估结算值 easvalue Estimated Average Settlement Value
+
+16 结尾符 \0
+
+===== PAGE 18/40 =====
+FIU 金融数据服务
+
+18
+
+协议内容示例
+
+{"protocol":"index","code":"000001","time":"19700101080000000","indexstatus":"0
+
+","preclose":"0","open":"0","high":"0","low":"0","close":"0","last":"0","totalv
+
+ol":"0","turnover":"0","netchgpreday":"0","netchgpredaypct":"0","easvalue":"0"}
+
+\0
+
+4.1.12 参考价
+
+协议号对应refprice。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol refprice
+
+2 证券代码 code
+
+3 参考价格 refprice 
+Reference price of the security for
+
+order input in POS and CAS
+
+4 最高价格 upperprice
+
+5 最低价格 lowerprice
+
+4 结尾符 \0
+
+4.1.13 交易时段状态
+
+协议号对应trading_session_status。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol trading_session_status
+
+2 市场代码 code 
+MAIN (主板)
+
+GEM（创业板）
+
+ETS(扩充交易证券)
+
+NASD(NASDAQ AMX 市场)
+
+3 交易时段 ID subid 100 Not Yet Open(NO)-未开市
+
+Pre-opening Sessiong-开市前时段
+
+1 [POS]Order Input(OI)-订单输入
+
+101 [POS]No Cancellation(NW)-不可取消
+
+108 [POS]Random Matching(RM)-随机对盘
+
+2 [POS]Order Matching(MA)-订单对盘
+
+7 Blocking(BL)-暂停
+
+Continuous Trading Session:-持续交易时段
+
+===== PAGE 19/40 =====
+FIU 金融数据服务
+
+19
+
+3 Continuous trading(CT)-持续交易
+
+Closing Auction Sessions:-收市竞价时段
+
+105 [CAS]Reference Price Fixing(RP)-参考定价
+
+5 [CAS]Order Input(OI)-订单输入
+
+106 [CAS]No Cancellation(NW)-不可取消
+
+107 [CAS]Random Close(RC)-随机收盘
+
+4 [CAS]Order Matching(MA)-订单对盘
+
+Other Sessions:-其它时段
+
+102 Exchange Intervention(EI)-交易所干预
+
+103 Close(CL)-收市
+
+104 Order Cancel(OC)-订单取消
+
+0 Day Close(DC)-当天闭市
+
+4 交易时段状态 status 0 Unknown（for NO）-未知
+
+10 Halted（for EI）-暂停
+
+20 Pre-Open（for[POS]OI、NW、RM、MA，and BL）-
+
+开盘前
+
+30 Open (for CT and OC)-开盘
+
+40 Pre-close（for[CAS]RP、OI、NW、RC、MA）-收
+
+盘前
+
+50 Closed（for CL）-收盘
+
+100 Day Closed（for DC）-当天闭市
+
+5 交易时段控制
+
+标识
+
+controlflag 0 自动（默认）
+
+1 手动（表示这一天的正常日程无效）
+
+6 开始时间 starttime 交易时段状态开始时间
+
+7 结束时间 endtime 交易时段状态结束时间
+
+8 结尾符 \0
+
+4.1.14 参考平衡价格 IEP
+
+协议号对应equiprice。在开盘前交易时段（POS）或收盘竞价时段（CAS）期间，只要
+
+参考平衡价格（IEP）或参考平衡交易量（IEV）发生变化，就会生成参考平衡价格（IEP）
+
+消息。当IEP不存在时，IEP将变为0。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol equiprice
+
+2 证券代码 code
+
+3 参考平衡价格
+
+（IEP）
+
+price 
+IEP
+
+4 参考平衡量 vol IEV
+
+5 结尾符 \0
+
+===== PAGE 20/40 =====
+FIU 金融数据服务
+
+20
+
+4.1.15 订单不平衡（未匹配量）
+
+协议号对应orderimbalance。在开盘前交易时段（POS）和收盘竞价时段（CAS）期间，
+
+当存在「参考的平衡价格」(IEP)的时候，将提供订单不平衡信息。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol orderimbalance
+
+2 证券代码 code
+
+3 订单不平衡方向 direction N 买=卖
+
+B 买多
+
+S 卖多
+
+空格 当IEP不存在的时候则为空值
+
+4 订单不平衡数量 quantity The absolute difference between the
+
+matchable buy quantity and the sell
+
+quantity at IEP。
+
+Value should be ignored if Order
+
+Imbalance Direction is <space>
+
+5 结尾符 \0
+
+*IEP：Indicative Equilibrium Price
+
+4.1.16 碎股挂单协议
+
+协议号对应oddlotorder。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol oddlotorder
+
+2 证券代码 code
+
+3 时间 time 年月日时分秒毫秒
+
+4 买价 bidprice
+
+5 买量 bidquantity
+
+6 买单经纪数 bidnum
+
+7 买单经纪 bidbroker
+
+8 卖价 askprice
+
+9 卖量 askquantity
+
+10 卖单经纪数 asknum
+
+11 卖单经纪 askbroker
+
+12 结尾符 \0
+
+4.1.17 市场成交额协议
+
+协议号对应marketturnover。
+
+序号 名称 字段 说明
+
+===== PAGE 21/40 =====
+FIU 金融数据服务
+
+21
+
+1 协议类型 protocol marketturnover
+
+2 市场代码 market MAIN
+
+GEM
+
+NASD
+
+ETS
+
+3 币种 currency
+
+4 总成交额 turnover
+
+5 时间 time 年月日时分秒毫秒
+
+12 结尾符 \0
+
+4.1.18 心跳包
+
+协议号对应：heartbeat。每5秒发送一条。
+
+{"protocol":"heartbeat"}\0
+
+4.2 protobuf 格式的二进制流方式
+
+4.2.1 消息结构
+
+每一条消息由消息头、消息体组成。消息采用单字节对齐方式。本接口规范中的所有整数类
+
+型字段都采用低字节序（LITTLE-ENDIAN）编码方式。如用 java 开发客户端接收程序，
+
+需要转整数字段换字节序。
+
+4.2.2 消息头
+
+消息头定义了消息类型，消息长度，C++定义如下:
+
+#include "base/types.h"
+
+#pragma pack(push,1)
+
+enum FiuType
+
+{
+
+FIU_Heartbeat = 0,
+
+FIU_CODE = 1,
+
+FIU_SNAPSHOT = 2,
+
+FIU_ORDER = 3,
+
+FIU_IndexDefine = 4,
+
+FIU_Trade = 5,
+
+FIU_Index = 6,
+
+FIU_VcmTrigger = 7,
+
+FIU_OrderBroker = 8,
+
+===== PAGE 22/40 =====
+FIU 金融数据服务
+
+22
+
+FIU_ConnectBalance = 9,
+
+FIU_ConnectTurnover = 10,
+
+FIU_SecurityStatus = 11,
+
+FIU_EquipPrice = 12,
+
+FIU_OrderImbalance = 13,
+
+FIU_TradeSessionStatus = 14,
+
+FIU_RefPrice = 15,
+
+FIU_OddLot = 16,
+
+FIU_MarketTurnOver = 17
+
+};
+
+struct FiuHeader
+
+{
+
+FiuHeader()
+
+{
+
+memset(this, 0, sizeof(*this));
+
+usLen = sizeof(*this);
+
+}
+
+uint16_t usLen;
+
+uint8_t cType;
+
+};
+
+#pragma pack(pop)
+
+4.2.3 消息说明
+
+usLen表示整个消息长度，包括消息头，消息体。FiuType表示消息类型。
+
+4.2.4 心跳包
+
+只有消息头，无消息体，FiuType = FIU_Heartbeat。
+
+4.2.5 股票码表
+
+消息id FIU_CODE，消息体 PBStockDefine
+
+序号 名称 字段 说明
+
+1 证券代码 code 00700
+
+2 证券中文名称 name 腾讯控股（建议使用自己维护的名
+
+称）
+
+3 证券英文简称 shortname TENCENT
+
+4 币种 currency
+
+5 ISIN码 isincode
+
+6 价差标识 spread 01 Part A*
+
+===== PAGE 23/40 =====
+FIU 金融数据服务
+
+23
+
+03 Part B*
+
+04 For Inline Warrant (same as
+
+Part A up to and include HK$ 1.00
+
+as per SEHK)
+
+05 Part D*
+
+06 Part E*
+
+7 产品类型 producttype 参见附录2
+
+8 每手股数 lotsize
+
+9 昨收价 preclose 元【放大1000倍】
+
+10 VCM标识 vcmflag Y--是VCM范畴
+
+N--非VCM范畴
+
+11 沽空标识 shortsell Y--可沽空
+
+N--不可沽空
+
+12 CAS标识 casflag Y--是收盘竞价
+
+N--非收盘竞价
+
+13 虚拟证券标识
+
+（交易所测试所
+
+用）
+
+dummyflag Y-- Dummy security
+
+N-- Normal security
+
+14 测试代码标识 testflag 0否/1是
+
+15 印花税标识 stampdutyflag Y --Stamp duty required
+
+N --Stamp duty not required
+
+16 上市日期 listingdate 年月日（由港交所定义）通常不太适
+
+用
+
+17
+
+17 退市日期 delistingdate
+
+18 EFN标识 enfflag Y--EFN
+
+N-- Non-EFN
+
+19 债券利息 accured
+
+20 债券担保息票率 （债券字段）
+
+couponrate
+
+21 兑换比率 counversionratio
+
+22 空闲文本 freetext Free text associated to the
+
+security
+
+23 行使价1 Strikeprice1 元【放大1000倍】
+
+24 行使价2 Strikeprice2 元【放大1000倍】
+
+25 到期日 maturitydate 年月日
+
+26 认购认沽标识 callput For衍生认股权证 :
+
+C-- Call
+
+===== PAGE 24/40 =====
+FIU 金融数据服务
+
+24
+
+P-- Put
+
+O-- Others
+
+For ELI & CBBC:
+
+C-- Bull
+
+P-- Bear / Rang
+
+27 权证类型 style A--美式权证
+
+E--欧式权证
+
+28 POS标识 posflag Y POS applicable
+
+N POS not applicable
+
+29 涡轮类型 warrenttype N Normal instrument
+
+X Exotic instrument
+
+“0” Not available
+
+30 回收价 callprice 元【放大1000倍】
+
+31 回收价小数位 decimalprice Not applicable if CallPrice = 0
+
+32 认股证的权利 entitlement 解析时注意要根据
+
+decimalentitlement字段确定小数
+
+位
+
+33 认股证的权利的
+
+小数位
+
+decimalentitlemen
+
+t
+
+34 每个权利的认股
+
+证数量
+
+nowarrants
+
+35 标的证券的数量 nounderlying 0 不属于码表定义的证券；
+
+1 属于码表定义的证券。
+
+36 POS最高限价 posupper 元【放大1000倍】
+
+37 POS最低限价 poslower 元【放大1000倍】
+
+38 市场代号 market MAIN (主板)
+
+GEM（创业板）
+
+ETS(扩充交易证券)
+
+NASD(NASDAQ AMX市场)
+
+39 品种 instrument BOND 债券
+
+EQTY 股票
+
+TRST 信托产品
+
+WRNT 权证
+
+40 CCASS（中央结算
+
+系统）标识
+
+ccassflag Y-- 是CCASS证券
+
+N-- 非CCASS证券
+
+41 繁体名称 securitynamegccs
+
+42 标的物代码 underlyingsecurit
+
+ycode
+
+43 主要交收柜台的
+
+证券代码
+
+domain_code 对应主要交收柜台的证券代码。（比
+
+如89988.hk对应主要交收柜台的是
+
+9988.hk）
+
+===== PAGE 25/40 =====
+FIU 金融数据服务
+
+25
+
+4.2.6 证券状态
+
+消息id FIU_SecurityStatus，消息体 PBSecurityStatus。
+
+序号 名称 字段 说明
+
+1 证券代码 code 00700
+
+2 停牌标识 suspension 2-暂停交易或者停牌
+
+3-复牌
+
+说明：只标记那些停牌或者刚复牌的证券。
+
+4.2.7 股票快照
+
+消息id FIU_SNAPSHOT，消息体 PBSnapshot。
+
+序号 名称 字段 说明
+
+1 证券代码 code 00700
+
+2 证券中文名称 name 腾讯控股
+
+3 行情时间 time 年月日时分秒毫秒
+
+4 昨收价 preclose 元【放大 1000 倍】
+
+5 最新价 lastprice 元【放大 1000 倍】
+
+6 开盘价 open 元【放大 1000 倍】
+
+7 最高价 high 元【放大 1000 倍】
+
+8 最低价 low 元【放大 1000 倍】
+
+9 收市价 close 元【放大 1000 倍】
+
+10 平均价 vwap 空值，交易所不再提供
+
+11 成交量 sharestraded 股
+
+12 成交额 turnover 元【放大 1000 倍】
+
+13 沽空量 shortshares 股
+
+14 沽空额 shortturnover 元【放大 1000 倍】
+
+15 价格标识 pflag 标识该笔最新价 last 是否用做画分时
+
+图（分 K）
+
+Y 是
+
+N 否
+
+4.2.8 逐笔成交
+
+消息id FIU_Trade，消息体 PBTrade。
+
+序号 名称 字段 说明
+
+===== PAGE 26/40 =====
+FIU 金融数据服务
+
+26
+
+1 证券代码 code 00700
+
+2 行情时间 time 年月日时分秒毫秒
+
+3 证券中文名称 name 腾讯控股
+
+4 序号 tickerid
+
+5 买卖方向 direction 预估值，仅供参考
+
+B 主动买入
+
+- 中性盘
+
+S 主动卖出
+
+6 成交价 price 元【放大 1000 倍】
+
+7 成交量 qty 股
+
+8 成交类型 type 参照附录 3
+
+9 撤单标识 cancelflag Y 是/N 否
+
+4.2.9 委托挂单
+
+消息id FIU_ORDER，消息体 PBOrder、PBOrderItem
+
+序号 名称 字段 说明
+
+1 证券代码 code 00700
+
+2 时间 time 20191201093008000
+
+3 买单序列 bidlist
+
+4 卖单序列 asklist
+
+3 买单数组 bidvec PBOrderItem 数组
+
+4 卖单数组 askvec PBOrderItem 数组
+
+协议内容示例：【买卖单序列中：price是挂单价格、qty是挂单数量、num是挂单经纪
+
+席位数目】
+
+PBOrderItem说明:
+
+序号 名称 字段 说明
+
+1 挂单价格 price 元【放大 1000 倍】
+
+2 挂单数量 qty
+
+3 经纪席位数目 num
+
+4.2.10 经纪席位
+
+消息id FIU_OrderBroker，消息体 PBOrderBroker。
+
+序号 名称 字段 说明
+
+1 证券代码 code 00700
+
+===== PAGE 27/40 =====
+FIU 金融数据服务
+
+27
+
+2 经纪明细 detail 为 json 字符串格式，含字
+
+段 3、4、5、6 内容
+
+3 时间 time
+
+4 买方经纪/卖方经纪 direction 1：买方经纪
+
+2：卖方经纪
+
+5 是否未展示完席位 moreflag Y（89）：是
+
+N（78）：否
+
+6 席位 orderbrokervec PBOrderBrokerItem
+
+repeated PBOrderBrokerItem orderbrokervec = 6;
+
+PBOrderBrokerItem说明
+
+序号 名称 字段 说明
+
+1 档位 index
+
+2 席位号 broker 数组形式
+
+4.2.11 北向每日额度剩余
+
+消息id FIU_ConnectBalance，消息体 PBConnectBalance。
+
+序号 名称 字段 说明
+
+1 市场 market SH-- 上海交易所
+
+SZ-- 深圳交易所
+
+2 时间 time
+
+3 交易方向 direction NB--北向交易
+
+4 额度剩余 balance 元（RMB）
+
+4.2.12 港股通成交额
+
+消息id FIU_ConnectTurnover，消息体 PBConnectTurnover。
+
+序号 名称 字段 说明
+
+1 市场 market 
+SH--上海交易所
+
+SZ-- 深圳交易所
+
+2 时间 time
+
+3 交易方向 direction 
+NB-- 北向交易
+
+SB-- 南向交易
+
+4 买入额 buyturnover 
+北向交易成交额单位是 RMB；
+
+南向交易成交额单位是 HKD；
+
+===== PAGE 28/40 =====
+FIU 金融数据服务
+
+28
+
+5 卖出额 sellturnover 
+北向交易成交额单位是 RMB；
+
+南向交易成交额单位是 HKD；
+
+6 买卖总额 buysell 
+北向交易成交额单位是 RMB；
+
+南向交易成交额单位是 HKD；
+
+4.2.13 熔断机制
+
+消息id FIU_VcmTrigger，消息体 PBVcmTrigger。
+
+序号 名称 字段 说明
+
+1 证券代码 code 00700
+
+2 冷却期开始 coolingoffstarttime
+
+3 冷却期结束 coolingoffendtime
+
+4 冷却期参考价 vcmprice
+
+5 冷却期最低价 vcmlowerprice
+
+6 冷却期最高价 vcmupperprice
+
+4.2.14 指数码表
+
+消息id FIU_IndexDefine，消息体 PBIndexDefine。
+
+序号 名称 字段 说明
+
+1 指数代码 code 0000100
+
+2 币种 currency
+
+3 指数来源 indexsource
+
+C--CSI系列
+
+H--恒生系列
+
+S--标普系列
+
+T-- TR
+
+4.2.15 指数行情快照
+
+消息id FIU_Index，消息体 PBIndex。
+
+序号 名称 字段 说明
+
+1 指数代码 code 0000100
+
+2 行情时间 time 年月日时分秒毫秒
+
+3 指数状态 indexstatus 可能返回的值：返回数字，可转为 ASCII
+
+码。（指数状态可以为空）
+
+数字 ASCII 码 说明
+
+67 C 收市价
+
+73 I Indicative 指示
+
+===== PAGE 29/40 =====
+FIU 金融数据服务
+
+29
+
+79 O 指数开盘
+
+80 P 昨收价格
+
+82 R Preliminary close
+
+预备收盘
+
+83 S Stop loss index
+
+止损指数
+
+84 T 指数现价
+
+4 昨收价 preclose 【放大 10000 倍】
+
+5 开盘价 open 【放大 10000 倍】
+
+6 最高价 high 【放大 10000 倍】
+
+7 最低价 low 【放大 10000 倍】
+
+8 收市价 close 【放大 10000 倍】
+
+9 最新价 last 【放大 10000 倍】
+
+10 成交量 totalvol
+
+11 成交额 turnover 【放大 10000 倍】
+
+12 涨跌 netchgpreday 【放大 10000 倍】
+
+13 涨跌% netchgpredaypct 【放大 10000 倍】
+
+14 预估结算值 easvalue 
+【放大 100 倍】
+
+Estimated Average Settlement Value
+
+4.2.16 参考价
+
+消息id FIU_RefPrice，消息体 PBRefPrice。
+
+序号 名称 字段 说明
+
+1 证券代码 code
+
+2 参考价格 refprice 
+Reference price of the security for
+
+order input in POS and CAS
+
+【放大 1000 倍】
+
+3 最高价格 upperprice 【放大1000倍】
+
+4 最低价格 lowerprice 【放大 1000 倍】
+
+4.2.17 交易时段状态
+
+消息id FIU_TradeSessionStatus，消息体 PBTradeSessionStatus。
+
+序号 名称 字段 说明
+
+1 市场代码 code 
+MAIN
+
+===== PAGE 30/40 =====
+FIU 金融数据服务
+
+30
+
+GEM
+
+NASD
+
+ETS
+
+2 交易时段状态 status 0 Unknown（for NO）-未知
+
+10 Halted（for EI）-暂停
+
+20 Pre-Open（for[POS]OI、NW、RM、MA，and BL）-
+
+开盘前
+
+30 Open (for CT and OC)-开盘
+
+40 Pre-close（for[CAS]RP、OI、NW、RC、MA）-收
+
+盘前
+
+50 Closed（for CL）-收盘
+
+100 Day Closed（for DC）-当天闭市
+
+3 交易时段 ID subid 100 Not Yet Open(NO)-未开市
+
+Pre-opening Sessiong-开市前时段
+
+1 [POS]Order Input(OI)-订单输入
+
+101 [POS]No Cancellation(NW)-不可取消
+
+108 [POS]Random Matching(RM)-随机对盘
+
+2 [POS]Order Matching(MA)-订单对盘
+
+7 Blocking(BL)-暂停
+
+Continuous Trading Session:-持续交易时段
+
+3 Continuous trading(CT)-持续交易
+
+Closing Auction Sessions:-收市竞价时段
+
+105 [CAS]Reference Price Fixing(RP)-参考定价
+
+5 [CAS]Order Input(OI)-订单输入
+
+106 [CAS]No Cancellation(NW)-不可取消
+
+107 [CAS]Random Close(RC)-随机收盘
+
+4 [CAS]Order Matching(MA)-订单对盘
+
+Other Sessions:-其它时段
+
+102 Exchange Intervention(EI)-交易所干预
+
+103 Close(CL)-收市
+
+104 Order Cancel(OC)-订单取消
+
+0 Day Close(DC)-当天闭市
+
+4 交易时段控制
+
+标识
+
+controlflag 0 自动（默认）
+
+1 手动（表示这一天的正常日程无效）
+
+5 开始时间 starttime 交易时段状态开始时间
+
+6 结束时间 endtime 交易时段状态结束时间
+
+4.2.18 参考平衡价格 IEP
+
+消息id FIU_EquipPrice，消息体 PBEquipPrice。
+
+===== PAGE 31/40 =====
+FIU 金融数据服务
+
+31
+
+在开盘前交易时段（POS）或收盘竞价时段（CAS）期间，只要参考平衡价格（IEP）或
+
+参考平衡交易量（IEV）发生变化，就会生成参考平衡价格（IEP）消息。当IEP不存在时，
+
+IEP将变为0。
+
+序号 名称 字段 说明
+
+1 证券代码 code
+
+2 参考平衡价格
+
+（IEP）
+
+price 
+IEP
+
+【放大 1000 倍】
+
+3 参考平衡量 vol IEV
+
+4.2.19 订单不平衡（未匹配量）
+
+消息id FIU_OrderImbalance，消息体 PBOrderImbalance。
+
+在开盘前交易时段（POS）和收盘竞价时段（CAS）期间，当存在「参考的平衡价格」(IEP)
+
+的时候，将提供订单不平衡信息。
+
+序号 名称 字段 说明
+
+1 证券代码 code
+
+2 订单不平衡方向 direction N 买=卖
+
+B 买多
+
+S 卖多
+
+空格 当 IEP 不存在的时候则为空值
+
+3 订单不平衡数量 quantity The absolute difference between the
+
+matchable buy quantity and the sell
+
+quantity at IEP。
+
+Value should be ignored if Order
+
+Imbalance Direction is <space>
+
+*IEP：Indicative Equilibrium Price
+
+4.2.20 碎股挂单协议
+
+消息id FIU_OddLot，消息体 PBOddLot。
+
+序号 名称 字段 说明
+
+1 协议类型 protocol oddlot
+
+2 证券代码 code
+
+3 时间 time 年月日时分秒毫秒
+
+4 买价 bidprice 【放大 1000 倍】
+
+5 买量 bidquantity
+
+6 买单经纪数 bidnum
+
+7 买单经纪 bidbroker
+
+8 卖价 askprice 【放大 1000 倍】
+
+===== PAGE 32/40 =====
+FIU 金融数据服务
+
+32
+
+9 卖量 askquantity
+
+10 卖单经纪数 asknum
+
+11 卖单经纪 askbroker
+
+4.2.21 市场成交额协议
+
+消息id FIU_MarketTurnOver，消息体 PBMarketTurnOver
+
+序号 名称 字段 说明
+
+1 市场代码 market MAIN
+
+GEM
+
+NASD
+
+ETS
+
+2 币种 currency
+
+3 总成交额 turnover 【放大 1000 倍】
+
+4 时间 time 年月日时分秒毫秒
+
+五、开发中常见问题
+
+1.协议不全，需要用户拼包
+
+通过 tcp 发送的协议，用户某一次 read 的时候，可能只读到了 1.5 个协议之后丢了剩下的
+
+0.5 个协议，因为不全，所以后面数据群全错了。对于 json 协议用‘\0’来判断结束，可
+
+以少错， 但要想完美的解决问题需要用户拼包。 对于 protobuf 协议， 必须根据消息头
+
+中的长度字段以及实际收到的字节数进行拼包。
+
+2. 没有数据
+
+首先检查接收程序是否存在：
+
+ps -ef | grep hkfiuhq
+
+如果存在， 那么检查网络连接是否正常， 需要保证 hkfiuhq 连接采集、用户程序连
+
+接 hkfiuhq 都正常：
+
+netstat -anp | grep hkfiuhq
+
+查看日志文件 debug_####.txt， 日志中每隔一段时间会打印接收及发送情况。
+
+3. 数据延迟较大
+
+查看日志文件 debug_####.txt， 看看数据接收速度是否正常， 还需要重点查看是否存在
+
+发送缓冲区数据
+
+日志示例：
+
+01/09/2017:15:40:14-> INFO total recv bytes : 3078126983, recv speed : 926.221KB/S, total
+
+send bytes : 0, send speed : 0KB/S, send buffer : 0 - statinfo.cpp:61
+
+===== PAGE 33/40 =====
+FIU 金融数据服务
+
+33
+
+如果 send buffer : 不为 0， 说明用户程序接收速度过慢
+
+六、附录
+
+附录 1：指数明细表
+
+Index
+
+Sourc
+
+e
+
+Index OMDC
+
+Code
+
+常用代码
+
+参考
+
+Name of the Index and market
+
+information disseminated
+
+under the OMD Index
+
+中文名称参考 Third Party
+
+Index
+
+Ownership
+
+C CES120 CES120 CES China 120 Index 中华交易服务
+
+中国120指数
+
+(中华120)
+
+CES
+
+C CESA80 CESA80 CES China A80 Index 中华交易服务
+
+中国A80指数
+
+（中华A80）
+
+CES
+
+C CESHKM HSCHKMI CES China HK Mainland Index 中华交易服务
+
+中国香港内地
+
+指数（中华香港
+
+内地指数）
+
+CES
+
+C CES280 CES280 CES China 280 Index 中华交易服务
+
+中国280指数
+
+（中华280）
+
+CES
+
+C CESG10 CESG10 CES Gaming Top 10 Index 中华交易服务
+
+博彩业指数
+
+CES
+
+C CES300 CES300 CES Stock Connect 300 Index 中华交易服务
+
+沪深港300指数
+
+（中华沪深港
+
+300）
+
+CES
+
+C CES100 CES100 CES Stock Connect Hong Kong
+
+Select 100 Index
+
+中华交易服务
+
+港股通精选100
+
+指数（中华港股
+
+通精选100）
+
+CES
+
+C CESP50 CESP50 CES Stock Connect Hong Kong
+
+Premier 50 Index
+
+中华交易服务
+
+港股通精选50
+
+指数（中华港股
+
+通精选50）
+
+CES
+
+C 990001 990001 CES China Semiconductor
+
+Chips Index
+
+CES中国半导体
+
+指数
+
+CES
+
+C CSI300 CSI300 CSI 300 Index 中证沪深300指
+
+数
+
+CSI
+
+C 000942 000942 CSI China Mainland Consumer
+
+Index
+
+中证中国大陆
+
+消费指数
+
+CSI
+
+===== PAGE 34/40 =====
+FIU 金融数据服务
+
+34
+
+C H11108 H11108 CSI Cross-Straits 500 Index 中证两岸三地
+
+500指数
+
+CSI
+
+C H11123 H11123 CSI HK Mainland Enterprises 50
+
+Index
+
+中证香港内地
+
+企业50指数
+
+CSI
+
+C H11100 H11100 CSI Hong Kong 100 Index 中证香港100指
+
+数
+
+CSI
+
+C H11140 H11140 CSI Hong Kong Dividend Index 中证香港红利
+
+指数
+
+CSI
+
+C H11144 H11144 CSI Hong Kong Listed Tradable
+
+Mainland Consumption Index
+
+中证香港上市
+
+可交易内地消
+
+费指数
+
+CSI
+
+C H11143 H11143 CSI Hong Kong Listed Tradable
+
+Mainland Real Estate Index
+
+中证香港上市
+
+可交易内地地
+
+产指数
+
+CSI
+
+C H11120 H11120 CSI Hong Kong Middle Cap Select
+
+Index
+
+中证香港中盘
+
+精选指数
+
+CSI
+
+C H11152 H11152 CSI Hong Kong Private-owned
+
+Mainland Enterprises Index
+
+中证香港内地
+
+民营企业指数
+
+CSI
+
+C H11153 H11153 CSI Hong Kong State-owned
+
+Mainland Enterprises Index
+
+中证香港内地
+
+国有企业指数
+
+CSI
+
+C H11110 H11110 CSI RAFI Hong Kong 50 Index 中证锐联香港
+
+基本面 50 指
+
+数
+
+CSI
+
+C 000016 000016 SSE 50 Index 上证50指数 SSE
+
+C 000021 000021 SSE 180 Governance Index 上证180公司治
+
+理指数
+
+SSE
+
+C 000010 000010 SSE 180 Index 上证成份指数
+
+（简称上证180
+
+指数）
+
+SSE
+
+C 000009 000009 SSE 380 Index 上证380指数 SSE
+
+C 000066 000066 SSE Commodity Equity Index 上证大宗商品
+
+股票指数
+
+SSE
+
+C 000001 000001 SSE Composite Index 上证综合指数 SSE
+
+C 000015 000015 SSE Dividend Index 上证红利指数 SSE
+
+C 000043 000043 SSE Mega-cap Index 上证超级大盘
+
+指数
+
+SSE
+
+C 000044 000044 SSE Mid Cap Index 上证中盘指数 SSE
+
+C 000065 000065 SSE Industry Top Index 上证龙头企业
+
+指数
+
+SSE
+
+C CESHKB CESHKB CES HK Biotechnology Index 香港生物科技
+
+指数
+
+CES
+
+H 0001500 HSCC Hang Seng China Affiliated
+
+Corporations Index
+
+恒生香港中资
+
+企业指数
+
+HSDS
+
+===== PAGE 35/40 =====
+FIU 金融数据服务
+
+35
+
+H 0001400 HSCE Hang Seng China Enterprises
+
+Index
+
+恒生中国企业
+
+指数
+
+HSDS
+
+H 0000100 HSI Hang Seng Index 恒生指数 HSDS
+
+H 0000101 HSNF HSI Sub Indices – Finance 恒生金融分类
+
+指数
+
+HSDS
+
+H 0000102 HSNU HSI Sub Indices – Utilities 恒生公用事业
+
+分类指数
+
+HSDS
+
+H 0000103 HSNP HSI Sub Indices – Property 恒生地产分类
+
+指数
+
+HSDS
+
+H 0000104 HSNC HSI Sub Indices – Commerce &
+
+Industry
+
+恒生工商业分
+
+类指数
+
+HSDS
+
+H 0105000 VHSI HSI Volatility Index (VHSI) 恒指波幅指数 HSDS
+
+H 0200700 HSMBI Hang Seng Mainland Banks Index 恒生内地银行
+
+指数
+
+HSDS
+
+H 0200800 HSMPI Hang Seng Mainland Properties
+
+Index
+
+恒生内地房地
+
+产指数
+
+HSDS
+
+H 0200900 HSMHI Hang Seng Mainland Healthcare
+
+Index
+
+恒生内地医疗
+
+指数
+
+HSDS
+
+H 0201000 HSMOGI Hang Seng Mainland Oil and Gas
+
+Index
+
+恒生内地石油
+
+及天然气指数
+
+HSDS
+
+H 0201100 HSITHI Hang Seng IT Hardware Index 恒生IT硬件指
+
+数
+
+HSDS
+
+H 0201200 HSSSI Hang Seng Software & Services
+
+Index
+
+恒生软件服务
+
+指数
+
+HSDS
+
+H 1006800 HSIGTR Hang Seng Index (Gross Total
+
+Return Index)
+
+恒生指数（总股
+
+息累积指数）
+
+HSDS
+
+H 1006801 HSNFGTR Hang Seng Finance Sub-Index
+
+(Gross Total Return Index)
+
+恒生金融分类
+
+指数（总股息累
+
+积指数）
+
+HSDS
+
+H 1006802 HSNUGTR Hang Seng Utilities Sub-Index
+
+(Gross Total Return Index)
+
+恒生公用事业
+
+分类指数（总股
+
+息累积指数）
+
+HSDS
+
+H 1006803 HSNPGTR Hang Seng Properties Sub-Index
+
+(Gross Total Return Index)
+
+恒生地产分类
+
+指数（总股息累
+
+积指数）
+
+HSDS
+
+H 1006804 HSNCGTR Hang Seng Index Commerce &
+
+Industry Sub-Index (Gross
+
+Total Return Index)
+
+恒生指数工商
+
+业分类指数（总
+
+股息累积指数）
+
+HSDS
+
+H 1007200 HSCEGTR Hang Seng China Enterprises
+
+Index (Gross Total Return
+
+Index)
+
+恒生中国企业
+
+指数（总股息累
+
+积指数）
+
+HSDS
+
+H 2006800 HSINTR Hang Seng Index (Net Total
+
+Return Index)
+
+恒生指数（净股
+
+息累积指数）
+
+HSDS
+
+===== PAGE 36/40 =====
+FIU 金融数据服务
+
+36
+
+H 2006801 HSNFNTR Hang Seng Finance Sub-Index
+
+(Net Total Return Index)
+
+恒生金融分类
+
+指数（净股息累
+
+积指数）
+
+HSDS
+
+H 2006802 HSNUNTR Hang Seng Utilities Sub-Index
+
+(Net Total Return Index)
+
+恒生公用事业
+
+分类指数（净股
+
+息累积指数）
+
+HSDS
+
+H 2006803 HSNPNTR Hang Seng Properties Sub-Index
+
+(Net Total Return Index)
+
+恒生地产分类
+
+指数（净股息累
+
+积指数）
+
+HSDS
+
+H 2006804 HSBCNTR Hang Seng Index Commerce &
+
+Industry Sub-Index (Net Total
+
+Return Index)
+
+恒生指数工商
+
+业分类指数（净
+
+股息累积指数）
+
+HSDS
+
+H 2007200 HSCENTR Hang Seng China Enterprises
+
+Index (Net Total Return Index)
+
+恒生中国企业
+
+指数（净股息累
+
+积指数）
+
+HSDS
+
+H 0205000 0205000 HSI ESG Index 恒指ESG指数 HSDS
+
+H 0205100 0205100 HSCEI ESG Index 恒生国指ESG
+
+指数
+
+HSDS
+
+H 0208300 0208300 Hang Seng TECH Index 恒生科技指数 HSDS
+
+S SPHKL SPHKL S&P/HKEX LargeCap Index 标普香港大型
+
+股指数
+
+S
+
+S SPHKG SPHKG S&P/HKEX GEM Index 标普创业板指
+
+数
+
+S
+
+T RXYH RXYH TR/HKEX RXY Global CNH TR/香港交易所
+
+RXY全球离岸人
+
+民币
+
+TR
+
+T RXYY RXYY TR/HKEX RXY Global CNY TR/香港交易所
+
+RXY全球在岸人
+
+民币
+
+TR
+
+T RXYRH RXYRH TR/HKEX RXY Reference CNH TR/香港交易所
+
+RXY参考离岸人
+
+民币
+
+TR
+
+T RXYRY RXYRY TR/HKEX RXY Reference CNY TR/香港交易所
+
+RXY参考在岸人
+
+民币
+
+TR
+
+T HKGDUER HKGDUER HKEX USD Gold Futures –
+
+Excess Return Index
+
+香港交易所黄
+
+金美元商品超
+
+额收益指数
+
+N/A
+
+T HKGDUTR HKGDUTR HKEX USD Gold Futures – Total
+
+Return Index
+
+香港交易所黄
+
+金美元商品总
+
+回报指数
+
+N/A
+
+T HKGDUSP HKGDUSP HKEX USD Gold Futures – Spot
+
+Price Index
+
+香港交易所黄
+
+金美元商品现
+
+N/A
+
+===== PAGE 37/40 =====
+FIU 金融数据服务
+
+37
+
+货指数
+
+T HKGDRER HKGDRER HKEX CNH Gold Futures –
+
+Excess Return Index
+
+港交所黄金离
+
+岸人民币商品
+
+超额收益指数
+
+N/A
+
+T HKGDRTR HKGDRTR HKEX CNH Gold Futures – Total
+
+Return Index
+
+港交所黄金离
+
+岸人民币商品
+
+总回报指数
+
+N/A
+
+T HKGDRSP HKGDRSP HKEX CNH Gold Futures – Spot
+
+Price Index
+
+港交所黄金离
+
+岸人民币商品
+
+现货指数
+
+N/A
+
+CES = China Exchanges Services Company Limited
+
+CSI = China Securities Index Company Limited
+
+HSDS = Hang Seng Data Services Limited
+
+HSI = Hang Seng Indexes Company Limited
+
+S&P = Standard and Poor’s
+
+TR = Thomson Reuters
+
+附录 2：产品类型
+
+1 Equity – Ordinary Shares
+
+2 Equity – Preference Shares
+
+6 Equity – Rights
+
+7 Equity – Depository Receipt (HDR) – Ordinary Shares
+
+12 Equity – Depository Receipt (HDR) – Preference Shares
+
+3 Warrant – Derivative Warrant (DW)
+
+11 Warrant – Callable Bull/Bear Contract (CBBC)
+
+13 Warrant – Equity Warrant
+
+14 Warrant – Equity Linked Instrument (ELI)
+
+15 Warrant – Inline Warrant
+
+4 Bond – Debt Security
+
+8 Trust – Real Estate Investment Trust (REIT)
+
+9 Trust – Other Unit Trusts
+
+10 Trust – Leveraged and Inverse Product (LIP)
+
+16 Trust – Equity ETF
+
+17 Trust – Fixed Income and Money Market ETF
+
+18 Trust – Commodities ETF
+
+99 Others – None of the above
+
+===== PAGE 38/40 =====
+FIU 金融数据服务
+
+38
+
+附录 3：成交类型
+
+0 Automatch normal (Public Trade Type
+
+<space>)
+
+自动对盘
+
+4 Late Trade (Off-exchange previous day)
+
+(Public Trade Type “P”)
+
+开市前成交盘
+
+22 Non-direct Off-Exchange Trade (Public Trade
+
+Type “M”)
+
+非自动对盘
+
+100 Automatch internalized (Public Trade Type
+
+“Y”)
+
+同一证券商自动对盘
+
+101 Direct off-exchange Trade (Public Trade
+
+Type “X”)
+
+同一证券商非自动对盘
+
+102 Odd-Lot Trade (Public Trade Type “D”) 碎股交易
+
+103 Auction Trade (Public Trade Type “U”) 竞价交易
+
+七、发版记录
+
+版本号 生效日期 修订说明
+
+初版 2018
+
+V1.0 2019-03-01 更新配置文件支持双站点自动切换
+
+V1.1 2019-06-19 码表产品类型增加：Warrant – Inline Warrant（权证-界内证）
+
+V1.2 2019-12-01 逐笔协议增加字段 direction；委托挂单协议增加字段 time；码表
+
+协议中的昨收价单位变为 1 元
+
+V2.0 2020-09-11 码表，增加字段：posflag、posupper、poslower
+
+增加参考价协议：refprice
+
+增加交易时段状态协议：trading_session_status
+
+增加参考平衡价格协议：equiprice
+
+增加订单不平衡协议：orderimbalance
+
+V2.1 2020-12-28 1）优化股票码表 name 字段的展示。
+
+V2.2 2021-01-21 去除码表协议中的市场代号字段返回值中的空格。
+
+修复指数 0105000 的开盘价。
+
+股票快照协议增加 pflag 字段。
+
+V2.3 2021-02-26 1）增加缓存 securitystatus 协议功能：每次重连可获取全量停复牌
+
+信息。
+
+V2.4 2021-03-04 调 整 码 表 部 分 字 段 的 数 值 单 位 为 1 ： 涉 及 字 段 有 accured ，
+
+===== PAGE 39/40 =====
+FIU 金融数据服务
+
+39
+
+couponrate ， counversionratio ， strikeprice1 ， strikeprice2 ，
+
+posupper， poslower
+
+V.2.4 2021-03-19 1）更新附录 1：指数明细表
+
+V2.5 2021-03-31 1）json 版本：优化防止出现非结尾符\0
+
+2）json 版本：优化 snapshot 协议的现价机制
+
+3）增加支持 protobuf 协议功能（公测中）
+
+V2.6 2021-04-07 1）修复 config 文件的 protocol 参数设置问题引起无法启动。
+
+V2.7 2021-04-12 1）修复 protobuf 版本中的 trade 协议发送。
+
+V2.8 2021-04-27 1）恒生指数 9 点 30 分之前的 last 取当天的 open
+
+V2.9 2021-06-05 1) 过滤恒生指数上午时段的 close
+
+2）完善多个连接的重连推送机制
+
+3）完善客户端连接断开后的报错机制
+
+V2.10 2021-06-15 1) 修改指数收盘时刻 last 的取值为 close
+
+已生效 码表协议的产品类型（producttype）调整：
+
+增加新 ETF 产品类型：
+
+16-Trust-Equity- ETF
+
+17-Trust-Fixed Income and Money Market ETF
+
+18-Trust-Commondities ETF
+
+删除旧 ETF 产品类型：
+
+5-Trust-Other ETF
+
+V2.11 2021-09-23 1) 缓存 trading_session_status 交易时段状态协议
+
+2) 修复参考价 refprice 协议的最高最低价格的返回值
+
+V2.12 2021-10-19 1) 优化 0000100 恒生指数的行情时间取值机制
+
+V2.13 2021-11-02 1) 优化 trading_session_status 协议缓存机制
+
+V2.14 2021-11-22 1) 修正恒生指数之外指数的成交额数据
+
+V2.15 2022-02-24 1）重启后 5 分钟内无收到码表则切换到第二个站点
+
+V2.16 2022-05-11 1）增加碎股挂单协议（json 格式和 pb 格式）
+
+2）码表协议增加：繁体名称和标的物代码（json 格式和 pb 格式）
+
+3）挂单协议 FIU_ORDER 新增 repeated askvec,bidvec（仅 pb 格
+
+式）
+
+4）心跳机制调整
+
+5）V2.16 开始 proto2 改为 proto3
+
+V2.17 2022-05-31 1） json 格式指数价格由支持 3 位小数改为 4 位小数
+
+2） pb 格式数据类型更改：float 改为 double
+
+V2.18 2022-06-29 1）优化重启机制
+
+V2.19 2022-07-20 版本 V2.19 更新说明-20220720
+
+1）修改委托挂单量超过 21 亿股为负数的问题。
+
+V2.20 2022-08-10 1）pb 和 json 格式增加市场总成交额协议
+
+V2.21 2022-09-15 1）解决重连时板块成交总额协议的发送数量大的问题
+
+V2.22 2022-11-30 1）缓存经纪席位 orderbroker 协议最新快照
+
+V2.23 2023-11-14 1) PBOrderBroker 调整结构，其中字段: string detail = 2;增加配置
+
+参数 newpb 控制
+
+2) PBOrder 字段:string asklist = 3; string bidlist = 4; 增加配置参数
+
+===== PAGE 40/40 =====
+FIU 金融数据服务
+
+40
+
+newpb 控制
+
+3) PB 版本价格由小数改成整数（绿色字体标注）
+
+4) config 配置增加可配是否打印全量日志
+
+5）config 配置增加参数 newpb 控制 PBOrderBroker 和 PBOrder
+
+内容展示
+
+V2.23.1 2024-10-31 1） 优化 hkbroker 协议最后一笔清零规则
+
+2） 增加输出 monitor.csv 日志
+
+V2.23.2 2024-12-30 1）调整 open 取值
+
+V2.23.3 2025-02-18 1） 调整 csv 日志输出：
+
+hkstockdef.csv
+
+hktrade.csv
+
+hkstock.csv
+
+hkorder.csv
+
+hkbroker.csv
+
+V2.24 2025-05-22 1）股票码表协议 PB 格式增加 domain_code 字段，JSON 格式字
+
+对应为 domainstmtsecuritycode 字段
+
+V2.25 2025-06-08 1）功能优化
+
+V2.26 2025-07-22 1）码表协议 spread 字段增加返回值 06
+
+2）根据交易所 20250804 调整最小价差第一阶段而调整 order 计
+
+算逻辑。

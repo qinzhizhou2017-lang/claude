@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>宁德时代 2Q26 · 研报精华</title>
+<style>
+@font-face{font-family:'Inter';src:url('fonts/Inter-var.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:block;}
+@font-face{font-family:'Fraunces';src:url('fonts/Fraunces-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:block;}
+
+:root{
+  --ink:#17191E; --ink2:#4C535D; --ink3:#8A909A; --ink4:#B4B0A6;
+  --paper:#F4F1EA; --paper2:#EDE8DD; --card:#FFFFFF;
+  --line:#E3DCCE; --line2:#ECE7DD;
+  --navy:#1B2440; --navy2:#2E3A5C;
+  --red:#C0271C; --redsoft:#F4E5E1; --redink:#9A1E15;
+  --green:#12705C; --greensoft:#E2ECE7;
+  --gold:#9A7B3F; --goldsoft:#F0E8D6;
+  --f-display:'Fraunces','Noto Serif CJK SC',Georgia,serif;
+  --f-head:'Noto Serif CJK SC','Fraunces',Georgia,serif;
+  --f-body:'Inter','Noto Sans CJK SC',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+body{font-family:var(--f-body);color:var(--ink);background:#c9c4b8;font-feature-settings:'tnum' 1,'ss01' 1;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;}
+@page{size:A4;margin:0;}
+
+.page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;padding:13mm 13mm 9mm 13mm;page-break-after:always;}
+.page:last-child{page-break-after:auto;}
+.main{flex:1;display:flex;flex-direction:column;justify-content:space-between;min-height:0;}
+.grp>*+*{margin-top:12px;}
+
+/* ---------- header / footer ---------- */
+.mast{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1.5px solid var(--ink);padding-bottom:7px;flex:none;}
+.mast .brand{display:flex;align-items:center;gap:8px;}
+.mast .dot{width:19px;height:19px;border-radius:50%;background:var(--red);position:relative;flex:none;}
+.mast .dot::after{content:"P";position:absolute;inset:0;color:#fff;font-family:var(--f-display);font-weight:600;font-size:12.5px;display:flex;align-items:center;justify-content:center;}
+.mast .bname{font-weight:800;font-size:13.5px;letter-spacing:.14em;color:var(--ink);}
+.mast .bsub{font-size:8.4px;letter-spacing:.34em;color:var(--ink3);margin-top:1px;font-weight:600;}
+.mast .mright{text-align:right;font-size:8.6px;letter-spacing:.06em;color:var(--ink2);line-height:1.55;}
+.mast .mright b{color:var(--ink);font-weight:700;}
+
+.foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:6px;margin-top:9px;font-size:7.6px;letter-spacing:.05em;color:var(--ink3);flex:none;}
+.foot .pg{font-weight:700;color:var(--ink2);letter-spacing:.12em;}
+.foot b{color:var(--ink2);font-weight:600;}
+
+.eyebrow{font-size:9px;font-weight:700;letter-spacing:.26em;color:var(--red);text-transform:uppercase;}
+.rule-gold{height:2px;background:var(--gold);width:44px;border-radius:2px;}
+.sectlabel{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
+.sectlabel .no{font-family:var(--f-display);font-weight:600;font-size:15px;color:var(--red);line-height:1;}
+.sectlabel .tt{font-family:var(--f-head);font-weight:700;font-size:17px;color:var(--ink);letter-spacing:.01em;}
+.sectlabel .en{font-size:8px;letter-spacing:.24em;color:var(--ink3);font-weight:700;text-transform:uppercase;margin-left:auto;}
+.src{font-size:7.4px;color:var(--ink3);letter-spacing:.02em;margin-top:6px;}
+
+/* ================= PAGE 1 — COVER ================= */
+.cv-eyerow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:11px;}
+.cv-tickers{margin-left:auto;font-size:9.5px;color:var(--ink2);letter-spacing:.04em;font-weight:600;}
+.cv-tickers b{color:var(--ink);}
+.headline{font-family:var(--f-head);font-weight:800;color:var(--ink);font-size:50px;line-height:1.12;letter-spacing:-.01em;margin-top:13px;}
+.headline .hl{color:var(--red);}
+.headline .box{border-bottom:5px solid var(--gold);padding-bottom:1px;}
+.subhead{font-size:12.6px;line-height:1.75;color:var(--ink2);max-width:174mm;margin-top:16px;font-weight:450;}
+.subhead b{color:var(--ink);font-weight:700;}
+
+.judg{display:flex;gap:0;background:var(--navy);border-radius:9px;overflow:hidden;}
+.judg .lab{background:var(--red);color:#fff;font-family:var(--f-head);font-weight:800;font-size:15px;letter-spacing:.16em;padding:0 17px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.3;flex:none;}
+.judg .body{padding:15px 18px;color:#EDEEF2;font-size:11.8px;line-height:1.68;display:flex;align-items:center;}
+.judg .body b{color:#fff;font-weight:700;}
+.judg .body .big{color:#fff;font-family:var(--f-display);font-weight:600;}
+
+.cv-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;}
+.mcard{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:16px 16px 15px;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+.mcard .top{font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;}
+.mcard .fig{font-family:var(--f-display);font-weight:600;color:var(--ink);font-size:41px;line-height:1;margin:11px 0 5px;letter-spacing:-.01em;}
+.mcard .fig .u{font-size:16px;color:var(--ink2);font-weight:600;margin-left:1px;}
+.mcard .fig.g{color:var(--green);}
+.mcard .cap{font-size:10.4px;color:var(--ink2);line-height:1.5;font-weight:500;}
+.mcard .cap b{color:var(--ink);font-weight:700;}
+.mcard .tag{position:absolute;top:15px;right:15px;font-size:8px;font-weight:700;letter-spacing:.06em;color:var(--green);}
+
+.cv-two{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.wide{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:15px 17px;display:flex;align-items:center;gap:14px;}
+.wide .ic{width:36px;height:36px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:600;font-size:17px;}
+.wide .ic.gold{background:var(--goldsoft);color:var(--gold);}
+.wide .ic.navy{background:#E7EAF1;color:var(--navy);}
+.wide .t{font-size:10.4px;font-weight:700;letter-spacing:.03em;color:var(--ink);margin-bottom:3px;}
+.wide .d{font-size:10px;color:var(--ink2);line-height:1.5;}
+.wide .d b{color:var(--red);font-weight:700;}
+.wide .d .bg{color:var(--green);font-weight:700;}
+
+.toc{display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--ink);padding-top:12px;}
+.toc .ti{padding:0 18px;border-right:1px solid var(--line);}
+.toc .ti:first-child{padding-left:0;}
+.toc .ti:last-child{border-right:none;padding-right:0;}
+.toc .tn{font-family:var(--f-display);font-weight:600;font-size:15px;color:var(--red);line-height:1;}
+.toc .tt2{font-family:var(--f-head);font-weight:700;font-size:12.5px;color:var(--ink);margin-top:5px;}
+.toc .td{font-size:9px;color:var(--ink2);margin-top:4px;line-height:1.45;}
+
+/* ================= data page shared ================= */
+.callout{border-left:4px solid var(--red);background:linear-gradient(90deg,var(--redsoft),rgba(244,229,225,0));padding:13px 16px;border-radius:0 8px 8px 0;}
+.callout .q{font-family:var(--f-head);font-weight:600;font-size:14.5px;line-height:1.62;color:var(--ink);letter-spacing:.005em;}
+.callout .q b{color:var(--red);}
+.callout.green{border-left-color:var(--green);background:linear-gradient(90deg,var(--greensoft),rgba(226,236,231,0));}
+.callout.green .q b{color:var(--green);}
+.callout.navy{border-left-color:var(--navy);background:linear-gradient(90deg,#E9ECF3,rgba(233,236,243,0));}
+
+.panel{background:var(--card);border:1px solid var(--line2);border-radius:11px;padding:17px 19px;}
+.panel-t{font-family:var(--f-head);font-weight:700;font-size:15px;color:var(--ink);line-height:1.35;}
+.panel-t .accent{color:var(--red);}
+.panel-sub{font-size:10.2px;color:var(--ink2);line-height:1.6;margin-top:6px;font-weight:450;}
+.panel-sub b{font-weight:700;}
+
+svg{display:block;width:100%;height:auto;overflow:visible;}
+.axlab{font-family:var(--f-body);font-size:11px;fill:var(--ink3);font-weight:600;}
+.ptlab{font-family:var(--f-body);font-size:13px;font-weight:800;}
+
+.bars{display:flex;flex-direction:column;gap:11px;margin-top:6px;}
+.bar{display:grid;grid-template-columns:78px 1fr 46px;align-items:center;gap:10px;}
+.bar .nm{font-size:10px;font-weight:600;color:var(--ink2);text-align:right;line-height:1.15;}
+.bar .nm b{display:block;font-size:10.5px;color:var(--ink);font-weight:700;}
+.bar .track{height:17px;background:var(--paper2);border-radius:4px;position:relative;overflow:hidden;}
+.bar .fill{height:100%;border-radius:4px;background:var(--navy2);}
+.bar.hl .fill{background:var(--green);}
+.bar .val{font-size:12px;font-weight:800;color:var(--ink);text-align:left;}
+.bar.hl .val{color:var(--green);}
+
+.dumb{display:flex;flex-direction:column;}
+.drow{display:grid;grid-template-columns:106px 1fr 52px;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid var(--line2);}
+.drow:last-child{border-bottom:none;}
+.drow .mk{font-size:10.5px;color:var(--ink);font-weight:700;line-height:1.2;}
+.drow .mk span{display:block;font-size:8px;color:var(--ink3);font-weight:600;letter-spacing:.02em;margin-top:2px;}
+.drow .tr{position:relative;height:24px;}
+.drow .base{position:absolute;top:11px;left:0;right:0;height:2px;background:var(--line);}
+.seg{position:absolute;top:10px;height:4px;background:var(--navy2);border-radius:2px;}
+.drow.hot .seg{background:var(--red);}
+.dot{position:absolute;top:6px;width:12px;height:12px;border-radius:50%;transform:translateX(-50%);}
+.dot.o{background:var(--card);border:2.5px solid var(--ink3);}
+.dot.n{background:var(--navy2);border:2.5px solid var(--navy2);}
+.drow.hot .dot.n{background:var(--red);border-color:var(--red);}
+.vlab{position:absolute;top:-7px;font-size:9px;font-weight:800;transform:translateX(-50%);color:var(--ink3);}
+.vlab.n{color:var(--navy);} .drow.hot .vlab.n{color:var(--red);}
+.delta{font-size:11.5px;font-weight:800;text-align:right;color:var(--navy);}
+.drow.hot .delta{color:var(--red);}
+
+.kpirow{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+.kpi{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:13px 14px;}
+.kpi .k{font-size:8.6px;font-weight:700;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;line-height:1.2;}
+.kpi .v{font-family:var(--f-display);font-weight:600;font-size:30px;color:var(--ink);line-height:1;margin:9px 0 5px;}
+.kpi .v .u{font-size:13px;color:var(--ink2);}
+.kpi .v.g{color:var(--green);}
+.kpi .s{font-size:8.8px;color:var(--ink2);line-height:1.5;}
+.kpi .s b{color:var(--ink);font-weight:700;}
+
+.split{display:grid;grid-template-columns:1.02fr 1fr;gap:13px;}
+.capband{background:var(--navy);border-radius:11px;padding:16px 18px;color:#fff;display:flex;flex-direction:column;}
+.capband .h{font-family:var(--f-head);font-weight:700;font-size:13.5px;color:#fff;display:flex;align-items:center;gap:8px;}
+.capband .h .g{color:var(--goldsoft);}
+.capstat{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.13);}
+.capstat:last-child{border-bottom:none;}
+.capstat .l{font-size:9.6px;color:#C7CCDA;line-height:1.4;max-width:60%;}
+.capstat .r{font-family:var(--f-display);font-weight:600;font-size:19px;color:#fff;white-space:nowrap;}
+.capstat .r .u{font-size:10px;color:#AEB4C6;}
+.capnote{font-size:8.2px;color:#AEB4C6;margin-top:10px;line-height:1.55;}
+
+.vecs{display:flex;flex-direction:column;gap:10px;}
+.vec{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:12px 14px;display:flex;gap:11px;align-items:flex-start;flex:1;}
+.vec .vi{font-family:var(--f-display);font-weight:600;font-size:11px;letter-spacing:.02em;color:var(--gold);background:var(--goldsoft);border-radius:6px;padding:5px 7px;flex:none;min-width:36px;text-align:center;}
+.vec .vt{font-size:10.4px;font-weight:700;color:var(--ink);}
+.vec .vd{font-size:9.4px;color:var(--ink2);line-height:1.5;margin-top:3px;}
+.vec .vd b{color:var(--green);font-weight:700;}
+
+/* ================= PAGE 4 ================= */
+.val2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.valcard{background:var(--card);border:1px solid var(--line2);border-radius:11px;padding:16px 18px;}
+.valcard .vh{display:flex;justify-content:space-between;align-items:center;}
+.valcard .vh .nm{font-weight:800;font-size:13px;color:var(--ink);letter-spacing:.02em;}
+.valcard .vh .tk{font-size:8.5px;color:var(--ink3);font-weight:600;letter-spacing:.04em;}
+.valcard .prices{display:flex;align-items:center;gap:12px;margin:13px 0 4px;flex-wrap:nowrap;white-space:nowrap;}
+.valcard .nowcol{display:flex;flex-direction:column;line-height:1.1;}
+.valcard .nowlab{font-size:8.5px;color:var(--ink3);font-weight:700;letter-spacing:.1em;}
+.valcard .nowval{font-family:var(--f-display);font-weight:600;font-size:15px;color:var(--ink2);margin-top:3px;}
+.valcard .arr{color:var(--ink4);font-size:16px;}
+.valcard .ptcol{display:flex;align-items:baseline;gap:7px;}
+.valcard .pt{font-family:var(--f-display);font-weight:600;font-size:31px;color:var(--green);line-height:1;}
+.valcard .up{display:inline-block;background:var(--greensoft);color:var(--green);font-size:11px;font-weight:800;padding:2px 8px;border-radius:100px;margin-left:2px;vertical-align:middle;}
+.valcard .meta{font-size:9px;color:var(--ink2);margin-top:11px;letter-spacing:.02em;font-weight:600;}
+
+.fcast{display:flex;justify-content:space-between;gap:6px;background:var(--paper2);border-radius:9px;padding:13px 8px;}
+.fcast .fc{flex:1;text-align:center;border-right:1px solid var(--line);}
+.fcast .fc:last-child{border-right:none;}
+.fcast .fc .fk{font-size:7.6px;font-weight:700;letter-spacing:.06em;color:var(--ink3);text-transform:uppercase;}
+.fcast .fc .fv{font-family:var(--f-display);font-weight:600;font-size:18px;color:var(--ink);margin-top:4px;line-height:1;}
+.fcast .fc .fv .u{font-size:9px;color:var(--ink2);}
+.fcast .fc .fs{font-size:7.6px;color:var(--green);font-weight:700;margin-top:3px;}
+
+.watch{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.wbox{border-radius:10px;padding:14px 16px;}
+.wbox.up{background:var(--greensoft);border:1px solid #CADED6;}
+.wbox.dn{background:var(--redsoft);border:1px solid #EBD3CD;}
+.wbox .wh{font-family:var(--f-head);font-weight:700;font-size:12.5px;display:flex;align-items:center;gap:6px;margin-bottom:8px;}
+.wbox.up .wh{color:var(--green);} .wbox.dn .wh{color:var(--red);}
+.wbox ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.wbox li{font-size:9.8px;line-height:1.45;color:var(--ink);padding-left:13px;position:relative;font-weight:500;}
+.wbox li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;}
+.wbox.up li::before{background:var(--green);} .wbox.dn li::before{background:var(--red);}
+
+.track-chips{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+.track-chips .tl{font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;margin-right:2px;}
+.tchip{font-size:9.4px;font-weight:600;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:100px;padding:5px 12px;}
+
+.qrcard{background:linear-gradient(135deg,#1B2440,#2C3860);border-radius:14px;padding:5px;box-shadow:0 6px 20px rgba(27,36,64,.18);}
+.qrinner{background:var(--card);border-radius:11px;padding:16px 18px;display:flex;align-items:center;gap:18px;}
+.qrbox{background:#fff;border:1px solid var(--line2);border-radius:12px;padding:8px;flex:none;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.qrbox img{display:block;width:40mm;height:40mm;image-rendering:crisp-edges;}
+.qrtxt{flex:1;}
+.qrtxt .qbrand{display:flex;align-items:center;gap:8px;}
+.qrtxt .qdot{width:20px;height:20px;border-radius:50%;background:var(--red);position:relative;flex:none;}
+.qrtxt .qdot::after{content:"P";position:absolute;inset:0;color:#fff;font-family:var(--f-display);font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center;}
+.qrtxt .qn{font-weight:800;font-size:15px;letter-spacing:.1em;color:var(--ink);}
+.qrtxt .qh{font-family:var(--f-head);font-weight:700;font-size:17px;color:var(--ink);margin-top:12px;line-height:1.35;}
+.qrtxt .qh .r{color:var(--red);}
+.qrtxt .qs{font-size:10px;color:var(--ink2);line-height:1.55;margin-top:7px;font-weight:500;}
+.qrtxt .qcta{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:9.4px;font-weight:700;color:var(--navy);letter-spacing:.02em;}
+.qrtxt .qcta::before{content:"";width:16px;height:2px;background:var(--gold);}
+
+.disc{font-size:7.6px;color:var(--ink3);line-height:1.6;letter-spacing:.01em;margin-top:11px;}
+</style>
+</head>
+<body>
+
+<!-- ============================= PAGE 1 : COVER ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>机构研究 · 可视化精华</b><br>来源：J.P. Morgan 亚太股票研究 · 2026.07.25<br>分析师 Rebecca Wen（增持 Overweight）</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="cv-eyerow">
+        <span class="eyebrow">宁德时代 CATL · 2Q26 业绩点评</span>
+        <span class="cv-tickers"><b>300750.SZ</b>&nbsp;A股&nbsp;&nbsp;/&nbsp;&nbsp;<b>3750.HK</b>&nbsp;H股</span>
+      </div>
+      <div class="rule-gold"></div>
+      <h1 class="headline">市场在卖<span class="hl">毛利率</span>，<br>真正的护城河<span class="box">纹丝未动</span></h1>
+      <p class="subhead">宁德时代 2Q26 毛利率回落至 <b>23.2%</b>，市场据此把 H 股从 6 月高点打下 <b>20%</b>，并开始担忧 2027 年需求。摩根大通给出相反判断：ASP 与毛利率的回落，是<b>结构变化叠加策略性让价</b>——真正衡量赚钱能力的指标"单瓦时净利润"，四年稳定在 <b>0.11 元</b>不动。这是一次预期差，不是基本面拐点。</p>
+    </div>
+
+    <div class="judg">
+      <div class="lab"><span>核心</span><span>判断</span></div>
+      <div class="body"><div>把毛利率的噪音放到一边——宁德时代 1H26 净利润 <b>同比 +42%</b>，是一台罕见的"工业科技复利机器"。摩根大通维持<b>增持</b>，A 股目标价 <span class="big">¥520</span>，较现价 <b>约 +36%</b>；并认为意外抛出的 A 股回购将进一步提振信心。</div></div>
+    </div>
+
+    <div class="cv-metrics">
+      <div class="mcard">
+        <div class="top">2Q26 净利润</div>
+        <div class="fig">¥225<span class="u">亿</span></div>
+        <div class="cap">落在市场 ¥220–230 亿预期<b>中段</b>；1H26 净利同比 <b>+42%</b></div>
+      </div>
+      <div class="mcard">
+        <div class="tag">四年不变</div>
+        <div class="top">单瓦时净利润</div>
+        <div class="fig g">¥0.11</div>
+        <div class="cap">锂价从约 50 万/吨腰斩，<b>这个数字始终没动</b>（1H26 为 0.10）</div>
+      </div>
+      <div class="mcard">
+        <div class="tag">海外提速</div>
+        <div class="top">全球动力电池份额</div>
+        <div class="fig">40<span class="u">%</span></div>
+        <div class="cap">5M26；海外份额 <b>30%→34%</b>，欧洲进一步升至 45%</div>
+      </div>
+    </div>
+
+    <div class="cv-two">
+      <div class="wide">
+        <div class="ic gold">￥</div>
+        <div><div class="t">意外抛出 A 股回购</div><div class="d"><b>¥200–400 亿</b>·注销式，规模或超今年 H 股发行</div></div>
+      </div>
+      <div class="wide">
+        <div class="ic navy">27</div>
+        <div><div class="t">2027 需求：市场最大分歧</div><div class="d">管理层：<span class="bg">或"高于"20–30%</span> 长期复合增速</div></div>
+      </div>
+    </div>
+
+    <div class="toc">
+      <div class="ti"><div class="tn">02</div><div class="tt2">最大预期差</div><div class="td">市场看错了指标：真正该看的是单瓦时净利</div></div>
+      <div class="ti"><div class="tn">03</div><div class="tt2">真正的增长引擎</div><div class="td">份额、在建产能、现金流与三大新增长极</div></div>
+      <div class="ti"><div class="tn">04</div><div class="tt2">结论与后市关注</div><div class="td">目标价、强化与挑战逻辑的关键变量</div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>数据以 J.P. Morgan 原报告为准 · 仅供参考，不构成投资建议</span>
+    <span class="pg">01 / 04</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 2 : EXPECTATION GAP ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>宁德时代 CATL</b> · 2Q26 业绩点评<br>J.P. Morgan · 2026.07.25</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">01</span><span class="tt">最大预期差：市场看错了指标</span><span class="en">The Expectation Gap</span></div>
+      <div class="callout">
+        <div class="q">毛利率与 ASP 的下滑，被市场读成"价格战受损"。但 ASP 里含了<b>原材料涨价的水分</b>，推高了分母、让毛利率失真。宁德时代管理层与摩根大通指向同一个数字——<b>单瓦时净利润</b>。</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-t">价格腰斩，单位净利润却是<span class="accent">一条水平线</span></div>
+      <div class="panel-sub">综合 ASP 从 2022 年 0.97 元/Wh 跌至 1H26 的 0.56 元（<b style="color:var(--red)">−42%</b>），但每卖出一瓦时电池所赚的净利润，始终稳定在 0.10–0.11 元。价格波动被合同的金属价格联动机制层层传导，龙头的单位盈利与锂价<b>脱钩</b>。</div>
+      <svg viewBox="0 0 680 262" role="img" aria-label="ASP 与单瓦时净利润走势" style="margin-top:6px;">
+        <g stroke="#ECE7DD" stroke-width="1">
+          <line x1="64" y1="40" x2="656" y2="40"/><line x1="64" y1="92" x2="656" y2="92"/>
+          <line x1="64" y1="144" x2="656" y2="144"/><line x1="64" y1="196" x2="656" y2="196"/>
+        </g>
+        <line x1="64" y1="234" x2="656" y2="234" stroke="#D9D2C4" stroke-width="1.5"/>
+        <g class="axlab" text-anchor="end" fill="#8A909A"><text x="56" y="43">1.0</text><text x="56" y="147">0.5</text><text x="56" y="238">0</text></g>
+        <path d="M100,45.5 L239,61.9 L378,108.4 L517,124.8 L632,126.8 L632,234 L100,234 Z" fill="#C0271C" opacity="0.06"/>
+        <polyline points="100,45.5 239,61.9 378,108.4 517,124.8 632,126.8" fill="none" stroke="#C0271C" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+        <g fill="#C0271C"><circle cx="100" cy="45.5" r="4.5"/><circle cx="239" cy="61.9" r="4.5"/><circle cx="378" cy="108.4" r="4.5"/><circle cx="517" cy="124.8" r="4.5"/><circle cx="632" cy="126.8" r="5.5"/></g>
+        <polyline points="100,213.6 239,213.6 378,213.6 517,213.6 632,215.6" fill="none" stroke="#12705C" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"/>
+        <g fill="#12705C"><circle cx="100" cy="213.6" r="4.5"/><circle cx="239" cy="213.6" r="4.5"/><circle cx="378" cy="213.6" r="4.5"/><circle cx="517" cy="213.6" r="4.5"/><circle cx="632" cy="215.6" r="5.5"/></g>
+        <text class="ptlab" x="632" y="33" text-anchor="end" fill="#C0271C">ASP 0.56</text>
+        <text x="632" y="110" text-anchor="end" fill="#C0271C" font-size="9.5" font-weight="700" font-family="Inter">−42%</text>
+        <text class="ptlab" x="632" y="207" text-anchor="end" fill="#12705C">净利/Wh 0.10</text>
+        <g class="axlab" text-anchor="middle" fill="#8A909A"><text x="100" y="252">FY22</text><text x="239" y="252">FY23</text><text x="378" y="252">FY24</text><text x="517" y="252">FY25</text><text x="632" y="252">1H26</text></g>
+        <g font-size="10.5" font-weight="700" font-family="Inter">
+          <rect x="70" y="12" width="13" height="4" rx="2" fill="#C0271C"/><text x="88" y="17" fill="#4C535D">综合 ASP（元/Wh）</text>
+          <rect x="238" y="12" width="13" height="4" rx="2" fill="#12705C"/><text x="256" y="17" fill="#4C535D">单瓦时净利润（元/Wh）</text>
+        </g>
+      </svg>
+      <div class="src">来源：公司数据、J.P. Morgan 估算（Table 3 / Table 5，均为会计政策调整后口径）。ASP 为 EV+储能综合口径。</div>
+    </div>
+
+    <div class="split">
+      <div class="panel" style="padding:15px 17px;">
+        <div class="panel-t" style="font-size:13.5px;">历史正在重演：<span class="accent">1Q22 的剧本</span></div>
+        <div class="panel-sub" style="margin-top:8px;">2022 年一季度，宁德时代同样出现毛利率与净利润"暴雷"，股价大跌。真实原因：碳酸锂现货冲到约 <b>50 万元/吨</b>时，公司将固定价合同批量改为<b>与材料价格联动</b>。结果——<b style="color:var(--green)">全年单瓦时净利润 0.11 元</b>，与 2020–21 年持平。摩根大通认为，2Q26 是同一剧本的重演。</div>
+      </div>
+      <div class="panel" style="padding:15px 17px;">
+        <div class="panel-t" style="font-size:13px;">同样卖电池，<span class="accent">只有龙头真赚钱</span></div>
+        <div class="panel-sub" style="margin-top:3px;margin-bottom:10px;">单瓦时净利润（元/Wh，2025，含补贴）</div>
+        <div class="bars">
+          <div class="bar hl"><div class="nm"><b>宁德时代</b>CATL</div><div class="track"><div class="fill" style="width:92%"></div></div><div class="val">0.11</div></div>
+          <div class="bar"><div class="nm"><b>亿纬锂能</b>EVE</div><div class="track"><div class="fill" style="width:17%"></div></div><div class="val">0.02</div></div>
+          <div class="bar"><div class="nm"><b>国轩高科</b>Gotion</div><div class="track"><div class="fill" style="width:17%"></div></div><div class="val">0.02</div></div>
+          <div class="bar"><div class="nm"><b>中创新航</b>CALB</div><div class="track"><div class="fill" style="width:9%"></div></div><div class="val">0.01</div></div>
+          <div class="bar"><div class="nm"><b>瑞浦兰钧</b>Rept</div><div class="track"><div class="fill" style="width:9%"></div></div><div class="val">0.01</div></div>
+        </div>
+        <div class="src">欣旺达动力电池仍为 −0.03 元（亏损）；比亚迪（整车+电池口径）0.11 元，模式不可直接比较。来源：各公司财报、J.P. Morgan（Table 6）。</div>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <div class="q"><b>投资含义</b>&nbsp;这不是盈利拐点，而是龙头在行业成本压力下"以价换量、锁定份额"的主动选择。抛开毛利率噪音，宁德时代每瓦时的赚钱能力稳定如常，二线厂商却仍在盈亏线挣扎——护城河反而在走阔。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>最大预期差 · The Expectation Gap</span>
+    <span class="pg">02 / 04</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 3 : GROWTH / SHARE / CAPITAL ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>宁德时代 CATL</b> · 2Q26 业绩点评<br>J.P. Morgan · 2026.07.25</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">02</span><span class="tt">抛开噪音，看真正的增长引擎</span><span class="en">The Engine Beneath</span></div>
+      <div class="kpirow">
+        <div class="kpi"><div class="k">1H26 销量</div><div class="v g">+60<span class="u">%</span></div><div class="s">同比（管理层口径）<br>储能约占 <b>1/4</b></div></div>
+        <div class="kpi"><div class="k">2Q26 营收</div><div class="v">¥1,478<span class="u">亿</span></div><div class="s"><b>+57%</b> 同比<br>连续放量</div></div>
+        <div class="kpi"><div class="k">在建产能</div><div class="v">764<span class="u">GWh</span></div><div class="s">利用率 <b>95%</b><br>产能基本售罄</div></div>
+        <div class="kpi"><div class="k">净现金</div><div class="v">¥734<span class="u">亿</span></div><div class="s">2Q26；<b>4Q22 以来</b><br>持续为正 FCF</div></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-t">份额还在往上走——最猛的增量来自<span class="accent">海外与高端三元</span></div>
+      <div class="panel-sub">全球第一的位置不只是"守住"，而是在最赚钱的国际与高镍三元市场持续扩张。海外份额每提升一个百分点，都对应更高的单位盈利。</div>
+      <div class="dumb" style="margin-top:6px;">
+        <div class="drow"><div class="mk">全球动力电池<span>2025 → 5M26</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:48.75%;width:1.25%"></div>
+            <div class="dot o" style="left:48.75%"></div><div class="vlab" style="left:46%">39</div>
+            <div class="dot n" style="left:50%"></div><div class="vlab n" style="left:53%">40</div></div>
+          <div class="delta">+1</div></div>
+        <div class="drow hot"><div class="mk">海外（除中国）<span>2025 → 5M26</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:37.5%;width:5%"></div>
+            <div class="dot o" style="left:37.5%"></div><div class="vlab" style="left:37.5%">30</div>
+            <div class="dot n" style="left:42.5%"></div><div class="vlab n" style="left:42.5%">34</div></div>
+          <div class="delta">+4</div></div>
+        <div class="drow"><div class="mk">中国动力电池<span>2025 → 1H26</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:55%;width:5%"></div>
+            <div class="dot o" style="left:55%"></div><div class="vlab" style="left:55%">44</div>
+            <div class="dot n" style="left:60%"></div><div class="vlab n" style="left:60%">48</div></div>
+          <div class="delta">+4</div></div>
+        <div class="drow hot"><div class="mk">欧洲 EV<span>2024 → YTD26</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:46.25%;width:10%"></div>
+            <div class="dot o" style="left:46.25%"></div><div class="vlab" style="left:46.25%">37</div>
+            <div class="dot n" style="left:56.25%"></div><div class="vlab n" style="left:56.25%">45</div></div>
+          <div class="delta">+8</div></div>
+        <div class="drow"><div class="mk">中国三元 NCM<span>2025 → 1H26</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:87.5%;width:8.75%"></div>
+            <div class="dot o" style="left:87.5%"></div><div class="vlab" style="left:85%">70</div>
+            <div class="dot n" style="left:96.25%"></div><div class="vlab n" style="left:98.5%">77</div></div>
+          <div class="delta">+7</div></div>
+      </div>
+      <div class="src">数字为市场份额（%）。来源：SNE Research（全球/海外/欧洲）、GGII（中国/三元），J.P. Morgan。储能全球份额约 30%，稳居第一。</div>
+    </div>
+
+    <div class="split">
+      <div class="capband">
+        <div class="h"><span class="g">￥</span>&nbsp;资本回报：意外的信心信号</div>
+        <div class="capstat"><div class="l">A 股回购（注销式，价格上限 573 元）</div><div class="r">¥200–400<span class="u">亿</span></div></div>
+        <div class="capstat"><div class="l">中期分红（每股，15% 派息率）</div><div class="r">¥1.411</div></div>
+        <div class="capstat"><div class="l">2Q26 净现金 / 自由现金流稳健</div><div class="r">¥734<span class="u">亿</span></div></div>
+        <div class="capnote">回购股份将在 12 个月内注销以减少注册资本（有别于 4 月为员工激励的 ¥44 亿回购）；34.9–69.8 百万股的规模，或超公司今年 H 股发行的 6,238.5 万股。</div>
+      </div>
+      <div class="vecs">
+        <div class="vec"><div class="vi">储能</div><div><div class="vt">ESS：587Ah 大电芯已量产</div><div class="vd">1H26 储能收入 <b>+88%</b> 同比；海外需求增长快于国内，主打"以价值而非价格竞争"。</div></div></div>
+        <div class="vec"><div class="vi">钠电</div><div><div class="vt">钠离子商业化快于预期</div><div class="vd">海内外订单已落地、产线在建；<b>新产线锂/钠兼容</b>，可按需求灵活切换产能。</div></div></div>
+        <div class="vec"><div class="vi">AIDC</div><div><div class="vt">AI 数据中心：从卖电池到卖体系</div><div class="vd">升级为端到端能源基础设施（储能+配电+电力电子+并网），<b>1–2 年内商业化</b>。</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>增长引擎 · Growth · Share · Capital</span>
+    <span class="pg">03 / 04</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 4 : CONCLUSION + QR ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>宁德时代 CATL</b> · 2Q26 业绩点评<br>J.P. Morgan · 2026.07.25</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">03</span><span class="tt">结论与后市关注</span><span class="en">What Matters Next</span></div>
+      <div class="callout navy">
+        <div class="q">摩根大通维持<b style="color:var(--navy)">增持</b>，宁德时代是中国电池产业链<b style="color:var(--navy)">首选</b>——一台罕见的"工业科技复利机器"：技术护城河、行业最大规模，以及穿越周期稳定的盈利、ROE 与自由现金流。短期股价的下杀，提供的是"加仓错杀"而非"回避风险"的机会。</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="val2">
+        <div class="valcard">
+          <div class="vh"><span class="nm">CATL&nbsp;·&nbsp;A 股</span><span class="tk">300750.SZ · 25× 2026E PE</span></div>
+          <div class="prices"><span class="nowcol"><span class="nowlab">现价</span><span class="nowval">¥383.01</span></span><span class="arr">→</span><span class="ptcol"><span class="pt">¥520</span><span class="up">+36%</span></span></div>
+          <div class="meta">目标价 Dec-26 · ROE 25.9%（2026E）· 产业链首选</div>
+        </div>
+        <div class="valcard">
+          <div class="vh"><span class="nm">CATL&nbsp;·&nbsp;H 股</span><span class="tk">3750.HK · 30× 2026E PE</span></div>
+          <div class="prices"><span class="nowcol"><span class="nowlab">现价</span><span class="nowval">HK$622</span></span><span class="arr">→</span><span class="ptcol"><span class="pt">HK$725</span><span class="up">+17%</span></span></div>
+          <div class="meta">目标价 Dec-26 · H 股稀缺性支撑估值溢价</div>
+        </div>
+      </div>
+      <div class="fcast" style="margin-top:13px;">
+        <div class="fc"><div class="fk">FY26E 营收</div><div class="fv">¥6,694<span class="u">亿</span></div><div class="fs">+58% y/y</div></div>
+        <div class="fc"><div class="fk">FY26E 净利</div><div class="fv">¥953<span class="u">亿</span></div><div class="fs">+32% y/y</div></div>
+        <div class="fc"><div class="fk">调整后 EPS</div><div class="fv">¥20.88</div><div class="fs">+29% y/y</div></div>
+        <div class="fc"><div class="fk">A 股 PE</div><div class="fv">23.7→18.3<span class="u">×</span></div><div class="fs">25E → 26E</div></div>
+        <div class="fc"><div class="fk">ROE</div><div class="fv">25.9<span class="u">%</span></div><div class="fs">2026E</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="watch">
+        <div class="wbox up">
+          <div class="wh">▲&nbsp;会强化逻辑</div>
+          <ul>
+            <li>2027 需求兑现"高于 20–30%"长期复合增速</li>
+            <li>A 股注销式回购落地、股东大会通过</li>
+            <li>海外与储能份额继续抬升，带动单位盈利</li>
+            <li>钠离子、AIDC 商业化节奏提前</li>
+          </ul>
+        </div>
+        <div class="wbox dn">
+          <div class="wh">▼&nbsp;会挑战逻辑</div>
+          <ul>
+            <li>2027 需求不及预期（市场当前最大分歧）</li>
+            <li>单瓦时净利润跌破 0.10 元关口</li>
+            <li>消费税 / 出口退税调整无法向客户转嫁</li>
+            <li>中美地缘政治风险升级</li>
+          </ul>
+        </div>
+      </div>
+      <div class="track-chips" style="margin-top:13px;">
+        <span class="tl">重点跟踪</span>
+        <span class="tchip">2027 订单能见度</span>
+        <span class="tchip">匈牙利工厂投产</span>
+        <span class="tchip">储能海外价格战</span>
+        <span class="tchip">AIDC 落地节奏</span>
+        <span class="tchip">碳酸锂价格</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="qrcard">
+        <div class="qrinner">
+          <div class="qrbox"><img src="qr.png" alt="THE PORT 微信二维码"></div>
+          <div class="qrtxt">
+            <div class="qbrand"><div class="qdot"></div><div class="qn">THE&nbsp;PORT</div></div>
+            <div class="qh">读懂全球投行的<span class="r">核心观点</span></div>
+            <div class="qs">扫码添加，每日获取高盛、摩根士丹利、摩根大通等一线机构研报的精华解读与可视化速览。</div>
+            <div class="qcta">微信扫一扫 · 或长按识别二维码</div>
+          </div>
+        </div>
+      </div>
+      <div class="disc">本文基于 J.P. Morgan 于 2026-07-25 发布的《CATL: 2Q26 result in-line; all eyes on 2027 demand outlook》（分析师 Rebecca Wen）整理，所有数字、评级、目标价与预测均以原报告为准。本可视化由 THE PORT 编辑制作，仅供信息参考与交流，不构成任何投资建议或要约；投资有风险，决策须谨慎。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>结论与后市 · What Matters Next</span>
+    <span class="pg">04 / 04</span>
+  </div>
+</section>
+
+</body>
+</html>

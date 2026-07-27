@@ -1,0 +1,661 @@
+<title>质量轮动 · 摩根士丹利美股策略周报精华版 (2026.07.27)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  /* ============ TOKENS ============ */
+  :root {
+    color-scheme: light;
+    --plane:        #eef1f4;   /* page background */
+    --surface:      #fbfcfd;   /* cards / chart surface */
+    --surface-2:    #f4f6f9;   /* inset panels */
+    --ink:          #10151e;   /* primary text */
+    --secondary:    #48505f;   /* secondary text */
+    --muted:        #838d9d;   /* axis / captions */
+    --hairline:     #e2e6ec;   /* borders / grid */
+    --axis:         #c4cbd6;   /* baseline */
+    --accent:       #a97e28;   /* brass — chrome text-safe */
+    --accent-mark:  #b98a2e;   /* brass — rules / marks */
+    --accent-soft:  rgba(169,126,40,0.10);
+    /* data series (light) */
+    --s-blue:   #2a78d6;
+    --s-orange: #eb6834;
+    --s-aqua:   #1baf7a;
+    --s-red:    #e34948;
+    --s-neutral:#b6bdc9;
+    --good:     #0ca30c;
+    --warning:  #d98a00;
+    --critical: #d03b3b;
+    --shadow:   0 1px 2px rgba(16,21,30,.05), 0 12px 32px -18px rgba(16,21,30,.28);
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", system-ui, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    --maxw: 720px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:where(:not([data-theme="light"])) {
+      color-scheme: dark;
+      --plane:     #0a0e15;
+      --surface:   #121824;
+      --surface-2: #0f141d;
+      --ink:       #f4f7fa;
+      --secondary: #a9b3c2;
+      --muted:     #6d7889;
+      --hairline:  #222b38;
+      --axis:      #333d4c;
+      --accent:      #e0b354;
+      --accent-mark: #d9a94a;
+      --accent-soft: rgba(217,169,74,0.12);
+      --s-blue:   #3987e5;
+      --s-orange: #d95926;
+      --s-aqua:   #199e70;
+      --s-red:    #e66767;
+      --s-neutral:#3c4655;
+      --good:     #0ca30c;
+      --warning:  #fab219;
+      --critical: #d03b3b;
+      --shadow:   0 1px 2px rgba(0,0,0,.3), 0 18px 40px -22px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --plane:     #0a0e15;
+    --surface:   #121824;
+    --surface-2: #0f141d;
+    --ink:       #f4f7fa;
+    --secondary: #a9b3c2;
+    --muted:     #6d7889;
+    --hairline:  #222b38;
+    --axis:      #333d4c;
+    --accent:      #e0b354;
+    --accent-mark: #d9a94a;
+    --accent-soft: rgba(217,169,74,0.12);
+    --s-blue:   #3987e5;
+    --s-orange: #d95926;
+    --s-aqua:   #199e70;
+    --s-red:    #e66767;
+    --s-neutral:#3c4655;
+    --good:     #0ca30c;
+    --warning:  #fab219;
+    --critical: #d03b3b;
+    --shadow:   0 1px 2px rgba(0,0,0,.3), 0 18px 40px -22px rgba(0,0,0,.7);
+  }
+  :root[data-theme="light"] { color-scheme: light; }
+
+  /* ============ BASE ============ */
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--plane);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+  h1,h2,h3 { text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  ::selection { background: var(--accent-soft); }
+
+  /* progress thread */
+  #thread { position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--accent-mark), color-mix(in srgb, var(--accent-mark) 55%, transparent));
+    z-index: 50; transition: width .08s linear; }
+
+  /* ============ HERO ============ */
+  header.hero { padding: 68px 0 30px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--accent); display: flex; align-items: center;
+    gap: 10px; flex-wrap: wrap; }
+  .eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--accent-mark); display: inline-block; }
+  .hero h1 { font-size: clamp(34px, 8vw, 58px); font-weight: 860; line-height: 1.04;
+    letter-spacing: -.01em; margin: 20px 0 0; }
+  .hero .arrow { color: var(--muted); font-weight: 500; }
+  .hero .hl { color: var(--accent); }
+  .hero .dek { font-size: clamp(16px, 2.6vw, 19px); color: var(--secondary); line-height: 1.7;
+    margin-top: 20px; max-width: 60ch; }
+  .byline { margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--hairline);
+    display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 13.5px; color: var(--muted); }
+  .byline b { color: var(--secondary); font-weight: 600; }
+  .badge { font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid color-mix(in srgb, var(--accent-mark) 45%, transparent);
+    border-radius: 999px; padding: 3px 10px; }
+
+  /* ============ STAT ROW ============ */
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 26px 0 8px; }
+  @media (min-width: 620px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+  .stat { background: var(--surface); border: 1px solid var(--hairline); border-radius: 14px;
+    padding: 16px 16px 15px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  .stat::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 3px;
+    border-radius: 3px; background: var(--accent-mark); opacity: .9; }
+  .stat .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: .06em; color: var(--muted);
+    text-transform: uppercase; padding-left: 12px; }
+  .stat .v { font-size: clamp(26px, 6vw, 34px); font-weight: 820; letter-spacing: -.02em;
+    margin-top: 8px; padding-left: 12px; line-height: 1; }
+  .stat .v small { font-size: .5em; font-weight: 700; color: var(--muted); letter-spacing: 0; }
+  .stat .s { font-size: 12.5px; color: var(--secondary); margin-top: 8px; padding-left: 12px; line-height: 1.45; }
+
+  /* ============ TL;DR PILLARS ============ */
+  .tldr { display: grid; gap: 12px; margin: 12px 0; }
+  @media (min-width: 620px) { .tldr { grid-template-columns: repeat(3,1fr); } }
+  .pill { background: var(--surface); border: 1px solid var(--hairline); border-radius: 14px;
+    padding: 18px; box-shadow: var(--shadow); }
+  .pill .n { font-family: var(--font-mono); font-size: 12px; color: var(--accent); letter-spacing: .1em; }
+  .pill h3 { font-size: 17px; font-weight: 750; margin-top: 8px; }
+  .pill p { font-size: 13.5px; color: var(--secondary); margin-top: 8px; line-height: 1.6; }
+
+  /* ============ SECTION ============ */
+  section { padding: 40px 0; border-top: 1px solid var(--hairline); }
+  .sec-head { margin-bottom: 22px; }
+  .sec-eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent); display: flex; align-items: baseline; gap: 10px; }
+  .sec-eyebrow .num { font-weight: 700; }
+  .sec-eyebrow .num::after { content: ""; }
+  h2.sec-title { font-size: clamp(24px, 5vw, 32px); font-weight: 820; letter-spacing: -.01em; margin-top: 12px; line-height: 1.15; }
+  .sec-dek { font-size: 15.5px; color: var(--secondary); line-height: 1.75; margin-top: 14px; max-width: 62ch; }
+  .sec-dek + .sec-dek { margin-top: 12px; }
+  .sec-dek b { color: var(--ink); font-weight: 650; }
+  .sec-dek .kbd { font-family: var(--font-mono); font-size: .9em; color: var(--accent); }
+
+  /* ============ FIGURE / CHART CARD ============ */
+  figure.card { margin: 22px 0 0; background: var(--surface); border: 1px solid var(--hairline);
+    border-radius: 16px; padding: 20px 20px 16px; box-shadow: var(--shadow); }
+  figure.card .fig-title { font-size: 15px; font-weight: 720; }
+  figure.card .fig-sub { font-size: 12.5px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+  .legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 14px 0 6px; }
+  .legend .li { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--secondary); }
+  .legend .sw { width: 11px; height: 11px; border-radius: 3px; flex: none; }
+  .chart-host { width: 100%; }
+  .chart-host svg { display: block; width: 100%; height: auto; overflow: visible; }
+  figcaption { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.5;
+    padding-top: 10px; border-top: 1px solid var(--hairline); }
+
+  /* proportion bar */
+  .prop { display: flex; width: 100%; height: 58px; border-radius: 10px; overflow: hidden; gap: 2px;
+    background: var(--surface); margin-top: 6px; }
+  .prop .seg { display: flex; flex-direction: column; justify-content: center; padding: 0 12px;
+    color: #fff; min-width: 0; }
+  .prop .seg .pv { font-family: var(--font-mono); font-weight: 700; font-size: 17px; line-height: 1; }
+  .prop .seg .pl { font-size: 11.5px; opacity: .92; margin-top: 4px; white-space: nowrap; }
+
+  /* ladder */
+  .ladder { display: grid; gap: 10px; margin-top: 6px; }
+  .rung { display: grid; grid-template-columns: 44px 1fr; align-items: stretch; gap: 14px;
+    background: var(--surface); border: 1px solid var(--hairline); border-radius: 14px; padding: 16px 18px;
+    box-shadow: var(--shadow); position: relative; }
+  .rung .rk { font-family: var(--font-mono); font-weight: 800; font-size: 20px; color: var(--surface);
+    display: grid; place-items: center; border-radius: 10px; }
+  .rung h3 { font-size: 16.5px; font-weight: 760; }
+  .rung h3 .en { font-family: var(--font-mono); font-size: 12px; color: var(--muted); font-weight: 500; margin-left: 6px; }
+  .rung p { font-size: 13px; color: var(--secondary); margin-top: 6px; line-height: 1.6; }
+  .rung .tag { position: absolute; right: 16px; top: 16px; font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: .04em; padding: 3px 8px; border-radius: 999px; }
+
+  /* callout / risk */
+  .callout { margin-top: 22px; background: var(--surface-2); border: 1px solid var(--hairline);
+    border-left: 3px solid var(--accent-mark); border-radius: 12px; padding: 18px 20px; }
+  .callout h3 { font-size: 15px; font-weight: 720; display: flex; align-items: center; gap: 8px; }
+  .callout ul { margin: 12px 0 0; padding-left: 18px; }
+  .callout li { font-size: 13.5px; color: var(--secondary); line-height: 1.65; margin-top: 7px; }
+  .callout li b { color: var(--ink); font-weight: 650; }
+
+  /* mini stat pair */
+  .duo { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 20px; }
+  @media (min-width: 560px){ .duo { grid-template-columns: 1fr 1fr; } }
+  .metric { background: var(--surface); border: 1px solid var(--hairline); border-radius: 14px;
+    padding: 18px; box-shadow: var(--shadow); }
+  .metric .mv { font-size: clamp(30px,7vw,40px); font-weight: 840; letter-spacing: -.02em; line-height: 1;
+    color: var(--s-blue); }
+  .metric .ml { font-size: 13.5px; color: var(--secondary); margin-top: 10px; line-height: 1.55; }
+  .metric .track { height: 8px; border-radius: 6px; background: color-mix(in srgb, var(--s-blue) 16%, transparent);
+    margin-top: 14px; overflow: hidden; }
+  .metric .fill { height: 100%; border-radius: 6px; background: var(--s-blue); }
+
+  /* small stat strip */
+  .strip { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-top: 20px; }
+  @media (min-width: 640px){ .strip { grid-template-columns: repeat(4,1fr); } }
+  .strip .item { background: var(--surface); border: 1px solid var(--hairline); border-radius: 12px; padding: 14px; }
+  .strip .item .n { font-family: var(--font-mono); font-size: 22px; font-weight: 750; letter-spacing: -.01em; color: var(--ink); }
+  .strip .item .n.up { color: var(--good); }
+  .strip .item .l { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+
+  /* screens */
+  .screen-tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .screen-tabs button { font-family: var(--font-sans); font-size: 13.5px; font-weight: 640; cursor: pointer;
+    border: 1px solid var(--hairline); background: var(--surface); color: var(--secondary);
+    padding: 8px 15px; border-radius: 999px; transition: all .15s; }
+  .screen-tabs button[aria-selected="true"] { background: var(--ink); color: var(--plane); border-color: var(--ink); }
+  .screen-tabs button:focus-visible { outline: 2px solid var(--accent-mark); outline-offset: 2px; }
+  .screen { display: none; }
+  .screen.on { display: block; }
+  .screen .meta { font-size: 13px; color: var(--secondary); margin-bottom: 14px; line-height: 1.6; }
+  .sector-grp { margin-top: 14px; }
+  .sector-grp .sh { display: flex; align-items: baseline; gap: 8px; font-size: 12px; color: var(--muted);
+    font-family: var(--font-mono); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 8px;
+    border-bottom: 1px solid var(--hairline); padding-bottom: 5px; }
+  .sector-grp .sh .c { color: var(--accent); }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip { font-family: var(--font-mono); font-size: 12.5px; font-weight: 640; color: var(--ink);
+    background: var(--surface-2); border: 1px solid var(--hairline); border-radius: 8px;
+    padding: 5px 9px; display: inline-flex; align-items: baseline; gap: 7px; cursor: default; }
+  .chip .px { color: var(--muted); font-size: 11px; font-weight: 500; }
+  .chip:hover { border-color: color-mix(in srgb, var(--accent-mark) 50%, var(--hairline)); }
+
+  /* footer */
+  footer { padding: 34px 0 60px; border-top: 1px solid var(--hairline); }
+  footer .src { font-size: 13px; color: var(--secondary); line-height: 1.7; }
+  footer .src b { color: var(--ink); font-weight: 650; }
+  footer .disc { font-size: 11.5px; color: var(--muted); line-height: 1.65; margin-top: 16px;
+    background: var(--surface-2); border: 1px solid var(--hairline); border-radius: 10px; padding: 14px 16px; }
+
+  /* tooltip */
+  #tt { position: fixed; pointer-events: none; z-index: 60; opacity: 0; transition: opacity .1s;
+    background: var(--ink); color: var(--plane); font-size: 12px; padding: 8px 10px; border-radius: 8px;
+    box-shadow: 0 8px 24px -8px rgba(0,0,0,.5); max-width: 220px; line-height: 1.45; }
+  #tt .tk { font-family: var(--font-mono); font-weight: 700; }
+  #tt .tr { display: flex; align-items: center; gap: 7px; margin-top: 4px; }
+  #tt .tr .d { width: 9px; height: 9px; border-radius: 2px; flex: none; }
+  #tt .tr .val { font-family: var(--font-mono); margin-left: auto; font-weight: 700; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } #thread{transition:none;} }
+</style>
+
+<div id="thread" aria-hidden="true"></div>
+<div id="tt" role="tooltip" aria-hidden="true"></div>
+
+<div class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <header class="hero">
+    <div class="eyebrow">Morgan Stanley · 美股策略周报 · 2026.07.27</div>
+    <h1>普涨扩散 <span class="arrow">→</span> <span class="hl">质量轮动</span></h1>
+    <p class="dek">早周期反弹阶段结束，市场进入典型的<b>中周期质量轮动</b>。利润率扩张的驱动，正从"经营杠杆"切换到"<b>AI 应用</b>"。半导体仍跑输超大规模云厂商，而 <b>AI 应用者</b>有望同时跑赢两者。</p>
+    <div class="byline">
+      <span><b>Michael J. Wilson</b> 等 · 摩根士丹利美股策略团队</span>
+      <span>标普 500 目标区间关键支撑 <b>7,000</b></span>
+      <span class="badge">可视化精华版</span>
+    </div>
+  </header>
+
+  <!-- ================= HERO STATS ================= -->
+  <div class="stats">
+    <div class="stat"><div class="k">技术支撑位</div><div class="v">7,000</div><div class="s">标普 500 关键技术支撑，过渡期的"地板"</div></div>
+    <div class="stat"><div class="k">指数质量结构</div><div class="v">42%<small> / 28%</small></div><div class="s">高质量 vs 低质量成分股占比</div></div>
+    <div class="stat"><div class="k">AI 净利润率扩张</div><div class="v">+100<small>bps</small></div><div class="s">预计到 2027 年由 AI 应用驱动</div></div>
+    <div class="stat"><div class="k">本周 FOMC 加息概率</div><div class="v">38%</div><div class="s">基准情形仍为按兵不动</div></div>
+  </div>
+
+  <!-- ================= TL;DR ================= -->
+  <div class="tldr">
+    <div class="pill"><div class="n">主题 01</div><h3>市场转向"质量"</h3><p>周期成熟，资金回归自由现金流与利润率。setup 类似 2021 年初的质量领导切换。</p></div>
+    <div class="pill"><div class="n">主题 02</div><h3>AI 应用登台</h3><p>盈利上修集中于"AI 关键 + 定价力强"的公司，其净利润率高出中位数近 400bps。</p></div>
+    <div class="pill"><div class="n">主题 03</div><h3>近看油价与利率</h3><p>本周 FOMC 与再度升温的地缘冲突是短期变量；油价上行尚未被市场定价。</p></div>
+  </div>
+
+  <!-- ================= SECTION 1 : QUALITY ================= -->
+  <section id="s1">
+    <div class="sec-head">
+      <div class="sec-eyebrow"><span class="num">01</span> Quality Rotation</div>
+      <h2 class="sec-title">质量轮动：早周期已经结束</h2>
+      <p class="sec-dek">市场开始转向质量——这是周期成熟时典型的<b>中周期切换</b>。往后看，利润率扩张将更少依赖早周期的经营杠杆，更多依赖 <b>AI 应用</b>，进一步强化质量主线。标普 500 本身已是一个<b>高质量、超大盘主导</b>的指数：高质量成分股约占指数 <b>42%</b>，低质量约 <b>28%</b>。</p>
+      <p class="sec-dek">当前格局与 <b>2021 年初至年中</b>高度相似——后疫情早周期反弹后，领导风格切向质量，弱资产负债表、高 Beta 成长与低质量盈利因子开始跑输，即便标普仍在上行。摩根士丹利的因子研究偏好：<b>高自由现金流收益率、低 EPS 波动、强资产负债表、高利润率</b>（对应原报告 Exhibit 11 质量选股清单）。</p>
+    </div>
+
+    <figure class="card">
+      <div class="fig-title">标普 500 的质量结构</div>
+      <div class="fig-sub">按质量分层的指数成分占比 · 指数本身已偏向高质量</div>
+      <div class="prop" role="img" aria-label="高质量 42%，中性/其他 30%，低质量 28%">
+        <div class="seg" style="flex:42;background:var(--s-blue)" title="高质量 42%"><span class="pv">42%</span><span class="pl">高质量</span></div>
+        <div class="seg" style="flex:30;background:var(--s-neutral);color:var(--ink)" title="中性 / 其他 30%"><span class="pv">30%</span><span class="pl">中性 / 其他</span></div>
+        <div class="seg" style="flex:28;background:var(--s-red)" title="低质量 28%"><span class="pv">28%</span><span class="pl">低质量</span></div>
+      </div>
+      <figcaption>高质量层近乎低质量层的 1.5 倍——质量轮动最终应支撑指数韧性与更广参与度，只是领导风格不同。来源：Compustat，摩根士丹利研究。</figcaption>
+    </figure>
+
+    <div class="callout">
+      <h3>短期为何仍需谨慎</h3>
+      <ul>
+        <li>若地缘冲突继续升级、或美联储本周<b>意外加息</b>，指数不排除向 <b>7,000</b> 一线整固甚至进一步回落。</li>
+        <li>宏观通胀/CPI 再度上行，与 2021 年几乎重合——但当下利率已近 <b>4%</b>，而 2021 年仍在零利率 + 全面 QE。</li>
+        <li>油价是另一大"外卡"：<b>持续上行尚未被股市定价</b>，也是把组合"向质量爬升"的又一理由。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 2 : AI ================= -->
+  <section id="s2">
+    <div class="sec-head">
+      <div class="sec-eyebrow"><span class="num">02</span> AI Adoption</div>
+      <h2 class="sec-title">AI 应用登上舞台中央</h2>
+      <p class="sec-dek">利润率扩张的接力棒正从早周期经营杠杆，交到 <b>AI 应用</b>及其他驱动手中。盈利上修已经开始反映这一机会：<b>"AI 对投资逻辑关键 + 定价力中性偏强"</b>的公司，其前瞻净利润率改善最为明显，该组净利润率高出中位数个股近 <b>400bps</b>。摩根士丹利预计，到 2027 年 AI 应用可带来约 <b>100bps</b> 的净利润率扩张。</p>
+    </div>
+
+    <figure class="card">
+      <div class="fig-title">AI"可量化收益"提及率快速抬升</div>
+      <div class="fig-sub">财报电话会中提及至少一项可量化 AI 收益的公司比例</div>
+      <div class="legend" id="lg-ai"></div>
+      <div class="chart-host" id="ch-ai"></div>
+      <figcaption>AI 应用者中提及可量化收益的比例：一年前 21% → 上一季度 37% → 2Q26 达 <b>40%</b>；全体标普 500 为 <b>25%</b>（去年同期 14%）。来源：AlphaWise，摩根士丹利研究。</figcaption>
+    </figure>
+
+    <div class="duo">
+      <div class="metric">
+        <div class="mv">+400<span style="font-size:.5em">bps</span></div>
+        <div class="ml">"AI 关键 + 定价力强"公司的前瞻净利润率，<b>高出中位数个股</b>约 400 个基点</div>
+        <div class="track"><div class="fill" style="width:82%"></div></div>
+      </div>
+      <div class="metric">
+        <div class="mv">9.6%</div>
+        <div class="ml">过去一年企业平均<b>净生产率提升</b>，由软件开发、客服、财务与运营领衔</div>
+        <div class="track"><div class="fill" style="width:48%"></div></div>
+      </div>
+    </div>
+
+    <p class="sec-dek" style="margin-top:22px">收益正从"实验"走向"<b>可衡量的企业价值</b>"，集中在收入创造、成本节约、资本效率与生产率，动能最强的是<b>科技、通信服务与金融</b>。对劳动力的影响更多是<b>岗位重塑</b>而非大规模替代——意味着应用周期仍处早期（对应原报告 Exhibit 12 AI 应用者选股清单）。</p>
+  </section>
+
+  <!-- ================= SECTION 3 : POSITIONING LADDER ================= -->
+  <section id="s3">
+    <div class="sec-head">
+      <div class="sec-eyebrow"><span class="num">03</span> Positioning</div>
+      <h2 class="sec-title">半导体 · 超大规模云 · AI 应用者</h2>
+      <p class="sec-dek">上周 GOOGL 财报与资本开支上调后的超大规模云板块走势，反映出市场在高质量领导格局下对<b>资本纪律</b>的重新关注。摩根士丹利的相对排序是——</p>
+    </div>
+
+    <div class="ladder">
+      <div class="rung">
+        <div class="rk" style="background:var(--s-aqua)">1</div>
+        <div>
+          <span class="tag" style="background:color-mix(in srgb,var(--good) 16%,transparent);color:var(--good)">最看好</span>
+          <h3>AI 应用者 <span class="en">AI Adopters</span></h3>
+          <p>有望同时跑赢半导体与超大规模云。运输、软件与服务、专业服务等"看似被颠覆"的行业，恰恰是应用图谱中更具吸引力的一批。</p>
+        </div>
+      </div>
+      <div class="rung">
+        <div class="rk" style="background:var(--s-blue)">2</div>
+        <div>
+          <span class="tag" style="background:color-mix(in srgb,var(--s-blue) 16%,transparent);color:var(--s-blue)">相对占优</span>
+          <h3>超大规模云 <span class="en">Hyperscalers</span></h3>
+          <p>仍将跑赢半导体，但 3 周内已相对跑赢约 <b>30%</b>，风险收益比转弱——下一段可能与半导体<b>同向下行</b>后再共同企稳。强核心业务 + 智能体应用层潜力。</p>
+        </div>
+      </div>
+      <div class="rung">
+        <div class="rk" style="background:var(--s-red)">3</div>
+        <div>
+          <span class="tag" style="background:color-mix(in srgb,var(--critical) 15%,transparent);color:var(--critical)">相对偏弱</span>
+          <h3>半导体 <span class="en">Semis</span></h3>
+          <p>典型早周期板块，盈利修正的<b>变化率已见顶</b>。"白银 / 半导体"类比关系依然有效，即便上周初出现短暂反弹。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 4 : EARNINGS ================= -->
+  <section id="s4">
+    <div class="sec-head">
+      <div class="sec-eyebrow"><span class="num">04</span> Earnings Season</div>
+      <h2 class="sec-title">财报季速览：盈利驱动的扩散</h2>
+      <p class="sec-dek">领导风格的扩散，主要由<b>盈利强度</b>驱动——本季中位数个股盈利增速已加速至 <b>17%</b>。即便美联储加息，也只会<b>推迟而非终结</b>对 2026 年的建设性判断，尤其当前股债收益率相关性已回落至<b>近零</b>。</p>
+    </div>
+
+    <div class="strip">
+      <div class="item"><div class="n up">+17%</div><div class="l">中位数个股盈利增速（本季，加速中）</div></div>
+      <div class="item"><div class="n up">+27%</div><div class="l">2026E 标普 500 EPS 增速（已上修）</div></div>
+      <div class="item"><div class="n">+10%</div><div class="l">2026E 营收增速（2027E +8%）</div></div>
+      <div class="item"><div class="n up">15.8%</div><div class="l">2026E 净利润率（自 14.4% 抬升）</div></div>
+    </div>
+
+    <figure class="card">
+      <div class="fig-title">"七巨头" vs 标普 493：增速差在 2027 年收敛</div>
+      <div class="fig-sub">净利润同比增速 · 盈利贡献正从头部向"其余 493 家"扩散</div>
+      <div class="legend" id="lg-mag7"></div>
+      <div class="chart-host" id="ch-mag7"></div>
+      <figcaption>Mag 7 2026 年预计 +49%，远超标普 493 的 +16%；但经上修后，Mag 7 <b>2027 年增速回落至 +9%</b>，反被标普 493 的 +17% 超越——盈利广度显著改善。来源：FactSet，摩根士丹利研究。</figcaption>
+    </figure>
+
+    <figure class="card">
+      <div class="fig-title">2Q26 EPS 超预期幅度远超历史</div>
+      <div class="fig-sub">标普 500 单季 EPS 实际 vs 预期</div>
+      <div class="chart-host" id="ch-surp"></div>
+      <figcaption>聚合超预期 +27.7% 大幅高于 4.4% 的历史均值，但很大程度受 GOOG 股票投资组合<b>未实现收益</b>推动；中位数个股 +7% 更具代表性。营收超预期 +3.3%，同样高于 1.3% 的历史均值。来源：FactSet，摩根士丹利研究。</figcaption>
+    </figure>
+
+    <div class="callout">
+      <h3>本周关键变量：美联储</h3>
+      <ul>
+        <li>债市定价 <b>38%</b> 的加息概率；一旦加息，将是明显的<b>鹰派意外</b>，也是高风险操作。</li>
+        <li><b>加息理由</b>：通过释放"对通胀更认真"的信号，帮助遏制曲线长端。</li>
+        <li><b>反对理由</b>：市场可能像 1994 年那样<b>过度外推</b>——尤其在新主席弱化前瞻指引的背景下。</li>
+        <li>摩根士丹利<b>基准判断</b>：美联储按兵不动。即便加息，也只是推迟而非终结 2026 年的建设性前景。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 5 : SCREENS ================= -->
+  <section id="s5">
+    <div class="sec-head">
+      <div class="sec-eyebrow"><span class="num">05</span> Stock Screens</div>
+      <h2 class="sec-title">两份选股清单</h2>
+      <p class="sec-dek">对应原报告 Exhibit 11 / 12，均要求摩根士丹利<b>增持（Overweight）</b>评级。价格为报告发布时点快照，仅供参考。</p>
+    </div>
+
+    <div class="screen-tabs" role="tablist" aria-label="选股清单">
+      <button role="tab" aria-selected="true" aria-controls="sc-q" id="tab-q">质量筛选 · Quality</button>
+      <button role="tab" aria-selected="false" aria-controls="sc-ai" id="tab-ai">AI 应用者 · Adopters</button>
+    </div>
+
+    <div class="screen on" id="sc-q" role="tabpanel" aria-labelledby="tab-q">
+      <div class="meta">板块内质量综合分位居前 20% + 2026/2027 自由现金流为正预期 + MS 增持。共 <b>42</b> 只。</div>
+      <div id="grp-q"></div>
+    </div>
+    <div class="screen" id="sc-ai" role="tabpanel" aria-labelledby="tab-ai" hidden>
+      <div class="meta">北美 AI 应用者 / 使能者 + 对投资逻辑关键 / 重大影响 + 定价力高/中性 + MS 增持。共 <b>58</b> 只。</div>
+      <div id="grp-ai"></div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <p class="src"><b>来源：</b>Morgan Stanley &amp; Co. LLC —《Weekly Warm-up: The Broadening Out Shifts to a Quality Rotation as Early Cycle Phase Ends》，分析师 Michael J. Wilson、Andrew B. Pauker、Michelle M. Weaver、Diane Ding、Nicholas Lentini，2026 年 7 月 27 日。</p>
+    <p class="disc">本页为对上述摩根士丹利研报的<b>可视化精华摘要</b>，由 AI 整理，仅供学习与快速理解之用，<b>不构成任何投资建议或要约</b>。全部数据、图表编号、假设、目标价、风险提示与合规披露，均以摩根士丹利原始报告为准；文中数值为对原文关键结论的提炼，价格为报告发布时点快照，可能与最新市场情况不一致。据此操作，风险自负。</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var tt = document.getElementById('tt');
+  function css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+
+  // ---------- tooltip helpers ----------
+  function showTip(html, x, y){
+    tt.innerHTML = html; tt.style.opacity = 1; tt.setAttribute('aria-hidden','false');
+    var w = tt.offsetWidth, h = tt.offsetHeight;
+    var left = x + 14, top = y - h - 10;
+    if(left + w > window.innerWidth - 8) left = x - w - 14;
+    if(top < 8) top = y + 16;
+    tt.style.left = left + 'px'; tt.style.top = top + 'px';
+  }
+  function hideTip(){ tt.style.opacity = 0; tt.setAttribute('aria-hidden','true'); }
+
+  // ---------- grouped columns ----------
+  // cfg: {categories:[], series:[{name,varc}], data:[[..per series..] per category], unit, single}
+  function groupedColumns(hostId, legendId, cfg){
+    var host = document.getElementById(hostId);
+    var legend = legendId ? document.getElementById(legendId) : null;
+
+    function palette(){ return cfg.series.map(function(s){ return css(s.varc); }); }
+
+    function render(){
+      var W = host.clientWidth || 600;
+      if(!W) return;
+      var H = 260;
+      var padL = 8, padR = 8, padT = 24, padB = 42;
+      var plotW = W - padL - padR, plotH = H - padT - padB;
+      var cols = palette();
+
+      // scale
+      var maxV = 0;
+      cfg.data.forEach(function(row){ row.forEach(function(v){ if(v>maxV) maxV=v; }); });
+      var niceMax = niceCeil(maxV);
+      function y(v){ return padT + plotH - (v/niceMax)*plotH; }
+
+      var nCat = cfg.categories.length, nSer = cfg.series.length;
+      var groupW = plotW / nCat;
+      var barGap = 2, sidePad = Math.min(groupW*0.16, 18);
+      var innerW = groupW - sidePad*2;
+      var barW = Math.min((innerW - barGap*(nSer-1)) / nSer, 24);
+      var clusterW = barW*nSer + barGap*(nSer-1);
+
+      var svg = '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+cfg.aria+'" preserveAspectRatio="xMidYMid meet">';
+      // gridlines + y ticks
+      var ticks = 4;
+      for(var t=0;t<=ticks;t++){
+        var tv = niceMax*t/ticks, yy = y(tv);
+        svg += '<line x1="'+padL+'" x2="'+(W-padR)+'" y1="'+yy+'" y2="'+yy+'" stroke="'+css('--hairline')+'" stroke-width="1"/>';
+        svg += '<text x="'+padL+'" y="'+(yy-5)+'" fill="'+css('--muted')+'" font-size="10.5" font-family="'+css('--font-mono')+'">'+fmt(tv)+cfg.unit+'</text>';
+      }
+      // baseline
+      svg += '<line x1="'+padL+'" x2="'+(W-padR)+'" y1="'+y(0)+'" y2="'+y(0)+'" stroke="'+css('--axis')+'" stroke-width="1"/>';
+
+      cfg.categories.forEach(function(cat, ci){
+        var gx = padL + groupW*ci + sidePad + (innerW - clusterW)/2;
+        cfg.series.forEach(function(s, si){
+          var v = cfg.data[ci][si];
+          var bx = gx + si*(barW+barGap);
+          var by = y(v), bh = y(0)-by;
+          var col = cols[si];
+          svg += '<rect class="col" x="'+bx.toFixed(1)+'" y="'+by.toFixed(1)+'" width="'+barW.toFixed(1)+'" height="'+Math.max(bh,0).toFixed(1)+'" rx="4" '+
+                 'fill="'+col+'" data-cat="'+ci+'" data-ser="'+si+'"/>';
+          // square the base: cover bottom radius
+          svg += '<rect x="'+bx.toFixed(1)+'" y="'+(y(0)-Math.min(bh,4)).toFixed(1)+'" width="'+barW.toFixed(1)+'" height="'+Math.min(bh,4).toFixed(1)+'" fill="'+col+'" pointer-events="none"/>';
+          // value label on cap
+          svg += '<text x="'+(bx+barW/2).toFixed(1)+'" y="'+(by-7).toFixed(1)+'" text-anchor="middle" fill="'+css('--ink')+'" '+
+                 'font-size="12" font-weight="700" font-family="'+css('--font-mono')+'">'+fmt(v)+cfg.unit+'</text>';
+        });
+        // category label
+        svg += '<text x="'+(padL+groupW*ci+groupW/2).toFixed(1)+'" y="'+(H-16)+'" text-anchor="middle" fill="'+css('--secondary')+'" font-size="12.5" font-weight="600">'+cat+'</text>';
+      });
+      svg += '</svg>';
+      host.innerHTML = svg;
+
+      // hover
+      host.querySelectorAll('rect.col').forEach(function(r){
+        r.style.cursor = 'default';
+        function move(e){
+          var ci=+r.dataset.cat, si=+r.dataset.ser;
+          var pt = (e.touches?e.touches[0]:e);
+          var rows='';
+          cfg.series.forEach(function(s,k){
+            rows += '<div class="tr"><span class="d" style="background:'+cols[k]+'"></span>'+s.name+
+                    '<span class="val">'+fmt(cfg.data[ci][k])+cfg.unit+'</span></div>';
+          });
+          showTip('<div class="tk">'+cfg.categories[ci]+'</div>'+rows, pt.clientX, pt.clientY);
+        }
+        r.addEventListener('mouseenter',move); r.addEventListener('mousemove',move);
+        r.addEventListener('mouseleave',hideTip);
+      });
+
+      // legend
+      if(legend && !cfg.single){
+        legend.innerHTML = cfg.series.map(function(s,i){
+          return '<span class="li"><span class="sw" style="background:'+cols[i]+'"></span>'+s.name+'</span>';
+        }).join('');
+      }
+    }
+
+    function fmt(v){ return (Math.round(v*10)/10).toString().replace(/\.0$/,''); }
+    function niceCeil(v){
+      if(v<=0) return 1;
+      var pow = Math.pow(10, Math.floor(Math.log10(v)));
+      var n = v/pow;
+      var step = n<=1?1:n<=2?2:n<=5?5:10;
+      return step*pow;
+    }
+
+    render();
+    if(window.ResizeObserver){ new ResizeObserver(render).observe(host); }
+    // theme reactive
+    if(window.matchMedia){ try{ matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);}catch(e){} }
+    new MutationObserver(render).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+    render._fn = render;
+    return render;
+  }
+
+  // ===== CHART DATA =====
+  groupedColumns('ch-ai','lg-ai',{
+    categories:['全体标普 500','AI 应用者'],
+    series:[{name:'一年前',varc:'--s-orange'},{name:'最新 (2Q26)',varc:'--s-blue'}],
+    data:[[14,25],[21,40]], unit:'%', aria:'AI 可量化收益提及率：全体标普由14%升至25%，AI应用者由21%升至40%'
+  });
+
+  groupedColumns('ch-mag7','lg-mag7',{
+    categories:['2026E','2027E'],
+    series:[{name:'七巨头 Mag 7',varc:'--s-blue'},{name:'标普 493',varc:'--s-orange'}],
+    data:[[49,16],[9,17]], unit:'%', aria:'Mag7与标普493净利润增速：2026年49%对16%，2027年9%对17%'
+  });
+
+  groupedColumns('ch-surp',null,{
+    categories:['聚合','中位数','历史均值'],
+    series:[{name:'EPS 超预期',varc:'--s-blue'}],
+    data:[[27.7],[7],[4.4]], unit:'%', single:true, aria:'2Q26 EPS超预期：聚合27.7%，中位数7%，历史均值4.4%'
+  });
+
+  // ===== SCREENS =====
+  var quality = [
+    ['通信服务',[['PINS','Pinterest',21.89],['RDDT','Reddit',168.78]]],
+    ['非必需消费',[['W','Wayfair',82.68],['TPR','Tapestry',139.13],['BKNG','Booking',172.83],['DKNG','DraftKings',22.81]]],
+    ['必需消费',[['COST','Costco',926.06],['KO','Coca-Cola',81.17],['MNST','Monster Bev',93.56],['CL','Colgate',90.08]]],
+    ['能源',[['SLB','SLB',47.22],['TRGP','Targa Resources',285.58]]],
+    ['金融',[['XYZ','Block',76.49],['CPAY','Corpay',364.80],['MA','Mastercard',530.29],['SEIC','SEI Invest',96.73],['V','Visa',351.60],['AON','Aon',355.78],['LNC','Lincoln Natl',40.83]]],
+    ['医疗保健',[['BTSG','BrightSpring',69.84],['IDXX','Idexx Labs',539.37],['THC','Tenet Health',199.02],['GILD','Gilead',130.86],['HALO','Halozyme',80.84]]],
+    ['工业',[['BE','Bloom Energy',217.30],['NOC','Northrop',533.48],['ROK','Rockwell',460.65],['ROL','Rollins',39.44]]],
+    ['信息技术',[['ALAB','Astera Labs',326.97],['FSLR','First Solar',205.92],['LRCX','Lam Research',319.78],['MU','Micron',990.21],['APP','AppLovin',398.86],['TEAM','Atlassian',80.15],['ADSK','Autodesk',205.26],['HUBS','HubSpot',190.01],['MDB','MongoDB',299.14],['AAPL','Apple',321.66],['SNDK','Sandisk',1610.33],['STX','Seagate',913.36]]],
+    ['材料',[['SHW','Sherwin-Williams',310.54]]],
+    ['公用事业',[['TLN','Talen Energy',379.27]]]
+  ];
+  var adopters = [
+    ['通信服务',[['GOOGL','Alphabet',317.69],['META','Meta',606.10],['RBLX','Roblox',47.55]]],
+    ['非必需消费',[['AMZN','Amazon',233.66],['DKS','Dick’s',204.36],['MH','McGraw Hill',9.56],['NAVN','Navan',22.23]]],
+    ['能源',[['HAL','Halliburton',32.71],['LBRT','Liberty Energy',19.62],['SLB','Schlumberger',47.22]]],
+    ['金融',[['BAC','Bank of America',61.28],['C','Citigroup',131.88],['BLK','BlackRock',1037.16],['BX','Blackstone',124.50],['COF','Capital One',199.96],['NDAQ','Nasdaq',90.42],['RKT','Rocket',12.78],['SPGI','S&P Global',420.00],['SEIC','SEI Invest',96.73],['STT','State Street',184.21]]],
+    ['医疗保健',[['CVS','CVS Health',106.89],['GH','Guardant',150.20],['HNGE','Hinge Health',76.69],['OMDA','Omada Health',21.20],['UNH','UnitedHealth',423.56],['NTRA','Natera',264.69]]],
+    ['工业',[['AXON','Axon',491.90],['BE','Bloom Energy',217.30],['GEV','GE Vernova',1031.19],['JCI','Johnson Controls',143.29],['TT','Trane Tech',479.71]]],
+    ['信息技术',[['NVDA','NVIDIA',208.76],['APP','AppLovin',398.86],['TEAM','Atlassian',80.15],['CDNS','Cadence',330.46],['CCC','CCC Intelligent',5.74],['NET','Cloudflare',262.32],['DOCN','DigitalOcean',131.15],['HUBS','HubSpot',190.01],['KVYO','Klaviyo',15.67],['MSFT','Microsoft',381.58],['MNDY','monday.com',71.74],['SAIL','SailPoint',14.32],['NOW','ServiceNow',91.94],['TTAN','ServiceTitan',69.07],['SHOP','Shopify',112.06],['SNOW','Snowflake',265.13],['TWLO','Twilio',185.06],['U','Unity',28.94],['AAPL','Apple',321.66]]],
+    ['公用事业',[['AEP','American Electric',134.92],['CEG','Constellation',275.60],['NEE','NextEra',89.79],['PPL','PPL',36.24],['PEG','Public Service',79.77],['SRE','Sempra',93.44],['TLN','Talen Energy',379.27],['VST','Vistra',168.98]]]
+  ];
+  function renderScreen(el, groups){
+    var html = '';
+    groups.forEach(function(g){
+      html += '<div class="sector-grp"><div class="sh">'+g[0]+' <span class="c">'+g[1].length+'</span></div><div class="chips">';
+      g[1].forEach(function(row){
+        html += '<span class="chip" title="'+row[1]+' · $'+row[2].toFixed(2)+'">'+row[0]+'<span class="px">'+row[2].toFixed(0)+'</span></span>';
+      });
+      html += '</div></div>';
+    });
+    document.getElementById(el).innerHTML = html;
+  }
+  renderScreen('grp-q', quality);
+  renderScreen('grp-ai', adopters);
+
+  // tabs
+  var tabs = document.querySelectorAll('.screen-tabs [role=tab]');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.setAttribute('aria-selected','false'); });
+      tab.setAttribute('aria-selected','true');
+      document.querySelectorAll('.screen').forEach(function(p){ p.classList.remove('on'); p.hidden=true; });
+      var panel = document.getElementById(tab.getAttribute('aria-controls'));
+      panel.classList.add('on'); panel.hidden=false;
+    });
+  });
+
+  // progress thread
+  var thread = document.getElementById('thread');
+  function onScroll(){
+    var h = document.documentElement;
+    var sc = h.scrollTop || document.body.scrollTop;
+    var max = h.scrollHeight - h.clientHeight;
+    thread.style.width = (max>0 ? (sc/max*100) : 0) + '%';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+})();
+</script>

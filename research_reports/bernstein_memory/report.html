@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>全球存储 · NVIDIA/博通与内存 · 研报精华</title>
+<style>
+@font-face{font-family:'Inter';src:url('fonts/Inter-var.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:block;}
+@font-face{font-family:'Fraunces';src:url('fonts/Fraunces-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:block;}
+
+:root{
+  --ink:#17191E; --ink2:#4C535D; --ink3:#8A909A; --ink4:#B4B0A6;
+  --paper:#F4F1EA; --paper2:#EDE8DD; --card:#FFFFFF;
+  --line:#E3DCCE; --line2:#ECE7DD;
+  --navy:#1B2440; --navy2:#2E3A5C;
+  --red:#C0271C; --redsoft:#F4E5E1; --redink:#9A1E15;
+  --green:#12705C; --greensoft:#E2ECE7;
+  --gold:#9A7B3F; --goldsoft:#F0E8D6;
+  --f-display:'Fraunces','Noto Serif CJK SC',Georgia,serif;
+  --f-head:'Noto Serif CJK SC','Fraunces',Georgia,serif;
+  --f-body:'Inter','Noto Sans CJK SC',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+body{font-family:var(--f-body);color:var(--ink);background:#c9c4b8;font-feature-settings:'tnum' 1,'ss01' 1;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;}
+@page{size:A4;margin:0;}
+
+.page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;padding:13mm 13mm 9mm 13mm;page-break-after:always;}
+.page:last-child{page-break-after:auto;}
+.main{flex:1;display:flex;flex-direction:column;justify-content:space-between;min-height:0;}
+.grp>*+*{margin-top:12px;}
+
+/* ---------- header / footer ---------- */
+.mast{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1.5px solid var(--ink);padding-bottom:7px;flex:none;}
+.mast .brand{display:flex;align-items:center;gap:8px;}
+.mast .dot{width:19px;height:19px;border-radius:50%;background:var(--red);position:relative;flex:none;}
+.mast .dot::after{content:"P";position:absolute;inset:0;color:#fff;font-family:var(--f-display);font-weight:600;font-size:14.2px;display:flex;align-items:center;justify-content:center;}
+.mast .bname{font-weight:800;font-size:15.4px;letter-spacing:.14em;color:var(--ink);}
+.mast .bsub{font-size:10.1px;letter-spacing:.34em;color:var(--ink3);margin-top:1px;font-weight:600;}
+.mast .mright{text-align:right;font-size:10.3px;letter-spacing:.06em;color:var(--ink2);line-height:1.62;}
+.mast .mright b{color:var(--ink);font-weight:700;}
+
+.foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:6px;margin-top:9px;font-size:9.5px;letter-spacing:.05em;color:var(--ink3);flex:none;}
+.foot .pg{font-weight:700;color:var(--ink2);letter-spacing:.12em;}
+.foot b{color:var(--ink2);font-weight:600;}
+
+.eyebrow{font-size:10.8px;font-weight:700;letter-spacing:.26em;color:var(--red);text-transform:uppercase;}
+.rule-gold{height:2px;background:var(--gold);width:44px;border-radius:2px;}
+.sectlabel{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
+.sectlabel .no{font-family:var(--f-display);font-weight:600;font-size:17.1px;color:var(--red);line-height:1;}
+.sectlabel .tt{font-family:var(--f-head);font-weight:700;font-size:18.4px;color:var(--ink);letter-spacing:.01em;}
+.sectlabel .en{font-size:9.6px;letter-spacing:.24em;color:var(--ink3);font-weight:700;text-transform:uppercase;margin-left:auto;}
+.src{font-size:9.5px;color:var(--ink3);letter-spacing:.02em;margin-top:6px;}
+
+/* ================= PAGE 1 — COVER ================= */
+.cv-eyerow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:11px;}
+.cv-tickers{margin-left:auto;font-size:11.4px;color:var(--ink2);letter-spacing:.04em;font-weight:600;}
+.cv-tickers b{color:var(--ink);}
+.headline{font-family:var(--f-head);font-weight:800;color:var(--ink);font-size:52.0px;line-height:1.12;letter-spacing:-.01em;margin-top:13px;}
+.headline .hl{color:var(--red);}
+.headline .box{border-bottom:5px solid var(--gold);padding-bottom:1px;}
+.subhead{font-size:14.4px;line-height:1.75;color:var(--ink2);max-width:174mm;margin-top:16px;font-weight:450;}
+.subhead b{color:var(--ink);font-weight:700;}
+
+.judg{display:flex;gap:0;background:var(--navy);border-radius:9px;overflow:hidden;}
+.judg .lab{background:var(--red);color:#fff;font-family:var(--f-head);font-weight:800;font-size:17.1px;letter-spacing:.16em;padding:0 17px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.3;flex:none;}
+.judg .body{padding:15px 18px;color:#EDEEF2;font-size:13.5px;line-height:1.68;display:flex;align-items:center;}
+.judg .body b{color:#fff;font-weight:700;}
+.judg .body .big{color:#fff;font-family:var(--f-display);font-weight:600;}
+
+.cv-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;}
+.mcard{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:16px 16px 15px;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+.mcard .top{font-size:10.8px;font-weight:700;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;}
+.mcard .fig{font-family:var(--f-display);font-weight:600;color:var(--ink);font-size:42.6px;line-height:1;margin:11px 0 5px;letter-spacing:-.01em;}
+.mcard .fig .u{font-size:17.3px;color:var(--ink2);font-weight:600;margin-left:1px;}
+.mcard .fig.g{color:var(--green);}
+.mcard .cap{font-size:12.5px;color:var(--ink2);line-height:1.6;font-weight:500;}
+.mcard .cap b{color:var(--ink);font-weight:700;}
+.mcard .tag{position:absolute;top:15px;right:15px;font-size:9.6px;font-weight:700;letter-spacing:.06em;color:var(--green);}
+
+.cv-two{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.wide{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:15px 17px;display:flex;align-items:center;gap:14px;}
+.wide .ic{width:36px;height:36px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:600;font-size:18.4px;}
+.wide .ic.gold{background:var(--goldsoft);color:var(--gold);}
+.wide .ic.navy{background:#E7EAF1;color:var(--navy);}
+.wide .t{font-size:12.5px;font-weight:700;letter-spacing:.03em;color:var(--ink);margin-bottom:3px;}
+.wide .d{font-size:12.0px;color:var(--ink2);line-height:1.6;}
+.wide .d b{color:var(--red);font-weight:700;}
+.wide .d .bg{color:var(--green);font-weight:700;}
+
+.toc{display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--ink);padding-top:12px;}
+.toc .ti{padding:0 18px;border-right:1px solid var(--line);}
+.toc .ti:first-child{padding-left:0;}
+.toc .ti:last-child{border-right:none;padding-right:0;}
+.toc .tn{font-family:var(--f-display);font-weight:600;font-size:17.1px;color:var(--red);line-height:1;}
+.toc .tt2{font-family:var(--f-head);font-weight:700;font-size:14.2px;color:var(--ink);margin-top:5px;}
+.toc .td{font-size:10.8px;color:var(--ink2);margin-top:4px;line-height:1.45;}
+
+/* ================= data page shared ================= */
+.callout{border-left:4px solid var(--red);background:linear-gradient(90deg,var(--redsoft),rgba(244,229,225,0));padding:13px 16px;border-radius:0 8px 8px 0;}
+.callout .q{font-family:var(--f-head);font-weight:600;font-size:16.5px;line-height:1.62;color:var(--ink);letter-spacing:.005em;}
+.callout .q b{color:var(--red);}
+.callout.green{border-left-color:var(--green);background:linear-gradient(90deg,var(--greensoft),rgba(226,236,231,0));}
+.callout.green .q b{color:var(--green);}
+.callout.navy{border-left-color:var(--navy);background:linear-gradient(90deg,#E9ECF3,rgba(233,236,243,0));}
+
+.panel{background:var(--card);border:1px solid var(--line2);border-radius:11px;padding:17px 19px;}
+.panel-t{font-family:var(--f-head);font-weight:700;font-size:17.1px;color:var(--ink);line-height:1.35;}
+.panel-t .accent{color:var(--red);}
+.panel-sub{font-size:12.2px;color:var(--ink2);line-height:1.6;margin-top:6px;font-weight:450;}
+.panel-sub b{font-weight:700;}
+
+svg{display:block;width:100%;height:auto;overflow:visible;}
+.axlab{font-family:var(--f-body);font-size:12.5px;fill:var(--ink3);font-weight:600;}
+.ptlab{font-family:var(--f-body);font-size:14.8px;font-weight:800;}
+
+.bars{display:flex;flex-direction:column;gap:11px;margin-top:6px;}
+.bar{display:grid;grid-template-columns:78px 1fr 46px;align-items:center;gap:10px;}
+.bar .nm{font-size:12.0px;font-weight:600;color:var(--ink2);text-align:right;line-height:1.15;}
+.bar .nm b{display:block;font-size:12.6px;color:var(--ink);font-weight:700;}
+.bar .track{height:17px;background:var(--paper2);border-radius:4px;position:relative;overflow:hidden;}
+.bar .fill{height:100%;border-radius:4px;background:var(--navy2);}
+.bar.hl .fill{background:var(--green);}
+.bar .val{font-size:13.7px;font-weight:800;color:var(--ink);text-align:left;}
+.bar.hl .val{color:var(--green);}
+
+.dumb{display:flex;flex-direction:column;}
+.drow{display:grid;grid-template-columns:106px 1fr 52px;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid var(--line2);}
+.drow:last-child{border-bottom:none;}
+.drow .mk{font-size:12.6px;color:var(--ink);font-weight:700;line-height:1.2;}
+.drow .mk span{display:block;font-size:9.6px;color:var(--ink3);font-weight:600;letter-spacing:.02em;margin-top:2px;}
+.drow .tr{position:relative;height:24px;}
+.drow .base{position:absolute;top:11px;left:0;right:0;height:2px;background:var(--line);}
+.seg{position:absolute;top:10px;height:4px;background:var(--navy2);border-radius:2px;}
+.drow.hot .seg{background:var(--red);}
+.dot{position:absolute;top:6px;width:12px;height:12px;border-radius:50%;transform:translateX(-50%);}
+.dot.o{background:var(--card);border:2.5px solid var(--ink3);}
+.dot.n{background:var(--navy2);border:2.5px solid var(--navy2);}
+.drow.hot .dot.n{background:var(--red);border-color:var(--red);}
+.vlab{position:absolute;top:-7px;font-size:10.8px;font-weight:800;transform:translateX(-50%);color:var(--ink3);}
+.vlab.n{color:var(--navy);} .drow.hot .vlab.n{color:var(--red);}
+.delta{font-size:13.1px;font-weight:800;text-align:right;color:var(--navy);}
+.drow.hot .delta{color:var(--red);}
+
+.kpirow{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+.kpi{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:13px 14px;}
+.kpi .k{font-size:10.3px;font-weight:700;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;line-height:1.2;}
+.kpi .v{font-family:var(--f-display);font-weight:600;font-size:31.2px;color:var(--ink);line-height:1;margin:9px 0 5px;}
+.kpi .v .u{font-size:14.8px;color:var(--ink2);}
+.kpi .v.g{color:var(--green);}
+.kpi .s{font-size:10.6px;color:var(--ink2);line-height:1.6;}
+.kpi .s b{color:var(--ink);font-weight:700;}
+
+.split{display:grid;grid-template-columns:1.02fr 1fr;gap:13px;}
+.capband{background:var(--navy);border-radius:11px;padding:16px 18px;color:#fff;display:flex;flex-direction:column;}
+.capband .h{font-family:var(--f-head);font-weight:700;font-size:15.4px;color:#fff;display:flex;align-items:center;gap:8px;}
+.capband .h .g{color:var(--goldsoft);}
+.capstat{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.13);}
+.capstat:last-child{border-bottom:none;}
+.capstat .l{font-size:11.5px;color:#C7CCDA;line-height:1.4;max-width:60%;}
+.capstat .r{font-family:var(--f-display);font-weight:600;font-size:20.5px;color:#fff;white-space:nowrap;}
+.capstat .r .u{font-size:12.0px;color:#AEB4C6;}
+.capnote{font-size:9.8px;color:#AEB4C6;margin-top:10px;line-height:1.62;}
+
+.vecs{display:flex;flex-direction:column;gap:10px;}
+.vec{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:12px 14px;display:flex;gap:11px;align-items:flex-start;flex:1;}
+.vec .vi{font-family:var(--f-display);font-weight:600;font-size:12.5px;letter-spacing:.02em;color:var(--gold);background:var(--goldsoft);border-radius:6px;padding:5px 7px;flex:none;min-width:36px;text-align:center;}
+.vec .vt{font-size:12.5px;font-weight:700;color:var(--ink);}
+.vec .vd{font-size:11.3px;color:var(--ink2);line-height:1.6;margin-top:3px;}
+.vec .vd b{color:var(--green);font-weight:700;}
+
+/* ================= PAGE 4 ================= */
+.val2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.valcard{background:var(--card);border:1px solid var(--line2);border-radius:11px;padding:16px 18px;}
+.valcard .vh{display:flex;justify-content:space-between;align-items:center;}
+.valcard .vh .nm{font-weight:800;font-size:14.8px;color:var(--ink);letter-spacing:.02em;}
+.valcard .vh .tk{font-size:10.2px;color:var(--ink3);font-weight:600;letter-spacing:.04em;}
+.valcard .prices{display:flex;align-items:center;gap:12px;margin:13px 0 4px;flex-wrap:nowrap;white-space:nowrap;}
+.valcard .nowcol{display:flex;flex-direction:column;line-height:1.1;}
+.valcard .nowlab{font-size:10.2px;color:var(--ink3);font-weight:700;letter-spacing:.1em;}
+.valcard .nowval{font-family:var(--f-display);font-weight:600;font-size:17.1px;color:var(--ink2);margin-top:3px;}
+.valcard .arr{color:var(--ink4);font-size:17.3px;}
+.valcard .ptcol{display:flex;align-items:baseline;gap:7px;}
+.valcard .pt{font-family:var(--f-display);font-weight:600;font-size:32.2px;color:var(--green);line-height:1;}
+.valcard .up{display:inline-block;background:var(--greensoft);color:var(--green);font-size:12.5px;font-weight:800;padding:2px 8px;border-radius:100px;margin-left:2px;vertical-align:middle;}
+.valcard .meta{font-size:10.8px;color:var(--ink2);margin-top:11px;letter-spacing:.02em;font-weight:600;}
+
+.fcast{display:flex;justify-content:space-between;gap:6px;background:var(--paper2);border-radius:9px;padding:13px 8px;}
+.fcast .fc{flex:1;text-align:center;border-right:1px solid var(--line);}
+.fcast .fc:last-child{border-right:none;}
+.fcast .fc .fk{font-size:9.5px;font-weight:700;letter-spacing:.06em;color:var(--ink3);text-transform:uppercase;}
+.fcast .fc .fv{font-family:var(--f-display);font-weight:600;font-size:19.4px;color:var(--ink);margin-top:4px;line-height:1;}
+.fcast .fc .fv .u{font-size:10.8px;color:var(--ink2);}
+.fcast .fc .fs{font-size:9.5px;color:var(--green);font-weight:700;margin-top:3px;}
+
+.watch{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.wbox{border-radius:10px;padding:14px 16px;}
+.wbox.up{background:var(--greensoft);border:1px solid #CADED6;}
+.wbox.dn{background:var(--redsoft);border:1px solid #EBD3CD;}
+.wbox .wh{font-family:var(--f-head);font-weight:700;font-size:14.2px;display:flex;align-items:center;gap:6px;margin-bottom:8px;}
+.wbox.up .wh{color:var(--green);} .wbox.dn .wh{color:var(--red);}
+.wbox ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.wbox li{font-size:11.8px;line-height:1.45;color:var(--ink);padding-left:13px;position:relative;font-weight:500;}
+.wbox li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;}
+.wbox.up li::before{background:var(--green);} .wbox.dn li::before{background:var(--red);}
+
+.track-chips{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+.track-chips .tl{font-size:10.8px;font-weight:700;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;margin-right:2px;}
+.tchip{font-size:11.3px;font-weight:600;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:100px;padding:5px 12px;}
+
+.qrcard{background:linear-gradient(135deg,#1B2440,#2C3860);border-radius:14px;padding:5px;box-shadow:0 6px 20px rgba(27,36,64,.18);}
+.qrinner{background:var(--card);border-radius:11px;padding:16px 18px;display:flex;align-items:center;gap:18px;}
+.qrbox{background:#fff;border:1px solid var(--line2);border-radius:12px;padding:8px;flex:none;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.qrbox img{display:block;width:40mm;height:40mm;image-rendering:crisp-edges;}
+.qrtxt{flex:1;}
+.qrtxt .qbrand{display:flex;align-items:center;gap:8px;}
+.qrtxt .qdot{width:20px;height:20px;border-radius:50%;background:var(--red);position:relative;flex:none;}
+.qrtxt .qdot::after{content:"P";position:absolute;inset:0;color:#fff;font-family:var(--f-display);font-weight:600;font-size:14.8px;display:flex;align-items:center;justify-content:center;}
+.qrtxt .qn{font-weight:800;font-size:17.1px;letter-spacing:.1em;color:var(--ink);}
+.qrtxt .qh{font-family:var(--f-head);font-weight:700;font-size:18.4px;color:var(--ink);margin-top:12px;line-height:1.35;}
+.qrtxt .qh .r{color:var(--red);}
+.qrtxt .qs{font-size:12.0px;color:var(--ink2);line-height:1.62;margin-top:7px;font-weight:500;}
+.qrtxt .qcta{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:11.3px;font-weight:700;color:var(--navy);letter-spacing:.02em;}
+.qrtxt .qcta::before{content:"";width:16px;height:2px;background:var(--gold);}
+
+.disc{font-size:9.5px;color:var(--ink3);line-height:1.6;letter-spacing:.01em;margin-top:11px;}
+</style>
+</head>
+<body>
+<style>
+  /* scorecard table (P3) — sized for the enlarged type */
+  .sctable{border:1px solid var(--line2);border-radius:12px;overflow:hidden;background:var(--card);margin-top:4px;}
+  .scrow{display:grid;grid-template-columns:1.55fr 0.62fr 1.75fr 1.5fr 0.62fr;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line2);}
+  .scrow:last-child{border-bottom:none;}
+  .scrow.head{background:var(--paper2);padding:9px 16px;}
+  .scrow.head span{font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--ink3);}
+  .scrow .co{font-weight:800;font-size:13.5px;color:var(--ink);line-height:1.1;}
+  .scrow .co small{display:block;font-weight:600;color:var(--ink3);font-size:10px;font-family:var(--f-body);letter-spacing:.03em;margin-top:2px;}
+  .scrow .rt{font-weight:800;font-size:12.5px;text-align:center;}
+  .rt.o{color:var(--green);} .rt.u{color:var(--red);}
+  .scrow .pxs{font-family:var(--f-body);font-variant-numeric:tabular-nums;font-size:12px;color:var(--ink2);}
+  .scrow .pxs b{color:var(--ink);font-weight:700;}
+  .updrow{display:flex;align-items:center;gap:9px;}
+  .uptrack{flex:1;height:9px;background:var(--paper2);border-radius:5px;overflow:hidden;}
+  .upfill{height:100%;border-radius:5px;}
+  .upval{font-family:var(--f-body);font-variant-numeric:tabular-nums;font-weight:800;font-size:12.5px;min-width:46px;text-align:right;}
+  .up.pos,.upval.pos{color:var(--green);} .up.neg,.upval.neg{color:var(--red);}
+  .scrow .pe{font-family:var(--f-body);font-variant-numeric:tabular-nums;font-weight:700;font-size:12.5px;color:var(--ink);text-align:right;}
+</style>
+
+<!-- ============================= PAGE 1 : COVER ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>机构研究 · 可视化精华</b><br>来源：Bernstein 伯恩斯坦 Global Research · 2026.07.27<br>分析师 Mark Li、Stacy Rasgon 等</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="cv-eyerow">
+        <span class="eyebrow">全球存储 Global Memory · 快评 Quick Thoughts</span>
+        <span class="cv-tickers"><b>NVDA</b>·<b>AVGO</b>·三星·SK 海力士·美光</span>
+      </div>
+      <div class="rule-gold"></div>
+      <h1 class="headline">千亿美元大单，<span class="hl">抢的是内存</span><br>AI 瓶颈从算力挪向<span class="box">存储</span></h1>
+      <p class="subhead">上周五韩国政府 AI 峰会上，三星、SK 海力士、NVIDIA、博通接连宣布合作。SK 海力士 × NVIDIA 意向书 <b>5,000 亿美元+</b>（含 2GW Vera Rubin AI 工厂）、SK 集团另有 <b>2,500 亿</b>五年供货；三星 × 博通 <b>2,000 亿美元</b>存储 + 代工 MOU。伯恩斯坦点破：这些钱<b>主要是为内存</b>——NVIDIA 与博通在<b>锁定内存供应</b>。在 AI 里，内存比逻辑更关键。</p>
+    </div>
+
+    <div class="judg">
+      <div class="lab"><span>核心</span><span>判断</span></div>
+      <div class="body"><div>对内存<b>维持乐观</b>，近期回调是<span class="big">好的入场点</span>。看多 DRAM 三强——<b>三星 / SK 海力士 / 美光（跑赢）</b>；因中国 NAND 威胁，<b>铠侠（跑输）</b>；<b>NVIDIA、博通（跑赢）</b>。</div></div>
+    </div>
+
+    <div class="cv-metrics">
+      <div class="mcard">
+        <div class="top">SK 海力士 × NVIDIA</div>
+        <div class="fig">$500<span class="u">B+</span></div>
+        <div class="cap">意向书；含 <b>2GW Vera Rubin AI 工厂</b>，2027 为 SK 电讯上线</div>
+      </div>
+      <div class="mcard">
+        <div class="top">三星 × 博通</div>
+        <div class="fig">$200<span class="u">B</span></div>
+        <div class="cap">存储（含 HBM）+ 代工 MOU，五年至 2030；代工聚焦 <b>2nm 及以下</b></div>
+      </div>
+      <div class="mcard">
+        <div class="top">内存市场 · 27–28E</div>
+        <div class="fig g">$1.3<span class="u">T</span></div>
+        <div class="cap">共识预测，自 2026 的 0.9T——AI 把内存推成<b>万亿美元</b>级赛道</div>
+      </div>
+    </div>
+
+    <div class="cv-two">
+      <div class="wide">
+        <div class="ic navy">存</div>
+        <div><div class="t">为什么大单是"抢内存"</div><div class="d">公布金额<b>更多是为内存</b>——NVIDIA / 博通在锁定供应；<span class="bg">内存 &gt; 逻辑</span></div></div>
+      </div>
+      <div class="wide">
+        <div class="ic gold">台</div>
+        <div><div class="t">对台积电影响：可忽略</div><div class="d">需求排队等台积产能，份额即便流向三星/Intel 也<b>不改其可见盈利</b></div></div>
+      </div>
+    </div>
+
+    <div class="toc">
+      <div class="ti"><div class="tn">02</div><div class="tt2">这不是代工大单</div><div class="td">三笔近 $950B，指向同一件事：锁定内存</div></div>
+      <div class="ti"><div class="tn">03</div><div class="tt2">谁受益</div><div class="td">评级、目标价与上行空间：DRAM 三强领跑</div></div>
+      <div class="ti"><div class="tn">04</div><div class="tt2">中国变量与风险</div><div class="td">看空 NAND、看多 DRAM 的差异化判断</div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>数据以 Bernstein 原报告为准 · 仅供参考，不构成投资建议</span>
+    <span class="pg">01 / 04</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 2 : IT'S ABOUT MEMORY ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>全球存储 · Quick Thoughts</b><br>Bernstein 伯恩斯坦 · 2026.07.27</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">01</span><span class="tt">这不是代工大单，是"抢内存"</span><span class="en">It's About Memory</span></div>
+      <div class="callout">
+        <div class="q">市场把这些合作读成"NVIDIA / 博通的代工与 AI 工厂大单"。但伯恩斯坦点破：<b>公布的金额更多是为内存</b>——它们真正在做的，是<b>锁定下一代 AI 内存（HBM4 及以后）的供应</b>。在 AI 里，<b>内存比逻辑半导体更关键</b>。</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-t">内存正在成为<span class="accent">万亿美元赛道</span></div>
+      <div class="panel-sub">存储供应商共识收入（含三星、SK 海力士、美光、SanDisk、铠侠、长鑫、长江存储）。2027 起站上 <b>1.3 万亿美元</b>。</div>
+      <svg viewBox="0 0 680 208" role="img" aria-label="内存行业共识收入：2026约0.9万亿，2027约1.3万亿，2028约1.3万亿美元" style="margin-top:6px;">
+        <g stroke="#ECE7DD" stroke-width="1">
+          <line x1="58" y1="36" x2="664" y2="36"/><line x1="58" y1="80" x2="664" y2="80"/><line x1="58" y1="124" x2="664" y2="124"/>
+        </g>
+        <line x1="58" y1="166" x2="664" y2="166" stroke="#D9D2C4" stroke-width="1.5"/>
+        <g font-size="12" font-weight="700" font-family="Inter" text-anchor="end" fill="#B4B0A6"><text x="52" y="39">1.4</text><text x="52" y="127">0.5</text><text x="52" y="169">0</text></g>
+        <!-- bars: 0.9,1.3,1.3 ; scale 1.4=>plot 130 (from y166 to y36) => 92.86px per T -->
+        <rect x="108" y="82.4" width="118" height="83.6" rx="5" fill="#2E3A5C"/>
+        <rect x="300" y="45.3" width="118" height="120.7" rx="5" fill="#12705C"/>
+        <rect x="492" y="45.3" width="118" height="120.7" rx="5" fill="#12705C"/>
+        <g font-size="17" font-weight="800" font-family="Inter" text-anchor="middle">
+          <text x="167" y="72" fill="#4C535D">$0.9T</text><text x="359" y="35" fill="#12705C">$1.3T</text><text x="551" y="35" fill="#12705C">$1.3T</text></g>
+        <g font-size="13" font-weight="700" font-family="'Noto Sans CJK SC',Inter" text-anchor="middle" fill="#17191E">
+          <text x="167" y="188">CY2026</text><text x="359" y="188">CY2027</text><text x="551" y="188">CY2028</text></g>
+      </svg>
+      <div class="src">单位：万亿美元。长鑫、长江存储为伯恩斯坦估算。来源：公司数据、Bloomberg、Bernstein（Exhibit 3）。</div>
+    </div>
+
+    <div class="split">
+      <div class="panel" style="padding:15px 17px;">
+        <div class="panel-t" style="font-size:14.6px;">三笔大单，<span class="accent">都指向内存</span></div>
+        <div class="panel-sub" style="margin-top:8px;line-height:1.7;">• SK 海力士 × NVIDIA：<b>$500B+</b>（含 2GW Vera Rubin AI 工厂）<br>• SK 集团 × 其他科技公司：<b>$250B</b>／五年供货<br>• 三星 × 博通：<b>$200B</b> 存储 + 代工，至 2030<br>合计近 <b style="color:var(--red)">$950B</b> 的相关承诺。</div>
+      </div>
+      <div class="panel" style="padding:15px 17px;">
+        <div class="panel-t" style="font-size:14.6px;">供应焦虑，<span class="accent">被安抚</span></div>
+        <div class="panel-sub" style="margin-top:8px;line-height:1.7;">NVIDIA 指引 CY25–27 约 <b>$1T</b>（明年近 $500B）、博通明年 <b>$100B+</b>。大单帮 <b>NVDA / AVGO 缓解内存供应担忧</b>——两者均予"跑赢"。</div>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <div class="q"><b>投资含义</b>&nbsp;内存是 AI 的<b>稀缺资源与真正瓶颈</b>；这最利好有 HBM 能力的内存龙头。伯恩斯坦对内存维持乐观，<b>近期回调即入场点</b>。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>这不是代工大单 · It's About Memory</span>
+    <span class="pg">02 / 04</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 3 : WHO WINS (SCORECARD) ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>全球存储 · Quick Thoughts</b><br>Bernstein 伯恩斯坦 · 2026.07.27</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">02</span><span class="tt">谁受益：评级与目标价</span><span class="en">Who Wins</span></div>
+      <div class="panel-sub" style="margin-bottom:12px;">伯恩斯坦覆盖的存储链 6 只标的（12 个月，相对指数）。<b>DRAM 三强与 NVDA / 博通"跑赢"</b>，铠侠因中国 NAND 威胁"跑输"。柱为至目标价的上行空间。</div>
+    </div>
+
+    <div class="sctable">
+      <div class="scrow head"><span>标的</span><span style="text-align:center">评级</span><span>现价 → 目标价</span><span>上行空间</span><span style="text-align:right">27E&nbsp;P/E</span></div>
+      <div class="scrow"><div class="co">SK 海力士<small>000660.KS</small></div><div class="rt o">跑赢</div><div class="pxs">₩178万 → <b>₩330万</b></div><div class="updrow"><div class="uptrack"><div class="upfill" style="width:94%;background:var(--green)"></div></div><div class="upval pos">+85%</div></div><div class="pe">3.1×</div></div>
+      <div class="scrow"><div class="co">三星电子<small>005930.KS</small></div><div class="rt o">跑赢</div><div class="pxs">₩25.3万 → <b>₩44万</b></div><div class="updrow"><div class="uptrack"><div class="upfill" style="width:82%;background:var(--green)"></div></div><div class="upval pos">+74%</div></div><div class="pe">3.3×</div></div>
+      <div class="scrow"><div class="co">英伟达 NVIDIA<small>NVDA</small></div><div class="rt o">跑赢</div><div class="pxs">$207 → <b>$315</b></div><div class="updrow"><div class="uptrack"><div class="upfill" style="width:58%;background:var(--green)"></div></div><div class="upval pos">+52%</div></div><div class="pe">16.5×</div></div>
+      <div class="scrow"><div class="co">博通 Broadcom<small>AVGO</small></div><div class="rt o">跑赢</div><div class="pxs">$382 → <b>$550</b></div><div class="updrow"><div class="uptrack"><div class="upfill" style="width:49%;background:var(--green)"></div></div><div class="upval pos">+44%</div></div><div class="pe">20.4×</div></div>
+      <div class="scrow"><div class="co">美光 Micron<small>MU</small></div><div class="rt o">跑赢</div><div class="pxs">$921 → <b>$1,300</b></div><div class="updrow"><div class="uptrack"><div class="upfill" style="width:46%;background:var(--green)"></div></div><div class="upval pos">+41%</div></div><div class="pe">5.8×</div></div>
+      <div class="scrow"><div class="co">铠侠 KIOXIA<small>285A.JP</small></div><div class="rt u">跑输</div><div class="pxs">¥5.6万 → <b>¥4.0万</b></div><div class="updrow"><div class="uptrack"><div class="upfill" style="width:32%;background:var(--red)"></div></div><div class="upval neg">−29%</div></div><div class="pe">5.8×</div></div>
+    </div>
+    <div class="src" style="margin-top:8px;">价格单位：三星 / SK 海力士为韩元、英伟达 / 博通 / 美光为美元、铠侠为日元；截至 2026/7/24。评级为相对指数 12 个月。来源：Bloomberg、Bernstein 估算。</div>
+
+    <div class="callout navy" style="margin-top:18px;">
+      <div class="q">估值反差扎眼：<b style="color:var(--navy)">DRAM 三强 2027E P/E 仅 3–6×</b>（三星 3.3×、SK 海力士 3.1×、美光 5.8×），显著低于 NVDA / 博通的 <b style="color:var(--navy)">16–20×</b>——在这些盈利预测下，内存龙头相当便宜。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>谁受益 · Who Wins</span>
+    <span class="pg">03 / 04</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 4 : CHINA + RISK + QR ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>全球存储 · Quick Thoughts</b><br>Bernstein 伯恩斯坦 · 2026.07.27</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">03</span><span class="tt">中国变量与后市</span><span class="en">China &amp; What Matters</span></div>
+      <div class="callout navy">
+        <div class="q">伯恩斯坦的差异化判断：<b style="color:var(--navy)">看空 NAND、看多 DRAM</b>。中国在 NAND 的长期威胁更大 → <b style="color:var(--navy)">铠侠跑输</b>；而缺少 EUV，中国最终<b style="color:var(--navy)">难在 DRAM 竞争</b> → 三星 / SK 海力士 / 美光跑赢。</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="watch">
+        <div class="wbox dn">
+          <div class="wh">▼&nbsp;NAND · 看空</div>
+          <ul>
+            <li><b>铠侠 Underperform</b>，目标价 ¥40,000（−29%）</li>
+            <li>中国在 NAND 的长期威胁更大、门槛更低</li>
+            <li>景气若提前见顶，NAND 首当其冲</li>
+          </ul>
+        </div>
+        <div class="wbox up">
+          <div class="wh">▲&nbsp;DRAM · 看多</div>
+          <ul>
+            <li><b>三星 / SK 海力士 / 美光 Outperform</b></li>
+            <li>没有 EUV，中国最终难在 DRAM 竞争</li>
+            <li>HBM 护城河 + AI 需求，龙头议价力强</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fcast" style="margin-top:13px;">
+        <div class="fc"><div class="fk">SK 海力士</div><div class="fv">₩330<span class="u">万</span></div><div class="fs">+85%</div></div>
+        <div class="fc"><div class="fk">三星电子</div><div class="fv">₩44<span class="u">万</span></div><div class="fs">+74%</div></div>
+        <div class="fc"><div class="fk">美光</div><div class="fv">$1,300</div><div class="fs">+41%</div></div>
+        <div class="fc"><div class="fk">英伟达</div><div class="fv">$315</div><div class="fs">+52%</div></div>
+        <div class="fc"><div class="fk">博通</div><div class="fv">$550</div><div class="fs">+44%</div></div>
+      </div>
+
+      <div class="track-chips" style="margin-top:14px;">
+        <span class="tl">关键风险</span>
+        <span class="tchip">价格景气提前见顶（需求走弱/供给增加）</span>
+        <span class="tchip">中国 NAND / DRAM 进展超预期</span>
+        <span class="tchip">估值与情绪反转</span>
+        <span class="tchip">NVDA 客户转向自研芯片</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="qrcard">
+        <div class="qrinner">
+          <div class="qrbox"><img src="qr.png" alt="THE PORT 微信二维码"></div>
+          <div class="qrtxt">
+            <div class="qbrand"><div class="qdot"></div><div class="qn">THE&nbsp;PORT</div></div>
+            <div class="qh">读懂全球投行的<span class="r">核心观点</span></div>
+            <div class="qs">扫码添加，每日获取高盛、摩根士丹利、伯恩斯坦等一线机构研报的精华解读与可视化速览。</div>
+            <div class="qcta">微信扫一扫 · 或长按识别二维码</div>
+          </div>
+        </div>
+      </div>
+      <div class="disc">本文基于 Bernstein（伯恩斯坦）Global Research 于 2026-07-27 发布的《Global Memory, NVIDIA &amp; Broadcom: Quick thoughts on strategic partnerships》（分析师 Mark Li、Stacy A. Rasgon 等）整理，所有数字、评级、目标价与预测均以原报告为准；上行空间以 2026/7/24 收盘价计算。本可视化由 THE PORT 编辑制作，仅供信息参考与交流，不构成任何投资建议或要约；投资有风险，决策须谨慎。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>中国变量与后市 · China &amp; What Matters</span>
+    <span class="pg">04 / 04</span>
+  </div>
+</section>
+
+</body>
+</html>

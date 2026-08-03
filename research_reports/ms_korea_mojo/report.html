@@ -229,54 +229,64 @@ svg{display:block;width:100%;height:auto;overflow:visible;}
 <body>
 <style>
   /* ===== enlarged components (big/full treatment) ===== */
-  .callout{padding:23px 26px;}
-  .callout .q{font-size:18px;line-height:1.72;}
-  .panel{padding:24px 27px;}
-  .panel-t{font-size:16.5px;}
-  .panel-sub{font-size:12.5px;line-height:1.72;}
-  .vec{padding:20px 22px;}
-  .vec .vi{font-size:14px;padding:9px 12px;min-width:60px;}
-  .vec .vt{font-size:14.5px;}
-  .vec .vd{font-size:12.5px;line-height:1.7;margin-top:6px;}
-  .vecs{gap:16px;}
-  .wbox{padding:26px 28px;}
-  .wbox .wh{font-size:18px;margin-bottom:16px;}
-  .wbox ul{gap:15px;}
-  .wbox li{font-size:14.5px;line-height:1.66;padding-left:17px;}
+  .callout{padding:22px 25px;}
+  .callout .q{font-size:17px;line-height:1.7;}
+  .panel{padding:22px 25px;}
+  .panel-t{font-size:16px;}
+  .panel-sub{font-size:12.5px;line-height:1.7;}
+  .vec{padding:18px 20px;}
+  .vec .vi{font-size:13.5px;padding:8px 11px;min-width:56px;}
+  .vec .vt{font-size:14px;}
+  .vec .vd{font-size:12px;line-height:1.66;margin-top:5px;}
+  .vecs{gap:14px;}
+  .wbox{padding:22px 24px;}
+  .wbox .wh{font-size:17px;margin-bottom:14px;}
+  .wbox ul{gap:13px;}
+  .wbox li{font-size:13.5px;line-height:1.6;padding-left:16px;}
   .wbox li::before{width:6px;height:6px;top:8px;}
-  .fcast{padding:24px 14px;}
-  .fcast .fc .fk{font-size:10.5px;}
-  .fcast .fc .fv{font-size:25px;margin-top:6px;}
-  .fcast .fc .fs{font-size:10.5px;margin-top:5px;}
-  .tchip{font-size:13px;padding:11px 18px;}
-  .track-chips{gap:12px;}
-  .track-chips .tl{font-size:12px;}
-  .mcard{padding:24px 22px 22px;}
-  .mcard .top{font-size:12px;}
-  .mcard .fig{font-size:46px;margin:14px 0 8px;}
-  .mcard .cap{font-size:13.5px;line-height:1.62;}
-  .mcard .tag{font-size:11px;}
-  .wide{padding:22px 24px;}
+  .fcast{padding:22px 12px;}
+  .fcast .fc .fk{font-size:10px;}
+  .fcast .fc .fv{font-size:24px;margin-top:6px;}
+  .fcast .fc .fs{font-size:10px;margin-top:5px;}
+  .tchip{font-size:12.5px;padding:10px 16px;}
+  .track-chips{gap:11px;}
+  .track-chips .tl{font-size:11.5px;}
+  .mcard{padding:22px 20px 20px;}
+  .mcard .top{font-size:11.5px;}
+  .mcard .fig{font-size:43px;margin:12px 0 8px;}
+  .mcard .cap{font-size:13px;line-height:1.58;}
+  .mcard .tag{font-size:10.5px;}
+  .wide{padding:20px 22px;}
   .wide .t{font-size:13.5px;margin-bottom:4px;}
-  .wide .d{font-size:13px;line-height:1.6;}
-  .wide .ic{width:46px;height:46px;font-size:21px;}
-  .judg .body{font-size:15px;padding:23px 26px;line-height:1.74;}
-  .judg .lab{font-size:16.5px;padding:0 21px;}
-  .subhead{line-height:1.85;}
-  .sectlabel .tt{font-size:19px;}
-  /* sector barbell table (P3) */
-  .stbl{border:1px solid var(--line2);border-radius:14px;overflow:hidden;background:var(--card);box-shadow:0 1px 0 rgba(0,0,0,.02);}
-  .strow{display:grid;grid-template-columns:56px 1.35fr 0.95fr 2.1fr;column-gap:18px;align-items:center;padding:19px 22px;border-bottom:1px solid var(--line2);}
-  .strow:last-child{border-bottom:none;}
-  .strow.hd{background:var(--paper2);padding:13px 22px;}
-  .strow.hd span{font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--ink3);}
-  .strow .rk{width:38px;height:38px;border-radius:10px;color:#fff;font-family:var(--f-display);font-weight:600;font-size:19px;display:flex;align-items:center;justify-content:center;}
-  .strow .sec{font-weight:800;font-size:17px;color:var(--ink);line-height:1.1;}
-  .strow .sec small{display:block;font-weight:600;color:var(--ink3);font-size:10.5px;font-family:var(--f-body);letter-spacing:.03em;margin-top:2px;}
-  .pos{display:inline-block;font-size:11.5px;font-weight:800;padding:4px 11px;border-radius:100px;letter-spacing:.02em;}
-  .pos.core{background:#E7EAF1;color:var(--navy);} .pos.spread{background:var(--goldsoft);color:var(--gold);} .pos.new{background:var(--greensoft);color:var(--green);}
-  .strow .rz{font-size:13px;color:var(--ink2);line-height:1.5;}
-  .strow .rz b{color:var(--ink);font-weight:700;}
+  .wide .d{font-size:12.5px;line-height:1.58;}
+  .wide .ic{width:44px;height:44px;font-size:20px;}
+  .judg .body{font-size:14.5px;padding:22px 25px;line-height:1.72;}
+  .judg .lab{font-size:16px;padding:0 20px;}
+  .subhead{line-height:1.8;}
+  .sectlabel .tt{font-size:18px;}
+  /* 5-stage leverage cycle */
+  .cyc{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:8px;}
+  .cyc .st{background:var(--card);border:1px solid var(--line2);border-radius:12px;padding:14px 12px;position:relative;text-align:center;}
+  .cyc .st .sn{font-family:var(--f-display);font-weight:600;font-size:16px;color:var(--ink3);}
+  .cyc .st .stt{font-size:13px;font-weight:800;color:var(--ink);margin-top:5px;line-height:1.25;}
+  .cyc .st .sd{font-size:10px;color:var(--ink2);margin-top:5px;line-height:1.4;}
+  .cyc .st.now{border-color:var(--green);background:var(--greensoft);box-shadow:0 4px 14px rgba(18,112,92,.14);}
+  .cyc .st.now .sn{color:var(--green);} .cyc .st.now .stt{color:var(--green);}
+  .cyc .st.now .nowtag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:100px;white-space:nowrap;}
+  /* focus-list table */
+  .ftbl{border:1px solid var(--line2);border-radius:14px;overflow:hidden;background:var(--card);box-shadow:0 1px 0 rgba(0,0,0,.02);}
+  .frow{display:grid;grid-template-columns:1.4fr 0.95fr 1.5fr 0.7fr;column-gap:16px;align-items:center;padding:14px 20px;border-bottom:1px solid var(--line2);}
+  .frow:last-child{border-bottom:none;}
+  .frow.hd{background:var(--paper2);padding:11px 20px;}
+  .frow.hd span{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--ink3);}
+  .frow .nm{font-weight:800;font-size:14.5px;color:var(--ink);line-height:1.1;}
+  .frow .nm small{display:block;font-weight:600;color:var(--ink3);font-size:9.5px;font-family:var(--f-body);margin-top:2px;}
+  .frow .sc{font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:100px;background:var(--paper2);color:var(--ink2);justify-self:start;}
+  .fbarrow{display:flex;align-items:center;gap:9px;}
+  .fbtrack{flex:1;height:11px;background:var(--paper2);border-radius:6px;overflow:hidden;}
+  .fbfill{height:100%;border-radius:6px;background:var(--green);}
+  .frow .up{font-family:var(--f-body);font-variant-numeric:tabular-nums;font-weight:800;font-size:14.5px;color:var(--green);text-align:right;}
+  .newtag{display:inline-block;font-size:9px;font-weight:800;color:#fff;background:var(--red);border-radius:4px;padding:1px 5px;margin-left:5px;vertical-align:middle;}
 </style>
 
 <!-- ============================= PAGE 1 : COVER ============================= -->
@@ -290,53 +300,53 @@ svg{display:block;width:100%;height:auto;overflow:visible;}
     <div>
       <div class="cv-eyerow">
         <span class="eyebrow">韩国 · Asia Pacific Insight</span>
-        <span class="cv-tickers">KOSPI <b>5,594</b>&nbsp;·&nbsp;目标 <b>9,000</b></span>
+        <span class="cv-tickers">KOSPI <b>6,595</b>&nbsp;·&nbsp;目标 <b>9,000</b></span>
       </div>
       <div class="rule-gold"></div>
       <h1 class="headline">暴跌 38% 后，<span class="hl">底部已现</span><br>韩股的 <span class="box">MoJo</span> 还在</h1>
-      <p class="subhead">KOSPI 上半年 <b>+101%</b>，随后从高点回调<b>逾 38%</b>——7 月 30 日跌至 5,594。摩根士丹利判断<b>最坏已过</b>：抛售指数创非危机期新低（<b>-2.53</b>）、前瞻 P/E 已<b>低于 5 倍</b>、去杠杆接近尾声。片名"MoJo"——"Mo"是<b>动能</b>、"Jo"是"好企业"——<b>真正的重估从现在开始</b>，但要靠行情"扩散"、不只靠 AI。维持目标 <b>9,000</b>；EM 策略师 Garner 将韩国上调至<b>超配</b>。</p>
+      <p class="subhead">KOSPI 上半年 <b>+101%</b>，随后暴跌<b>逾 38%</b>（7/30 见底 5,594、7/31 反弹至 6,595）——本质是一场<b>杠杆的暴涨暴跌</b>。MS 判断<b>最坏已过</b>：抛售指数创 2008 年以来新低（<b>-2.53</b>）、前瞻 P/E 仅 <b>5.0x</b>（芯片 3.5x）。片名"MoJo"=<b>动能(Mo)+好企业(Jo)</b>。而宏观并未失速——2026 GDP 上修至 <b>mid-3%</b>。维持目标 <b>9,000</b>，Garner 将韩国上调至<b>超配</b>。</p>
     </div>
 
     <div class="judg">
       <div class="lab"><span>核心</span><span>判断</span></div>
-      <div class="body"><div>最坏已过，<b>重估重启</b>。维持 KOSPI 目标（Jun-2027）<span class="big">9,000</span>（较现价 +61%），乐观 10,500、悲观 5,500。策略：<b>杠铃配置</b>——工业 + 科技为核，向银行 / 通信 / 医疗 / 必需消费<b>扩散</b>。</div></div>
+      <div class="body"><div>最坏已过，<b>重估重启</b>，但要靠"<b>扩散</b>"、不只靠 AI。维持 KOSPI 目标（Jun-2027）<span class="big">9,000</span>（较现价 <b>+36.5%</b>），乐观 10,500（+59%）、悲观 5,500（-17%）。策略：<b>杠铃配置</b>，工业 + 科技为核，向银行 / 通信 / 医疗 / 必需消费扩散。</div></div>
     </div>
 
     <div class="cv-metrics">
       <div class="mcard">
         <div class="top">KOSPI 目标 · Jun-2027</div>
         <div class="fig">9,000</div>
-        <div class="cap">较现价 5,594 约 <b>+61%</b>；乐观 10,500 / 悲观 5,500</div>
+        <div class="cap">较现价 6,595 约 <b>+36.5%</b>；乐观 10,500 / 悲观 5,500</div>
       </div>
       <div class="mcard">
         <div class="tag" style="color:var(--red)">估值洗净</div>
-        <div class="top">KOSPI 前瞻 P/E</div>
-        <div class="fig">&lt;5<span class="u">x</span></div>
-        <div class="cap">抛售指数 <b>-2.53</b> 创非危机期新低——底部信号</div>
+        <div class="top">前瞻 P/E</div>
+        <div class="fig">5.0<span class="u">x</span></div>
+        <div class="cap">2004 年以来最低；<b>两大芯片厂仅 ~3.5x</b>；抛售指数 -2.53</div>
       </div>
       <div class="mcard">
-        <div class="tag">已上调</div>
-        <div class="top">EM 策略评级</div>
-        <div class="fig g">超配</div>
-        <div class="cap">策略师 Garner 将韩国<b>上调至 Overweight</b>，高信心重估</div>
+        <div class="tag">宏观未失速</div>
+        <div class="top">2026 实际 GDP</div>
+        <div class="fig g">mid-3<span class="u">%</span></div>
+        <div class="cap">自 2.8% 上修；2Q <b>+3.75%</b>、均衡且内需扩散</div>
       </div>
     </div>
 
     <div class="cv-two">
       <div class="wide">
         <div class="ic navy">杠</div>
-        <div><div class="t">为什么会崩</div><div class="d">过度集中 + 杠杆双刃剑；杠杆 ETF 与对冲基金<b>去杠杆接近尾声</b></div></div>
+        <div><div class="t">崩盘的真相</div><div class="d">5/27 单一股杠杆 ETF 给散户"装喷气引擎"，<b>去杠杆</b>引发暴跌——现已近尾声</div></div>
       </div>
       <div class="wide">
-        <div class="ic gold">散</div>
-        <div><div class="t">下一程靠什么</div><div class="d">不能只靠 AI——<span class="bg">需要行情"扩散"</span>到更多板块</div></div>
+        <div class="ic gold">升</div>
+        <div><div class="t">EM 评级已上调</div><div class="d">策略师 Garner <span class="bg">将韩国上调至超配</span>，高信心重估</div></div>
       </div>
     </div>
 
     <div class="toc">
-      <div class="ti"><div class="tn">02</div><div class="tt2">底部已现，估值洗净</div><div class="td">崩了 38% 后，韩国仍是亚洲今年最强</div></div>
-      <div class="ti"><div class="tn">03</div><div class="tt2">杠铃配置</div><div class="td">工业+科技为核，向防御与价值扩散</div></div>
-      <div class="ti"><div class="tn">04</div><div class="tt2">目标、催化与风险</div><div class="td">9,000 目标、Value-up 与关键变量</div></div>
+      <div class="ti"><div class="tn">02</div><div class="tt2">一场杠杆周期</div><div class="td">暴涨暴跌的真相，与"底部已现"的证据</div></div>
+      <div class="ti"><div class="tn">03</div><div class="tt2">配置：杠铃 + 焦点股</div><div class="td">超配序列与 8 只焦点股（含新增）</div></div>
+      <div class="ti"><div class="tn">04</div><div class="tt2">目标机制、宏观与风险</div><div class="td">9,000 怎么算出来、宏观与五大风险</div></div>
     </div>
   </div>
 
@@ -347,7 +357,7 @@ svg{display:block;width:100%;height:auto;overflow:visible;}
   </div>
 </section>
 
-<!-- ============================= PAGE 2 : THE TROUGH IS IN ============================= -->
+<!-- ============================= PAGE 2 : A LEVERAGE CYCLE ============================= -->
 <section class="page">
   <div class="mast">
     <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
@@ -356,57 +366,49 @@ svg{display:block;width:100%;height:auto;overflow:visible;}
 
   <div class="main">
     <div>
-      <div class="sectlabel"><span class="no">01</span><span class="tt">最坏已过：底部已现，估值洗净</span><span class="en">The Trough Is In</span></div>
+      <div class="sectlabel"><span class="no">01</span><span class="tt">一场杠杆周期：暴涨暴跌的真相</span><span class="en">A Leverage Cycle</span></div>
       <div class="callout">
-        <div class="q">KOSPI 上半年 +101% 的狂欢，靠的是<b>过度集中与杠杆</b>的双刃剑。随后暴跌逾 <b>38%</b>。但摩根士丹利判断：<b>7 月 30 日就是底</b>——去杠杆接近尾声、负面基本已被 price in，前瞻 P/E 已跌破 <b>5 倍</b>。</div>
+        <div class="q">这轮暴涨暴跌，本质是<b>杠杆的双刃剑</b>。5 月 27 日<b>单一股票杠杆 ETF</b> 上市，给散户流动性"装上喷气引擎"——14 只追踪三星/海力士的产品，AUM 从上市时约 <b>5 万亿</b>韩元冲到 <b>17.4 万亿</b>（6/25 峰值）、再跌回 <b>5.4 万亿</b>，几乎回到起点。</div>
       </div>
     </div>
 
     <div class="panel">
-      <div class="panel-t">崩了 38% 之后，<span class="accent">韩国仍是亚洲今年最强</span></div>
-      <div class="panel-sub">亚洲（除日本）主要市场 2026 年 YTD 表现（美元计，截至 7/30）。即便深度回调，韩国仍居首位。</div>
-      <svg viewBox="0 0 680 234" role="img" aria-label="AxJ市场2026YTD表现：韩国+47.5%居首，台湾+39.2%，泰国+19%，新加坡+18.3%，AxJ+12.5%，香港+7.6%，中国-9.1%" style="margin-top:10px;">
-        <line x1="286" y1="14" x2="286" y2="210" stroke="#D9D2C4" stroke-width="1.5"/>
-        <text x="286" y="226" text-anchor="middle" font-size="11.5" font-weight="700" font-family="Inter" fill="#B4B0A6">0</text>
-        <g font-size="13.5" font-weight="700" font-family="'Noto Sans CJK SC',Inter" fill="#17191E" text-anchor="end">
-          <text x="162" y="33">韩国</text><text x="162" y="61">台湾</text><text x="162" y="89">泰国</text><text x="162" y="117">新加坡</text><text x="162" y="145">亚洲(除日)</text><text x="162" y="173">香港</text><text x="162" y="201">中国</text>
-        </g>
-        <!-- scale ~5.2px/% from zero x=286 ; bar height 20 -->
-        <rect x="286" y="20" width="247" height="20" rx="4" fill="#12705C"/><text x="541" y="35" font-size="14.5" font-weight="800" font-family="Inter" fill="#12705C">+47.5%</text>
-        <rect x="286" y="48" width="204" height="20" rx="4" fill="#2E3A5C"/><text x="498" y="63" font-size="14.5" font-weight="800" font-family="Inter" fill="#2E3A5C">+39.2%</text>
-        <rect x="286" y="76" width="99" height="20" rx="4" fill="#2E3A5C"/><text x="393" y="91" font-size="14.5" font-weight="800" font-family="Inter" fill="#2E3A5C">+19.0%</text>
-        <rect x="286" y="104" width="95" height="20" rx="4" fill="#2E3A5C"/><text x="389" y="119" font-size="14.5" font-weight="800" font-family="Inter" fill="#2E3A5C">+18.3%</text>
-        <rect x="286" y="132" width="65" height="20" rx="4" fill="#B4B0A6"/><text x="359" y="147" font-size="14.5" font-weight="800" font-family="Inter" fill="#8A909A">+12.5%</text>
-        <rect x="286" y="160" width="40" height="20" rx="4" fill="#2E3A5C"/><text x="334" y="175" font-size="14.5" font-weight="800" font-family="Inter" fill="#2E3A5C">+7.6%</text>
-        <rect x="239" y="188" width="47" height="20" rx="4" fill="#C0271C"/><text x="231" y="203" text-anchor="end" font-size="14.5" font-weight="800" font-family="Inter" fill="#C0271C">−9.1%</text>
-      </svg>
-      <div class="src">MSCI，美元计，2026 YTD 至 2026/7/30。来源：FactSet、MSCI、Morgan Stanley（Exhibit 2）。</div>
+      <div class="panel-t">杠杆周期的<span class="accent">五个阶段</span>——韩国已走到"投降→修复"</div>
+      <div class="panel-sub">摩根士丹利的杠杆/去杠杆框架。强制去杠杆与抛售投降基本完成，最弱的持有者已离场。</div>
+      <div class="cyc">
+        <div class="st"><div class="sn">1</div><div class="stt">亢奋</div><div class="sd">价涨加杠杆，AUM 快速膨胀</div></div>
+        <div class="st"><div class="sn">2</div><div class="stt">初跌</div><div class="sd">触发风险削减，日内再平衡放大波动</div></div>
+        <div class="st"><div class="sn">3</div><div class="stt">强制去杠杆</div><div class="sd">ETF 机械抛售、追加保证金强平</div></div>
+        <div class="st now"><div class="nowtag">现在</div><div class="sn">4</div><div class="stt">抛售投降</div><div class="sd">最弱持有者离场，流出企稳/反转</div></div>
+        <div class="st"><div class="sn">5</div><div class="stt">修复</div><div class="sd">波动下降，杠杆缓慢重建</div></div>
+      </div>
+      <div class="src">来源：Morgan Stanley Research（Exhibit 7）。抛售指数 -2.53 为 2008 年以来最低（仅逊于 GFC/欧债/新冠的 -3.1）。</div>
     </div>
 
     <div class="split">
-      <div class="panel" style="padding:20px 22px;">
-        <div class="panel-t" style="font-size:15px;">底部信号<span class="accent">·&nbsp;四条</span></div>
-        <div class="panel-sub" style="margin-top:8px;line-height:1.75;">• 抛售指数 <b>-2.53</b>（非危机期最低）<br>• 前瞻 P/E <b>&lt;5x</b>，已回吐 60%+ 年内涨幅<br>• 杠杆 ETF、对冲基金<b>去杠杆近尾声</b><br>• AI 负面（三星/海力士 2Q）基本出清</div>
+      <div class="panel" style="padding:18px 20px;">
+        <div class="panel-t" style="font-size:14.5px;">底部证据<span class="accent">·&nbsp;四条</span></div>
+        <div class="panel-sub" style="margin-top:8px;line-height:1.72;">• 抛售指数 <b>-2.53</b>，2008 年来最低<br>• 前瞻 P/E <b>5.0x</b>（2004 来最低）、芯片 <b>3.5x</b><br>• 已回吐 60%+ 年内涨幅，去杠杆近尾声<br>• 财长召开紧急会议；破 5,000 或触发平准基金</div>
       </div>
-      <div class="panel" style="padding:20px 22px;">
-        <div class="panel-t" style="font-size:15px;">但仍需<span class="accent">警惕</span></div>
-        <div class="panel-sub" style="margin-top:8px;line-height:1.75;">2H26 波动料延续；国内流动性趋紧（散户杠杆受限、养老金小幅回流）。<b>外资流向是 2H 的关键摆动因素</b>——7 月已现回流迹象。</div>
+      <div class="panel" style="padding:18px 20px;">
+        <div class="panel-t" style="font-size:14.5px;">流动性<span class="accent">换挡</span></div>
+        <div class="panel-sub" style="margin-top:8px;line-height:1.72;">2026 年散户净买 <b>+114 万亿</b>韩元，对冲外资 <b>-166 万亿</b>流出。2H 外资成<b>关键摆动因素</b>——<b>7/31 已转净流入</b>；养老金 7 月首度净流入；散户杠杆受限、料放缓。</div>
       </div>
     </div>
 
     <div class="callout green">
-      <div class="q"><b>投资含义</b>&nbsp;"MoJo"还在——<b>Mo=动能、Jo=好企业</b>。估值洗净 + 负面出清为重估打底；但这次要靠"<b>扩散</b>"，不只是反弹。</div>
+      <div class="q"><b>投资含义</b>&nbsp;去杠杆基本完成 → <b>波动收窄</b>。早期或有芯片领衔的超跌反弹，但持续上行要靠"<b>扩散</b>"，不只是反弹。</div>
     </div>
   </div>
 
   <div class="foot">
     <span><b>THE PORT</b> · 全球投行研报精选</span>
-    <span>底部已现 · The Trough Is In</span>
+    <span>一场杠杆周期 · A Leverage Cycle</span>
     <span class="pg">02 / 04</span>
   </div>
 </section>
 
-<!-- ============================= PAGE 3 : THE BARBELL ============================= -->
+<!-- ============================= PAGE 3 : POSITIONING + FOCUS LIST ============================= -->
 <section class="page">
   <div class="mast">
     <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
@@ -415,34 +417,41 @@ svg{display:block;width:100%;height:auto;overflow:visible;}
 
   <div class="main">
     <div>
-      <div class="sectlabel"><span class="no">02</span><span class="tt">杠铃配置：从 AI 扩散到更多板块</span><span class="en">The Barbell</span></div>
-      <div class="panel-sub" style="margin-bottom:14px;">摩根士丹利维持<b>杠铃策略</b>：一头是"核心"（工业 + 科技），一头向"防御与价值"扩散。科技仍占市场约 <b>60–65%</b>，但 2H26 的健康上行需要更广参与。超配序列如下（新增必需消费）。</div>
+      <div class="sectlabel"><span class="no">02</span><span class="tt">配置：杠铃 + 8 只焦点股</span><span class="en">Positioning &amp; Focus List</span></div>
+      <div class="callout" style="padding:18px 24px;">
+        <div class="q" style="font-size:15.5px;"><b>杠铃策略</b>：超配 <b>工业① · 科技② · 银行③ · 通信④ · 医疗⑤ · 必需消费⑥</b>（新增）。回调验证了它——防御类<b>更少受伤</b>（必需 -8%、银行 -13%），而超跌成长股（IT硬件 -55%、半导体 -47%）或先反弹。</div>
+      </div>
     </div>
 
-    <div class="stbl">
-      <div class="strow hd"><span>排名</span><span>板块</span><span>定位</span><span>一句话逻辑</span></div>
-      <div class="strow"><div class="rk" style="background:var(--navy)">1</div><div class="sec">工业<small>Industrials</small></div><div><span class="pos core">核心</span></div><div class="rz">结构成长 + 周期修复，杠铃的一端</div></div>
-      <div class="strow"><div class="rk" style="background:var(--navy)">2</div><div class="sec">科技<small>Tech</small></div><div><span class="pos core">核心</span></div><div class="rz">仍是主力，但 AI 消息面<b>来回震荡</b></div></div>
-      <div class="strow"><div class="rk" style="background:var(--gold)">3</div><div class="sec">银行<small>Banks</small></div><div><span class="pos spread">扩散</span></div><div class="rz"><b>Value-up</b> 受益、股东回报提升</div></div>
-      <div class="strow"><div class="rk" style="background:var(--gold)">4</div><div class="sec">通信服务<small>Comm. Svc.</small></div><div><span class="pos spread">扩散</span></div><div class="rz">防御 + 稳定现金流</div></div>
-      <div class="strow"><div class="rk" style="background:var(--gold)">5</div><div class="sec">医疗保健<small>Healthcare</small></div><div><span class="pos spread">扩散</span></div><div class="rz">结构成长、兼具防御性</div></div>
-      <div class="strow"><div class="rk" style="background:var(--green)">6</div><div class="sec">必需消费<small>Staples</small></div><div><span class="pos new">新增</span></div><div class="rz">相对落后、盈利改善的<b>补涨</b>候选</div></div>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:var(--ink2);margin:2px 2px 10px;">焦点股（Focus List）· 本期<b style="color:var(--red)">剔除起亚、新增 SK Innovation</b>&nbsp;<span style="color:var(--ink3);font-weight:600;">柱为至目标价上行空间</span></div>
+      <div class="ftbl">
+        <div class="frow hd"><span>标的</span><span>板块</span><span>上行空间</span><span style="text-align:right">空间</span></div>
+        <div class="frow"><div class="nm">HD 现代电气<small>267260.KS</small></div><span class="sc">工业</span><div class="fbarrow"><div class="fbtrack"><div class="fbfill" style="width:100%"></div></div></div><div class="up">+119%</div></div>
+        <div class="frow"><div class="nm">SK Square<small>402340.KS</small></div><span class="sc">工业</span><div class="fbarrow"><div class="fbtrack"><div class="fbfill" style="width:70%"></div></div></div><div class="up">+83%</div></div>
+        <div class="frow"><div class="nm">韩华航空航天<small>012450.KS</small></div><span class="sc">工业</span><div class="fbarrow"><div class="fbtrack"><div class="fbfill" style="width:45%"></div></div></div><div class="up">+53%</div></div>
+        <div class="frow"><div class="nm">三星电子<small>005930.KS</small></div><span class="sc">科技</span><div class="fbarrow"><div class="fbtrack"><div class="fbfill" style="width:38%"></div></div></div><div class="up">+45%</div></div>
+        <div class="frow"><div class="nm">爱茉莉太平洋<small>090430.KS</small></div><span class="sc">必需消费</span><div class="fbarrow"><div class="fbtrack"><div class="fbfill" style="width:38%"></div></div></div><div class="up">+45%</div></div>
+        <div class="frow"><div class="nm">三星 E&amp;A<small>028050.KS</small></div><span class="sc">工业</span><div class="fbarrow"><div class="fbtrack"><div class="fbfill" style="width:37%"></div></div></div><div class="up">+44%</div></div>
+        <div class="frow"><div class="nm">SK Innovation<small>096770.KS</small><span class="newtag">新增</span></div><span class="sc">能源</span><div class="fbarrow"><div class="fbtrack"><div class="fbfill" style="width:30%"></div></div></div><div class="up">+36%</div></div>
+        <div class="frow"><div class="nm">新韩金融<small>055550.KS</small></div><span class="sc">银行</span><div class="fbarrow"><div class="fbtrack"><div class="fbfill" style="width:16%"></div></div></div><div class="up">+19%</div></div>
+      </div>
+      <div class="src" style="margin-top:8px;">上行空间 = MS 目标价 / 现价 - 1；现价截至 2026/7/31。工业为超配主力，焦点股横跨杠铃两端。来源：Morgan Stanley（Exhibit 30）。</div>
     </div>
-    <div class="src" style="margin-top:8px;">超配排序，"新增"为本期加入。回调中，防御类（银行、必需、化妆品、医疗、电信）"更少受伤"。来源：Morgan Stanley Research。</div>
 
-    <div class="callout navy" style="margin-top:16px;">
-      <div class="q"><b style="color:var(--navy)">Value-up 是中期催化。</b>&nbsp;三星电子与 SK 海力士将<b style="color:var(--navy)">披露 Value-up 计划</b>；《商法》3.0（强制注销库存股）等改革，正把资金引向"好企业"（Jo）。</div>
+    <div class="callout navy">
+      <div class="q"><b style="color:var(--navy)">Value-up 是中期催化。</b>&nbsp;<b style="color:var(--navy)">三星电子已披露首份 Value-up 计划</b>；《商法》3.0 要求<b style="color:var(--navy)">强制注销库存股</b>，9/10 起累积投票、审计委员会等新规生效——资金正流向"好企业"（Jo）。</div>
     </div>
   </div>
 
   <div class="foot">
     <span><b>THE PORT</b> · 全球投行研报精选</span>
-    <span>杠铃配置 · The Barbell</span>
+    <span>配置 · Positioning &amp; Focus List</span>
     <span class="pg">03 / 04</span>
   </div>
 </section>
 
-<!-- ============================= PAGE 4 : TARGETS / RISK / QR ============================= -->
+<!-- ============================= PAGE 4 : TARGETS / MACRO / RISK ============================= -->
 <section class="page">
   <div class="mast">
     <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
@@ -451,50 +460,50 @@ svg{display:block;width:100%;height:auto;overflow:visible;}
 
   <div class="main">
     <div>
-      <div class="sectlabel"><span class="no">03</span><span class="tt">目标、催化与风险</span><span class="en">Targets &amp; What Matters</span></div>
+      <div class="sectlabel"><span class="no">03</span><span class="tt">目标机制、宏观与风险</span><span class="en">Targets &amp; What Matters</span></div>
       <div class="callout navy">
-        <div class="q">维持 KOSPI 目标（Jun-2027）<b style="color:var(--navy)">9,000</b>（较现价 <b style="color:var(--navy)">+61%</b>）；乐观 10,500、悲观降至 5,500；目标 P/E 降至 <b style="color:var(--navy)">6.3×</b>（原 8.3×）。3–6 个月交易区间 <b style="color:var(--navy)">5,500~9,000</b>。</div>
+        <div class="q"><b style="color:var(--navy)">9,000 是怎么算出来的？</b>&nbsp;12 个月前瞻 EPS 增速 78%（原 100%）× 目标 P/E <b style="color:var(--navy)">6.3×</b>（原 8.3×，因估值已洗到 5.0x）。若<b style="color:var(--navy)">三星 + 海力士</b>都到 MS 目标价，KOSPI 约 8,400；触及乐观值则约 9,100。</div>
       </div>
     </div>
 
     <div>
       <div class="fcast">
-        <div class="fc"><div class="fk">基准目标</div><div class="fv">9,000</div><div class="fs">+61%</div></div>
-        <div class="fc"><div class="fk">乐观 (V 型)</div><div class="fv">10,500</div><div class="fs">+88%</div></div>
-        <div class="fc"><div class="fk">悲观</div><div class="fv">5,500</div><div class="fs">自 6,000 下调</div></div>
-        <div class="fc"><div class="fk">目标 P/E</div><div class="fv">6.3<span class="u">×</span></div><div class="fs">原 8.3×</div></div>
-        <div class="fc"><div class="fk">现前瞻 P/E</div><div class="fv">&lt;5<span class="u">×</span></div><div class="fs">估值洗净</div></div>
+        <div class="fc"><div class="fk">基准</div><div class="fv">9,000</div><div class="fs">+36.5%</div></div>
+        <div class="fc"><div class="fk">乐观 (V 型)</div><div class="fv">10,500</div><div class="fs">+59.2%</div></div>
+        <div class="fc"><div class="fk">悲观</div><div class="fv">5,500</div><div class="fs">-16.6%</div></div>
+        <div class="fc"><div class="fk">BoK 终端利率</div><div class="fv">3.5<span class="u">%</span></div><div class="fs">2Q27（渐进加息）</div></div>
+        <div class="fc"><div class="fk">USD/KRW · 2H</div><div class="fv">1,420<span class="u"></span></div><div class="fs">~1,420–1,430</div></div>
       </div>
 
-      <div class="watch" style="margin-top:15px;">
+      <div class="watch" style="margin-top:14px;">
         <div class="wbox up">
-          <div class="wh">▲&nbsp;关键催化</div>
+          <div class="wh">▲&nbsp;强化逻辑</div>
           <ul>
-            <li>AI capex + <b>ROIC 兑现</b>、芯片厂资本管理（回购/分红）</li>
-            <li>三星/海力士 Value-up 计划、《商法》3.0 改革</li>
-            <li>外资回流（2H26 关键摆动因素）</li>
-            <li>金融条件转松</li>
+            <li>宏观未失速：GDP 上修至 mid-3%、消费+旅游（<b>目标 2,300 万入境</b>）</li>
+            <li>AI capex 强、超大厂 <b>ROIC 25–50%</b>；芯片厂资本管理（回购/分红）</li>
+            <li>外资回流（<b>2H 关键摆动因素</b>）、养老金转正</li>
+            <li>Value-up 计划落地、《商法》3.0 改革</li>
           </ul>
         </div>
         <div class="wbox dn">
-          <div class="wh">▼&nbsp;关键风险</div>
+          <div class="wh">▼&nbsp;五大风险</div>
           <ul>
-            <li>AI 消息面反复、capex 担忧再起</li>
-            <li>美联储路径不明</li>
-            <li>中东局势 / 油价波动</li>
-            <li>政策失误、改革停滞；国内流动性趋紧</li>
+            <li>AI capex 周期与需求中断（PC/手机<b>吃不下</b>内存涨价）</li>
+            <li>中东局势 / 油价（<b>破 5,000 需油价 $140+</b>）</li>
+            <li><b>美联储路径比 BoK 更关键</b>（韩美联动）</li>
+            <li>改革无法落地；内需与首尔房市走弱</li>
           </ul>
         </div>
       </div>
 
-      <div class="track-chips" style="margin-top:15px;">
+      <div class="track-chips" style="margin-top:14px;">
         <span class="tl">重点跟踪</span>
-        <span class="tchip">三星 / 海力士 Value-up</span>
+        <span class="tchip">三星 / 海力士 Value-up · HBM4</span>
         <span class="tchip">外资流向</span>
         <span class="tchip">AI capex / ROIC</span>
         <span class="tchip">美联储</span>
         <span class="tchip">中东 / 油价</span>
-        <span class="tchip">《商法》3.0</span>
+        <span class="tchip">《商法》3.0（9/10）</span>
       </div>
     </div>
 
@@ -510,13 +519,13 @@ svg{display:block;width:100%;height:auto;overflow:visible;}
           </div>
         </div>
       </div>
-      <div class="disc">本文基于 Morgan Stanley 于 2026-08-02 发布的《South Korea: Korea Still Has MoJo》（分析师 Joon Seok、Kathleen Oh 等）整理，数字、评级与目标均以原报告为准；KOSPI 目标为 Jun-2027 情景目标，现价截至 2026/7/30。本可视化由 THE PORT 编辑制作，仅供参考、不构成投资建议；投资有风险，决策须谨慎。</div>
+      <div class="disc">本文基于 Morgan Stanley 于 2026-08-02 发布的《South Korea: Korea Still Has MoJo》（分析师 Joon Seok、Kathleen Oh 等）整理，数字、评级、目标与预测均以原报告为准；KOSPI 目标为 Jun-2027 情景目标，现价与上行空间截至 2026/7/31。本可视化由 THE PORT 编辑制作，仅供参考、不构成投资建议；投资有风险，决策须谨慎。</div>
     </div>
   </div>
 
   <div class="foot">
     <span><b>THE PORT</b> · 全球投行研报精选</span>
-    <span>目标 · 催化 · 风险 · What Matters</span>
+    <span>目标 · 宏观 · 风险 · What Matters</span>
     <span class="pg">04 / 04</span>
   </div>
 </section>

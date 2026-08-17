@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>老内存涨价潮·大摩全线超配 — THE PORT</title>
+<title>老内存涨价潮·三页精华 — THE PORT</title>
 <style>
 @font-face{font-family:'Inter';src:url('fonts/Inter-var.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:block;}
 @font-face{font-family:'Fraunces';src:url('fonts/Fraunces-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:block;}
@@ -228,57 +228,94 @@ svg{display:block;width:100%;height:auto;overflow:visible;}
 </head>
 <body>
 <style>
-  /* ===== single-page tuning (compact to fit one A4) ===== */
-  .headline{font-size:36px;line-height:1.1;}
-  .callout{padding:11px 18px;}
-  .callout .q{font-size:13.6px;line-height:1.56;}
-  .sectlabel{margin-bottom:0;}
-  .sectlabel .tt{font-size:17px;}
-  .subhead{line-height:1.6;font-size:13.3px;margin-top:12px;}
+  /* ===== enlarged components (big/full treatment) ===== */
+  .callout{padding:20px 24px;}
+  .callout .q{font-size:17px;line-height:1.66;}
+  .callout.navy .q,.callout.green .q{font-size:16px;line-height:1.68;}
+  .panel{padding:20px 23px;}
+  .panel-t{font-size:17px;}
+  .panel-sub{font-size:13px;line-height:1.66;}
+  .mcard{padding:20px 18px 18px;}
+  .mcard .top{font-size:11.5px;}
+  .mcard .fig{font-size:41px;margin:12px 0 7px;}
+  .mcard .fig .u{font-size:17px;}
+  .mcard .cap{font-size:12.5px;line-height:1.56;}
+  .mcard .tag{font-size:10.5px;}
+  .wide{padding:17px 18px;}
+  .wide .t{font-size:14px;margin-bottom:4px;}
+  .wide .d{font-size:12.5px;line-height:1.56;}
+  .wide .ic{width:42px;height:42px;font-size:21px;}
+  .judg .body{font-size:14px;padding:18px 20px;line-height:1.68;}
+  .judg .lab{font-size:17px;padding:0 18px;}
+  .subhead{line-height:1.76;}
+  .sectlabel .tt{font-size:19px;}
+  .bars{gap:13px;}
+  .bar{grid-template-columns:118px 1fr 62px;}
+  .bar .track{height:20px;}
+  .bar .val{font-size:14.5px;}
+  .bar .nm{font-size:12.5px;} .bar .nm b{font-size:13.5px;}
+  .vecs{gap:11px;}
+  .vec{padding:14px 16px;}
+  .vec .vi{font-size:13px;padding:6px 9px;min-width:44px;}
+  .vec .vt{font-size:13.5px;}
+  .vec .vd{font-size:12px;line-height:1.55;margin-top:4px;}
+  .qrtxt .qh{font-size:18px;} .qrtxt .qs{font-size:12.5px;}
+  .qrinner{padding:13px 16px;gap:16px;}
+  .qrbox img{width:32mm;height:32mm;}
+  .mcard .top{padding-right:60px;}
 
   /* ===== pricing trio ===== */
-  .ptrio{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-top:9px;}
-  .pcard{background:var(--card);border:1px solid var(--line2);border-top-width:5px;border-radius:11px;padding:12px 15px;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+  .ptrio{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-top:13px;}
+  .pcard{background:var(--card);border:1px solid var(--line2);border-top-width:5px;border-radius:12px;padding:17px 18px;box-shadow:0 1px 0 rgba(0,0,0,.02);}
   .pcard.d{border-top-color:var(--navy2);}
   .pcard.n{border-top-color:var(--red);}
   .pcard.r{border-top-color:var(--gold);}
-  .pcard .pn{font-weight:800;font-size:15px;color:var(--ink);letter-spacing:.01em;}
-  .pcard .ph{font-family:var(--f-display);font-weight:600;font-size:23px;color:var(--ink);line-height:1;margin:7px 0 3px;}
+  .pcard .pn{font-weight:800;font-size:16.5px;color:var(--ink);letter-spacing:.01em;}
+  .pcard .ph{font-family:var(--f-display);font-weight:600;font-size:29px;color:var(--ink);line-height:1;margin:9px 0 4px;}
   .pcard.n .ph{color:var(--red);}
-  .pcard .ph .u{font-size:12.5px;color:var(--ink2);font-weight:600;}
-  .pcard .pd{font-size:11px;color:var(--ink2);line-height:1.42;}
+  .pcard .ph .u{font-size:14px;color:var(--ink2);font-weight:600;}
+  .pcard .pd{font-size:12px;color:var(--ink2);line-height:1.5;}
   .pcard .pd b{color:var(--ink);font-weight:700;}
-  .pcard .ptag{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.04em;padding:2px 7px;border-radius:100px;margin-top:6px;}
+  .pcard .ptag{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.04em;padding:2px 8px;border-radius:100px;margin-top:8px;}
   .pcard.n .ptag{background:var(--redsoft);color:var(--redink);}
 
   /* ===== stock scorecard ===== */
-  .stbl{border:1px solid var(--line2);border-radius:13px;overflow:hidden;background:var(--card);margin-top:9px;box-shadow:0 1px 0 rgba(0,0,0,.02);}
-  .strow{display:grid;grid-template-columns:1.7fr 88px 1fr 1.1fr;align-items:center;padding:9px 20px;border-bottom:1px solid var(--line2);column-gap:12px;}
+  .stbl{border:1px solid var(--line2);border-radius:14px;overflow:hidden;background:var(--card);margin-top:12px;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+  .strow{display:grid;grid-template-columns:1.7fr 76px 0.95fr 0.85fr 1fr;align-items:center;padding:13px 20px;border-bottom:1px solid var(--line2);column-gap:12px;}
   .strow:last-child{border-bottom:none;}
-  .strow.hd{background:var(--paper2);padding:8px 20px;}
+  .strow.hd{background:var(--paper2);padding:9px 20px;}
   .strow.hd span{font-size:10px;font-weight:700;letter-spacing:.04em;color:var(--ink3);}
   .strow.hd span.c{text-align:center;} .strow.hd span.r{text-align:right;}
   .strow.top{background:linear-gradient(90deg,var(--goldsoft),rgba(240,232,214,0));}
-  .strow .nm{font-weight:800;font-size:14.5px;color:var(--ink);line-height:1.08;}
+  .strow .nm{font-weight:800;font-size:15px;color:var(--ink);line-height:1.1;}
   .strow .nm small{display:block;font-size:9px;color:var(--ink3);font-weight:600;font-family:var(--f-body);margin-top:2px;letter-spacing:.02em;}
   .strow .nm .star{color:var(--gold);font-size:11.5px;font-weight:800;margin-left:5px;}
-  .stbadge{justify-self:center;font-size:11px;font-weight:800;padding:4px 0;width:54px;text-align:center;border-radius:100px;background:var(--greensoft);color:var(--green);}
-  .strow .up{text-align:center;font-family:var(--f-body);font-variant-numeric:tabular-nums;font-size:16.5px;font-weight:800;color:var(--green);line-height:1.05;}
-  .strow .up small{display:block;font-size:8.5px;color:var(--ink3);font-weight:600;margin-top:2px;}
-  .strow .up.na{color:var(--gold);font-family:var(--f-head);font-size:13.5px;}
+  .stbadge{justify-self:center;font-size:11px;font-weight:800;padding:4px 0;width:52px;text-align:center;border-radius:100px;background:var(--greensoft);color:var(--green);}
+  .strow .px{text-align:center;font-family:var(--f-body);font-variant-numeric:tabular-nums;font-size:12.5px;font-weight:600;color:var(--ink2);line-height:1.2;}
+  .strow .px b{display:block;font-size:13.5px;color:var(--ink);font-weight:800;}
+  .strow .up{text-align:center;font-family:var(--f-body);font-variant-numeric:tabular-nums;font-size:17px;font-weight:800;color:var(--green);}
+  .strow .up.na{color:var(--gold);font-family:var(--f-head);font-size:14px;}
   .strow .eps{text-align:right;}
-  .strow .eps b{font-family:var(--f-body);font-variant-numeric:tabular-nums;font-size:15px;font-weight:800;color:var(--red);}
+  .strow .eps b{font-family:var(--f-body);font-variant-numeric:tabular-nums;font-size:16px;font-weight:800;color:var(--red);}
   .strow .eps small{display:block;font-size:8.5px;color:var(--ink3);font-weight:600;margin-top:2px;}
 
-  /* ===== compact QR ===== */
-  .qrinner{padding:9px 15px;gap:13px;}
-  .qrbox img{width:23mm;height:23mm;}
-  .qrtxt .qh{font-size:14.5px;margin-top:5px;}
-  .qrtxt .qs{font-size:10.8px;line-height:1.45;margin-top:4px;}
-  .qrtxt .qcta{margin-top:5px;font-size:10.5px;}
-  .disc{font-size:9px;line-height:1.42;margin-top:7px;}
+  /* ===== scenario range (bull/base/bear) ===== */
+  .rrange{display:flex;flex-direction:column;gap:11px;margin-top:11px;}
+  .rr{display:grid;grid-template-columns:112px 1fr;align-items:center;gap:14px;}
+  .rr .rnm{font-size:13px;font-weight:800;color:var(--ink);text-align:right;line-height:1.12;}
+  .rr .rnm small{display:block;font-size:9px;color:var(--ink3);font-weight:600;font-family:var(--f-body);margin-top:1px;}
+  .rtk{position:relative;height:26px;}
+  .rzero{position:absolute;top:-4px;bottom:-4px;width:1.5px;background:var(--ink3);z-index:3;}
+  .rbar{position:absolute;top:8px;height:10px;border-radius:5px;background:linear-gradient(90deg,#E7B7B0,#8FC7B8);z-index:1;}
+  .rbase{position:absolute;top:2px;width:3px;height:22px;background:var(--navy);border-radius:2px;z-index:4;}
+  .rlab{position:absolute;top:-3px;font-size:10px;font-weight:800;transform:translateX(-50%);z-index:5;white-space:nowrap;}
+  .rlab.bl{color:var(--green);} .rlab.br{color:var(--red);} .rlab.bs{color:var(--navy);}
+  .rrscale{display:flex;justify-content:space-between;font-size:9.5px;font-weight:700;color:var(--ink3);padding:2px 0 0 126px;}
+
+  .disc{font-size:10px;line-height:1.5;margin-top:11px;}
 </style>
 
+<!-- ============================= PAGE 1 : COVER ============================= -->
 <section class="page">
   <div class="mast">
     <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
@@ -294,44 +331,169 @@ svg{display:block;width:100%;height:auto;overflow:visible;}
       <div class="rule-gold"></div>
       <h1 class="headline">「老内存」涨价潮未完<br>大摩全线 <span class="box">超配</span></h1>
       <p class="subhead">DDR4、SLC NAND、NOR flash 与主流内存<b>持续分化</b>，强劲涨价延续至 <b>4Q26</b>、甚至 <b>1Q27</b>。大摩：<b>"没有长约（LTA）反而不是坏事"</b>——主流大厂退出、供给收紧，现货价更强。全线上调 Macronix、Winbond、GigaDevice、PSMC 盈利预测；<b>首选 AP Memory</b>（SiCap 业务）。</p>
-      <div class="callout" style="margin-top:10px;">
-        <div class="q"><b>为什么"没有长约"反而好？</b>&nbsp;主流大厂正<b>退出 DDR4 / 传统制程</b>、供给持续收紧；<b>没有固定价长约</b>反让现货价充分反映涨价——周期或<b>比市场预期更长</b>（延续到 2027）。</div>
+    </div>
+
+    <div class="judg">
+      <div class="lab"><span>核心</span><span>判断</span></div>
+      <div class="body"><div>一个"<b>供给收紧 + 涨价延续</b>"的结构性上行周期——周期或<span class="big">比预期更长</span>（延续到 2027）。老内存与主流内存分化，<b>全线超配</b>，首选 <b>AP Memory</b>（SiCap）。</div></div>
+    </div>
+
+    <div class="cv-metrics">
+      <div class="mcard">
+        <div class="tag" style="color:var(--red)">最高信念</div>
+        <div class="top">SLC NAND</div>
+        <div class="fig">+50<span class="u">%+</span></div>
+        <div class="cap"><b>3Q & 4Q 连涨</b>；晶圆不愿分给传统品，<b>延续至 2027</b>、MLC→SLC 续撑</div>
+      </div>
+      <div class="mcard">
+        <div class="tag" style="color:var(--gold)">盈利大上调</div>
+        <div class="top">Macronix</div>
+        <div class="fig g">+139<span class="u">%</span></div>
+        <div class="cap"><b>26e EPS</b> 涨价兑现；27/28e 再 <b>+144% / +147%</b></div>
+      </div>
+      <div class="mcard">
+        <div class="tag" style="color:var(--green)">行业观点</div>
+        <div class="top">大中华存储</div>
+        <div class="fig" style="font-size:34px">Attractive</div>
+        <div class="cap"><b>全线超配</b>；首选 <b>AP Memory</b>（SiCap），Macronix/Winbond/GigaDevice/PSMC 齐上调</div>
+      </div>
+    </div>
+
+    <div class="cv-two">
+      <div class="wide">
+        <div class="ic navy">约</div>
+        <div><div class="t">"没有长约"反而是好事</div><div class="d">主流大厂<b>退出 DDR4 / 传统制程</b>、供给收紧；无固定价长约<span class="bg">让现货价充分反映涨价</span></div></div>
+      </div>
+      <div class="wide">
+        <div class="ic gold">调</div>
+        <div><div class="t">GigaDevice 目标价下调 ≠ 看空</div><div class="d">因 CXMT 上市后估值回落（¥888→<b>750</b>），但<span class="bg">盈利大幅上修、维持超配</span></div></div>
+      </div>
+    </div>
+
+    <div class="toc">
+      <div class="ti"><div class="tn">02</div><div class="tt2">分化与涨价逻辑</div><div class="td">涨价三重奏、为什么没长约反而好、ASP 涨幅</div></div>
+      <div class="ti"><div class="tn">03</div><div class="tt2">受益股与配置</div><div class="td">评级 · 目标价 · 情景空间 · 风险</div></div>
+      <div class="ti"><div class="tn">★</div><div class="tt2">首选 AP Memory</div><div class="td">SiCap 业务；行业观点 Attractive</div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>数据以 Morgan Stanley 原报告为准 · 仅供参考，不构成投资建议</span>
+    <span class="pg">01 / 03</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 2 : DIVERGENCE & PRICING ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>大中华半导体 · 存储</b><br>Morgan Stanley · 2026.08.16</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">01</span><span class="tt">分化与涨价逻辑</span><span class="en">Old Memory Diverges</span></div>
+      <div class="callout">
+        <div class="q">老内存与主流内存<b>持续分化</b>：主流大厂把产能转向 HBM/先进制程，<b>退出传统产品</b>，让 DDR4、SLC NAND、NOR flash 的供给持续收紧、涨价延续至 <b>4Q26</b>、甚至 <b>1Q27</b>。</div>
       </div>
     </div>
 
     <div>
-      <div class="sectlabel"><span class="no">◆</span><span class="tt">涨价三重奏</span><span class="en">Pricing Surge</span></div>
+      <div style="font-size:13px;font-weight:700;color:var(--ink2);margin:2px 2px 0;">涨价三重奏<span style="color:var(--ink3);font-weight:600;">&nbsp;· Pricing Surge</span></div>
       <div class="ptrio">
         <div class="pcard d">
           <div class="pn">DDR4</div>
           <div class="ph">+50<span class="u">% · 3Q</span></div>
-          <div class="pd"><b>4Q 再涨双位数</b>；需求从服务器扩散到消费电子</div>
+          <div class="pd"><b>4Q 再涨双位数</b>；需求从服务器<b>扩散到消费电子</b>，比主流内存更强</div>
         </div>
         <div class="pcard n">
           <div class="pn">SLC NAND</div>
           <div class="ph">+50<span class="u">%+ · 3Q&4Q</span></div>
-          <div class="pd">产能受限、晶圆不愿分给传统品；延续至 <b>2027</b></div>
+          <div class="pd">产能受限、晶圆不愿分给传统品；<b>延续至 2027</b>，MLC→SLC 迁移续撑</div>
           <div class="ptag">最高信念</div>
         </div>
         <div class="pcard r">
           <div class="pn">NOR flash</div>
           <div class="ph">+30–40<span class="u">% · 3Q</span></div>
-          <div class="pd"><b>4Q 再涨</b>；工业 / 汽车 / 网络 / 边缘 AI 需求支撑</div>
+          <div class="pd"><b>4Q 再涨</b>、动能延至 1H27；工业 / 汽车 / 网络 / 边缘 AI 需求支撑</div>
         </div>
       </div>
     </div>
 
-    <div>
-      <div class="sectlabel"><span class="no">◆</span><span class="tt">受益股记分牌</span><span class="en">Overweight Across</span></div>
-      <div class="stbl">
-        <div class="strow hd"><span>标的</span><span class="c">评级</span><span class="c">目标价上行</span><span class="r">26e EPS 上调</span></div>
-        <div class="strow top"><div class="nm">AP Memory<span class="star">★ 首选</span><small>6531.TW</small></div><div class="stbadge">超配</div><div class="up na">SiCap</div><div class="eps"><b>—</b><small>SiCap 业务驱动</small></div></div>
-        <div class="strow"><div class="nm">Macronix 旺宏<small>2337.TW</small></div><div class="stbadge">超配</div><div class="up">+61%<small>PT NT$220</small></div><div class="eps"><b>+139%</b><small>27/28e +144/147%</small></div></div>
-        <div class="strow"><div class="nm">GigaDevice 兆易创新<small>603986.SS</small></div><div class="stbadge">超配</div><div class="up">+80%<small>PT ¥750</small></div><div class="eps"><b>+108%</b><small>PT 下调但仍超配</small></div></div>
-        <div class="strow"><div class="nm">Winbond 华邦<small>2344.TW</small></div><div class="stbadge">超配</div><div class="up">+57%<small>PT NT$288</small></div><div class="eps"><b>+17%</b><small>27/28e +30/34%</small></div></div>
-        <div class="strow"><div class="nm">PSMC 力积电<small>6770.TW</small></div><div class="stbadge">超配</div><div class="up">+42%<small>PT NT$111</small></div><div class="eps"><b>+18%</b><small>27/28e +17/13%</small></div></div>
+    <div class="split">
+      <div class="panel">
+        <div class="panel-t">为什么<span class="accent">"没有长约"</span>反而好？</div>
+        <div class="panel-sub">投资者担心缺少长约(LTA)=周期不稳；但大摩的逻辑正相反——</div>
+        <div class="vecs" style="margin-top:11px;">
+          <div class="vec"><div class="vi">1</div><div><div class="vt">主流厂退出，供给收紧</div><div class="vd">三星 / 美光 / 海力士转向 HBM，<b>退出 DDR4 / 传统制程</b></div></div></div>
+          <div class="vec"><div class="vi">2</div><div><div class="vt">无固定价长约 = 现货更充分</div><div class="vd">价格随行就市，<b>涨价传导更彻底</b></div></div></div>
+          <div class="vec"><div class="vi">3</div><div><div class="vt">周期比预期更长</div><div class="vd">供给紧张<b>延续到 2027</b>；MLC→SLC 迁移撑 1H27</div></div></div>
+        </div>
       </div>
-      <div class="src" style="margin-top:6px;">评级均为超配（Overweight）；上行空间为目标价较 8/14 现价。来源：Morgan Stanley。</div>
+
+      <div class="panel">
+        <div class="panel-t">涨价有多猛？<span class="accent">2026e ASP 涨幅</span></div>
+        <div class="panel-sub">价格弹性直接兑现为盈利——ASP 涨幅动辄三位数。</div>
+        <div class="bars" style="margin-top:14px;">
+          <div class="bar hl"><div class="nm">Winbond <b>DRAM</b></div><div class="track"><div class="fill" style="width:94.7%"></div></div><div class="val">+284%</div></div>
+          <div class="bar"><div class="nm">GigaDevice <b>NOR</b></div><div class="track"><div class="fill" style="width:72.3%"></div></div><div class="val">+217%</div></div>
+          <div class="bar"><div class="nm">Macronix <b>传统NAND</b></div><div class="track"><div class="fill" style="width:66.7%"></div></div><div class="val">&gt;200%</div></div>
+          <div class="bar"><div class="nm">Winbond <b>NOR</b></div><div class="track"><div class="fill" style="width:51%"></div></div><div class="val">+153%</div></div>
+        </div>
+        <div class="src">2026e ASP / 价格同比涨幅（部分产品）。来源：Morgan Stanley 各公司 Risk Reward。</div>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <div class="q"><b>关键含义</b>&nbsp;这不是短暂反弹，而是<b>供给端结构性收紧</b>驱动的上行周期——大摩认为<b>比市场预期更长</b>，涨价动能延续到 2027 年。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>分化与涨价逻辑 · Old Memory Diverges</span>
+    <span class="pg">02 / 03</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 3 : STOCKS & POSITIONING ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>大中华半导体 · 存储</b><br>Morgan Stanley · 2026.08.16</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">02</span><span class="tt">受益股与配置</span><span class="en">Overweight Across</span></div>
+      <div class="callout">
+        <div class="q"><b>全线超配</b>，盈利预测大幅上修。<b>首选 AP Memory</b>（SiCap 业务）；Macronix / GigaDevice 上行空间与 EPS 上调幅度最大，但波动亦大、风险回报偏向熊市情形。</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="stbl">
+        <div class="strow hd"><span>标的</span><span class="c">评级</span><span class="c">现价 → 目标价</span><span class="c">上行</span><span class="r">26e EPS 上调</span></div>
+        <div class="strow top"><div class="nm">AP Memory<span class="star">★ 首选</span><small>6531.TW</small></div><div class="stbadge">超配</div><div class="px">NT$932<b>SiCap 驱动</b></div><div class="up na">首选</div><div class="eps"><b>—</b><small>SiCap 业务</small></div></div>
+        <div class="strow"><div class="nm">Macronix 旺宏<small>2337.TW</small></div><div class="stbadge">超配</div><div class="px">137<b>→ NT$220</b></div><div class="up">+61%</div><div class="eps"><b>+139%</b><small>27/28e +144/147%</small></div></div>
+        <div class="strow"><div class="nm">GigaDevice 兆易创新<small>603986.SS</small></div><div class="stbadge">超配</div><div class="px">417<b>→ ¥750</b></div><div class="up">+80%</div><div class="eps"><b>+108%</b><small>PT 下调但仍超配</small></div></div>
+        <div class="strow"><div class="nm">Winbond 华邦<small>2344.TW</small></div><div class="stbadge">超配</div><div class="px">183.5<b>→ NT$288</b></div><div class="up">+57%</div><div class="eps"><b>+17%</b><small>27/28e +30/34%</small></div></div>
+        <div class="strow"><div class="nm">PSMC 力积电<small>6770.TW</small></div><div class="stbadge">超配</div><div class="px">78.4<b>→ NT$111</b></div><div class="up">+42%</div><div class="eps"><b>+18%</b><small>27/28e +17/13%</small></div></div>
+      </div>
+      <div class="src" style="margin-top:6px;">评级均为超配；现价截至 8/14，目标价为 12 个月基准情景。GigaDevice 目标价因 CXMT 上市估值回落而下调（¥888→750）。</div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-t">情景空间<span class="accent">·&nbsp;熊 / 基准 / 牛</span>（较现价）</div>
+      <div class="rrange">
+        <div class="rr"><div class="rnm">Macronix<small>2337.TW</small></div><div class="rtk"><div class="rbar" style="left:5%;width:71.5%"></div><div class="rzero" style="left:15.4%"></div><div class="rbase" style="left:38.8%"></div><div class="rlab br" style="left:5%">−27%</div><div class="rlab bs" style="left:38.8%;top:16px">+61%</div><div class="rlab bl" style="left:76.5%">+159%</div></div></div>
+        <div class="rr"><div class="rnm">GigaDevice<small>603986.SS</small></div><div class="rtk"><div class="rbar" style="left:6.9%;width:89.6%"></div><div class="rzero" style="left:15.4%"></div><div class="rbase" style="left:46.2%"></div><div class="rlab br" style="left:6.9%">−22%</div><div class="rlab bs" style="left:46.2%;top:16px">+80%</div><div class="rlab bl" style="left:96.5%">+211%</div></div></div>
+        <div class="rr"><div class="rnm">Winbond<small>2344.TW</small></div><div class="rtk"><div class="rbar" style="left:1.5%;width:47%"></div><div class="rzero" style="left:15.4%"></div><div class="rbase" style="left:37.3%"></div><div class="rlab br" style="left:1.5%">−36%</div><div class="rlab bs" style="left:37.3%;top:16px">+57%</div><div class="rlab bl" style="left:48.5%">+86%</div></div></div>
+        <div class="rr"><div class="rnm">PSMC<small>6770.TW</small></div><div class="rtk"><div class="rbar" style="left:3.8%;width:60%"></div><div class="rzero" style="left:15.4%"></div><div class="rbase" style="left:31.5%"></div><div class="rlab br" style="left:3.8%">−30%</div><div class="rlab bs" style="left:31.5%;top:16px">+42%</div><div class="rlab bl" style="left:63.8%">+126%</div></div></div>
+      </div>
+      <div class="rrscale"><span>← 熊市（下行）</span><span style="color:var(--navy)">│ 现价</span><span>牛市（上行）→</span></div>
+      <div class="src" style="margin-top:8px;">竖线=现价，深色标=基准目标价，条形=熊市→牛市区间。上行弹性大，但波动同样大。</div>
     </div>
 
     <div>
@@ -346,14 +508,14 @@ svg{display:block;width:100%;height:auto;overflow:visible;}
           </div>
         </div>
       </div>
-      <div class="disc">本文基于 Morgan Stanley 于 2026-08-16《Old Memory: No LTAs Is Not Necessarily Bad》（分析师 Daniel Yen、Charlie Chan 等）整理；评级、目标价、EPS 修订与涨价预测以原报告为准，现价截至 2026/8/14。本可视化由 THE PORT 制作，仅供参考、不构成投资建议；投资有风险，决策须谨慎。</div>
+      <div class="disc">本文基于 Morgan Stanley 于 2026-08-16《Old Memory: No LTAs Is Not Necessarily Bad》（分析师 Daniel Yen、Charlie Chan 等）整理；评级、目标价、EPS 修订、情景值以原报告为准，现价截至 2026/8/14。存储板块波动大、风险回报偏向熊市情形。本可视化由 THE PORT 制作，仅供参考、不构成投资建议；投资有风险，决策须谨慎。</div>
     </div>
   </div>
 
   <div class="foot">
     <span><b>THE PORT</b> · 全球投行研报精选</span>
-    <span>大中华半导体 · 老内存涨价潮</span>
-    <span class="pg">精华</span>
+    <span>受益股与配置 · Overweight Across</span>
+    <span class="pg">03 / 03</span>
   </div>
 </section>
 

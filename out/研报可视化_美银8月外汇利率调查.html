@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>美银 8 月全球外汇与利率调查 · 研报精华</title>
+<style>
+@font-face{font-family:'Inter';src:url('fonts/Inter-var.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:block;}
+@font-face{font-family:'Fraunces';src:url('fonts/Fraunces-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:block;}
+
+:root{
+  --ink:#17191E; --ink2:#4C535D; --ink3:#8A909A; --ink4:#B4B0A6;
+  --paper:#F4F1EA; --paper2:#EDE8DD; --card:#FFFFFF;
+  --line:#E3DCCE; --line2:#ECE7DD;
+  --navy:#1B2440; --navy2:#2E3A5C;
+  --red:#C0271C; --redsoft:#F4E5E1; --redink:#9A1E15;
+  --green:#12705C; --greensoft:#E2ECE7;
+  --gold:#9A7B3F; --goldsoft:#F0E8D6;
+  --f-display:'Fraunces','Noto Serif CJK SC',Georgia,serif;
+  --f-head:'Noto Serif CJK SC','Fraunces',Georgia,serif;
+  --f-body:'Inter','Noto Sans CJK SC',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+body{font-family:var(--f-body);color:var(--ink);background:#c9c4b8;font-feature-settings:'tnum' 1,'ss01' 1;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;}
+@page{size:A4;margin:0;}
+
+.page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;padding:13mm 13mm 9mm 13mm;page-break-after:always;}
+.page:last-child{page-break-after:auto;}
+.main{flex:1;display:flex;flex-direction:column;justify-content:space-between;min-height:0;}
+
+/* ---------- header / footer ---------- */
+.mast{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1.5px solid var(--ink);padding-bottom:7px;flex:none;}
+.mast .brand{display:flex;align-items:center;gap:8px;}
+.mast .dot{width:19px;height:19px;border-radius:50%;background:var(--red);position:relative;flex:none;}
+.mast .dot::after{content:"研";position:absolute;inset:0;color:#fff;font-family:var(--f-head);font-weight:700;font-size:10.5px;display:flex;align-items:center;justify-content:center;}
+.mast .bname{font-weight:800;font-size:13.5px;letter-spacing:.14em;color:var(--ink);font-family:var(--f-head);}
+.mast .bsub{font-size:8.4px;letter-spacing:.30em;color:var(--ink3);margin-top:1px;font-weight:600;}
+.mast .mright{text-align:right;font-size:8.6px;letter-spacing:.06em;color:var(--ink2);line-height:1.55;}
+.mast .mright b{color:var(--ink);font-weight:700;}
+
+.foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:6px;margin-top:9px;font-size:7.6px;letter-spacing:.05em;color:var(--ink3);flex:none;}
+.foot .pg{font-weight:700;color:var(--ink2);letter-spacing:.12em;}
+.foot b{color:var(--ink2);font-weight:600;}
+
+.eyebrow{font-size:9px;font-weight:700;letter-spacing:.24em;color:var(--red);text-transform:uppercase;}
+.rule-gold{height:2px;background:var(--gold);width:44px;border-radius:2px;}
+.sectlabel{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
+.sectlabel .no{font-family:var(--f-display);font-weight:600;font-size:15px;color:var(--red);line-height:1;}
+.sectlabel .tt{font-family:var(--f-head);font-weight:700;font-size:17px;color:var(--ink);letter-spacing:.01em;}
+.sectlabel .en{font-size:8px;letter-spacing:.22em;color:var(--ink3);font-weight:700;text-transform:uppercase;margin-left:auto;}
+.src{font-size:7.4px;color:var(--ink3);letter-spacing:.02em;margin-top:6px;line-height:1.5;}
+
+/* ================= PAGE 1 — COVER ================= */
+.cv-eyerow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:11px;}
+.cv-tickers{margin-left:auto;font-size:9.5px;color:var(--ink2);letter-spacing:.04em;font-weight:600;}
+.cv-tickers b{color:var(--ink);}
+.headline{font-family:var(--f-head);font-weight:800;color:var(--ink);font-size:50px;line-height:1.16;letter-spacing:-.01em;margin-top:13px;}
+.headline .hl{color:var(--red);}
+.headline .box{border-bottom:5px solid var(--gold);padding-bottom:1px;}
+.subhead{font-size:12.4px;line-height:1.78;color:var(--ink2);max-width:176mm;margin-top:15px;font-weight:450;}
+.subhead b{color:var(--ink);font-weight:700;}
+
+.judg{display:flex;gap:0;background:var(--navy);border-radius:9px;overflow:hidden;}
+.judg .lab{background:var(--red);color:#fff;font-family:var(--f-head);font-weight:800;font-size:15px;letter-spacing:.16em;padding:0 17px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.3;flex:none;}
+.judg .body{padding:15px 18px;color:#EDEEF2;font-size:11.6px;line-height:1.72;display:flex;align-items:center;}
+.judg .body b{color:#fff;font-weight:700;}
+.judg .body .big{color:#fff;font-family:var(--f-display);font-weight:600;}
+
+.cv-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;}
+.mcard{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:16px 16px 15px;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+.mcard .top{font-size:9px;font-weight:700;letter-spacing:.10em;color:var(--ink3);padding-right:66px;line-height:1.4;}
+.mcard .fig{font-family:var(--f-display);font-weight:600;color:var(--ink);font-size:41px;line-height:1;margin:11px 0 5px;letter-spacing:-.01em;}
+.mcard .fig .u{font-size:16px;color:var(--ink2);font-weight:600;margin-left:1px;}
+.mcard .fig.r{color:var(--red);}
+.mcard .fig.g{color:var(--green);}
+.mcard .cap{font-size:10.3px;color:var(--ink2);line-height:1.55;font-weight:500;}
+.mcard .cap b{color:var(--ink);font-weight:700;}
+.mcard .tag{position:absolute;top:15px;right:15px;font-size:8px;font-weight:700;letter-spacing:.04em;color:var(--green);}
+.mcard .tag.r{color:var(--red);}
+
+.cv-two{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.wide{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;}
+.wide .ic{width:40px;height:40px;border-radius:8px;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:600;font-size:15px;line-height:1;}
+.wide .ic.gold{background:var(--goldsoft);color:var(--gold);}
+.wide .ic.navy{background:#E7EAF1;color:var(--navy);}
+.wide .t{font-size:10.4px;font-weight:700;letter-spacing:.03em;color:var(--ink);margin-bottom:3px;}
+.wide .d{font-size:9.8px;color:var(--ink2);line-height:1.55;}
+.wide .d b{color:var(--red);font-weight:700;}
+.wide .d .bg{color:var(--green);font-weight:700;}
+
+.toc{display:grid;grid-template-columns:1.12fr 1.12fr .92fr;border-top:1.5px solid var(--ink);padding-top:12px;}
+.toc .ti{padding:0 17px;border-right:1px solid var(--line);}
+.toc .ti:first-child{padding-left:0;}
+.toc .ti:last-child{border-right:none;padding-right:0;}
+.toc .tn{font-family:var(--f-display);font-weight:600;font-size:15px;color:var(--red);line-height:1;}
+.toc .tt2{font-family:var(--f-head);font-weight:700;font-size:12.5px;color:var(--ink);margin-top:5px;}
+.toc .td{font-size:9px;color:var(--ink2);margin-top:4px;line-height:1.5;}
+
+/* ================= data pages shared ================= */
+.callout{border-left:4px solid var(--red);background:linear-gradient(90deg,var(--redsoft),rgba(244,229,225,0));padding:13px 16px;border-radius:0 8px 8px 0;}
+.callout .q{font-family:var(--f-head);font-weight:600;font-size:13.6px;line-height:1.66;color:var(--ink);letter-spacing:.005em;}
+.callout .q b{color:var(--red);}
+.callout.green{border-left-color:var(--green);background:linear-gradient(90deg,var(--greensoft),rgba(226,236,231,0));}
+.callout.green .q b{color:var(--green);}
+.callout.navy{border-left-color:var(--navy);background:linear-gradient(90deg,#E9ECF3,rgba(233,236,243,0));}
+.callout.navy .q b{color:var(--navy);}
+
+.panel{background:var(--card);border:1px solid var(--line2);border-radius:11px;padding:15px 17px;}
+.panel-t{font-family:var(--f-head);font-weight:700;font-size:14.5px;color:var(--ink);line-height:1.4;}
+.panel-t .accent{color:var(--red);}
+.panel-t .acg{color:var(--green);}
+.panel-sub{font-size:10.1px;color:var(--ink2);line-height:1.62;margin-top:6px;font-weight:450;}
+.panel-sub b{font-weight:700;color:var(--ink);}
+
+.bars{display:flex;flex-direction:column;gap:9px;margin-top:9px;}
+.bar{display:grid;grid-template-columns:132px 1fr 42px;align-items:center;gap:10px;}
+.bar .nm{font-size:10px;font-weight:600;color:var(--ink2);text-align:right;line-height:1.25;}
+.bar .nm b{font-size:10.3px;color:var(--ink);font-weight:700;}
+.bar .track{height:16px;background:var(--paper2);border-radius:4px;position:relative;overflow:hidden;}
+.bar .fill{height:100%;border-radius:4px;background:var(--navy2);}
+.bar.red .fill{background:var(--red);}
+.bar.mut .fill{background:#B9BEC9;}
+.bar .val{font-size:12px;font-weight:800;color:var(--ink);text-align:left;}
+.bar.red .val{color:var(--red);}
+.bar.mut .val{color:var(--ink3);}
+
+.facts{display:flex;flex-direction:column;gap:9px;margin-top:9px;}
+.fact{display:flex;gap:9px;align-items:flex-start;}
+.fact .fi{width:6px;height:6px;border-radius:50%;background:var(--navy2);flex:none;margin-top:5.5px;}
+.fact.r .fi{background:var(--red);}
+.fact .ft{font-size:10.1px;color:var(--ink2);line-height:1.6;}
+.fact .ft b{color:var(--ink);font-weight:700;}
+.fact .ft .rr{color:var(--red);font-weight:700;}
+
+.bigstat{display:flex;align-items:center;gap:13px;background:var(--paper2);border-radius:9px;padding:11px 14px;margin-top:11px;}
+.bigstat .bv{font-family:var(--f-display);font-weight:600;font-size:29px;color:var(--navy);line-height:1;flex:none;}
+.bigstat .bt{font-size:9.8px;color:var(--ink2);line-height:1.5;}
+.bigstat .bt b{color:var(--ink);font-weight:700;}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.split.wideleft{grid-template-columns:1.06fr 1fr;}
+
+/* dumbbell */
+.dumb{display:flex;flex-direction:column;margin-top:4px;}
+.drow{display:grid;grid-template-columns:150px 1fr 48px;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line2);}
+.drow:last-child{border-bottom:none;}
+.drow .mk{font-size:10.1px;color:var(--ink);font-weight:700;line-height:1.35;}
+.drow .mk span{display:block;font-size:8px;color:var(--ink3);font-weight:600;letter-spacing:.02em;margin-top:2px;}
+.drow .tr{position:relative;height:24px;}
+.drow .base{position:absolute;top:11px;left:0;right:0;height:2px;background:var(--line);}
+.seg{position:absolute;top:10px;height:4px;background:var(--navy2);border-radius:2px;}
+.drow.hot .seg{background:var(--red);}
+.dt{position:absolute;top:6px;width:12px;height:12px;border-radius:50%;transform:translateX(-50%);}
+.dt.o{background:var(--card);border:2.5px solid var(--ink3);}
+.dt.n{background:var(--navy2);border:2.5px solid var(--navy2);}
+.drow.hot .dt.n{background:var(--red);border-color:var(--red);}
+.vlab{position:absolute;top:-7px;font-size:9px;font-weight:800;transform:translateX(-50%);color:var(--ink3);white-space:nowrap;}
+.vlab.n{color:var(--navy);} .drow.hot .vlab.n{color:var(--red);}
+.delta{font-size:11.5px;font-weight:800;text-align:right;color:var(--navy);}
+.drow.hot .delta{color:var(--red);}
+.dlegend{display:flex;gap:16px;align-items:center;margin-top:9px;font-size:9px;font-weight:700;color:var(--ink3);}
+.dlegend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;}
+.dlegend .o{background:#fff;border:2.5px solid var(--ink3);}
+.dlegend .n{background:var(--navy2);}
+
+.kpirow{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+.kpi{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:11px 12px;}
+.kpi .k{font-size:8.4px;font-weight:700;letter-spacing:.06em;color:var(--ink3);line-height:1.3;}
+.kpi .v{font-family:var(--f-display);font-weight:600;font-size:27px;color:var(--ink);line-height:1;margin:7px 0 4px;}
+.kpi .v.r{color:var(--red);}
+.kpi .v .u{font-size:13px;color:var(--ink2);}
+.kpi .s{font-size:8.7px;color:var(--ink2);line-height:1.5;}
+.kpi .s b{color:var(--ink);font-weight:700;}
+
+.capband{background:var(--navy);border-radius:11px;padding:15px 17px;color:#fff;display:flex;flex-direction:column;}
+.capband .h{font-family:var(--f-head);font-weight:700;font-size:13.5px;color:#fff;display:flex;align-items:center;gap:8px;}
+.capband .h .g{color:var(--goldsoft);}
+.capstat{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.13);}
+.capstat:last-of-type{border-bottom:none;}
+.capstat .l{font-size:9.4px;color:#C7CCDA;line-height:1.45;max-width:66%;}
+.capstat .r{font-family:var(--f-display);font-weight:600;font-size:18px;color:#fff;white-space:nowrap;}
+.capstat .r .u{font-size:9.5px;color:#AEB4C6;}
+.capnote{font-size:8.2px;color:#AEB4C6;margin-top:9px;line-height:1.6;}
+
+.wbox{border-radius:10px;padding:14px 16px;}
+.wbox.dn{background:var(--redsoft);border:1px solid #EBD3CD;}
+.wbox .wh{font-family:var(--f-head);font-weight:700;font-size:12.5px;display:flex;align-items:center;gap:6px;margin-bottom:9px;color:var(--red);}
+.wbox ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.wbox li{font-size:9.5px;line-height:1.5;color:var(--ink);padding-left:13px;position:relative;font-weight:500;}
+.wbox li b{font-weight:700;}
+.wbox li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:var(--red);}
+
+.fcast{display:flex;justify-content:space-between;gap:6px;background:var(--paper2);border-radius:9px;padding:12px 8px;}
+.fcast .fc{flex:1;text-align:center;border-right:1px solid var(--line);padding:0 6px;}
+.fcast .fc:last-child{border-right:none;}
+.fcast .fc .fk{font-size:7.8px;font-weight:700;letter-spacing:.04em;color:var(--ink3);}
+.fcast .fc .fv{font-family:var(--f-display);font-weight:600;font-size:19px;color:var(--ink);margin-top:4px;line-height:1;}
+.fcast .fc .fv .u{font-size:9.5px;color:var(--ink2);}
+.fcast .fc .fs{font-size:7.8px;color:var(--ink2);font-weight:600;margin-top:4px;line-height:1.4;}
+
+.disc{font-size:7.6px;color:var(--ink3);line-height:1.65;letter-spacing:.01em;margin-top:9px;}
+.bandlab{font-size:9px;font-weight:700;letter-spacing:.20em;color:var(--ink3);margin-bottom:8px;}
+</style>
+</head>
+<body>
+
+<!-- ============================= PAGE 1 : COVER ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">研报精华</div><div class="bsub">全 球 投 行 研 究 · 可 视 化 速 览</div></div></div>
+    <div class="mright"><b>机构研究 · 可视化精华</b><br>来源：BofA Global Research《FX and Rates Sentiment Survey》· 2026.08.14<br>调查时间 8 月 7–12 日 · 32 位全球固收基金经理 · 合计管理 4,670 亿美元</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="cv-eyerow">
+        <span class="eyebrow">美银 8 月全球外汇与利率调查 · Yen-erated fears</span>
+        <span class="cv-tickers"><b>日元</b>&nbsp;·&nbsp;<b>美元</b>&nbsp;·&nbsp;<b>新兴市场</b></span>
+      </div>
+      <div class="rule-gold"></div>
+      <h1 class="headline">看空日元的声音<span class="hl">四年最强</span>，<br>真正的仓位却<span class="box">留了一手</span></h1>
+      <p class="subhead">日本央行几次干预，非但没能扭转情绪，反而把日元的看空情绪推到了 <b>2022 年以来最低点</b>。<b>61%</b> 的受访者选了同一个答案：看空日元，因为<b>日银加息太慢、落后于形势</b>。但他们并没有把仓位押满——以完整历史样本衡量，实际持仓远没有嘴上的判断那么极端。他们在等日银把政策路径说清楚，等的期间先赚着利差。而半数人给出的解药相当具体：<b>把政策利率抬到 2%</b>。</p>
+    </div>
+
+    <div class="judg">
+      <div class="lab"><span>核心</span><span>判断</span></div>
+      <div class="body"><div>8 月这三笔最热闹的交易——<b>空日元、空美元、多新兴市场</b>——共同的地基都不是基本面变好了，而是<b>「市场波动小 + 吃利差」</b>。情绪喊得很响，仓位却明显克制。秋天联储会议与美国中期选举扎堆，正是检验这批仓位成色的时候。</div></div>
+    </div>
+
+    <div class="cv-metrics">
+      <div class="mcard">
+        <div class="tag r">四年最空</div>
+        <div class="top">看空日元的理由</div>
+        <div class="fig r">61<span class="u">%</span></div>
+        <div class="cap">受访者选择「看空日元，因为<b>日银落后于曲线</b>」。其余任何一个选项最高仅 17%</div>
+      </div>
+      <div class="mcard">
+        <div class="tag">半数人的答案</div>
+        <div class="top">能稳住日元的政策利率</div>
+        <div class="fig">2.0<span class="u">%</span></div>
+        <div class="cap">50% 认为终端利率到 2% 就够了，<b>相当于还要再加息四次</b>；17% 认为要 2.25% 以上</div>
+      </div>
+      <div class="mcard">
+        <div class="tag">7 月仅 27%</div>
+        <div class="top">不调配置、不加对冲</div>
+        <div class="fig g">50<span class="u">%</span></div>
+        <div class="cap">一半人明确表示美国资产配置和对冲比率都不动——<b>「减配美国资产」的叙事在退潮</b></div>
+      </div>
+    </div>
+
+    <div class="cv-two">
+      <div class="wide">
+        <div class="ic gold">63%</div>
+        <div><div class="t">最拥挤的交易：做多风险资产</div><div class="d">连续三个月降温：6 月 <b>77%</b> → 7 月 72% → 8 月 <b>63%</b></div></div>
+      </div>
+      <div class="wide">
+        <div class="ic navy">28%</div>
+        <div><div class="t">年内最有信心的交易：做多利率</div><div class="d">7 月还是 20%，本月<span class="bg">升至首位</span>，押注收益率下行</div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="bandlab">调查里还问了这些</div>
+      <div class="fcast">
+        <div class="fc"><div class="fk">油价（未来 3–6 个月）</div><div class="fv">80<span class="u">美元+</span></div><div class="fs">77% 看这个区间<br>7 月只有 36%</div></div>
+        <div class="fc"><div class="fk">霍尔木兹海峡恢复自由通航</div><div class="fv">0<span class="u">%</span></div><div class="fs">已经没有人这么认为<br>7 月还有 13%</div></div>
+        <div class="fc"><div class="fk">AI 资本开支周期</div><div class="fv">34<span class="u">%</span></div><div class="fs">认为已经被高估<br>另有 33% 说不知道</div></div>
+        <div class="fc"><div class="fk">美元兑人民币（年底）</div><div class="fv">6.70<span class="u">以下</span></div><div class="fs">34% 看到这个位置<br>44% 表示不确定</div></div>
+      </div>
+      <div class="src">油价为「80–89 美元」与「90–99 美元」两档合计；AI 一项为「已进入中后期且被高估」两类合计（28%+6%）。来源：Exhibit 9 / 8 / 7 / 24。</div>
+    </div>
+
+    <div class="toc">
+      <div class="ti"><div class="tn">01</div><div class="tt2">日元：情绪与仓位之间的裂口</div><div class="td">61% 只怪日银太慢，2% 是他们要的答案；而日本一旦动起来，最先痛的可能是美债</div></div>
+      <div class="ti"><div class="tn">02</div><div class="tt2">美元与新兴市场：借来的乐观</div><div class="td">一个月里，市场怕的东西换了方向；新兴市场的仓位靠低波动和利差撑着</div></div>
+      <div class="ti"><div class="tn">·</div><div class="tt2">本期调查</div><div class="td">2026 年 8 月 7–12 日<br>32 位全球固收基金经理<br>合计管理 4,670 亿美元</div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>研报精华</b> · 全球投行研究可视化</span>
+    <span>数据以 BofA Global Research 原报告为准 · 仅供参考，不构成投资建议</span>
+    <span class="pg">01 / 03</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 2 : THE YEN ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">研报精华</div><div class="bsub">全 球 投 行 研 究 · 可 视 化 速 览</div></div></div>
+    <div class="mright"><b>美银 8 月外汇与利率调查</b> · Yen-erated fears<br>BofA Global Research · 2026.08.14</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">01</span><span class="tt">日元：情绪与仓位之间的裂口</span><span class="en">The Yen Gap</span></div>
+      <div class="callout">
+        <div class="q">干预没能把情绪拉回来，反而让空头更坚决——日元的看空情绪过去一个月大幅上升，<b>创下四年新高</b>。但报告同时点出一个容易被忽略的细节：<b>持仓的极端程度，远不如嘴上的判断</b>。</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-t">看空日元的人里，几乎所有人<span class="accent">只怪同一件事</span></div>
+      <div class="panel-sub">「未来 6 个月你怎么看日元」——61% 的回答是「看空，因为日本央行落后于曲线」。这不是分歧，这是一边倒的共识：<b>剩下的选项里，没有一个超过 17%</b>。共识越集中，一旦日银真的转向，需要掉头的人也就越多。</div>
+      <div class="bars">
+        <div class="bar red"><div class="nm"><b>看空</b>：日银落后于曲线</div><div class="track"><div class="fill" style="width:96%"></div></div><div class="val">61%</div></div>
+        <div class="bar"><div class="nm"><b>看多</b>：美日两国的汇率政策</div><div class="track"><div class="fill" style="width:26.8%"></div></div><div class="val">17%</div></div>
+        <div class="bar mut"><div class="nm">中性 / 没有明确观点</div><div class="track"><div class="fill" style="width:9.4%"></div></div><div class="val">6%</div></div>
+        <div class="bar mut"><div class="nm"><b>看多</b>：国际收支改善</div><div class="track"><div class="fill" style="width:9.4%"></div></div><div class="val">6%</div></div>
+        <div class="bar mut"><div class="nm"><b>看空</b>：其他原因</div><div class="track"><div class="fill" style="width:9.4%"></div></div><div class="val">6%</div></div>
+        <div class="bar mut"><div class="nm">不知道</div><div class="track"><div class="fill" style="width:9.4%"></div></div><div class="val">6%</div></div>
+      </div>
+      <div class="src">「看多：日元套息交易平仓 / 资金回流」「看空：日本财政风险」两项本月均为 0%。来源：BofA Global Research FX and Rates Sentiment Survey，Exhibit 22（2026 年 8 月）。各项因四舍五入合计不等于 100%。</div>
+    </div>
+
+    <div class="split wideleft">
+      <div class="panel">
+        <div class="panel-t">他们要的答案很具体：<span class="accent">2%</span></div>
+        <div class="panel-sub">「日银要把政策利率抬到多高，才能稳住日元？」半数人给出同一个数字。按目前的加息节奏推算，这意味着<b>还要再加息四次</b>。</div>
+        <div class="bars">
+          <div class="bar red"><div class="nm"><b>2%</b>（再加四次息）</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">50%</div></div>
+          <div class="bar"><div class="nm">2.25% 或更高</div><div class="track"><div class="fill" style="width:34%"></div></div><div class="val">17%</div></div>
+          <div class="bar"><div class="nm">1.75%</div><div class="track"><div class="fill" style="width:34%"></div></div><div class="val">17%</div></div>
+          <div class="bar mut"><div class="nm">其他 / 不知道</div><div class="track"><div class="fill" style="width:34%"></div></div><div class="val">17%</div></div>
+        </div>
+        <div class="src">1.50% 与 1.25% 两档本月均为 0%。来源：同上，Exhibit 21。</div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-t">嘴上到了极端，<span class="acg">手上没有</span></div>
+        <div class="facts">
+          <div class="fact r"><div class="fi"></div><div class="ft"><b>情绪端：</b>日元的看空情绪跌到 <span class="rr">2022 年以来最低</span>，持仓也明显转向做空；日债久期同步走弱——低配加深、情绪恶化。</div></div>
+          <div class="fact"><div class="fi"></div><div class="ft"><b>仓位端：</b>但以<b>完整历史样本</b>衡量，日元的实际持仓<b>没有情绪那么极端</b>——空头的话说满了，钱没押满。</div></div>
+          <div class="fact"><div class="fi"></div><div class="ft"><b>他们在等什么：</b>等日银把政策路径说清楚；在此之前先赚利差。这也解释了为什么<b>新兴市场同时被买进来</b>。</div></div>
+          <div class="fact"><div class="fi"></div><div class="ft"><b>一个反向信号：</b>认为「日银会比市场定价加更多息」的人从 7 月的 27% 掉到 <b>11%</b>——大家反而更不指望日银了。</div></div>
+        </div>
+        <div class="bigstat">
+          <div class="bv">56%</div>
+          <div class="bt">认为一旦<b>日本养老金启动再平衡</b>，受冲击最大的是<b>美国债市</b>（欧盟 28%，英国 0%）。日本的事，痛的先是美债。</div>
+        </div>
+        <div class="src">来源：同上，Exhibit 22 / 30 / 32 / 43 / 44 / 10 / 23。</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="bandlab">把日元放回全局来看</div>
+      <div class="fcast">
+        <div class="fc"><div class="fk">过去一年最极端的两笔仓位</div><div class="fv">2<span class="u">笔</span></div><div class="fs">空日元、多新兴市场——<br>偏离常态的程度都最突出</div></div>
+        <div class="fc"><div class="fk">认为日银会「少加息、多降息」</div><div class="fv">6<span class="u">%</span></div><div class="fs">几乎没人觉得日银会更鸽<br>大家只是嫌它太慢</div></div>
+        <div class="fc"><div class="fk">日本 vs 美国的久期敞口</div><div class="fv">转负</div><div class="fs">2022 年以来首次回到中性后<br>本月再度掉头向下</div></div>
+        <div class="fc"><div class="fk">日债久期仓位</div><div class="fv">低配</div><div class="fs">低配继续加深<br>情绪同步走弱</div></div>
+      </div>
+      <div class="src">来源：BofA Global Research FX and Rates Sentiment Survey，Exhibit 29 / 11 / 46 / 44（2026 年 8 月）。</div>
+    </div>
+
+    <div class="callout green">
+      <div class="q"><b>怎么读这件事</b>&nbsp;这是一批「等待型空头」：情绪已经到极端，钱却留在场边。它的含义是双向的——日银迟迟不动，日元还会承压；而一旦日银给出通向 2% 的清晰路径，<b>最先被震出来的，恰恰是那些靠利差撑着的仓位</b>。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>研报精华</b> · 全球投行研究可视化</span>
+    <span>日元：情绪与仓位之间的裂口</span>
+    <span class="pg">02 / 03</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 3 : USD + EM + WHAT'S NEXT ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">研报精华</div><div class="bsub">全 球 投 行 研 究 · 可 视 化 速 览</div></div></div>
+    <div class="mright"><b>美银 8 月外汇与利率调查</b> · Yen-erated fears<br>BofA Global Research · 2026.08.14</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">02</span><span class="tt">美元与新兴市场：借来的乐观</span><span class="en">Borrowed Optimism</span></div>
+      <div class="callout navy">
+        <div class="q">美元这边，市场怕的东西在一个月里换了方向：<b>从怕「美国数据太强、联储被迫转鹰」，变成怕「联储太松」</b>。而美国数据走软加上 7 月偏鸽的议息会议，并没有动摇联储的反通胀信誉——<b>44% 的人仍把当前政策定性为「温和宽松」</b>，只是把话说得没那么满了。</div>
+      </div>
+    </div>
+
+    <div class="kpirow">
+      <div class="kpi"><div class="k">美元下跌的头号催化剂</div><div class="v r">33<span class="u">%</span></div><div class="s">认为是<b>「联储过度宽松」</b><br>7 月这个比例只有 10%</div></div>
+      <div class="kpi"><div class="k">不调配置、不加对冲</div><div class="v">50<span class="u">%</span></div><div class="s">「减配美国资产」<br>叙事<b>明显退潮</b></div></div>
+      <div class="kpi"><div class="k">没有央行会超预期加息</div><div class="v">61<span class="u">%</span></div><div class="s">认为主要央行都<b>不会</b><br>比市场定价加更多</div></div>
+      <div class="kpi"><div class="k">联储当前政策立场</div><div class="v">44<span class="u">%</span></div><div class="s">仍认为是<b>「温和宽松」</b><br>7 月为 37%</div></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-t">一个月里，他们<span class="accent">改主意最快的五件事</span></div>
+      <div class="panel-sub">同一批人、同一份问卷，7 月与 8 月的回答对比。变化最大的几项，几乎都指向同一个转折：<b>「怕联储太紧」变成了「怕联储太松」</b>。</div>
+      <div class="dumb">
+        <div class="drow hot"><div class="mk">油价看到 80 美元以上<span>未来 3–6 个月均价</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:36%;width:41%"></div>
+            <div class="dt o" style="left:36%"></div><div class="vlab" style="left:36%">36%</div>
+            <div class="dt n" style="left:77%"></div><div class="vlab n" style="left:77%">77%</div></div>
+          <div class="delta">+41</div></div>
+        <div class="drow hot"><div class="mk">美元下跌的下一个理由<span>是「联储过度宽松」</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:10%;width:23%"></div>
+            <div class="dt o" style="left:10%"></div><div class="vlab" style="left:10%">10%</div>
+            <div class="dt n" style="left:33%"></div><div class="vlab n" style="left:33%">33%</div></div>
+          <div class="delta">+23</div></div>
+        <div class="drow"><div class="mk">不调整美国资产配置<span>也不提高汇率对冲比率</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:27%;width:23%"></div>
+            <div class="dt o" style="left:27%"></div><div class="vlab" style="left:27%">27%</div>
+            <div class="dt n" style="left:50%"></div><div class="vlab n" style="left:50%">50%</div></div>
+          <div class="delta">+23</div></div>
+        <div class="drow"><div class="mk">没有央行会超预期加息<span>即都不会比市场定价加更多</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:40%;width:21%"></div>
+            <div class="dt o" style="left:40%"></div><div class="vlab" style="left:40%">40%</div>
+            <div class="dt n" style="left:61%"></div><div class="vlab n" style="left:61%">61%</div></div>
+          <div class="delta">+21</div></div>
+        <div class="drow"><div class="mk">日银会比定价加更多息<span>指望日银的人在减少</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:11%;width:16%"></div>
+            <div class="dt n" style="left:11%"></div><div class="vlab n" style="left:11%">11%</div>
+            <div class="dt o" style="left:27%"></div><div class="vlab" style="left:27%">27%</div></div>
+          <div class="delta">−16</div></div>
+      </div>
+      <div class="dlegend"><span><i class="o"></i>2026 年 7 月</span><span><i class="n"></i>2026 年 8 月</span><span style="margin-left:auto;font-weight:600;color:var(--ink3);">横轴为选择该项的受访者占比（0–100%）</span></div>
+      <div class="src">油价一项为「80–89 美元」与「90–99 美元」两档合计（8 月 44%+33%，7 月 30%+3%+3%）。来源：BofA Global Research FX and Rates Sentiment Survey，Exhibit 9 / 15 / 16 / 10。</div>
+    </div>
+
+    <div class="split">
+      <div class="capband">
+        <div class="h"><span class="g">◆</span>&nbsp;新兴市场：乐观是借来的</div>
+        <div class="capstat"><div class="l">EM 外汇与久期敞口，已回到 2 月的高位——伊朗战争与鹰派联储的担忧被抛在脑后</div><div class="r">2 月<span class="u">高位</span></div></div>
+        <div class="capstat"><div class="l">但 EM 组合内部反而更谨慎：现金处于「常态」水平的比例（历史均值 58%）</div><div class="r">88<span class="u">%</span></div></div>
+        <div class="capstat"><div class="l">EM 硬通货债券转为「温和低配」的比例，7 月还只有 20%</div><div class="r">43<span class="u">%</span></div></div>
+        <div class="capnote">报告的判断：这轮改善集中在拉美资产，而且<b style="color:#fff">仓位比观点更激进</b>——支撑它的是低波动、看多利差的环境，不是对新兴市场基本面的重新评估。本月已经没有人再持有低于常态的现金。</div>
+      </div>
+      <div class="wbox dn">
+        <div class="wh">▼&nbsp;会考验这批仓位的四件事</div>
+        <ul>
+          <li><b>秋天催化剂扎堆</b>——联储会议与美国中期选举，报告直接点名会压测新兴市场多头的信心</li>
+          <li><b>日银给出通往 2% 的路径</b>——利差交易的地基被抽走，日元空头最拥挤的一侧先受冲击</li>
+          <li><b>美国数据重新走强</b>——28% 认为这是美元反弹的头号催化剂，22% 押注「美国例外论」卷土重来</li>
+          <li><b>波动率抬头</b>——空日元、空美元、多新兴市场，这三笔交易共用同一块地基：市场足够安静</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="disc">本可视化基于 BofA Global Research 于 2026 年 8 月 14 日发布的《FX and Rates Sentiment Survey: Yen-erated fears》整理编辑，所有数据、比例与观点均以原报告为准；调查于 2026 年 8 月 7–12 日进行，32 位全球固定收益基金经理参与，合计管理规模 4,670 亿美元，受访者来自英国、欧洲大陆、亚太与美国。本文由第三方独立整理制作，与 BofA 无关，仅供信息参考与交流，不构成任何投资建议；市场有风险，决策须谨慎。</div>
+  </div>
+
+  <div class="foot">
+    <span><b>研报精华</b> · 全球投行研究可视化</span>
+    <span>美元与新兴市场：借来的乐观</span>
+    <span class="pg">03 / 03</span>
+  </div>
+</section>
+
+</body>
+</html>

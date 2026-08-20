@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>人形机器人·公开首秀 — THE PORT</title>
+<style>
+@font-face{font-family:'Inter';src:url('fonts/Inter-var.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:block;}
+@font-face{font-family:'Fraunces';src:url('fonts/Fraunces-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:block;}
+
+:root{
+  --ink:#17191E; --ink2:#4C535D; --ink3:#8A909A; --ink4:#B4B0A6;
+  --paper:#F4F1EA; --paper2:#EDE8DD; --card:#FFFFFF;
+  --line:#E3DCCE; --line2:#ECE7DD;
+  --navy:#1B2440; --navy2:#2E3A5C;
+  --red:#C0271C; --redsoft:#F4E5E1; --redink:#9A1E15;
+  --green:#12705C; --greensoft:#E2ECE7;
+  --gold:#9A7B3F; --goldsoft:#F0E8D6;
+  --f-display:'Fraunces','Noto Serif CJK SC',Georgia,serif;
+  --f-head:'Noto Serif CJK SC','Fraunces',Georgia,serif;
+  --f-body:'Inter','Noto Sans CJK SC',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+body{font-family:var(--f-body);color:var(--ink);background:#c9c4b8;font-feature-settings:'tnum' 1,'ss01' 1;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;}
+@page{size:A4;margin:0;}
+
+.page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;padding:13mm 13mm 9mm 13mm;page-break-after:always;}
+.page:last-child{page-break-after:auto;}
+.main{flex:1;display:flex;flex-direction:column;justify-content:space-between;min-height:0;}
+.grp>*+*{margin-top:12px;}
+
+/* ---------- header / footer ---------- */
+.mast{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1.5px solid var(--ink);padding-bottom:7px;flex:none;}
+.mast .brand{display:flex;align-items:center;gap:8px;}
+.mast .dot{width:19px;height:19px;border-radius:50%;background:var(--red);position:relative;flex:none;}
+.mast .dot::after{content:"P";position:absolute;inset:0;color:#fff;font-family:var(--f-display);font-weight:600;font-size:15.0px;display:flex;align-items:center;justify-content:center;}
+.mast .bname{font-weight:800;font-size:16.2px;letter-spacing:.14em;color:var(--ink);}
+.mast .bsub{font-size:10.9px;letter-spacing:.34em;color:var(--ink3);margin-top:1px;font-weight:600;}
+.mast .mright{text-align:right;font-size:11.2px;letter-spacing:.06em;color:var(--ink2);line-height:1.65;}
+.mast .mright b{color:var(--ink);font-weight:700;}
+
+.foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:6px;margin-top:9px;font-size:10.5px;letter-spacing:.05em;color:var(--ink3);flex:none;}
+.foot .pg{font-weight:700;color:var(--ink2);letter-spacing:.12em;}
+.foot b{color:var(--ink2);font-weight:600;}
+
+.eyebrow{font-size:11.7px;font-weight:700;letter-spacing:.26em;color:var(--red);text-transform:uppercase;}
+.rule-gold{height:2px;background:var(--gold);width:44px;border-radius:2px;}
+.sectlabel{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
+.sectlabel .no{font-family:var(--f-display);font-weight:600;font-size:18.0px;color:var(--red);line-height:1;}
+.sectlabel .tt{font-family:var(--f-head);font-weight:700;font-size:19.0px;color:var(--ink);letter-spacing:.01em;}
+.sectlabel .en{font-size:10.5px;letter-spacing:.24em;color:var(--ink3);font-weight:700;text-transform:uppercase;margin-left:auto;}
+.src{font-size:10.5px;color:var(--ink3);letter-spacing:.02em;margin-top:6px;}
+
+/* ================= PAGE 1 — COVER ================= */
+.cv-eyerow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:11px;}
+.cv-tickers{margin-left:auto;font-size:12.3px;color:var(--ink2);letter-spacing:.04em;font-weight:600;}
+.cv-tickers b{color:var(--ink);}
+.headline{font-family:var(--f-head);font-weight:800;color:var(--ink);font-size:53.0px;line-height:1.12;letter-spacing:-.01em;margin-top:13px;}
+.headline .hl{color:var(--red);}
+.headline .box{border-bottom:5px solid var(--gold);padding-bottom:1px;}
+.subhead{font-size:15.1px;line-height:1.75;color:var(--ink2);max-width:174mm;margin-top:16px;font-weight:450;}
+.subhead b{color:var(--ink);font-weight:700;}
+
+.judg{display:flex;gap:0;background:var(--navy);border-radius:9px;overflow:hidden;}
+.judg .lab{background:var(--red);color:#fff;font-family:var(--f-head);font-weight:800;font-size:18.0px;letter-spacing:.16em;padding:0 17px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.3;flex:none;}
+.judg .body{padding:15px 18px;color:#EDEEF2;font-size:14.2px;line-height:1.68;display:flex;align-items:center;}
+.judg .body b{color:#fff;font-weight:700;}
+.judg .body .big{color:#fff;font-family:var(--f-display);font-weight:600;}
+
+.cv-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;}
+.mcard{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:16px 16px 15px;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+.mcard .top{font-size:11.7px;font-weight:700;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;}
+.mcard .fig{font-family:var(--f-display);font-weight:600;color:var(--ink);font-size:43.5px;line-height:1;margin:11px 0 5px;letter-spacing:-.01em;}
+.mcard .fig .u{font-size:17.9px;color:var(--ink2);font-weight:600;margin-left:1px;}
+.mcard .fig.g{color:var(--green);}
+.mcard .cap{font-size:13.5px;color:var(--ink2);line-height:1.62;font-weight:500;}
+.mcard .cap b{color:var(--ink);font-weight:700;}
+.mcard .tag{position:absolute;top:15px;right:15px;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--green);}
+
+.cv-two{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.wide{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:15px 17px;display:flex;align-items:center;gap:14px;}
+.wide .ic{width:36px;height:36px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:600;font-size:19.0px;}
+.wide .ic.gold{background:var(--goldsoft);color:var(--gold);}
+.wide .ic.navy{background:#E7EAF1;color:var(--navy);}
+.wide .t{font-size:13.5px;font-weight:700;letter-spacing:.03em;color:var(--ink);margin-bottom:3px;}
+.wide .d{font-size:13.0px;color:var(--ink2);line-height:1.62;}
+.wide .d b{color:var(--red);font-weight:700;}
+.wide .d .bg{color:var(--green);font-weight:700;}
+
+.toc{display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--ink);padding-top:12px;}
+.toc .ti{padding:0 18px;border-right:1px solid var(--line);}
+.toc .ti:first-child{padding-left:0;}
+.toc .ti:last-child{border-right:none;padding-right:0;}
+.toc .tn{font-family:var(--f-display);font-weight:600;font-size:18.0px;color:var(--red);line-height:1;}
+.toc .tt2{font-family:var(--f-head);font-weight:700;font-size:15.0px;color:var(--ink);margin-top:5px;}
+.toc .td{font-size:11.7px;color:var(--ink2);margin-top:4px;line-height:1.45;}
+
+/* ================= data page shared ================= */
+.callout{border-left:4px solid var(--red);background:linear-gradient(90deg,var(--redsoft),rgba(244,229,225,0));padding:13px 16px;border-radius:0 8px 8px 0;}
+.callout .q{font-family:var(--f-head);font-weight:600;font-size:17.4px;line-height:1.62;color:var(--ink);letter-spacing:.005em;}
+.callout .q b{color:var(--red);}
+.callout.green{border-left-color:var(--green);background:linear-gradient(90deg,var(--greensoft),rgba(226,236,231,0));}
+.callout.green .q b{color:var(--green);}
+.callout.navy{border-left-color:var(--navy);background:linear-gradient(90deg,#E9ECF3,rgba(233,236,243,0));}
+
+.panel{background:var(--card);border:1px solid var(--line2);border-radius:11px;padding:17px 19px;}
+.panel-t{font-family:var(--f-head);font-weight:700;font-size:18.0px;color:var(--ink);line-height:1.35;}
+.panel-t .accent{color:var(--red);}
+.panel-sub{font-size:13.3px;color:var(--ink2);line-height:1.6;margin-top:6px;font-weight:450;}
+.panel-sub b{font-weight:700;}
+
+svg{display:block;width:100%;height:auto;overflow:visible;}
+.axlab{font-family:var(--f-body);font-size:13.2px;fill:var(--ink3);font-weight:600;}
+.ptlab{font-family:var(--f-body);font-size:15.6px;font-weight:800;}
+
+.bars{display:flex;flex-direction:column;gap:11px;margin-top:6px;}
+.bar{display:grid;grid-template-columns:78px 1fr 46px;align-items:center;gap:10px;}
+.bar .nm{font-size:13.0px;font-weight:600;color:var(--ink2);text-align:right;line-height:1.15;}
+.bar .nm b{display:block;font-size:13.7px;color:var(--ink);font-weight:700;}
+.bar .track{height:17px;background:var(--paper2);border-radius:4px;position:relative;overflow:hidden;}
+.bar .fill{height:100%;border-radius:4px;background:var(--navy2);}
+.bar.hl .fill{background:var(--green);}
+.bar .val{font-size:14.4px;font-weight:800;color:var(--ink);text-align:left;}
+.bar.hl .val{color:var(--green);}
+
+.dumb{display:flex;flex-direction:column;}
+.drow{display:grid;grid-template-columns:106px 1fr 52px;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid var(--line2);}
+.drow:last-child{border-bottom:none;}
+.drow .mk{font-size:13.7px;color:var(--ink);font-weight:700;line-height:1.2;}
+.drow .mk span{display:block;font-size:10.5px;color:var(--ink3);font-weight:600;letter-spacing:.02em;margin-top:2px;}
+.drow .tr{position:relative;height:24px;}
+.drow .base{position:absolute;top:11px;left:0;right:0;height:2px;background:var(--line);}
+.seg{position:absolute;top:10px;height:4px;background:var(--navy2);border-radius:2px;}
+.drow.hot .seg{background:var(--red);}
+.dot{position:absolute;top:6px;width:12px;height:12px;border-radius:50%;transform:translateX(-50%);}
+.dot.o{background:var(--card);border:2.5px solid var(--ink3);}
+.dot.n{background:var(--navy2);border:2.5px solid var(--navy2);}
+.drow.hot .dot.n{background:var(--red);border-color:var(--red);}
+.vlab{position:absolute;top:-7px;font-size:11.7px;font-weight:800;transform:translateX(-50%);color:var(--ink3);}
+.vlab.n{color:var(--navy);} .drow.hot .vlab.n{color:var(--red);}
+.delta{font-size:13.8px;font-weight:800;text-align:right;color:var(--navy);}
+.drow.hot .delta{color:var(--red);}
+
+.kpirow{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+.kpi{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:13px 14px;}
+.kpi .k{font-size:11.2px;font-weight:700;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;line-height:1.2;}
+.kpi .v{font-family:var(--f-display);font-weight:600;font-size:31.8px;color:var(--ink);line-height:1;margin:9px 0 5px;}
+.kpi .v .u{font-size:15.6px;color:var(--ink2);}
+.kpi .v.g{color:var(--green);}
+.kpi .s{font-size:11.4px;color:var(--ink2);line-height:1.62;}
+.kpi .s b{color:var(--ink);font-weight:700;}
+
+.split{display:grid;grid-template-columns:1.02fr 1fr;gap:13px;}
+.capband{background:var(--navy);border-radius:11px;padding:16px 18px;color:#fff;display:flex;flex-direction:column;}
+.capband .h{font-family:var(--f-head);font-weight:700;font-size:16.2px;color:#fff;display:flex;align-items:center;gap:8px;}
+.capband .h .g{color:var(--goldsoft);}
+.capstat{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.13);}
+.capstat:last-child{border-bottom:none;}
+.capstat .l{font-size:12.5px;color:#C7CCDA;line-height:1.4;max-width:60%;}
+.capstat .r{font-family:var(--f-display);font-weight:600;font-size:21.3px;color:#fff;white-space:nowrap;}
+.capstat .r .u{font-size:13.0px;color:#AEB4C6;}
+.capnote{font-size:10.7px;color:#AEB4C6;margin-top:10px;line-height:1.65;}
+
+.vecs{display:flex;flex-direction:column;gap:10px;}
+.vec{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:12px 14px;display:flex;gap:11px;align-items:flex-start;flex:1;}
+.vec .vi{font-family:var(--f-display);font-weight:600;font-size:13.2px;letter-spacing:.02em;color:var(--gold);background:var(--goldsoft);border-radius:6px;padding:5px 7px;flex:none;min-width:36px;text-align:center;}
+.vec .vt{font-size:13.5px;font-weight:700;color:var(--ink);}
+.vec .vd{font-size:12.2px;color:var(--ink2);line-height:1.62;margin-top:3px;}
+.vec .vd b{color:var(--green);font-weight:700;}
+
+/* ================= PAGE 4 ================= */
+.val2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.valcard{background:var(--card);border:1px solid var(--line2);border-radius:11px;padding:16px 18px;}
+.valcard .vh{display:flex;justify-content:space-between;align-items:center;}
+.valcard .vh .nm{font-weight:800;font-size:15.6px;color:var(--ink);letter-spacing:.02em;}
+.valcard .vh .tk{font-size:11.1px;color:var(--ink3);font-weight:600;letter-spacing:.04em;}
+.valcard .prices{display:flex;align-items:center;gap:12px;margin:13px 0 4px;flex-wrap:nowrap;white-space:nowrap;}
+.valcard .nowcol{display:flex;flex-direction:column;line-height:1.1;}
+.valcard .nowlab{font-size:11.1px;color:var(--ink3);font-weight:700;letter-spacing:.1em;}
+.valcard .nowval{font-family:var(--f-display);font-weight:600;font-size:18.0px;color:var(--ink2);margin-top:3px;}
+.valcard .arr{color:var(--ink4);font-size:17.9px;}
+.valcard .ptcol{display:flex;align-items:baseline;gap:7px;}
+.valcard .pt{font-family:var(--f-display);font-weight:600;font-size:32.9px;color:var(--green);line-height:1;}
+.valcard .up{display:inline-block;background:var(--greensoft);color:var(--green);font-size:13.2px;font-weight:800;padding:2px 8px;border-radius:100px;margin-left:2px;vertical-align:middle;}
+.valcard .meta{font-size:11.7px;color:var(--ink2);margin-top:11px;letter-spacing:.02em;font-weight:600;}
+
+.fcast{display:flex;justify-content:space-between;gap:6px;background:var(--paper2);border-radius:9px;padding:13px 8px;}
+.fcast .fc{flex:1;text-align:center;border-right:1px solid var(--line);}
+.fcast .fc:last-child{border-right:none;}
+.fcast .fc .fk{font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--ink3);text-transform:uppercase;}
+.fcast .fc .fv{font-family:var(--f-display);font-weight:600;font-size:20.2px;color:var(--ink);margin-top:4px;line-height:1;}
+.fcast .fc .fv .u{font-size:11.7px;color:var(--ink2);}
+.fcast .fc .fs{font-size:10.5px;color:var(--green);font-weight:700;margin-top:3px;}
+
+.watch{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.wbox{border-radius:10px;padding:14px 16px;}
+.wbox.up{background:var(--greensoft);border:1px solid #CADED6;}
+.wbox.dn{background:var(--redsoft);border:1px solid #EBD3CD;}
+.wbox .wh{font-family:var(--f-head);font-weight:700;font-size:15.0px;display:flex;align-items:center;gap:6px;margin-bottom:8px;}
+.wbox.up .wh{color:var(--green);} .wbox.dn .wh{color:var(--red);}
+.wbox ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.wbox li{font-size:12.7px;line-height:1.45;color:var(--ink);padding-left:13px;position:relative;font-weight:500;}
+.wbox li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;}
+.wbox.up li::before{background:var(--green);} .wbox.dn li::before{background:var(--red);}
+
+.track-chips{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+.track-chips .tl{font-size:11.7px;font-weight:700;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;margin-right:2px;}
+.tchip{font-size:12.2px;font-weight:600;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:100px;padding:5px 12px;}
+
+.qrcard{background:linear-gradient(135deg,#1B2440,#2C3860);border-radius:14px;padding:5px;box-shadow:0 6px 20px rgba(27,36,64,.18);}
+.qrinner{background:var(--card);border-radius:11px;padding:16px 18px;display:flex;align-items:center;gap:18px;}
+.qrbox{background:#fff;border:1px solid var(--line2);border-radius:12px;padding:8px;flex:none;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.qrbox img{display:block;width:40mm;height:40mm;image-rendering:crisp-edges;}
+.qrtxt{flex:1;}
+.qrtxt .qbrand{display:flex;align-items:center;gap:8px;}
+.qrtxt .qdot{width:20px;height:20px;border-radius:50%;background:var(--red);position:relative;flex:none;}
+.qrtxt .qdot::after{content:"P";position:absolute;inset:0;color:#fff;font-family:var(--f-display);font-weight:600;font-size:15.6px;display:flex;align-items:center;justify-content:center;}
+.qrtxt .qn{font-weight:800;font-size:18.0px;letter-spacing:.1em;color:var(--ink);}
+.qrtxt .qh{font-family:var(--f-head);font-weight:700;font-size:19.0px;color:var(--ink);margin-top:12px;line-height:1.35;}
+.qrtxt .qh .r{color:var(--red);}
+.qrtxt .qs{font-size:13.0px;color:var(--ink2);line-height:1.65;margin-top:7px;font-weight:500;}
+.qrtxt .qcta{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12.2px;font-weight:700;color:var(--navy);letter-spacing:.02em;}
+.qrtxt .qcta::before{content:"";width:16px;height:2px;background:var(--gold);}
+
+.disc{font-size:10.5px;color:var(--ink3);line-height:1.6;letter-spacing:.01em;margin-top:11px;}
+</style>
+</head>
+<body>
+<style>
+  /* ===== enlarged components (big/full) ===== */
+  .callout{padding:20px 24px;}
+  .callout .q{font-size:16.5px;line-height:1.64;}
+  .callout.navy .q,.callout.green .q{font-size:15.5px;line-height:1.66;}
+  .panel{padding:19px 22px;}
+  .panel-t{font-size:16.5px;}
+  .panel-sub{font-size:12.5px;line-height:1.6;}
+  .mcard{padding:19px 18px 17px;}
+  .mcard .top{font-size:11px;padding-right:58px;}
+  .mcard .fig{font-size:38px;margin:11px 0 7px;}
+  .mcard .fig .u{font-size:16px;}
+  .mcard .cap{font-size:12px;line-height:1.54;}
+  .mcard .tag{font-size:10px;}
+  .wide{padding:16px 18px;}
+  .wide .t{font-size:13.5px;margin-bottom:4px;}
+  .wide .d{font-size:12px;line-height:1.54;}
+  .wide .ic{width:42px;height:42px;font-size:20px;}
+  .judg .body{font-size:13.5px;padding:17px 20px;line-height:1.64;}
+  .judg .lab{font-size:17px;padding:0 18px;}
+  .subhead{line-height:1.68;font-size:14px;}
+  .sectlabel .tt{font-size:19px;}
+  .qrtxt .qh{font-size:18px;} .qrtxt .qs{font-size:12.5px;}
+  .qrinner{padding:13px 16px;gap:16px;}
+  .qrbox img{width:32mm;height:32mm;}
+
+  /* ===== layered framework ===== */
+  .layers{display:flex;flex-direction:column;gap:9px;margin-top:12px;}
+  .lyr{display:grid;grid-template-columns:120px 1fr;align-items:center;border-radius:11px;padding:13px 17px;border:1px solid var(--line2);background:var(--card);}
+  .lyr .ln{font-family:var(--f-head);font-weight:800;font-size:15px;color:var(--ink);line-height:1.1;}
+  .lyr .ln small{display:block;font-size:9.5px;color:var(--ink3);font-weight:600;font-family:var(--f-body);margin-top:3px;letter-spacing:.03em;}
+  .lyr .ld{font-size:12.5px;color:var(--ink2);line-height:1.5;}
+  .lyr .ld b{color:var(--ink);font-weight:700;}
+  .lyr.brain{border-left:5px solid var(--navy2);}
+  .lyr.plat{border-left:5px solid var(--gold);}
+  .lyr.comp{border-left:5px solid var(--green);background:var(--greensoft);border-color:#CADED6;}
+  .lyr.comp .ln{color:var(--green);}
+  .lyr .flag{display:inline-block;font-size:9px;font-weight:800;color:#fff;background:var(--green);border-radius:100px;padding:2px 9px;margin-left:8px;vertical-align:middle;}
+
+  /* ===== diverging YTD bar ===== */
+  .dvg{display:flex;flex-direction:column;gap:8px;margin-top:11px;}
+  .dvgr{display:grid;grid-template-columns:118px 1fr 56px;align-items:center;gap:13px;}
+  .dvgr .nm{font-size:12.5px;font-weight:700;color:var(--ink2);text-align:right;line-height:1.1;}
+  .dvgr .nm.big{color:var(--ink);font-weight:800;}
+  .dvgtk{position:relative;height:17px;background:var(--paper2);border-radius:4px;}
+  .dvgtk .zc{position:absolute;left:50%;top:-4px;bottom:-4px;width:1.5px;background:var(--ink3);z-index:2;}
+  .dvgtk .pos{position:absolute;left:50%;top:0;bottom:0;background:var(--green);border-radius:0 4px 4px 0;}
+  .dvgtk .neg{position:absolute;right:50%;top:0;bottom:0;background:var(--red);border-radius:4px 0 0 4px;}
+  .dvgr .vl{font-size:13.5px;font-weight:800;text-align:left;font-variant-numeric:tabular-nums;}
+  .dvgr .vl.p{color:var(--green);} .dvgr .vl.n{color:var(--red);}
+  .dvghd{display:flex;justify-content:space-between;font-size:10px;font-weight:700;letter-spacing:.03em;color:var(--ink3);margin-top:5px;padding:0 56px 0 118px;}
+
+  /* ===== stock scorecard ===== */
+  .stbl{border:1px solid var(--line2);border-radius:14px;overflow:hidden;background:var(--card);margin-top:12px;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+  .strow{display:grid;grid-template-columns:1.55fr 62px 0.72fr 1.75fr;align-items:center;padding:10px 20px;border-bottom:1px solid var(--line2);column-gap:11px;}
+  .strow:last-child{border-bottom:none;}
+  .strow.hd{background:var(--paper2);padding:8px 20px;}
+  .strow.hd span{font-size:9.5px;font-weight:700;letter-spacing:.03em;color:var(--ink3);}
+  .strow.hd span.c{text-align:center;} .strow.hd span.r{text-align:left;}
+  .strow.top{background:linear-gradient(90deg,var(--goldsoft),rgba(240,232,214,0));}
+  .strow .nm{font-weight:800;font-size:14px;color:var(--ink);line-height:1.08;}
+  .strow .nm small{display:block;font-size:8.5px;color:var(--ink3);font-weight:600;font-family:var(--f-body);margin-top:2px;letter-spacing:.02em;}
+  .strow .nm .star{color:var(--gold);font-size:10.5px;font-weight:800;margin-left:4px;}
+  .stbadge{justify-self:center;font-size:10.5px;font-weight:800;padding:3px 0;width:46px;text-align:center;border-radius:100px;}
+  .stbadge.ow{background:var(--greensoft);color:var(--green);}
+  .stbadge.uw{background:var(--redsoft);color:var(--redink);}
+  .strow .up{text-align:center;font-family:var(--f-body);font-variant-numeric:tabular-nums;font-size:15px;font-weight:800;color:var(--green);}
+  .strow .up.na{color:var(--gold);font-family:var(--f-head);font-size:12.5px;}
+  .strow .up.neg{color:var(--red);}
+  .strow .role{font-size:11.5px;color:var(--ink2);line-height:1.36;}
+  .strow .role b{color:var(--ink);font-weight:700;}
+
+  .disc{font-size:9.6px;line-height:1.46;margin-top:10px;}
+</style>
+
+<!-- ============================= PAGE 1 : COVER ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>机构研究 · 可视化精华</b><br>来源：J.P. Morgan 人形机器人 · 2026.08.19<br>Physical AI · Karen Li、Sunny Su 等</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="cv-eyerow">
+        <span class="eyebrow">摩根大通 · 人形机器人 · Physical AI</span>
+        <span class="cv-tickers">首选 <b>绿的谐波 · 奥比中光</b></span>
+      </div>
+      <div class="rule-gold"></div>
+      <h1 class="headline">人形机器人 <span class="hl">公开首秀</span><br>JPM 首选 <span class="box">卖铲人</span></h1>
+      <p class="subhead">Unitree <b>8月19日上市</b>，标志人形机器人从"稀缺代理"交易转向<b>真正的公开市场价格发现</b>——估值锚重置、板块进入 <b>1–6 月消化期</b>。政策强力支持（中国 <b>7万亿</b>基建与国家标准；美国算力/人才、韩国现代产业化）。JPM 判断这是"<b>按层级赢家通吃更多</b>"：现阶段最看好<b>可规模化的零部件</b>（卖铲人）。首选 <b>绿的谐波、奥比中光</b>；OW 三花/恒立（特斯拉链）与 UBTech/Estun（目标价下调）。</p>
+    </div>
+
+    <div class="judg">
+      <div class="lab"><span>核心</span><span>判断</span></div>
+      <div class="body"><div>从"讲故事"到"<span class="big">拼交付</span>"——赢家由<b>商业化落地、可靠性、量产纪律</b>定义，而非软件叙事。三层结构（大脑 / 平台 / 零部件）"各层赢家通吃更多"，现阶段最看好<b>零部件</b>。首选 <b>绿的谐波、奥比中光</b>。</div></div>
+    </div>
+
+    <div class="cv-metrics">
+      <div class="mcard">
+        <div class="tag" style="color:var(--red)">分水岭</div>
+        <div class="top">Unitree 上市</div>
+        <div class="fig">8<span class="u">/19</span></div>
+        <div class="cap">稀缺代理 → <b>真价格发现</b>；估值锚重置，板块 <b>1–6 月</b>消化期</div>
+      </div>
+      <div class="mcard">
+        <div class="tag" style="color:var(--gold)">政策支持</div>
+        <div class="top">中国投入</div>
+        <div class="fig" style="color:var(--gold)">¥7<span class="u">万亿</span></div>
+        <div class="cap">基建 + 国家标准；美国（算力/人才）、韩国（现代产业化）</div>
+      </div>
+      <div class="mcard">
+        <div class="tag" style="color:var(--green)">最看好</div>
+        <div class="top">卖铲人 · 零部件</div>
+        <div class="fig g" style="font-size:25px;line-height:1.16;margin-top:14px">绿的谐波<br>奥比中光</div>
+        <div class="cap">谐波减速器 + 机器视觉"眼睛"；直接受益多家 OEM，无单一平台风险</div>
+      </div>
+    </div>
+
+    <div class="cv-two">
+      <div class="wide">
+        <div class="ic navy">异</div>
+        <div><div class="t">Physical AI ≠ 大模型</div><div class="d">人形机器人受<b>制造/部署/安全</b>约束，无法软件级扩张 → 走"<span class="bg">智能手机 / 自动驾驶</span>"式可信度曲线</div></div>
+      </div>
+      <div class="wide">
+        <div class="ic gold">局</div>
+        <div><div class="t">中国 vs 美国：分层领导</div><div class="d">中国强在<b>供应链 / 量产 / 降本</b>（"身体"）；美国强在<span class="bg">基础模型 / 算力</span>（"大脑"）——多层布局</div></div>
+      </div>
+    </div>
+
+    <div class="toc">
+      <div class="ti"><div class="tn">02</div><div class="tt2">拐点与轮动</div><div class="td">三层结构、YTD 轮动、从稀缺到交付</div></div>
+      <div class="ti"><div class="tn">03</div><div class="tt2">选股记分牌</div><div class="td">零部件首选 · 特斯拉链 · OEM · 回避</div></div>
+      <div class="ti"><div class="tn">★</div><div class="tt2">首选 绿的谐波 · 奥比中光</div><div class="td">可规模化零部件，最干净的敞口</div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>数据以 J.P. Morgan 原报告为准 · 仅供参考，不构成投资建议</span>
+    <span class="pg">01 / 03</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 2 : INFLECTION & ROTATION ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>人形机器人 · Physical AI</b><br>J.P. Morgan · 2026.08.19</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">01</span><span class="tt">拐点与轮动</span><span class="en">Public Debut &amp; Rotation</span></div>
+      <div class="callout">
+        <div class="q">Unitree 上市把板块从"<b>稀缺代理</b>"交易带入<b>真正的价格发现</b>——催化剂从"订单/试点"回到"IPO 定价、标志性商单、自主突破"等<b>事件驱动</b>。新股供给（Unitree、智元）与估值基准需被消化，资金转向<b>更挑剔、看证据</b>。</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-t">"<span class="accent">按层赢家通吃更多</span>"——不是赢家通吃，而是分层领导</div>
+      <div class="layers">
+        <div class="lyr brain"><div class="ln">① 大脑<small>BRAIN · 美国主导</small></div><div class="ld">基础模型 · 算力 · AI 人才——软件与集成栈的差异化</div></div>
+        <div class="lyr plat"><div class="ln">② 平台<small>PLATFORM · OEM</small></div><div class="ld">Unitree · 优必选 · Estun · 特斯拉——<b>价格发现开启</b>，但需承担单一平台风险</div></div>
+        <div class="lyr comp"><div class="ln">③ 零部件<span class="flag">最看好</span><small>COMPONENTS · 中国主导</small></div><div class="ld"><b>减速器 · 视觉"眼睛" · 执行器</b>——瓶颈供给稀缺；直接受益多家 OEM 量产，是最干净的"卖铲人"敞口</div></div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:14px;">
+      <div class="panel-t">YTD 轮动：<span class="accent">零部件/自动化领涨，人形代理领跌</span>（%）</div>
+      <div class="panel-sub">资金奖励能"规模化不失毛利"的龙头；纯人形代理被抛售——JPM 认为部分<b>超跌</b>（如三花、UBTech、速腾仍 OW）。</div>
+      <div class="dvg">
+        <div class="dvgr"><div class="nm big">绿的谐波</div><div class="dvgtk"><div class="zc"></div><div class="pos" style="width:50%"></div></div><div class="vl p">+98</div></div>
+        <div class="dvgr"><div class="nm">上银 Hiwin</div><div class="dvgtk"><div class="zc"></div><div class="pos" style="width:45.9%"></div></div><div class="vl p">+90</div></div>
+        <div class="dvgr"><div class="nm">THK</div><div class="dvgtk"><div class="zc"></div><div class="pos" style="width:41.3%"></div></div><div class="vl p">+81</div></div>
+        <div class="dvgr"><div class="nm">埃斯顿 Estun</div><div class="dvgtk"><div class="zc"></div><div class="pos" style="width:35.2%"></div></div><div class="vl p">+69</div></div>
+        <div class="dvgr"><div class="nm big">优必选 UBTech</div><div class="dvgtk"><div class="zc"></div><div class="neg" style="width:12.8%"></div></div><div class="vl n">−25</div></div>
+        <div class="dvgr"><div class="nm">三花 Sanhua</div><div class="dvgtk"><div class="zc"></div><div class="neg" style="width:14.3%"></div></div><div class="vl n">−28</div></div>
+        <div class="dvgr"><div class="nm">拓普 Tuopu</div><div class="dvgtk"><div class="zc"></div><div class="neg" style="width:17.3%"></div></div><div class="vl n">−34</div></div>
+        <div class="dvgr"><div class="nm">速腾 Robosense</div><div class="dvgtk"><div class="zc"></div><div class="neg" style="width:19.9%"></div></div><div class="vl n">−39</div></div>
+      </div>
+      <div class="dvghd"><span>← 领跌（人形代理）</span><span>领涨（零部件/自动化）→</span></div>
+    </div>
+
+    <div class="callout green">
+      <div class="q"><b>从稀缺到交付</b>&nbsp;主题炒作 → <b>能力定价</b>：市场将进一步区分"平台龙头 / 零部件专家 / 应用部署"三类，各按不同指标估值。中国机器人 OEM 的 YTD 抛售，JPM 认为<b>过度</b>。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>拐点与轮动 · Public Debut &amp; Rotation</span>
+    <span class="pg">02 / 03</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 3 : SCORECARD ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>人形机器人 · Physical AI</b><br>J.P. Morgan · 2026.08.19</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">02</span><span class="tt">选股记分牌</span><span class="en">Prefer the Picks &amp; Shovels</span></div>
+      <div class="callout">
+        <div class="q"><b>最看好"卖铲人"零部件</b>——直接受益于多家 OEM 量产，无需押注单一平台。首选 <b>绿的谐波、奥比中光</b>；OEM（UBTech/Estun）维持 OW 但目标价下调（稀缺溢价消退）。韩国另偏好 OEM（现代 HMC / 起亚，均 OW）。</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="stbl">
+        <div class="strow hd"><span>标的</span><span class="c">评级</span><span class="c">目标价上行</span><span class="r">定位 · 看点</span></div>
+        <div class="strow top"><div class="nm">绿的谐波 Leader Drive<span class="star">★首选</span><small>688017.SH</small></div><div class="stbadge ow">超配</div><div class="up">+26%</div><div class="role"><b>谐波减速器</b>·YTD +98%（全球最佳）；海外经 Minth/SKF 扩张</div></div>
+        <div class="strow top"><div class="nm">奥比中光 Orbbec<span class="star">★首选</span><small>688322.SH</small></div><div class="stbadge ow">超配</div><div class="up na">首选</div><div class="role"><b>机器视觉"眼睛"</b>；单机感知含量提升的关键受益者</div></div>
+        <div class="strow"><div class="nm">速腾聚创 Robosense<small>2498.HK</small></div><div class="stbadge ow">超配</div><div class="up">+102%</div><div class="role"><b>激光雷达 / 感知</b>；YTD −39% 超跌，上行空间大</div></div>
+        <div class="strow"><div class="nm">三花智控 Sanhua<small>002050.SH · 2050.HK</small></div><div class="stbadge ow">超配</div><div class="up">+52%</div><div class="role"><b>特斯拉链</b>·热管理/执行器；有望拓展至链外</div></div>
+        <div class="strow"><div class="nm">恒立液压 Hengli<small>601100.SH</small></div><div class="stbadge ow">超配</div><div class="up">+12%</div><div class="role"><b>丝杠/液压</b>·抗跌（YTD −2%）；精密制造外溢机器人</div></div>
+        <div class="strow"><div class="nm">优必选 UBTech<small>9880.HK</small></div><div class="stbadge ow">超配</div><div class="up">+25%</div><div class="role"><b>人形 OEM</b>·目标价下调 HK$161→<b>118</b>（稀缺溢价消退）</div></div>
+        <div class="strow"><div class="nm">埃斯顿 Estun<small>002747.SH</small></div><div class="stbadge ow">超配</div><div class="up">+25%</div><div class="role"><b>工业机器人 OEM</b>·YTD +69%；风险回报更均衡</div></div>
+        <div class="strow"><div class="nm">拓普集团 Tuopu<small>601689.SH</small></div><div class="stbadge uw">低配</div><div class="up neg">−6%</div><div class="role"><b>回避</b>·执行器；估值与预期偏高</div></div>
+      </div>
+      <div class="src" style="margin-top:6px;">评级与目标价（Jun-27）以 J.P. Morgan 为准，价格与 YTD 涨跌截至 8/18；上行=目标价/现价−1。奥比中光为团队"首选"、以定位标注。</div>
+    </div>
+
+    <div>
+      <div class="qrcard" style="margin-top:4px;">
+        <div class="qrinner">
+          <div class="qrbox"><img src="qr.png" alt="THE PORT 微信二维码"></div>
+          <div class="qrtxt">
+            <div class="qbrand"><div class="qdot"></div><div class="qn">THE&nbsp;PORT</div></div>
+            <div class="qh">读懂全球投行的<span class="r">核心观点</span></div>
+            <div class="qs">扫码添加，每日获取高盛、摩根士丹利、摩根大通、瑞银等一线机构研报的精华解读与可视化速览。</div>
+            <div class="qcta">微信扫一扫 · 或长按识别二维码</div>
+          </div>
+        </div>
+      </div>
+      <div class="disc">本文基于 J.P. Morgan 于 2026-08-19《Humanoid Robot — Physical AI's public debut: Sector rotation, policy support, and the new valuation anchors》（分析师 Karen Li、Sunny Su 等）整理；评级、目标价、涨跌幅与政策数字均以原报告为准，价格截至 2026/8/18。本可视化由 THE PORT 制作，仅供参考、不构成投资建议；投资有风险，决策须谨慎。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>选股记分牌 · Prefer the Picks &amp; Shovels</span>
+    <span class="pg">03 / 03</span>
+  </div>
+</section>
+
+</body>
+</html>

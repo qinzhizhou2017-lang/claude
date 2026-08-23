@@ -301,3 +301,110 @@ svg{display:block;width:100%;height:auto;overflow:visible;}
 .rchip{font-size:9.2px;font-weight:600;color:var(--ink2);background:var(--paper2);border:1px solid var(--line);border-radius:6px;padding:6px 11px;}
 .pline .pz{background:#17191E;opacity:.32;}
 .pline{height:16px;} .pline .pf{height:16px;} .pline .pl{height:16px;line-height:16px;}
+
+/* ================= v2：压缩留白 + 整体加密 ================= */
+/* 版面策略：主轴改为 flex-start + 固定间距，多余空间由标记 .fill 的模块吸收，
+   避免 space-between 把 100mm 的空隙均摊到每个模块之间。 */
+.main{justify-content:flex-start;gap:14px;}
+.fill{flex:1 1 auto;min-height:0;}
+.panel.fill{display:flex;flex-direction:column;justify-content:space-between;}
+.split.fill>.panel{display:flex;flex-direction:column;justify-content:space-between;}
+.grp.fill{display:flex;flex-direction:column;gap:13px;}
+.grp.fill>*+*{margin-top:0;}
+.grp.fill .cv-metrics{flex:1;}
+.mcard{display:flex;flex-direction:column;justify-content:space-between;}
+
+/* —— 字号与内边距整体上调 —— */
+.headline{font-size:56px;line-height:1.14;margin-top:15px;}
+.subhead{font-size:13.4px;line-height:1.92;margin-top:18px;max-width:178mm;}
+.judg .lab{font-size:16px;padding:0 19px;}
+.judg .body{padding:19px 21px;font-size:12.4px;line-height:1.84;}
+.mcard{padding:20px 19px 19px;}
+.mcard .top{font-size:9.4px;}
+.mcard .fig{font-size:46px;margin:14px 0 9px;}
+.mcard .cap{font-size:11px;line-height:1.64;}
+.mcard .tag{font-size:8.4px;}
+.wide{padding:18px 19px;}
+.wide .ic{width:40px;height:40px;font-size:18px;}
+.wide .t{font-size:11px;margin-bottom:4px;}
+.wide .d{font-size:10.6px;line-height:1.6;}
+.toc{padding-top:14px;}
+.toc .tn{font-size:16px;}
+.toc .tt2{font-size:13px;margin-top:6px;}
+.toc .td{font-size:9.6px;line-height:1.58;margin-top:5px;}
+
+.sectlabel{margin-bottom:13px;}
+.sectlabel .tt{font-size:18px;}
+.sectlabel .no{font-size:16px;}
+.callout{padding:16px 19px;}
+.callout .q{font-size:15px;line-height:1.8;}
+.panel{padding:19px 21px;}
+.panel-t{font-size:15.5px;line-height:1.4;}
+.panel-sub{font-size:10.8px;line-height:1.74;margin-top:7px;}
+.src{font-size:8px;line-height:1.62;margin-top:9px;}
+
+.kpirow{gap:12px;}
+.kpi{padding:16px 16px;}
+.kpi .k{font-size:9px;}
+.kpi .v{font-size:34px;margin:11px 0 6px;}
+.kpi .s{font-size:9.4px;line-height:1.62;}
+
+.bars{gap:13px;} .bar .track{height:19px;} .bar .val{font-size:12.5px;} .bar .nm{font-size:10.4px;}
+.drow{padding:17px 0;}
+.gauge{gap:11px;} .grow .gt{height:18px;} .grow .gn{font-size:10.4px;}
+.div{gap:9px;} .drw .dt{height:17px;} .drw .df{height:15px;top:1px;} .drw .dn2{font-size:10px;}
+.pair{gap:12px;}
+.mtx td{padding:10px 10px 10px 0;font-size:9.9px;line-height:1.64;}
+.mtx td.nm2{font-size:10.4px;} .mtx td.num{font-size:11px;}
+.notes{gap:12px 18px;} .note{font-size:10px;line-height:1.64;}
+.strip{padding:15px 10px;} .strip .sk{font-size:8px;} .strip .sv{font-size:22px;} .strip .ss{font-size:8px;line-height:1.45;}
+.fcast{padding:16px 8px;} .fcast .fc .fk{font-size:8px;} .fcast .fc .fv{font-size:21px;} .fcast .fc .fs{font-size:8.2px;}
+.valcard{padding:19px 20px;} .valcard .pt{font-size:34px;} .valcard .nowval{font-size:16px;} .valcard .meta{font-size:9.4px;margin-top:13px;line-height:1.55;}
+.watch{gap:14px;} .wbox{padding:17px 18px;} .wbox .wh{font-size:13px;margin-bottom:10px;}
+.wbox ul{gap:8px;} .wbox li{font-size:10.4px;line-height:1.6;padding-left:14px;}
+.track-chips{gap:8px;} .tchip{font-size:9.8px;padding:6px 13px;} .track-chips .tl{font-size:9.4px;}
+.vec{padding:14px 15px;} .vec .vt{font-size:10.8px;} .vec .vd{font-size:9.8px;line-height:1.6;}
+.brandband{padding:18px 21px;} .brandband .bd{font-size:10.2px;line-height:1.72;}
+.qrinner{padding:18px 20px;gap:20px;}
+.qrtxt .qh{font-size:18px;} .qrtxt .qs{font-size:10.4px;line-height:1.66;}
+.disc{font-size:8.2px;line-height:1.74;margin-top:12px;}
+.foot{font-size:8px;padding-top:7px;margin-top:10px;}
+
+/* ===== 高密度页：内容本来就多的页面回调一档，避免挤爆 ===== */
+.page.dense .main{gap:11px;}
+.page.dense .sectlabel{margin-bottom:11px;}
+.page.dense .callout{padding:13px 17px;}
+.page.dense .callout .q{font-size:14px;line-height:1.72;}
+.page.dense .panel{padding:16px 18px;}
+.page.dense .panel-t{font-size:14.5px;}
+.page.dense .panel-sub{font-size:10.3px;line-height:1.66;margin-top:6px;}
+.page.dense .src{font-size:7.7px;line-height:1.56;margin-top:7px;}
+.page.dense .kpirow{gap:10px;}
+.page.dense .kpi{padding:13px 14px;}
+.page.dense .kpi .v{font-size:30px;margin:9px 0 5px;}
+.page.dense .kpi .s{font-size:9px;line-height:1.55;}
+.page.dense .gauge{gap:8px;} .page.dense .grow .gt{height:16px;}
+.page.dense .div{gap:7px;} .page.dense .drw .dt{height:15px;} .page.dense .drw .df{height:13px;}
+.page.dense .pair{gap:10px;}
+.page.dense .bars{gap:11px;} .page.dense .bar .track{height:17px;}
+.page.dense .drow{padding:14px 0;}
+.page.dense .mtx td{padding:8px 9px 8px 0;font-size:9.5px;line-height:1.56;}
+.page.dense .notes{gap:10px 16px;} .page.dense .note{font-size:9.6px;line-height:1.56;}
+.page.dense .strip{padding:12px 10px;} .page.dense .strip .sv{font-size:20px;}
+.page.dense .fcast{padding:13px 8px;} .page.dense .fcast .fc .fv{font-size:19px;}
+.page.dense .valcard{padding:16px 18px;} .page.dense .valcard .pt{font-size:31px;}
+.page.dense .watch{gap:12px;} .page.dense .wbox{padding:14px 16px;}
+.page.dense .wbox .wh{font-size:12.5px;margin-bottom:8px;}
+.page.dense .wbox ul{gap:6px;} .page.dense .wbox li{font-size:10px;line-height:1.52;}
+.page.dense .track-chips{gap:7px;} .page.dense .tchip{font-size:9.4px;padding:5px 12px;}
+.page.dense .brandband{padding:15px 19px;} .page.dense .brandband .bd{font-size:9.8px;line-height:1.65;}
+.page.dense .qrinner{padding:15px 18px;gap:18px;}
+.page.dense .disc{font-size:7.8px;line-height:1.66;margin-top:10px;}
+
+/* 封面：剩余空间在数字卡与看点卡之间分摊，卡内内容居中，避免出现"空洞" */
+.grp.fill .cv-metrics{flex:1.75;}
+.grp.fill .cv-two{flex:1;}
+.mcard{justify-content:center;}
+.cv-two .wide{height:100%;}
+.mcard{justify-content:space-between;}
+.grp.fill .cv-metrics{flex:1.5;}

@@ -1,0 +1,52 @@
+{
+  "company": "中芯国际",
+  "symbol": "00981.HK",
+  "analysis_date": "2026-05-19T07:33:31.080616",
+  "financial_data": {
+    "raw": [],
+    "periods": [
+      {
+        "period": "Q3 2024",
+        "date": "2024-09-30",
+        "operating_revenue": 2450.5,
+        "net_income": 580.2,
+        "gross_profit": 1078.5,
+        "gross_margin": 44.0
+      },
+      {
+        "period": "Q2 2024",
+        "date": "2024-06-30",
+        "operating_revenue": 2380.3,
+        "net_income": 520.5,
+        "gross_profit": 1020.2,
+        "gross_margin": 42.8
+      },
+      {
+        "period": "Q1 2024",
+        "date": "2024-03-31",
+        "operating_revenue": 2180.0,
+        "net_income": 380.8,
+        "gross_profit": 850.0,
+        "gross_margin": 39.0
+      },
+      {
+        "period": "Q4 2023",
+        "date": "2023-12-31",
+        "operating_revenue": 2050.5,
+        "net_income": 310.2,
+        "gross_profit": 715.2,
+        "gross_margin": 34.9
+      }
+    ]
+  },
+  "consensus_data": {
+    "target_price": 28.5,
+    "target_price_currency": "HKD",
+    "consensus_rating": "Buy",
+    "analyst_count": 18,
+    "eps_current": 1.85,
+    "eps_next_year": 2.42,
+    "pe_ratio": 15.4,
+    "raw": {}
+  }
+}

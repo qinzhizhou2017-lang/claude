@@ -1,0 +1,1333 @@
+
+===== PAGE 1/15 =====
+as-stock-information
+
+as-stock-information项目架构说明
+
+本文与stock-information-data架构说明同一格式，方便对照。as-stock-information是cms平台资讯链路的对外接入层（AS=
+
+Anti-corruption/AggregationService），自身不持有数据，只做请求路由+i18n+访客判定。
+
+如何查看本文档的图
+
+含Mermaid图，启用方式：IDEA装
+Mermaid插件、VSCode装
+MarkdownPreviewMermaidSupport、GitLab/GitHub原生支
+
+持，或粘贴到https://mermaid.live临时预览。
+
+1.项目概述
+
+as-stock-information 是cms平台资讯类对外API网关，端口1217，应用名/Apollo app.id 都是 as-stock-
+
+information 。在网关层（ sys.notoken.server-name=as_stock_information ）配置为免token服务，对外暴露
+
+给APP与运营后台。
+
+核心职责（极简）：
+•
+接收外部HTTP请求（资讯列表、公告、卓锐洞察、要闻轮播、自选股资讯、路透token等）。
+•
+解析 userId / lang HTTPHeader做访客判定+多语言路由。
+•
+通过Feign把请求转发到内部业务服务：
+◦
+stock-information （端口1214）——14个Feign接口，承担绝大多数业务。
+◦
+stock-information-data （端口1959）——仅1个Feign接口（路透token查询）。
+•
+完全不持有数据库、缓存、消息；不做任何持久化；只做i18n包装和返回结果包装。
+
+启动类：AsInformationApplication.java， @EnableEurekaClient + @EnableFeignClients(basePackages=
+
+{"com.zhuorui.*.facade"}) + @EnableHystrix + @EnableApolloConfig 。
+
+2.数据流转
+
+内部业务服务
+
+as-stock-information:1217
+
+平台网关外部调用方
+
+14个Feign接口
+
+(NewsInfoFacade/
+
+AnnouncementInfoFacade/
+StockImportantNewsFacade
+
+/TopicFacade...)
+
+1个Feign接口
+
+(ReutersFacade.getCurrentToken)
+
+App/移动端
+
+运营后台
+
+H5/Web
+
+zhuorui-gateway
+(根据sys.notoken跳过
+
+token校验)
+
+Controller层
+
+14个Controller
+
+≈50+HTTPEndpoint
+
+VisitorContext.isVisitor(userId)
+
+访客判定
+
+Feign客戶端
+
+(由facadejar提供)
+
+stock-information:1214
+(资讯/公告主存储+业务)
+
+stock-information-data
+
+:1959
+(后台拉取+路透Token)
+
+视图
+
+数据流的几个特点
+
+点 说明
+
+无数据库 pom.xml不引入 mysql-component /
+
+mongo-component / redis-component /
+
+===== PAGE 2/15 =====
+mq-component ，只引入 springcloud-
+
+component + as-component +两个
+
+facade。
+
+无缓存 没有Caffeine/Redis客戶端，缓存逻辑全部在
+
+stock-information 那一侧。
+
+无i18n资源外置 spring.messages.basename=static/i18n
+
+/messages ，多语言是把 lang Header透传
+
+给后端服务，本服务自身基本不解析消息文案。
+
+访客判定前置 VisitorContext.isVisitor(userId) ：
+
+userId Header为空→视为未登录访客；判
+
+定结果作为参数（ notLogin /
+
+notLoginLang ）透传给后端，让后端按访客
+
+口径返回数据（屏蔽某些字段或限制内容）。
+
+@NoToken 注解 来自 as-component ；标注后该接口在网关那
+
+一侧免token校验，访客也可直接调用。绝大
+
+多数接口都带这个注解。
+
+3.系统架构
+
+===== PAGE 3/15 =====
+
+
+===== PAGE 4/15 =====
+i d 契约
+
+对外HTTP（Controller）
+
+NewsInfoController
+/api/news/*
+
+AnnouncementInfoController
+/api/announcement/*
+
+InformationListController
+/api/important_news/*
+
+StockImportantNewsController
+/api/info/important/*
+
+TopicInfoController
+/api/topic/*
+
+StockNewsFlashController
+/api/info/flash/*
+
+StockInfoSelectController
+/api/info/selected/*
+
+StockInfoDetailController
+/api/info/detail
+
+StockInfoHoldPositionController
+/api/info/hold_position/*
+
+StockConomicCalendarController
+/api/economic/*
+
+ReutersTokenController
+/api/reuters/token/*
+
+视图
+
+===== PAGE 5/15 =====
+内部业务服务
+
+FeignFacade契约
+
+工具/装配
+
+VisitorContext
+
+NoToken注解
+
+来自as-component
+
+i18n:messages.properties
+static/i18n
+
+stock-information-facade
+14个Facade
+
+stock-information-data-
+facade
+ReutersFacade
+
+stock-information:1214
+(承担绝大多数业务)
+
+stock-information-data
+
+:1959
+(仅Reuterstoken查询)
+
+关键依赖（pom.xml）
+
+代码块
+
+springcloud-component # Eureka + Feign + Hystrix + Apollo 一揽子
+
+as-component # @NoToken / 通用过滤器 / i18n 工具
+
+stock-information-facade # 14 个 Feign（核心）
+
+stock-information-data-facade # ReutersFacade
+
+test-component # TestNG（测试期）
+
+依赖只有5个。这意味着该服务的build/启动/内存占用都比stock-information轻量，重启对线上风险极低。
+
+4.部署形态
+
+
+
+1
+2
+3
+4
+5
+
+===== PAGE 6/15 =====
+内部业务服务
+
+Eureka/Apollo
+
+注册
+
+拉配置
+
+Feign
+
+Feign
+
+as-stock-information实例
+
+（多实例横向扩展）
+
+Node1:1217 Node2:1217 NodeN:1217 
+Eureka
+
+Apollo
+
+stock-information:1214
+
+stock-information-data
+
+:1959
+
+zhuorui-gateway
+
+视图
+
+配置要点（bootstrap.yml）
+•
+默认端口1217，应用名 as-stock-information ，Apollo app.id=as-stock-information 。
+•
+Web容器Undertow： io-threads=20, worker-threads=32 （与平台其他服务一致）。
+•
+Hystrix： timeoutInMilliseconds=9000 ， coreSize=100 ，半隔离 SEMAPHORE ，
+
+maxConcurrentRequests=1000 。
+•
+Ribbon： ReadTimeout=3000ms, ConnectTimeout=1000ms 。
+•
+sys.notoken.server-name=as_stock_information ：网关层据此判定本服务为免token服务。
+•
+Profile： local / dev / pre / test / prod 。 prod 仅注入Eureka/Apollo地址，业务相关配置全部通过Apollo下
+
+发。
+
+部署上的好处：
+
+1. 无状态：可任意水平扩展；任何一个实例挂掉都无数据丢失。
+
+2. 依赖少：发布回滚速度快。
+
+3. 故障域窄：本服务故障不影响内部消费链路（ stock-information-data 拉取/入库/ notification 推送等都不经过
+
+本服务）。
+
+5.业务范围
+
+按Controller维度列出所有对外HTTP接口及其转发去向。 /api/... 是该Controller路由前缀，单元粒度的接口路径按
+
+Facade接口对应。
+
+5.0APP资讯页↔AS接口映射（最常用场景）
+
+APP「资讯」一级Tab的页面结构（与原型图对照）：
+
+代码块
+
+顶部一级 Tab ：资讯 | 社区 | 视频 ← APP 主导航
+
+资讯页二级 Tab ：自选 | 卓锐洞察 | 要闻 | 快讯 | 加密货币 | 新股 | 宏观 [≡ 更多]
+
+二级 Tab 下筛选 ：新闻 ▾ | 所有公告 ▾ | 评级 ← 内容类型筛选 chip
+
+1
+2
+3
+
+===== PAGE 7/15 =====
+右上：全部 ▾（市场筛选）
+
+整个资讯页只用4个核心接口——这是本服务流量的80%+。其它Controller仍提供的接口（要闻独立链路、自选selected、个股
+
+详情等）属于历史/个股详情页/其他端入口，不参与当前APP主资讯页：
+
+APPUI元素 ASHTTP接口 ASController ASFacade（转发目
+
+标）
+
+Tab：自选/卓锐洞察
+
+/要闻/加密货币/新
+
+股/宏观（及≡展开
+
+的港股/美股/异动
+
+等）→chip「新闻」
+「评级」
+
+POST
+
+/api/news/v1/lis
+
+t 
+
+NewsInfoController NewsInfoFacade.g
+
+etList 
+
+Tab：快讯 POST
+
+/api/news/v1/fast
+
+_list 
+
+NewsInfoControll
+
+er 
+
+NewsInfoFacade.p
+
+ullFastNewsList 
+
+Tab：自选→chip
+
+「所有公告」
+
+POST
+
+/api/announcement
+
+/v1/list 
+
+AnnouncementInfoC
+ontroller
+
+AnnouncementInfo
+
+Facade.announceme
+
+ntList 
+
+Tab：卓锐洞察→顶
+
+部首推（banner+
+
+hot）
+
+POST
+
+/api/news/v1/get_
+
+recommend 
+
+NewsInfoControll
+
+er 
+
+NewsInfoFacade.g
+
+etRecommend 
+
+资讯页的主列表只靠/api/news/v1/list（含卓锐洞察Tab，传type=14即ZHUORUI_LOOKS_AT_THE_MARKET卓锐看市）+
+
+/api/news/v1/fast_list（快讯专Tab）+/api/announcement/v1/list（公告chip）这3个接
+
+口。/api/news/v1/get_recommend只是卓锐洞察Tab顶部"首推"模块的副接口（服务端帮APP预置isRecommend=1+
+
+type=14，并按recommended_bit拆banner/hot），本质上仍是同一份NewsDao.pullNewsList。
+
+列表项点击进入详情/AI补全：
+
+行为 ASHTTP接口 转发目标
+
+点列表项进详情页 POST
+
+/api/news/v1/content 
+
+NewsInfoFacade.content 
+
+详情页底部「AI助手相关资
+
+讯」
+
+POST
+
+/api/news/v1/ai_make_up 
+
+NewsInfoFacade.aiMakeUp
+
+News 
+
+列表项关联个股的实时价格
+
+（如截图里 谷歌-C
+
+397.050 +0.44% ）
+
+不走本服务 APP拿到 news.codes 后单
+
+独调 stock-market-* 服务
+刷价格
+
+关键约定
+
+1. 要闻Tab不再走RedisZSet独立链路：当前APP「要闻」二级Tab就是普通Tab，与加密货币/新股/宏观一样走
+
+/api/news/v1/list ，靠 type=MAJOR_NEWS(0) 区分。 InformationListController 
+
+( /api/important_news/* )与 StockInfoSelectController ( /api/info/selected/* )仍存在但当前主资讯
+
+页未使用，按历史/其他端入口对待。
+
+2. 筛选维度全部塞进请求体：Tab→ type （卓锐洞察=14、要闻=0、加密货币=15、新股=6、宏观=11、港股=1、美股=2、异动
+
+=5、AI看盘=7）；自选Tab→ selectedCodes （用戶自选股ts_code列表）；右上「全部▾」市场筛选→ market （1港
+
+股/2美股/3沪深）；chip「评级」→ type=RATING(10) ；chip「新闻」→ type=NEWS(8) 或不传type；chip「所有
+
+公告」→切到 /api/announcement/v1/list 。
+
+4
+
+===== PAGE 8/15 =====
+3. 「卓锐洞察Tab」分两块：上半部分首推（banner+hot）调 /api/news/v1/get_recommend （服务端预置
+
+isRecommend=1 + type=14 ）；下半部分常规列表与其它Tab一样调 /api/news/v1/list + type=14 ，只是不带
+
+isRecommend 过滤。
+
+4. 「卓锐洞察Tab」与「卓锐洞察推送」是两件事：Tab读Mongo t_news 中 type=14 （卓锐看市）的资讯，拉取式；后台
+
+运营手工发起的「卓锐洞察推送」走SI的 news_push_centre 表+ PushNewsHandler.PUSH_NEWS_ZY 定时塞通知中
+
+心，与Tab完全两条路径（详见stock-information-data架构§4.4）。
+
+5. 自选Tab需登录：访客（ VisitorContext.isVisitor(userId)==true ）情况下 notLogin=true 透传到SI；自
+
+选Tab因没有 selectedCodes 通常前端会拦截不发请求；其余Tab全部带 @NoToken ，访客可直接看（部分付费内容如
+
+路透资讯由 notLogin=true 在DAO层过滤）。
+
+6. 下拉刷新/上拉加载：以请求体里的 pubTime / newsId 作为游标，不靠path区分last/old――与历史
+
+/api/important_news/v1/all_info_list_new  /_old 那套两路接口不同。
+
+5.1Controller一览
+
+# Controller URL前缀 转发到的
+
+Facade
+
+主资讯页 用途
+
+1 NewsInfoCo
+ntroller
+
+/api/news  NewsInfoFa
+
+cade +
+
+StockImpor
+
+tantNewsFa
+
+cade 
+
+✅ 资讯页主力：
+
+list （7
+
+Tab+chip共
+
+用主列表，卓
+
+锐洞察传
+
+type=14 ）
+
+/
+
+fast_list
+
+（快讯
+
+Tab）；
+
+get_recomm
+
+end 仅卓锐
+
+洞察Tab顶部
+
+首推副接口；
+
+外加
+
+content /
+
+ai_make_u
+
+p /
+
+get_carous
+
+el_list /
+
+topic_lis
+
+t /
+
+related_to
+
+pic_news 
+
+2 Announceme
+ntInfoContro
+ller
+
+/api/annou
+
+ncement 
+
+Announceme
+
+ntInfoFaca
+
+de 
+
+✅ 资讯页公告
+
+chip： /v1/
+
+list （带
+
+selectedCo
+
+des ），及详
+
+情
+
+/v1/conten
+
+t 、个股详情
+
+页的
+
+/v1/import
+
+ant_list 
+
+3 InformationL
+istController
+
+/api/impor
+
+tant_news 
+
+AllInforma
+
+tionListFa
+
+❌（历史） 早期「要闻」
+
+Tab独立
+
+===== PAGE 9/15 =====
+cade  RedisZSet链
+
+路
+
+（ all_info
+
+_list_new 
+
+/ _old ）；
+
+当前主资讯页
+
+改走
+
+/api/news/
+
+v1/list ，
+
+但接口保留以
+
+兼容老端
+
+4 StockImport
+antNewsCon
+troller
+
+/api/info/
+
+important 
+
+StockImpor
+
+tantNewsFa
+
+cade 
+
+❌ 个股详情页
+
+的"重要资
+
+讯"模块（按
+
+ts/code取该
+
+股的要闻）
+
+5 TopicInfoCon
+troller
+
+/api/topi
+
+c 
+
+TopicFacad
+
+e +
+
+ConTopicFa
+
+cade 
+
+❌ 主题列表/主
+
+题详情/主题
+
+分类（如"风
+
+险早知
+
+道"、"机会风
+
+向标"）
+
+6 StockNewsFl
+ashControlle
+r
+
+/api/info/
+
+flash 
+
+StockNewsF
+
+lashFacade 
+
+❌ 7×24快讯流
+
+（独立快讯
+
+页/加密货币
+
+快讯页备用）
+
+7 StockInfoSel
+ectController
+
+/api/info/
+
+selected 
+
+StockInfoS
+
+electFacad
+
+e 
+
+❌（历史） 早期自选Tab
+
+专用
+
+get_last 
+
+/
+
+get_old ；
+
+当前自选Tab
+
+改走
+
+/api/news/
+
+v1/list?
+
+selectedCo
+
+des=... ，
+
+本接口保留
+
+8 StockInfoDet
+ailController
+
+/api/info  StockInfoD
+
+etailFacad
+
+e 
+
+❌ 个股详情页的
+
+资讯聚合（资
+
+讯+公告+异
+
+动一并返回）
+
+9 StockInfoHol
+dPositionCo
+ntroller
+
+/api/info/
+
+hold_posit
+
+ion 
+
+StockInfoH
+
+oldPositio
+
+nFacade 
+
+❌ 持仓页的相关
+
+资讯（按持仓
+
+股票拉资讯）
+
+10 StockConom
+icCalendarC
+ontroller
+
+/api/econo
+
+mic 
+
+StockConom
+
+icCalendar
+
+Facade 
+
+❌ 经济日历（财
+
+经事件日程）
+
+11 ReutersToke
+nController
+
+/api/reute
+
+rs/token 
+
+ReutersFac
+
+ade （来自
+
+stock-
+information-
+
+❌ 路透Token
+
+查询（不是
+
+APP用，是给
+
+富文本组件等
+
+内部调用）
+
+===== PAGE 10/15 =====
+data-
+facade）
+
+当前APP资讯主页（原型图所示）只调#1+#2两个Controller。#3/#7是同一页的历史链路，保留但不再被主流量打到。
+
+5.24个核心接口的请求转发链路
+
+A/B/C/D是APP资讯主页的全部出口；其中A单接口承担7个Tab的全部主列表流量（含卓锐洞察Tab的下半部分常规列
+
+表），B只是卓锐洞察Tab顶部"首推"模块的副接口。
+
+A.通用资讯列表（ POST /api/news/v1/list ）——自选/卓锐洞察/要闻/加密货币/新股/宏观等共用
+
+MongoDBt_news/MySQLstock-informationas-stock-informationzhuorui-gatewayApp
+
+MongoDBt_news/MySQLstock-informationas-stock-informationzhuorui-gatewayApp
+POST/api/news/v1/list
+Header:X-User-Id/Accept-Language
+Body:{type,selectedCodes?,market?,pubTime?,newsId?}
+
+1
+
+透传（@NoToken免token）
+
+2
+
+VisitorContext.isVisitor(userId)
+
+→newsReqPageVo.notLogin=true/false
+
+3
+
+FeignNewsInfoFacade.getList(lang,vo)
+
+4
+
+NewsInfoController→NewsDataService.pullNewsList
+
+5
+
+NewsDao.pullNewsList(vo)
+
+按type/selectedCodes/market过滤
+
+notLogin=true时过滤路透社等付费源
+
+6
+
+List<NewsPo>
+
+7
+
+拼H5URL+多语言裁剪+关联股票名/主题
+
+8
+
+ApiResponse<List<NewsDto>>
+
+9
+
+JSON
+
+10
+
+视图
+
+B.卓锐洞察Tab顶部首推（ POST /api/news/v1/get_recommend ）——副接口，Tab主列表仍走A
+
+
+
+===== PAGE 11/15 =====
+MongoDBt_newsstock-informationas-stock-informationApp
+
+MongoDBt_newsstock-informationas-stock-informationApp
+POST/api/news/v1/get_recommend
+
+1
+
+VisitorContext.isVisitor(userId)
+
+2
+
+FeignNewsInfoFacade.getRecommend(lang,notLogin)
+(notLogin通过Header透传)
+
+3
+
+NewsDataService.getRecommend
+
+构造vo:isRecommend=1,type=14(卓锐看市)
+
+4
+
+NewsDao.pullNewsList(vo)
+
+5
+
+List<NewsPo>
+
+6
+
+按recommended_bit拆分banner(=1)/hot(=2)
+banner用bannerImage覆盖themeImg
+
+7
+
+ApiResponse<NewsRecommendDTO{banner,hot}>
+
+8
+
+JSON
+
+9
+
+视图
+
+C.快讯（ POST /api/news/v1/fast_list ）
+
+MongoDBt_newsstock-informationas-stock-informationApp
+
+MongoDBt_newsstock-informationas-stock-informationApp
+POST/api/news/v1/fast_list
+Body:{type=FAST(3),subType?,pubTime?,newsId?}
+
+1
+
+FeignNewsInfoFacade.pullFastNewsList(lang,vo)
+
+2
+
+NewsDataService.pullFastNewsList
+
+3
+
+NewsDao.pullNewsList(vo)
+
+4
+
+List<NewsPo>
+
+5
+
+removeHtmlTag(content)+多语言裁剪
+
+（快讯不附主题/关联股票名）
+
+6
+
+ApiResponse<List<NewsDto>>
+
+7
+
+JSON
+
+8
+
+视图
+
+D.自选股公告（ POST /api/announcement/v1/list ）——自选Tab下「所有公告」chip
+
+===== PAGE 12/15 =====
+MySQL公告库stock-informationas-stock-informationApp
+
+MySQL公告库stock-informationas-stock-informationApp
+POST/api/announcement/v1/list
+Body:{selectedCodes/code,market?,category?,pubTime?}
+
+1
+
+FeignAnnouncementInfoFacade.announcementList(lang,vo)
+
+2
+
+AnnouncementInfoController参数校验
+
+(code与selectedCodes至少一个非空)
+
+3
+
+AnnouncementInitDataService.listAnnouncement
+
+按market(1港/2美/3沪深)切对应数据源
+
+4
+
+查公告表
+
+5
+
+List<AnnouncementPo>
+
+6
+
+ApiResponse<List<AnnouncementDto>>
+
+7
+
+JSON
+
+8
+
+视图
+
+E.路透Token查询（ POST /api/reuters/token/v1/current ）——唯一指向 -data 
+
+
+
+Redisstock-information-dataas-stock-information调用方
+
+Redisstock-information-dataas-stock-information调用方
+
+POST/api/reuters/token/v1/current
+
+1
+
+FeignReutersFacade.getCurrentToken
+
+2
+
+ReutersTokenManager读Redis
+
+3
+
+Token+剩余秒数
+
+4
+
+ApiResponse
+
+5
+
+JSON
+
+6
+
+视图
+
+E是给富文本组件等内部用，不是APP直接调。AS本身只做i18n+访客判定，没有缓存/持久化/业务判断。
+
+5.3访客与登录态如何流到后端
+•
+请求侧： X-User-Id Header由网关注入（已登录用戶）或为空（访客）。
+•
+AS侧： VisitorContext.isVisitor(userId) （VisitorContext.java）做唯一判定。
+•
+下游侧：把判定结果写到 XxxReqVo.notLogin （请求体字段）或 notLogin Header一并发给 stock-
+
+information ，后端服务不再做登录态判定，只看 notLogin 控制返回粒度。
+
+这种"访客判定只在AS边界发生"的设计，使后端服务可以保持纯业务，未登录/已登录返回的差异统一收敛在AS入口处可控。
+
+===== PAGE 13/15 =====
+5.4没有的能力（与stock-information/-data对比）
+
+能力 as-stock-information
+
+数据库读写 ❌
+
+Redis缓存读写 ❌
+
+MongoDB读写 ❌
+
+Kafka/RabbitMQ生产消费 ❌
+
+XXL-Job定时任务 ❌
+
+资讯抓取/公告抓取 ❌
+
+业务实体（PO） ❌
+
+多数据源切面 ❌
+
+OSS上传 ❌
+
+6.代码模块
+
+代码块
+
+as-stock-information/
+
+├── pom.xml # 仅 5 个依赖
+
+├── src/main/java/com/zhuorui/asstockinformation/
+
+│ ├── AsInformationApplication.java # 启动类
+
+│ ├── config/
+
+│ │ └── package-info.java # 占位（无实际配置类）
+
+│ ├── controller/ # 11 个 Controller，全部 @RestController
+
+│ │ ├── NewsInfoController.java
+
+│ │ ├── AnnouncementInfoController.java
+
+│ │ ├── InformationListController.java
+
+│ │ ├── StockImportantNewsController.java
+
+│ │ ├── TopicInfoController.java
+
+│ │ ├── StockNewsFlashController.java
+
+│ │ ├── StockInfoSelectController.java
+
+│ │ ├── StockInfoDetailController.java
+
+│ │ ├── StockInfoHoldPositionController.java
+
+│ │ ├── StockConomicCalendarController.java
+
+│ │ └── ReutersTokenController.java
+
+│ └── util/
+
+│ └── VisitorContext.java # 唯一工具类，访客判定
+
+└── src/main/resources/
+
+├── bootstrap.yml + bootstrap-{profile}.yml
+
+└── log4j2-boot-{profile}.xml
+
+设计上的约定
+•
+Controller只做转发： @RestController 接收HTTP→调一个 *Facade →返回。任何业务判断（如"该用戶是否能看这
+
+条VIP资讯"）都在后端，不在这里。
+•
+不持有Service： controller/service/dao 三层结构里的下两层在AS不存在。
+•
+i18n透传： Accept-Language / lang Header解析为字符串透传给后端，AS自己不维护语言资源
+
+（ spring.messages.basename 是spring默认值，没有真正使用）。
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+
+===== PAGE 14/15 =====
+•未来新增接口的步骤：
+
+a. 在 stock-information-facade （或 -data-facade ）里加 @FeignClient 方法；
+
+b. 在 stock-information （或 -data ）里实现对应 @RestController ；
+
+c. 在AS这边加一个薄controller方法，把 lang / userId 透传过去；
+
+d. 加 @NoToken 如果走访客流量。
+
+7.实体ER图
+
+本服务无实体——所有PO/Mongo文档/RedisKey都属于 stock-information 或 stock-information-data 。详细
+
+ER图请参考：
+•
+stock-information-data架构说明§7实体ER图
+
+AS接收的请求体/响应体DTO都来自 stock-information-facade jar：
+
+DTO类（来自facadejar） 用途
+
+NewsDto / MakeUpNewsDto /
+
+NewsRecommendDTO 
+
+资讯返回体
+
+NewsReqPageVo / NewsReqVo  资讯请求体
+
+AnnouncementDto / AnnouncementReqVo  公告请求/返回
+
+ImportantBannerDto  要闻轮播图
+
+StockBaseInformationDto /
+
+InfoListTypeRequestVo 
+
+自选股资讯
+
+InfoDetailDto （来自model-
+component）
+
+个股资讯详情
+
+8.与兄弟服务的关系
+
+资讯三件套
+
+14个Feign接口
+
+ReutersFacade
+(token查询)
+
+写
+
+读
+
+写
+
+as-stock-information:1217
+
+对外网关层
+
+(本服务)
+
+stock-information:1214
+
+资讯主存储+业务
+
++历史的拉取链路（与-
+data重复）
+
+stock-information-data
+
+:1959
+
+新资讯源拉取+路透+去重
+
++XXL-Job定时任务
+
+共享存储
+
+MySQL/Mongo/Redis
+
+视图
+
+职责切分（与本仓库其他两个服务对照）：
+
+===== PAGE 15/15 =====
+维度 as-stock-information stock-information stock-information-
+data
+
+端口 1217 1214 1959
+
+主要角色 对外API网关 对内业务服务（被
+
+Feign调）
+
+后台拉取/批处理
+
+（XXL-Job）
+
+数据库 无 11个数据源 11个数据源（与SI同
+
+库）
+
+Mongo/Redis 无 读写 读写
+
+Kafka/RabbitMQ 无 RabbitMQ消费/生产 Kafka+RabbitMQ
+
+抓取定时任务 无 有（与-data重复，
+
+历史遗留）
+
+有（新资讯源主战
+
+场，含路透）
+
+是否对外暴露HTTP 是（经网关） 否（内部Feign） 否（仅内部Feign）
+
+注：stock-information与stock-information-data的xxljobhandler/scheduled/service/po/高度重复，是因为-data是从-
+information拷贝出来另起的服务。当前实际生产中新接资讯源（路透/CoinDesk/FiNet/Techub等）只在-data跑，老资讯源
+
+（智通/格隆汇/凤凰网/BlockBeats/公告）的XXL-Job在哪一侧执行需要看运维端的cron注册情况。AS不感知这层差异，永
+
+远只调stock-information的对外API。
+
+9.维护提示
+•
+加接口：先在 stock-information-facade 里加 @FeignClient 方法+在 stock-information 里实现
+
+controller，再在AS加一个一行的controller方法转发。
+•
+改i18n：本服务不持有语言资源，去 stock-information 那边改 messages_*.properties 。
+•
+故障排查：AS报错通常是下游Feign调用超时（Hystrix timeoutInMilliseconds=9000 ）/反序列化失败/网关层
+
+token配置变更；本服务自身极少出独立bug。
+•
+本地启动： mvn spring-boot:run -pl as-stock-information -Dspring-boot.run.profiles=local ，需
+
+要可达的Apollo+Eureka+至少一个 stock-information 实例。
+
+生成日期：2026-05-09·修订：2026-05-11（按APP原型图收敛主资讯页为4接口）

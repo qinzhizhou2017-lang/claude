@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>美银 8 月全球外汇与利率调查 · 研报精华</title>
+<style>
+@font-face{font-family:'Inter';src:url('fonts/Inter-var.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:block;}
+@font-face{font-family:'Fraunces';src:url('fonts/Fraunces-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:block;}
+
+:root{
+  --ink:#17191E; --ink2:#4C535D; --ink3:#8A909A; --ink4:#B4B0A6;
+  --paper:#F4F1EA; --paper2:#EDE8DD; --card:#FFFFFF;
+  --line:#E3DCCE; --line2:#ECE7DD;
+  --navy:#1B2440; --navy2:#2E3A5C;
+  --red:#C0271C; --redsoft:#F4E5E1; --redink:#9A1E15;
+  --green:#12705C; --greensoft:#E2ECE7;
+  --gold:#9A7B3F; --goldsoft:#F0E8D6;
+  --f-display:'Fraunces','Noto Serif CJK SC',Georgia,serif;
+  --f-head:'Noto Serif CJK SC','Fraunces',Georgia,serif;
+  --f-body:'Inter','Noto Sans CJK SC',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+body{font-family:var(--f-body);color:var(--ink);background:#c9c4b8;font-feature-settings:'tnum' 1,'ss01' 1;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;}
+@page{size:A4;margin:0;}
+
+.page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;padding:13mm 13mm 9mm 13mm;page-break-after:always;}
+.page:last-child{page-break-after:auto;}
+.main{flex:1;display:flex;flex-direction:column;justify-content:space-between;min-height:0;}
+
+/* ---------- header / footer ---------- */
+.mast{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1.5px solid var(--ink);padding-bottom:7px;flex:none;}
+.mast .brand{display:flex;align-items:center;gap:8px;}
+.mast .dot{width:19px;height:19px;border-radius:50%;background:var(--red);position:relative;flex:none;}
+.mast .dot::after{content:"研";position:absolute;inset:0;color:#fff;font-family:var(--f-head);font-weight:700;font-size:10.5px;display:flex;align-items:center;justify-content:center;}
+.mast .bname{font-weight:800;font-size:13.5px;letter-spacing:.14em;color:var(--ink);font-family:var(--f-head);}
+.mast .bsub{font-size:8.4px;letter-spacing:.30em;color:var(--ink3);margin-top:1px;font-weight:600;}
+.mast .mright{text-align:right;font-size:8.6px;letter-spacing:.06em;color:var(--ink2);line-height:1.55;}
+.mast .mright b{color:var(--ink);font-weight:700;}
+
+.foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:6px;margin-top:9px;font-size:7.6px;letter-spacing:.05em;color:var(--ink3);flex:none;}
+.foot .pg{font-weight:700;color:var(--ink2);letter-spacing:.12em;}
+.foot b{color:var(--ink2);font-weight:600;}
+
+.eyebrow{font-size:9px;font-weight:700;letter-spacing:.24em;color:var(--red);text-transform:uppercase;}
+.rule-gold{height:2px;background:var(--gold);width:44px;border-radius:2px;}
+.sectlabel{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
+.sectlabel .no{font-family:var(--f-display);font-weight:600;font-size:15px;color:var(--red);line-height:1;}
+.sectlabel .tt{font-family:var(--f-head);font-weight:700;font-size:17px;color:var(--ink);letter-spacing:.01em;}
+.sectlabel .en{font-size:8px;letter-spacing:.22em;color:var(--ink3);font-weight:700;text-transform:uppercase;margin-left:auto;}
+.src{font-size:7.4px;color:var(--ink3);letter-spacing:.02em;margin-top:6px;line-height:1.5;}
+
+/* ================= PAGE 1 — COVER ================= */
+.cv-eyerow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:11px;}
+.cv-tickers{margin-left:auto;font-size:9.5px;color:var(--ink2);letter-spacing:.04em;font-weight:600;}
+.cv-tickers b{color:var(--ink);}
+.headline{font-family:var(--f-head);font-weight:800;color:var(--ink);font-size:50px;line-height:1.16;letter-spacing:-.01em;margin-top:13px;}
+.headline .hl{color:var(--red);}
+.headline .box{border-bottom:5px solid var(--gold);padding-bottom:1px;}
+.subhead{font-size:12.4px;line-height:1.78;color:var(--ink2);max-width:176mm;margin-top:15px;font-weight:450;}
+.subhead b{color:var(--ink);font-weight:700;}
+
+.judg{display:flex;gap:0;background:var(--navy);border-radius:9px;overflow:hidden;}
+.judg .lab{background:var(--red);color:#fff;font-family:var(--f-head);font-weight:800;font-size:15px;letter-spacing:.16em;padding:0 17px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.3;flex:none;}
+.judg .body{padding:15px 18px;color:#EDEEF2;font-size:11.6px;line-height:1.72;display:flex;align-items:center;}
+.judg .body b{color:#fff;font-weight:700;}
+.judg .body .big{color:#fff;font-family:var(--f-display);font-weight:600;}
+
+.cv-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;}
+.mcard{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:16px 16px 15px;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+.mcard .top{font-size:9px;font-weight:700;letter-spacing:.10em;color:var(--ink3);padding-right:66px;line-height:1.4;}
+.mcard .fig{font-family:var(--f-display);font-weight:600;color:var(--ink);font-size:41px;line-height:1;margin:11px 0 5px;letter-spacing:-.01em;}
+.mcard .fig .u{font-size:16px;color:var(--ink2);font-weight:600;margin-left:1px;}
+.mcard .fig.r{color:var(--red);}
+.mcard .fig.g{color:var(--green);}
+.mcard .cap{font-size:10.3px;color:var(--ink2);line-height:1.55;font-weight:500;}
+.mcard .cap b{color:var(--ink);font-weight:700;}
+.mcard .tag{position:absolute;top:15px;right:15px;font-size:8px;font-weight:700;letter-spacing:.04em;color:var(--green);}
+.mcard .tag.r{color:var(--red);}
+
+.cv-two{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.wide{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:14px 16px;display:flex;align-items:center;gap:14px;}
+.wide .ic{width:40px;height:40px;border-radius:8px;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:600;font-size:15px;line-height:1;}
+.wide .ic.gold{background:var(--goldsoft);color:var(--gold);}
+.wide .ic.navy{background:#E7EAF1;color:var(--navy);}
+.wide .t{font-size:10.4px;font-weight:700;letter-spacing:.03em;color:var(--ink);margin-bottom:3px;}
+.wide .d{font-size:9.8px;color:var(--ink2);line-height:1.55;}
+.wide .d b{color:var(--red);font-weight:700;}
+.wide .d .bg{color:var(--green);font-weight:700;}
+
+.toc{display:grid;grid-template-columns:1.12fr 1.12fr .92fr;border-top:1.5px solid var(--ink);padding-top:12px;}
+.toc .ti{padding:0 17px;border-right:1px solid var(--line);}
+.toc .ti:first-child{padding-left:0;}
+.toc .ti:last-child{border-right:none;padding-right:0;}
+.toc .tn{font-family:var(--f-display);font-weight:600;font-size:15px;color:var(--red);line-height:1;}
+.toc .tt2{font-family:var(--f-head);font-weight:700;font-size:12.5px;color:var(--ink);margin-top:5px;}
+.toc .td{font-size:9px;color:var(--ink2);margin-top:4px;line-height:1.5;}
+
+/* ================= data pages shared ================= */
+.callout{border-left:4px solid var(--red);background:linear-gradient(90deg,var(--redsoft),rgba(244,229,225,0));padding:13px 16px;border-radius:0 8px 8px 0;}
+.callout .q{font-family:var(--f-head);font-weight:600;font-size:13.6px;line-height:1.66;color:var(--ink);letter-spacing:.005em;}
+.callout .q b{color:var(--red);}
+.callout.green{border-left-color:var(--green);background:linear-gradient(90deg,var(--greensoft),rgba(226,236,231,0));}
+.callout.green .q b{color:var(--green);}
+.callout.navy{border-left-color:var(--navy);background:linear-gradient(90deg,#E9ECF3,rgba(233,236,243,0));}
+.callout.navy .q b{color:var(--navy);}
+
+.panel{background:var(--card);border:1px solid var(--line2);border-radius:11px;padding:15px 17px;}
+.panel-t{font-family:var(--f-head);font-weight:700;font-size:14.5px;color:var(--ink);line-height:1.4;}
+.panel-t .accent{color:var(--red);}
+.panel-t .acg{color:var(--green);}
+.panel-sub{font-size:10.1px;color:var(--ink2);line-height:1.62;margin-top:6px;font-weight:450;}
+.panel-sub b{font-weight:700;color:var(--ink);}
+
+.bars{display:flex;flex-direction:column;gap:9px;margin-top:9px;}
+.bar{display:grid;grid-template-columns:132px 1fr 42px;align-items:center;gap:10px;}
+.bar .nm{font-size:10px;font-weight:600;color:var(--ink2);text-align:right;line-height:1.25;}
+.bar .nm b{font-size:10.3px;color:var(--ink);font-weight:700;}
+.bar .track{height:16px;background:var(--paper2);border-radius:4px;position:relative;overflow:hidden;}
+.bar .fill{height:100%;border-radius:4px;background:var(--navy2);}
+.bar.red .fill{background:var(--red);}
+.bar.mut .fill{background:#B9BEC9;}
+.bar .val{font-size:12px;font-weight:800;color:var(--ink);text-align:left;}
+.bar.red .val{color:var(--red);}
+.bar.mut .val{color:var(--ink3);}
+
+.facts{display:flex;flex-direction:column;gap:9px;margin-top:9px;}
+.fact{display:flex;gap:9px;align-items:flex-start;}
+.fact .fi{width:6px;height:6px;border-radius:50%;background:var(--navy2);flex:none;margin-top:5.5px;}
+.fact.r .fi{background:var(--red);}
+.fact .ft{font-size:10.1px;color:var(--ink2);line-height:1.6;}
+.fact .ft b{color:var(--ink);font-weight:700;}
+.fact .ft .rr{color:var(--red);font-weight:700;}
+
+.bigstat{display:flex;align-items:center;gap:13px;background:var(--paper2);border-radius:9px;padding:11px 14px;margin-top:11px;}
+.bigstat .bv{font-family:var(--f-display);font-weight:600;font-size:29px;color:var(--navy);line-height:1;flex:none;}
+.bigstat .bt{font-size:9.8px;color:var(--ink2);line-height:1.5;}
+.bigstat .bt b{color:var(--ink);font-weight:700;}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.split.wideleft{grid-template-columns:1.06fr 1fr;}
+
+/* dumbbell */
+.dumb{display:flex;flex-direction:column;margin-top:4px;}
+.drow{display:grid;grid-template-columns:150px 1fr 48px;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line2);}
+.drow:last-child{border-bottom:none;}
+.drow .mk{font-size:10.1px;color:var(--ink);font-weight:700;line-height:1.35;}
+.drow .mk span{display:block;font-size:8px;color:var(--ink3);font-weight:600;letter-spacing:.02em;margin-top:2px;}
+.drow .tr{position:relative;height:24px;}
+.drow .base{position:absolute;top:11px;left:0;right:0;height:2px;background:var(--line);}
+.seg{position:absolute;top:10px;height:4px;background:var(--navy2);border-radius:2px;}
+.drow.hot .seg{background:var(--red);}
+.dt{position:absolute;top:6px;width:12px;height:12px;border-radius:50%;transform:translateX(-50%);}
+.dt.o{background:var(--card);border:2.5px solid var(--ink3);}
+.dt.n{background:var(--navy2);border:2.5px solid var(--navy2);}
+.drow.hot .dt.n{background:var(--red);border-color:var(--red);}
+.vlab{position:absolute;top:-7px;font-size:9px;font-weight:800;transform:translateX(-50%);color:var(--ink3);white-space:nowrap;}
+.vlab.n{color:var(--navy);} .drow.hot .vlab.n{color:var(--red);}
+.delta{font-size:11.5px;font-weight:800;text-align:right;color:var(--navy);}
+.drow.hot .delta{color:var(--red);}
+.dlegend{display:flex;gap:16px;align-items:center;margin-top:9px;font-size:9px;font-weight:700;color:var(--ink3);}
+.dlegend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px;}
+.dlegend .o{background:#fff;border:2.5px solid var(--ink3);}
+.dlegend .n{background:var(--navy2);}
+
+.kpirow{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+.kpi{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:11px 12px;}
+.kpi .k{font-size:8.4px;font-weight:700;letter-spacing:.06em;color:var(--ink3);line-height:1.3;}
+.kpi .v{font-family:var(--f-display);font-weight:600;font-size:27px;color:var(--ink);line-height:1;margin:7px 0 4px;}
+.kpi .v.r{color:var(--red);}
+.kpi .v .u{font-size:13px;color:var(--ink2);}
+.kpi .s{font-size:8.7px;color:var(--ink2);line-height:1.5;}
+.kpi .s b{color:var(--ink);font-weight:700;}
+
+.capband{background:var(--navy);border-radius:11px;padding:15px 17px;color:#fff;display:flex;flex-direction:column;}
+.capband .h{font-family:var(--f-head);font-weight:700;font-size:13.5px;color:#fff;display:flex;align-items:center;gap:8px;}
+.capband .h .g{color:var(--goldsoft);}
+.capstat{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.13);}
+.capstat:last-of-type{border-bottom:none;}
+.capstat .l{font-size:9.4px;color:#C7CCDA;line-height:1.45;max-width:66%;}
+.capstat .r{font-family:var(--f-display);font-weight:600;font-size:18px;color:#fff;white-space:nowrap;}
+.capstat .r .u{font-size:9.5px;color:#AEB4C6;}
+.capnote{font-size:8.2px;color:#AEB4C6;margin-top:9px;line-height:1.6;}
+
+.wbox{border-radius:10px;padding:14px 16px;}
+.wbox.dn{background:var(--redsoft);border:1px solid #EBD3CD;}
+.wbox .wh{font-family:var(--f-head);font-weight:700;font-size:12.5px;display:flex;align-items:center;gap:6px;margin-bottom:9px;color:var(--red);}
+.wbox ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.wbox li{font-size:9.5px;line-height:1.5;color:var(--ink);padding-left:13px;position:relative;font-weight:500;}
+.wbox li b{font-weight:700;}
+.wbox li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:var(--red);}
+
+.fcast{display:flex;justify-content:space-between;gap:6px;background:var(--paper2);border-radius:9px;padding:12px 8px;}
+.fcast .fc{flex:1;text-align:center;border-right:1px solid var(--line);padding:0 6px;}
+.fcast .fc:last-child{border-right:none;}
+.fcast .fc .fk{font-size:7.8px;font-weight:700;letter-spacing:.04em;color:var(--ink3);}
+.fcast .fc .fv{font-family:var(--f-display);font-weight:600;font-size:19px;color:var(--ink);margin-top:4px;line-height:1;}
+.fcast .fc .fv .u{font-size:9.5px;color:var(--ink2);}
+.fcast .fc .fs{font-size:7.8px;color:var(--ink2);font-weight:600;margin-top:4px;line-height:1.4;}
+
+.disc{font-size:7.6px;color:var(--ink3);line-height:1.65;letter-spacing:.01em;margin-top:9px;}
+.bandlab{font-size:9px;font-weight:700;letter-spacing:.20em;color:var(--ink3);margin-bottom:8px;}
+/* diverging monthly-change bars */
+.mv{display:flex;flex-direction:column;gap:7px;margin-top:10px;}
+.mvr{display:grid;grid-template-columns:98px 1fr 38px 76px;align-items:center;gap:9px;}
+.mvr .nm{font-size:10px;font-weight:700;color:var(--ink);text-align:right;line-height:1.2;}
+.mvr .tk{position:relative;height:15px;background:var(--paper2);border-radius:4px;}
+.mvr .zero{position:absolute;left:50%;top:-3px;bottom:-3px;width:1px;background:var(--ink4);}
+.mvr .b{position:absolute;top:0;height:100%;border-radius:3px;}
+.mvr .b.up{background:var(--green);left:50%;}
+.mvr .b.dn{background:var(--red);}
+.mvr .v{font-size:11.5px;font-weight:800;text-align:left;}
+.mvr .v.up{color:var(--green);}
+.mvr .v.dn{color:var(--red);}
+.mvr .pos{font-size:8.4px;font-weight:700;text-align:center;padding:3px 0;border-radius:100px;letter-spacing:.02em;}
+.mvr .pos.ow{background:var(--greensoft);color:var(--green);}
+.mvr .pos.uw{background:var(--redsoft);color:var(--redink);}
+.mvhead{display:grid;grid-template-columns:98px 1fr 38px 76px;gap:9px;margin-top:11px;font-size:8.2px;font-weight:700;letter-spacing:.08em;color:var(--ink3);}
+.mvhead .c3{text-align:left;} .mvhead .c4{text-align:center;}
+.mvsplit{height:1px;background:var(--line);margin:4px 0;}
+</style>
+</head>
+<body>
+
+<!-- ============================= PAGE 1 : COVER ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">研报精华</div><div class="bsub">全 球 投 行 研 究 · 可 视 化 速 览</div></div></div>
+    <div class="mright"><b>机构研究 · 可视化精华</b><br>来源：BofA Global Research《Asia Fund Manager Survey》· 2026.08.18<br>调查时间 8 月 7–13 日 · 203 位基金经理 · 合计管理 5,810 亿美元</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="cv-eyerow">
+        <span class="eyebrow">美银 8 月亚洲基金经理调查 · Tech is still king</span>
+        <span class="cv-tickers"><b>AI</b>&nbsp;·&nbsp;<b>日本</b>&nbsp;·&nbsp;<b>中国</b>&nbsp;·&nbsp;<b>印度</b></span>
+      </div>
+      <div class="rule-gold"></div>
+      <h1 class="headline">没人舍得卖 <span class="hl">AI</span>，<br>但都在悄悄<span class="box">买保险</span></h1>
+      <p class="subhead">半导体依然是亚洲（除日本）基金经理的<b>第一大超配</b>，净超配 50%——科技的地位没被动摇。真正变了的是行为：说自己「<b>不做任何对冲、继续超配 AI</b>」的人，一个月里从 28% 掉到 <b>9%</b>；改用「轮动到价值、周期与防御板块」来给 AI 上保险的人则从 28% 涨到 <b>59%</b>，一个月翻了一倍多。而要他们真的加仓 AI，条件只有一个：<b>拿出 AI 能赚钱的证据</b>。</p>
+    </div>
+
+    <div class="judg">
+      <div class="lab"><span>核心</span><span>判断</span></div>
+      <div class="body"><div>这不是从科技撤退，而是<b>给科技上保险</b>：仓位没砍，但边际资金正流向公用事业、银行、必需消费和医药。更值得注意的是——本月<b>加得最猛的几个防御板块，目前多数仍是低配；砍得最狠的工业和科技硬件，反而还在超配</b>。防御化才刚开了个头。</div></div>
+    </div>
+
+    <div class="cv-metrics">
+      <div class="mcard">
+        <div class="tag r">7 月还有 28%</div>
+        <div class="top">「不对冲、继续超配 AI」</div>
+        <div class="fig r">9<span class="u">%</span></div>
+        <div class="cap">一个月里少了三分之二——<b>裸奔的多头基本消失了</b></div>
+      </div>
+      <div class="mcard">
+        <div class="tag">降息只有 0%</div>
+        <div class="top">加仓 AI 的唯一条件</div>
+        <div class="fig">64<span class="u">%</span></div>
+        <div class="cap">选「<b>拿出 AI 变现、能产生收入的证据</b>」；估值便宜只打动 5% 的人</div>
+      </div>
+      <div class="mcard">
+        <div class="tag">仍居第一</div>
+        <div class="top">半导体净超配</div>
+        <div class="fig g">50<span class="u">%</span></div>
+        <div class="cap">科技硬件 32% 紧随其后——<b>科技的仓位并没有被卖掉</b></div>
+      </div>
+    </div>
+
+    <div class="cv-two">
+      <div class="wide">
+        <div class="ic gold">59%</div>
+        <div><div class="t">用「轮动到价值 / 周期 / 防御」对冲 AI</div><div class="d">7 月还只有 <b>28%</b>，一个月<b>翻了一倍多</b></div></div>
+      </div>
+      <div class="wide">
+        <div class="ic navy">−35</div>
+        <div><div class="t">本月被砍最狠：工业</div><div class="d">科技硬件 −20 紧随其后；<span class="bg">但两者仍是净超配</span></div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="bandlab">调查里的其他坐标</div>
+      <div class="fcast">
+        <div class="fc"><div class="fk">最受青睐的市场</div><div class="fv">台湾<span class="u">+55</span></div><div class="fs">净超配第一，日本 +50<br>韩国 +23 排第三</div></div>
+        <div class="fc"><div class="fk">最不受待见的市场</div><div class="fv">印度<span class="u">−32</span></div><div class="fs">净低配最深<br>核心担忧：没有 AI 可买</div></div>
+        <div class="fc"><div class="fk">亚洲（除日本）估值</div><div class="fv">净 18<span class="u">% 低估</span></div><div class="fs">乐观度升至历史 89 分位<br>越来越多人觉得便宜</div></div>
+        <div class="fc"><div class="fk">中国最看好的主题</div><div class="fv">73<span class="u">%</span></div><div class="fs">选 AI / 半导体<br>回购与分红 27% 居次</div></div>
+      </div>
+      <div class="src">市场与板块口径为「净超配％」＝ 回答超配的比例减去回答低配的比例。来源：Exhibit 20 / 18 / 11 / 9 / 13。</div>
+    </div>
+
+    <div class="toc">
+      <div class="ti"><div class="tn">01</div><div class="tt2">AI 这笔交易：不下车，先系安全带</div><div class="td">对冲方式一个月内彻底掉头；他们要的不是降息，是 AI 真能赚钱的证据</div></div>
+      <div class="ti"><div class="tn">02</div><div class="tt2">钱实际去了哪里</div><div class="td">仓位月度变化揭穿了一件事：防御化才刚开始；外加日本的三个关键数字</div></div>
+      <div class="ti"><div class="tn">·</div><div class="tt2">本期调查</div><div class="td">2026 年 8 月 7–13 日<br>203 位基金经理参与<br>合计管理 5,810 亿美元</div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>研报精华</b> · 全球投行研究可视化</span>
+    <span>数据以 BofA Global Research 原报告为准 · 仅供参考，不构成投资建议</span>
+    <span class="pg">01 / 03</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 2 : THE AI TRADE ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">研报精华</div><div class="bsub">全 球 投 行 研 究 · 可 视 化 速 览</div></div></div>
+    <div class="mright"><b>美银 8 月亚洲基金经理调查</b> · Tech is still king, but defensives are rising<br>BofA Global Research · 2026.08.18</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">01</span><span class="tt">AI 这笔交易：不下车，先系安全带</span><span class="en">Buckling Up</span></div>
+      <div class="callout">
+        <div class="q">调查问的是「未来 6–12 个月，你怎么对冲 AI 交易的下行风险」。一个月之间，答案几乎完全掉了个头——<b>「不对冲」从第一名跌到并列第三</b>，而「换到价值与周期股」一跃成为压倒性的首选。</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-t">对冲方式一个月内<span class="accent">整体掉头</span></div>
+      <div class="panel-sub">值得注意的是，这五个选项里<b>没有一个是「减仓 AI」</b>——做空或低配拥挤的 AI 受益股反而从 12% 降到 5%。他们选择的是留在场内、用别的板块来缓冲，而不是离场。</div>
+      <div class="dumb">
+        <div class="drow hot"><div class="mk">轮动到价值 / 周期股<span>本月首选</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:40%;width:42%"></div>
+            <div class="dt o" style="left:40%"></div><div class="vlab" style="left:40%">20%</div>
+            <div class="dt n" style="left:82%"></div><div class="vlab n" style="left:82%">41%</div></div>
+          <div class="delta">+21</div></div>
+        <div class="drow hot"><div class="mk">轮动到防御板块<span>公用、必需消费等</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:16%;width:20%"></div>
+            <div class="dt o" style="left:16%"></div><div class="vlab" style="left:16%">8%</div>
+            <div class="dt n" style="left:36%"></div><div class="vlab n" style="left:36%">18%</div></div>
+          <div class="delta">+10</div></div>
+        <div class="drow"><div class="mk">不对冲，继续超配 AI<span>7 月的第一名</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:18%;width:38%"></div>
+            <div class="dt n" style="left:18%"></div><div class="vlab n" style="left:18%">9%</div>
+            <div class="dt o" style="left:56%"></div><div class="vlab" style="left:56%">28%</div></div>
+          <div class="delta">−19</div></div>
+        <div class="drow"><div class="mk">在 AI 产业链内部轮动<span>换赛道不换主题</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:18%;width:14%"></div>
+            <div class="dt n" style="left:18%"></div><div class="vlab n" style="left:18%">9%</div>
+            <div class="dt o" style="left:32%"></div><div class="vlab" style="left:32%">16%</div></div>
+          <div class="delta">−7</div></div>
+        <div class="drow"><div class="mk">做空 / 低配拥挤的 AI 股<span>真正的看空</span></div>
+          <div class="tr"><div class="base"></div><div class="seg" style="left:10%;width:14%"></div>
+            <div class="dt n" style="left:10%"></div><div class="vlab n" style="left:10%">5%</div>
+            <div class="dt o" style="left:24%"></div><div class="vlab" style="left:24%">12%</div></div>
+          <div class="delta">−7</div></div>
+      </div>
+      <div class="dlegend"><span><i class="o"></i>2026 年 7 月</span><span><i class="n"></i>2026 年 8 月</span><span style="margin-left:auto;font-weight:600;color:var(--ink3);">横轴为选择该项的受访者占比（0–50%）</span></div>
+      <div class="src">「轮动到价值 / 周期」与「轮动到防御板块」合计 59%，7 月合计 28%。选「不知道」的票数未计入。来源：BofA Asia Fund Manager Survey，Exhibit 1（2026 年 8 月）。</div>
+    </div>
+
+    <div class="split wideleft">
+      <div class="panel">
+        <div class="panel-t">要他们加仓，只认<span class="accent">一件事</span></div>
+        <div class="panel-sub">「什么最能提高你加仓 AI 相关股票的信心？」答案高度集中——不是估值，更不是降息。</div>
+        <div class="bars">
+          <div class="bar red"><div class="nm"><b>AI 变现</b>、能产生收入的证据</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">64%</div></div>
+          <div class="bar"><div class="nm">大厂 AI 资本开支<b>重新加速</b></div><div class="track"><div class="fill" style="width:28.1%"></div></div><div class="val">18%</div></div>
+          <div class="bar"><div class="nm">盈利预测<b>上修更强</b></div><div class="track"><div class="fill" style="width:21.9%"></div></div><div class="val">14%</div></div>
+          <div class="bar mut"><div class="nm"><b>估值更便宜</b></div><div class="track"><div class="fill" style="width:7.8%"></div></div><div class="val">5%</div></div>
+          <div class="bar mut"><div class="nm"><b>利率更低</b></div><div class="track"><div class="fill" style="width:0%"></div></div><div class="val">0%</div></div>
+        </div>
+        <div class="src">选「其他」的票数未计入。来源：同上，Exhibit 19。</div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-t">同一时间，三个信号<span class="acg">在互相打架</span></div>
+        <div class="facts">
+          <div class="fact"><div class="fi"></div><div class="ft"><b>行情还没走完：</b>59% 认为 AI 对股市的利好<b>只是部分定价</b>——这个比例还在往上走（6 月 41%→7 月 56%→8 月 59%）。</div></div>
+          <div class="fact r"><div class="fi"></div><div class="ft"><b>基本面在松动：</b>对半导体周期（韩台出口增速）的乐观度 <span class="rr">8 月大幅回落</span>，净比例降至 27%，是本月最先变脸的指标。</div></div>
+          <div class="fact"><div class="fi"></div><div class="ft"><b>受益方向换了：</b>AI 下一阶段谁最受益——台湾从 12% 跳到 <b>27%</b> 重回第一，美国则从 28% 掉到 18%，中国从 8% 升到 18%。</div></div>
+        </div>
+        <div class="bigstat">
+          <div class="bv">5%</div>
+          <div class="bt">只有 5% 的人认为 AI 利好「<b>已经超过充分定价</b>」——大家在买保险，<b>却几乎没人认为这是泡沫顶</b>。</div>
+        </div>
+        <div class="src">来源：同上，Exhibit 12 / 15 / 16。</div>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <div class="q"><b>怎么读这件事</b>&nbsp;这是一次<b>态度没变、动作先变</b>的调整：观点上仍相信 AI 有后续，行动上已经不愿意裸奔。它的含义是——AI 行情的下一段涨幅，大概率要等一份能证明「AI 真的在赚钱」的财报来解锁；在那之前，防御板块吃到的是<b>避险的边际资金，而不是信仰的转移</b>。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>研报精华</b> · 全球投行研究可视化</span>
+    <span>AI 这笔交易：不下车，先系安全带</span>
+    <span class="pg">02 / 03</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 3 : WHERE THE MONEY WENT ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">研报精华</div><div class="bsub">全 球 投 行 研 究 · 可 视 化 速 览</div></div></div>
+    <div class="mright"><b>美银 8 月亚洲基金经理调查</b> · Tech is still king, but defensives are rising<br>BofA Global Research · 2026.08.18</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">02</span><span class="tt">钱实际去了哪里</span><span class="en">Follow the Money</span></div>
+      <div class="callout navy">
+        <div class="q">把「怎么对冲」的问卷答案，和真实仓位的月度变化放在一起看，会发现一件容易被漏掉的事：<b>加得最猛的几个防御板块，目前仍然处在低配；砍得最狠的工业和科技硬件，砍完之后依然是超配</b>。所谓防御化，现在还只是刚起步的边际动作。</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-t">仓位月度变化：<span class="accent">加得最猛的，多数还在低配</span></div>
+      <div class="panel-sub">左侧是本月加仓与减仓的幅度（百分点），右侧是加减之后<b>目前的净超配水平</b>。两者对不上的地方，才是这个月真正的信息。</div>
+      <div class="mvhead"><span></span><span>← 减仓　　本月变化（百分点）　　加仓 →</span><span class="c3">变化</span><span class="c4">当前仓位</span></div>
+      <div class="mv">
+        <div class="mvr"><div class="nm">零售 / 电商</div><div class="tk"><div class="zero"></div><div class="b up" style="width:35.49%"></div></div><div class="v up">+27</div><div class="pos uw">低配 −9</div></div>
+        <div class="mvr"><div class="nm">公用事业</div><div class="tk"><div class="zero"></div><div class="b up" style="width:24.97%"></div></div><div class="v up">+19</div><div class="pos uw">低配 −5</div></div>
+        <div class="mvr"><div class="nm">能源</div><div class="tk"><div class="zero"></div><div class="b up" style="width:22.34%"></div></div><div class="v up">+17</div><div class="pos ow">超配 +5</div></div>
+        <div class="mvr"><div class="nm">软件</div><div class="tk"><div class="zero"></div><div class="b up" style="width:19.71%"></div></div><div class="v up">+15</div><div class="pos uw">低配 −5</div></div>
+        <div class="mvr"><div class="nm">银行</div><div class="tk"><div class="zero"></div><div class="b up" style="width:19.71%"></div></div><div class="v up">+15</div><div class="pos ow">超配 +27</div></div>
+        <div class="mvr"><div class="nm">必需消费</div><div class="tk"><div class="zero"></div><div class="b up" style="width:19.71%"></div></div><div class="v up">+15</div><div class="pos uw">低配 −9</div></div>
+        <div class="mvsplit"></div>
+        <div class="mvr"><div class="nm">原材料</div><div class="tk"><div class="zero"></div><div class="b dn" style="left:38.17%;width:11.83%"></div></div><div class="v dn">−9</div><div class="pos uw">低配 −5</div></div>
+        <div class="mvr"><div class="nm">房地产</div><div class="tk"><div class="zero"></div><div class="b dn" style="left:34.23%;width:15.77%"></div></div><div class="v dn">−12</div><div class="pos uw">低配 −32</div></div>
+        <div class="mvr"><div class="nm">科技硬件</div><div class="tk"><div class="zero"></div><div class="b dn" style="left:23.71%;width:26.29%"></div></div><div class="v dn">−20</div><div class="pos ow">超配 +32</div></div>
+        <div class="mvr"><div class="nm">工业</div><div class="tk"><div class="zero"></div><div class="b dn" style="left:4%;width:46%"></div></div><div class="v dn">−35</div><div class="pos ow">超配 +5</div></div>
+      </div>
+      <div class="src">只列出本月变化幅度最大的六个加仓与四个减仓板块（共 17 个板块）。半导体本月微降 2 个百分点，但净超配 50% 仍稳居第一；医药本月 +12、净超配 32%，是少数「加仓且已超配」的板块。来源：BofA Asia Fund Manager Survey，Exhibit 21 / 22（亚洲除日本，净超配％＝超配比例减低配比例）。</div>
+    </div>
+
+    <div class="split">
+      <div class="capband">
+        <div class="h"><span class="g">◆</span>&nbsp;日本：这份调查里最拥挤的地方</div>
+        <div class="capstat"><div class="l">押日银<b style="color:#fff">下个月（9 月）</b>就加息的比例；另有 32% 押 10 月</div><div class="r">59<span class="u">%</span></div></div>
+        <div class="capstat"><div class="l">认为触发日本当局出手干预的美元 / 日元点位是 <b style="color:#fff">165</b></div><div class="r">55<span class="u">%</span></div></div>
+        <div class="capstat"><div class="l">把<b style="color:#fff">银行</b>与<b style="color:#fff">半导体</b>列为日股两大超配的比例（各自）</div><div class="r">64<span class="u">%</span></div></div>
+        <div class="capnote">银行的超配比例已升至历史最高。日股主题榜也在换血：「日银政策正常化」从 7 月的 0% 直接跳到 23%，成为第二大主题；「盈利」虽仍居首，但从 64% 降到 41%。日股未来 12 个月的预期回报小幅降至 4.9%（7 月 5.5%）。</div>
+      </div>
+      <div class="wbox dn">
+        <div class="wh">▼&nbsp;接下来盯这四件事</div>
+        <ul>
+          <li><b>AI 变现的证据</b>——64% 的人说这是他们加仓的唯一条件，也是解除防御化的那把钥匙</li>
+          <li><b>日银 9 月会议</b>——近六成押这一次就加息，而 165 是他们心里的干预线，两件事会同时兑现</li>
+          <li><b>半导体周期</b>——乐观度 8 月已经骤降至净 27%，是这轮里最先变脸的基本面指标</li>
+          <li><b>印度与中国的落差</b>——印度净低配 32%、是最不受待见的市场，首要担忧正是「没有 AI 可买」（32%）；而中国最受欢迎的主题恰好是 AI / 半导体（73%）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="disc">本可视化基于 BofA Global Research 于 2026 年 8 月 18 日发布的《Asia Fund Manager Survey: Tech is still king, but defensives are rising》整理编辑，所有数据、比例与观点均以原报告为准；调查于 2026 年 8 月 7–13 日进行，共 203 位基金经理参与，合计管理规模 5,810 亿美元，其中 105 位（2,720 亿美元）回答了区域问卷。本文由第三方独立整理制作，与 BofA 无关，仅供信息参考与交流，不构成任何投资建议；市场有风险，决策须谨慎。</div>
+  </div>
+
+  <div class="foot">
+    <span><b>研报精华</b> · 全球投行研究可视化</span>
+    <span>钱实际去了哪里 · Follow the Money</span>
+    <span class="pg">03 / 03</span>
+  </div>
+</section>
+
+</body>
+</html>

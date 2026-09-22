@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>AI主权·资本开支周期更长 — THE PORT</title>
+<style>
+@font-face{font-family:'Inter';src:url('fonts/Inter-var.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:block;}
+@font-face{font-family:'Fraunces';src:url('fonts/Fraunces-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:block;}
+
+:root{
+  --ink:#17191E; --ink2:#4C535D; --ink3:#8A909A; --ink4:#B4B0A6;
+  --paper:#F4F1EA; --paper2:#EDE8DD; --card:#FFFFFF;
+  --line:#E3DCCE; --line2:#ECE7DD;
+  --navy:#1B2440; --navy2:#2E3A5C;
+  --red:#C0271C; --redsoft:#F4E5E1; --redink:#9A1E15;
+  --green:#12705C; --greensoft:#E2ECE7;
+  --gold:#9A7B3F; --goldsoft:#F0E8D6;
+  --f-display:'Fraunces','Noto Serif CJK SC',Georgia,serif;
+  --f-head:'Noto Serif CJK SC','Fraunces',Georgia,serif;
+  --f-body:'Inter','Noto Sans CJK SC',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+body{font-family:var(--f-body);color:var(--ink);background:#c9c4b8;font-feature-settings:'tnum' 1,'ss01' 1;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;}
+@page{size:A4;margin:0;}
+
+.page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;padding:13mm 13mm 9mm 13mm;page-break-after:always;}
+.page:last-child{page-break-after:auto;}
+.main{flex:1;display:flex;flex-direction:column;justify-content:space-between;min-height:0;}
+.grp>*+*{margin-top:12px;}
+
+/* ---------- header / footer ---------- */
+.mast{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1.5px solid var(--ink);padding-bottom:7px;flex:none;}
+.mast .brand{display:flex;align-items:center;gap:8px;}
+.mast .dot{width:19px;height:19px;border-radius:50%;background:var(--red);position:relative;flex:none;}
+.mast .dot::after{content:"P";position:absolute;inset:0;color:#fff;font-family:var(--f-display);font-weight:600;font-size:15.0px;display:flex;align-items:center;justify-content:center;}
+.mast .bname{font-weight:800;font-size:16.2px;letter-spacing:.14em;color:var(--ink);}
+.mast .bsub{font-size:10.9px;letter-spacing:.34em;color:var(--ink3);margin-top:1px;font-weight:600;}
+.mast .mright{text-align:right;font-size:11.2px;letter-spacing:.06em;color:var(--ink2);line-height:1.65;}
+.mast .mright b{color:var(--ink);font-weight:700;}
+
+.foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:6px;margin-top:9px;font-size:10.5px;letter-spacing:.05em;color:var(--ink3);flex:none;}
+.foot .pg{font-weight:700;color:var(--ink2);letter-spacing:.12em;}
+.foot b{color:var(--ink2);font-weight:600;}
+
+.eyebrow{font-size:11.7px;font-weight:700;letter-spacing:.26em;color:var(--red);text-transform:uppercase;}
+.rule-gold{height:2px;background:var(--gold);width:44px;border-radius:2px;}
+.sectlabel{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
+.sectlabel .no{font-family:var(--f-display);font-weight:600;font-size:18.0px;color:var(--red);line-height:1;}
+.sectlabel .tt{font-family:var(--f-head);font-weight:700;font-size:19.0px;color:var(--ink);letter-spacing:.01em;}
+.sectlabel .en{font-size:10.5px;letter-spacing:.24em;color:var(--ink3);font-weight:700;text-transform:uppercase;margin-left:auto;}
+.src{font-size:10.5px;color:var(--ink3);letter-spacing:.02em;margin-top:6px;}
+
+/* ================= PAGE 1 — COVER ================= */
+.cv-eyerow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:11px;}
+.cv-tickers{margin-left:auto;font-size:12.3px;color:var(--ink2);letter-spacing:.04em;font-weight:600;}
+.cv-tickers b{color:var(--ink);}
+.headline{font-family:var(--f-head);font-weight:800;color:var(--ink);font-size:53.0px;line-height:1.12;letter-spacing:-.01em;margin-top:13px;}
+.headline .hl{color:var(--red);}
+.headline .box{border-bottom:5px solid var(--gold);padding-bottom:1px;}
+.subhead{font-size:15.1px;line-height:1.75;color:var(--ink2);max-width:174mm;margin-top:16px;font-weight:450;}
+.subhead b{color:var(--ink);font-weight:700;}
+
+.judg{display:flex;gap:0;background:var(--navy);border-radius:9px;overflow:hidden;}
+.judg .lab{background:var(--red);color:#fff;font-family:var(--f-head);font-weight:800;font-size:18.0px;letter-spacing:.16em;padding:0 17px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.3;flex:none;}
+.judg .body{padding:15px 18px;color:#EDEEF2;font-size:14.2px;line-height:1.68;display:flex;align-items:center;}
+.judg .body b{color:#fff;font-weight:700;}
+.judg .body .big{color:#fff;font-family:var(--f-display);font-weight:600;}
+
+.cv-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;}
+.mcard{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:16px 16px 15px;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+.mcard .top{font-size:11.7px;font-weight:700;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;}
+.mcard .fig{font-family:var(--f-display);font-weight:600;color:var(--ink);font-size:43.5px;line-height:1;margin:11px 0 5px;letter-spacing:-.01em;}
+.mcard .fig .u{font-size:17.9px;color:var(--ink2);font-weight:600;margin-left:1px;}
+.mcard .fig.g{color:var(--green);}
+.mcard .cap{font-size:13.5px;color:var(--ink2);line-height:1.62;font-weight:500;}
+.mcard .cap b{color:var(--ink);font-weight:700;}
+.mcard .tag{position:absolute;top:15px;right:15px;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--green);}
+
+.cv-two{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.wide{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:15px 17px;display:flex;align-items:center;gap:14px;}
+.wide .ic{width:36px;height:36px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:600;font-size:19.0px;}
+.wide .ic.gold{background:var(--goldsoft);color:var(--gold);}
+.wide .ic.navy{background:#E7EAF1;color:var(--navy);}
+.wide .t{font-size:13.5px;font-weight:700;letter-spacing:.03em;color:var(--ink);margin-bottom:3px;}
+.wide .d{font-size:13.0px;color:var(--ink2);line-height:1.62;}
+.wide .d b{color:var(--red);font-weight:700;}
+.wide .d .bg{color:var(--green);font-weight:700;}
+
+.toc{display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--ink);padding-top:12px;}
+.toc .ti{padding:0 18px;border-right:1px solid var(--line);}
+.toc .ti:first-child{padding-left:0;}
+.toc .ti:last-child{border-right:none;padding-right:0;}
+.toc .tn{font-family:var(--f-display);font-weight:600;font-size:18.0px;color:var(--red);line-height:1;}
+.toc .tt2{font-family:var(--f-head);font-weight:700;font-size:15.0px;color:var(--ink);margin-top:5px;}
+.toc .td{font-size:11.7px;color:var(--ink2);margin-top:4px;line-height:1.45;}
+
+/* ================= data page shared ================= */
+.callout{border-left:4px solid var(--red);background:linear-gradient(90deg,var(--redsoft),rgba(244,229,225,0));padding:13px 16px;border-radius:0 8px 8px 0;}
+.callout .q{font-family:var(--f-head);font-weight:600;font-size:17.4px;line-height:1.62;color:var(--ink);letter-spacing:.005em;}
+.callout .q b{color:var(--red);}
+.callout.green{border-left-color:var(--green);background:linear-gradient(90deg,var(--greensoft),rgba(226,236,231,0));}
+.callout.green .q b{color:var(--green);}
+.callout.navy{border-left-color:var(--navy);background:linear-gradient(90deg,#E9ECF3,rgba(233,236,243,0));}
+
+.panel{background:var(--card);border:1px solid var(--line2);border-radius:11px;padding:17px 19px;}
+.panel-t{font-family:var(--f-head);font-weight:700;font-size:18.0px;color:var(--ink);line-height:1.35;}
+.panel-t .accent{color:var(--red);}
+.panel-sub{font-size:13.3px;color:var(--ink2);line-height:1.6;margin-top:6px;font-weight:450;}
+.panel-sub b{font-weight:700;}
+
+svg{display:block;width:100%;height:auto;overflow:visible;}
+.axlab{font-family:var(--f-body);font-size:13.2px;fill:var(--ink3);font-weight:600;}
+.ptlab{font-family:var(--f-body);font-size:15.6px;font-weight:800;}
+
+.bars{display:flex;flex-direction:column;gap:11px;margin-top:6px;}
+.bar{display:grid;grid-template-columns:78px 1fr 46px;align-items:center;gap:10px;}
+.bar .nm{font-size:13.0px;font-weight:600;color:var(--ink2);text-align:right;line-height:1.15;}
+.bar .nm b{display:block;font-size:13.7px;color:var(--ink);font-weight:700;}
+.bar .track{height:17px;background:var(--paper2);border-radius:4px;position:relative;overflow:hidden;}
+.bar .fill{height:100%;border-radius:4px;background:var(--navy2);}
+.bar.hl .fill{background:var(--green);}
+.bar .val{font-size:14.4px;font-weight:800;color:var(--ink);text-align:left;}
+.bar.hl .val{color:var(--green);}
+
+.dumb{display:flex;flex-direction:column;}
+.drow{display:grid;grid-template-columns:106px 1fr 52px;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid var(--line2);}
+.drow:last-child{border-bottom:none;}
+.drow .mk{font-size:13.7px;color:var(--ink);font-weight:700;line-height:1.2;}
+.drow .mk span{display:block;font-size:10.5px;color:var(--ink3);font-weight:600;letter-spacing:.02em;margin-top:2px;}
+.drow .tr{position:relative;height:24px;}
+.drow .base{position:absolute;top:11px;left:0;right:0;height:2px;background:var(--line);}
+.seg{position:absolute;top:10px;height:4px;background:var(--navy2);border-radius:2px;}
+.drow.hot .seg{background:var(--red);}
+.dot{position:absolute;top:6px;width:12px;height:12px;border-radius:50%;transform:translateX(-50%);}
+.dot.o{background:var(--card);border:2.5px solid var(--ink3);}
+.dot.n{background:var(--navy2);border:2.5px solid var(--navy2);}
+.drow.hot .dot.n{background:var(--red);border-color:var(--red);}
+.vlab{position:absolute;top:-7px;font-size:11.7px;font-weight:800;transform:translateX(-50%);color:var(--ink3);}
+.vlab.n{color:var(--navy);} .drow.hot .vlab.n{color:var(--red);}
+.delta{font-size:13.8px;font-weight:800;text-align:right;color:var(--navy);}
+.drow.hot .delta{color:var(--red);}
+
+.kpirow{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+.kpi{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:13px 14px;}
+.kpi .k{font-size:11.2px;font-weight:700;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;line-height:1.2;}
+.kpi .v{font-family:var(--f-display);font-weight:600;font-size:31.8px;color:var(--ink);line-height:1;margin:9px 0 5px;}
+.kpi .v .u{font-size:15.6px;color:var(--ink2);}
+.kpi .v.g{color:var(--green);}
+.kpi .s{font-size:11.4px;color:var(--ink2);line-height:1.62;}
+.kpi .s b{color:var(--ink);font-weight:700;}
+
+.split{display:grid;grid-template-columns:1.02fr 1fr;gap:13px;}
+.capband{background:var(--navy);border-radius:11px;padding:16px 18px;color:#fff;display:flex;flex-direction:column;}
+.capband .h{font-family:var(--f-head);font-weight:700;font-size:16.2px;color:#fff;display:flex;align-items:center;gap:8px;}
+.capband .h .g{color:var(--goldsoft);}
+.capstat{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.13);}
+.capstat:last-child{border-bottom:none;}
+.capstat .l{font-size:12.5px;color:#C7CCDA;line-height:1.4;max-width:60%;}
+.capstat .r{font-family:var(--f-display);font-weight:600;font-size:21.3px;color:#fff;white-space:nowrap;}
+.capstat .r .u{font-size:13.0px;color:#AEB4C6;}
+.capnote{font-size:10.7px;color:#AEB4C6;margin-top:10px;line-height:1.65;}
+
+.vecs{display:flex;flex-direction:column;gap:10px;}
+.vec{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:12px 14px;display:flex;gap:11px;align-items:flex-start;flex:1;}
+.vec .vi{font-family:var(--f-display);font-weight:600;font-size:13.2px;letter-spacing:.02em;color:var(--gold);background:var(--goldsoft);border-radius:6px;padding:5px 7px;flex:none;min-width:36px;text-align:center;}
+.vec .vt{font-size:13.5px;font-weight:700;color:var(--ink);}
+.vec .vd{font-size:12.2px;color:var(--ink2);line-height:1.62;margin-top:3px;}
+.vec .vd b{color:var(--green);font-weight:700;}
+
+/* ================= PAGE 4 ================= */
+.val2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.valcard{background:var(--card);border:1px solid var(--line2);border-radius:11px;padding:16px 18px;}
+.valcard .vh{display:flex;justify-content:space-between;align-items:center;}
+.valcard .vh .nm{font-weight:800;font-size:15.6px;color:var(--ink);letter-spacing:.02em;}
+.valcard .vh .tk{font-size:11.1px;color:var(--ink3);font-weight:600;letter-spacing:.04em;}
+.valcard .prices{display:flex;align-items:center;gap:12px;margin:13px 0 4px;flex-wrap:nowrap;white-space:nowrap;}
+.valcard .nowcol{display:flex;flex-direction:column;line-height:1.1;}
+.valcard .nowlab{font-size:11.1px;color:var(--ink3);font-weight:700;letter-spacing:.1em;}
+.valcard .nowval{font-family:var(--f-display);font-weight:600;font-size:18.0px;color:var(--ink2);margin-top:3px;}
+.valcard .arr{color:var(--ink4);font-size:17.9px;}
+.valcard .ptcol{display:flex;align-items:baseline;gap:7px;}
+.valcard .pt{font-family:var(--f-display);font-weight:600;font-size:32.9px;color:var(--green);line-height:1;}
+.valcard .up{display:inline-block;background:var(--greensoft);color:var(--green);font-size:13.2px;font-weight:800;padding:2px 8px;border-radius:100px;margin-left:2px;vertical-align:middle;}
+.valcard .meta{font-size:11.7px;color:var(--ink2);margin-top:11px;letter-spacing:.02em;font-weight:600;}
+
+.fcast{display:flex;justify-content:space-between;gap:6px;background:var(--paper2);border-radius:9px;padding:13px 8px;}
+.fcast .fc{flex:1;text-align:center;border-right:1px solid var(--line);}
+.fcast .fc:last-child{border-right:none;}
+.fcast .fc .fk{font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--ink3);text-transform:uppercase;}
+.fcast .fc .fv{font-family:var(--f-display);font-weight:600;font-size:20.2px;color:var(--ink);margin-top:4px;line-height:1;}
+.fcast .fc .fv .u{font-size:11.7px;color:var(--ink2);}
+.fcast .fc .fs{font-size:10.5px;color:var(--green);font-weight:700;margin-top:3px;}
+
+.watch{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.wbox{border-radius:10px;padding:14px 16px;}
+.wbox.up{background:var(--greensoft);border:1px solid #CADED6;}
+.wbox.dn{background:var(--redsoft);border:1px solid #EBD3CD;}
+.wbox .wh{font-family:var(--f-head);font-weight:700;font-size:15.0px;display:flex;align-items:center;gap:6px;margin-bottom:8px;}
+.wbox.up .wh{color:var(--green);} .wbox.dn .wh{color:var(--red);}
+.wbox ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.wbox li{font-size:12.7px;line-height:1.45;color:var(--ink);padding-left:13px;position:relative;font-weight:500;}
+.wbox li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;}
+.wbox.up li::before{background:var(--green);} .wbox.dn li::before{background:var(--red);}
+
+.track-chips{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+.track-chips .tl{font-size:11.7px;font-weight:700;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;margin-right:2px;}
+.tchip{font-size:12.2px;font-weight:600;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:100px;padding:5px 12px;}
+
+.qrcard{background:linear-gradient(135deg,#1B2440,#2C3860);border-radius:14px;padding:5px;box-shadow:0 6px 20px rgba(27,36,64,.18);}
+.qrinner{background:var(--card);border-radius:11px;padding:16px 18px;display:flex;align-items:center;gap:18px;}
+.qrbox{background:#fff;border:1px solid var(--line2);border-radius:12px;padding:8px;flex:none;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.qrbox img{display:block;width:40mm;height:40mm;image-rendering:crisp-edges;}
+.qrtxt{flex:1;}
+.qrtxt .qbrand{display:flex;align-items:center;gap:8px;}
+.qrtxt .qdot{width:20px;height:20px;border-radius:50%;background:var(--red);position:relative;flex:none;}
+.qrtxt .qdot::after{content:"P";position:absolute;inset:0;color:#fff;font-family:var(--f-display);font-weight:600;font-size:15.6px;display:flex;align-items:center;justify-content:center;}
+.qrtxt .qn{font-weight:800;font-size:18.0px;letter-spacing:.1em;color:var(--ink);}
+.qrtxt .qh{font-family:var(--f-head);font-weight:700;font-size:19.0px;color:var(--ink);margin-top:12px;line-height:1.35;}
+.qrtxt .qh .r{color:var(--red);}
+.qrtxt .qs{font-size:13.0px;color:var(--ink2);line-height:1.65;margin-top:7px;font-weight:500;}
+.qrtxt .qcta{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12.2px;font-weight:700;color:var(--navy);letter-spacing:.02em;}
+.qrtxt .qcta::before{content:"";width:16px;height:2px;background:var(--gold);}
+
+.disc{font-size:10.5px;color:var(--ink3);line-height:1.6;letter-spacing:.01em;margin-top:11px;}
+</style>
+</head>
+<body>
+<style>
+  /* ===== enlarged components (big/full) ===== */
+  .callout{padding:20px 24px;}
+  .callout .q{font-size:16.5px;line-height:1.64;}
+  .callout.navy .q,.callout.green .q{font-size:15.5px;line-height:1.66;}
+  .panel{padding:19px 22px;}
+  .panel-t{font-size:16.5px;}
+  .panel-sub{font-size:12.5px;line-height:1.6;}
+  .mcard{padding:19px 18px 17px;}
+  .mcard .top{font-size:11px;padding-right:60px;}
+  .mcard .fig{font-size:37px;margin:11px 0 7px;}
+  .mcard .fig .u{font-size:16px;}
+  .mcard .cap{font-size:12px;line-height:1.54;}
+  .mcard .tag{font-size:10px;}
+  .wide{padding:16px 18px;}
+  .wide .t{font-size:13.5px;margin-bottom:4px;}
+  .wide .d{font-size:12px;line-height:1.54;}
+  .wide .ic{width:42px;height:42px;font-size:20px;}
+  .judg .body{font-size:13.5px;padding:17px 20px;line-height:1.64;}
+  .judg .lab{font-size:17px;padding:0 18px;}
+  .subhead{line-height:1.68;font-size:14px;}
+  .sectlabel .tt{font-size:19px;}
+  .qrtxt .qh{font-size:18px;} .qrtxt .qs{font-size:12.5px;}
+  .qrinner{padding:13px 16px;gap:16px;}
+  .qrbox img{width:32mm;height:32mm;}
+
+  /* ===== regional 2x2 ===== */
+  .region{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
+  .rcard{border:1px solid var(--line2);border-radius:13px;padding:16px 18px;background:var(--card);border-top-width:4px;}
+  .rcard.us{border-top-color:var(--navy2);}
+  .rcard.cn{border-top-color:var(--red);}
+  .rcard.eu{border-top-color:var(--gold);}
+  .rcard.asean{border-top-color:var(--green);}
+  .rcard .rh{display:flex;align-items:baseline;gap:9px;margin-bottom:9px;}
+  .rcard .rh .rn{font-family:var(--f-head);font-weight:800;font-size:16px;color:var(--ink);}
+  .rcard .rh .re{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;}
+  .rcard .rt{font-size:12.5px;color:var(--ink2);line-height:1.55;}
+  .rcard .rt b{color:var(--ink);font-weight:700;}
+  .rcard .rt .r{color:var(--red);font-weight:700;} .rcard .rt .g{color:var(--green);font-weight:700;}
+
+  /* ===== 3 states ===== */
+  .states{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:11px;}
+  .scard{border:1px solid var(--line2);border-radius:12px;padding:14px 15px;background:var(--card);}
+  .scard .sh{font-family:var(--f-head);font-weight:800;font-size:14px;color:var(--ink);line-height:1.15;}
+  .scard .sh small{display:block;font-size:9.5px;color:var(--ink3);font-weight:700;letter-spacing:.06em;margin-top:2px;text-transform:uppercase;}
+  .scard .sd{font-size:11px;color:var(--ink2);line-height:1.45;margin:8px 0 9px;}
+  .scard .stk{font-size:11.5px;font-weight:700;color:var(--navy);line-height:1.5;}
+  .statnote{display:flex;align-items:center;gap:10px;background:var(--navy);border-radius:11px;padding:11px 18px;margin-top:11px;}
+  .statnote .nv{font-family:var(--f-display);font-weight:600;font-size:22px;color:#7FD1BE;flex:none;}
+  .statnote .nt{font-size:13px;color:#EDEEF2;line-height:1.5;}
+  .statnote .nt b{color:#fff;font-weight:700;}
+
+  /* ===== stock scorecard ===== */
+  .stbl{border:1px solid var(--line2);border-radius:14px;overflow:hidden;background:var(--card);margin-top:12px;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+  .strow{display:grid;grid-template-columns:1.55fr 58px 0.7fr 0.7fr 1.5fr;align-items:center;padding:8px 20px;border-bottom:1px solid var(--line2);column-gap:10px;}
+  .strow:last-child{border-bottom:none;}
+  .strow.hd{background:var(--paper2);padding:8px 20px;}
+  .strow.hd span{font-size:9px;font-weight:700;letter-spacing:.02em;color:var(--ink3);}
+  .strow.hd span.c{text-align:center;} .strow.hd span.r{text-align:left;}
+  .strow.top{background:linear-gradient(90deg,var(--goldsoft),rgba(240,232,214,0));}
+  .strow .nm{font-weight:800;font-size:13.5px;color:var(--ink);line-height:1.08;}
+  .strow .nm small{display:block;font-size:8.5px;color:var(--ink3);font-weight:600;font-family:var(--f-body);margin-top:2px;letter-spacing:.02em;}
+  .stbadge{justify-self:center;font-size:10px;font-weight:800;padding:3px 0;width:44px;text-align:center;border-radius:100px;background:var(--greensoft);color:var(--green);}
+  .strow .base{text-align:center;font-family:var(--f-body);font-variant-numeric:tabular-nums;font-size:15px;font-weight:800;color:var(--green);}
+  .strow .bull{text-align:center;font-family:var(--f-body);font-variant-numeric:tabular-nums;font-size:12.5px;font-weight:700;color:var(--ink3);}
+  .strow .role{font-size:11px;color:var(--ink2);line-height:1.32;}
+  .strow .role b{color:var(--ink);font-weight:700;}
+
+  .disc{font-size:9.6px;line-height:1.46;margin-top:10px;}
+</style>
+
+<!-- ============================= PAGE 1 : COVER ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>机构研究 · 可视化精华</b><br>来源：Morgan Stanley 全球主题 · 2026.08.19<br>AI Sovereignty · Ariana Salvatore、Daniel Blake 等</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="cv-eyerow">
+        <span class="eyebrow">摩根士丹利 · 全球主题 · AI 主权</span>
+        <span class="cv-tickers">美国 AI 资本开支 <b>$8600亿</b>&nbsp;·&nbsp;主题增速最快</span>
+      </div>
+      <div class="rule-gold"></div>
+      <h1 class="headline">各国抢建 <span class="hl">主权 AI</span><br><span class="box">资本开支</span>周期更长</h1>
+      <p class="subhead">对<b>关键基础设施、数据、模型、供应链</b>的主权控制，已成各国战略要务——既放大 AI 资本开支机会（仅美国今年 <b>$8600亿</b>），也带来更广的科技管制风险。支出在美 / 中 / 区域生态间<b>碎片化</b>，反而<b>拉长</b>建设周期（利好半导体、数据中心、网络、电力、云）。大摩把 3800 只覆盖股映射到"<b>AI 主权 & 半导体本土化</b>"主题——<b>增速最快的主题群之一</b>。</p>
+    </div>
+
+    <div class="judg">
+      <div class="lab"><span>核心</span><span>判断</span></div>
+      <div class="body"><div>AI 已成"<b>战略基础设施</b>"，各国转向<span class="big">本土产能</span>、可信伙伴、更严管制。主权 AI <b>强化而非削弱</b>资本开支周期——支出更多、更分散。看好<b>半导体本土化、数据中心、云控制层</b>。</div></div>
+    </div>
+
+    <div class="cv-metrics">
+      <div class="mcard">
+        <div class="tag" style="color:var(--gold)">资本开支机会</div>
+        <div class="top">美国 AI 建设 · 仅今年</div>
+        <div class="fig" style="color:var(--gold)">$860<span class="u">B</span></div>
+        <div class="cap">联邦支持加码；主权化让基础设施"全球通用性下降"→ <b>拉长</b>建设周期</div>
+      </div>
+      <div class="mcard">
+        <div class="tag" style="color:var(--green)">最快增长主题</div>
+        <div class="top">AI 主权主题</div>
+        <div class="fig g" style="font-size:25px;line-height:1.16;margin-top:14px">高个位数<br>EPS 增速</div>
+        <div class="cap">27–28 年 CAGR；估值溢价，盈利上修<b>正在加速</b>（未见顶）</div>
+      </div>
+      <div class="mcard">
+        <div class="tag" style="color:var(--red)">全能赢家</div>
+        <div class="top">三种范式下都赢</div>
+        <div class="fig">NVDA</div>
+        <div class="cap">闭源 / 混合 / 开源<b>三种"世界"</b>下，英伟达半导体均是赢家</div>
+      </div>
+    </div>
+
+    <div class="cv-two">
+      <div class="wide">
+        <div class="ic navy">碎</div>
+        <div><div class="t">碎片化 = 更多投资</div><div class="d">基础设施<b>不再"全球通用"</b>→ 各地重复建设、冗余增加 → <span class="bg">资本开支更多、周期更长</span></div></div>
+      </div>
+      <div class="wide">
+        <div class="ic gold">差</div>
+        <div><div class="t">管制制造差异化赢家</div><div class="d">限制中国低价模型 → <span class="bg">美国模型商得份额/定价权</span>；物理 AI 管制<b>保护非中国机器人</b></div></div>
+      </div>
+    </div>
+
+    <div class="toc">
+      <div class="ti"><div class="tn">02</div><div class="tt2">各国主权 AI 打法</div><div class="td">美国 · 中国 · 欧洲 · 东盟</div></div>
+      <div class="ti"><div class="tn">03</div><div class="tt2">怎么投：三情景 + 选股</div><div class="td">三种"世界" · 层级赢家 · 最高敞口个股</div></div>
+      <div class="ti"><div class="tn">★</div><div class="tt2">主题增速最快</div><div class="td">强化资本开支周期；看好半导体本土化</div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>数据以 Morgan Stanley 原报告为准 · 仅供参考，不构成投资建议</span>
+    <span class="pg">01 / 03</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 2 : REGIONAL PLAYBOOK ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>全球主题 · AI 主权</b><br>Morgan Stanley · 2026.08.19</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">01</span><span class="tt">各国主权 AI 打法</span><span class="en">Regional Playbook</span></div>
+      <div class="callout">
+        <div class="q">各地经济含义不同，但<b>共同线索一致</b>：当基础设施越不"全球通用"，各国就投入越多——<b>把更多投资转化为基础设施</b>。这也是主权 AI 强化（而非削弱）资本开支周期的根本原因。</div>
+      </div>
+    </div>
+
+    <div class="region">
+      <div class="rcard us">
+        <div class="rh"><span class="rn">美国 US</span><span class="re">Capex + De-risking</span></div>
+        <div class="rt">① <b>$8600亿</b> AI 基建建设、联邦加码；② 对华<span class="r">"去风险"</span>——管制从<b>芯片</b>扩展到<b>云 / 模型 / 采购 / 分销</b>。以控制换取国家竞争力。</div>
+      </div>
+      <div class="rcard cn">
+        <div class="rh"><span class="rn">中国 China</span><span class="re">Localization</span></div>
+        <div class="rt"><b>本土化 · 自主可控</b>，收紧对外国技术的控制；对内加速 AI 扩散、对外建"<b>中国兼容</b>"生态。策略上<span class="g">超配 A 股硬科技</span>。</div>
+      </div>
+      <div class="rcard eu">
+        <div class="rh"><span class="rn">欧洲 Europe</span><span class="re">Strategic Autonomy</span></div>
+        <div class="rt">追求<b>战略自主</b>（Draghi 报告）→ 算力 / 云 / 半导体大投入；但面临<span class="r">融资与规模的实质挑战</span>，落地难度高。</div>
+      </div>
+      <div class="rcard asean">
+        <div class="rh"><span class="rn">东盟 ASEAN</span><span class="re">Trusted Partners</span></div>
+        <div class="rt"><b>本土产能 + 可信伙伴</b>（如 Singtel 建区域 AI 基建），而非追求<b>全栈自给</b>。新加坡 / 马来 / 泰国数据中心受益。</div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:15px;">
+      <div class="panel-t">受益<span class="accent">集中在哪些板块</span>（按覆盖股数量占比）</div>
+      <div class="panel-sub">3800 只覆盖股映射后——<b>半导体本土化</b>是最集中的一条主线，其次是科技硬件与电信。</div>
+      <div class="bars" style="margin-top:12px;">
+        <div class="bar hl"><div class="nm"><b>半导体</b></div><div class="track"><div class="fill" style="width:98.8%"></div></div><div class="val">24.7%</div></div>
+        <div class="bar"><div class="nm">科技硬件</div><div class="track"><div class="fill" style="width:68.4%"></div></div><div class="val">17.1%</div></div>
+        <div class="bar"><div class="nm">电信</div><div class="track"><div class="fill" style="width:52.4%"></div></div><div class="val">13.1%</div></div>
+        <div class="bar"><div class="nm">资本品</div><div class="track"><div class="fill" style="width:43.6%"></div></div><div class="val">10.9%</div></div>
+        <div class="bar"><div class="nm">汽车</div><div class="track"><div class="fill" style="width:26%"></div></div><div class="val">6.5%</div></div>
+        <div class="bar"><div class="nm">软件</div><div class="track"><div class="fill" style="width:23.2%"></div></div><div class="val">5.8%</div></div>
+      </div>
+      <div class="src">来源：Morgan Stanley（Exhibit 8），按 Core/Significant/Moderate 敞口的股票数量分布。绿=最大板块。</div>
+    </div>
+
+    <div class="callout navy">
+      <div class="q"><b style="color:var(--navy)">对市场意味着什么？</b>&nbsp;算力<b style="color:var(--navy)">不再全球通用</b>→ 各国要本地产能、冗余、可控，<b style="color:var(--navy)">强化资本开支超级周期</b>（半导体/数据中心/网络/电力/云）。但管制是双刃剑：限中国低价模型利好美国模型商、物理 AI 管制保护非中国机器人（但抬成本、有反制风险）。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>各国主权 AI 打法 · Regional Playbook</span>
+    <span class="pg">02 / 03</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 3 : HOW TO INVEST ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>全球主题 · AI 主权</b><br>Morgan Stanley · 2026.08.19</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">02</span><span class="tt">怎么投：三情景 + 选股</span><span class="en">How to Invest</span></div>
+      <div class="callout">
+        <div class="q">大摩用"<b>三种世界</b>"框架布局——无论闭源、混合还是开源模型胜出，都有对应赢家；<b>NVDA 三种情景通吃</b>。而在最高敞口个股里，<b>中国半导体本土化</b>是最集中的一条主线。</div>
+      </div>
+    </div>
+
+    <div class="states">
+      <div class="scard">
+        <div class="sh">闭源赢<small>Closed Win</small></div>
+        <div class="sd">少数前沿大厂胜出 → 超大规模数据中心 / 定制芯片</div>
+        <div class="stk">GOOGL · AMZN · NVDA · AVGO · PANW · ANET</div>
+      </div>
+      <div class="scard">
+        <div class="sh">混合<small>Hybrid</small></div>
+        <div class="sd">多模型架构并存 → 编排 / 可观测 / 多云</div>
+        <div class="stk">MSFT · AMZN · PLTR · DDOG · CRWD · NVDA</div>
+      </div>
+      <div class="scard">
+        <div class="sh">开源赢<small>Open Win</small></div>
+        <div class="sd">开源普及、token 成本降 → 硬件 / 边缘</div>
+        <div class="stk">DELL · HPE · AAPL · MSFT · BABA · NVDA</div>
+      </div>
+    </div>
+    <div class="statnote">
+      <div class="nv">通吃</div>
+      <div class="nt"><b>NVDA</b> 在三种情景下都是赢家；<b>Microsoft</b> 掌"云控制层"、<b>Equinix</b> 是最干净的数据中心敞口、<b>Nebius / CoreWeave</b> 供应本地化"AI 工厂"。</div>
+    </div>
+
+    <div>
+      <div class="stbl">
+        <div class="strow hd"><span>最高敞口个股（Core to Thesis）</span><span class="c">评级</span><span class="c">基准上行</span><span class="c">牛市上行</span><span class="r">定位</span></div>
+        <div class="strow top"><div class="nm">SpaceX<small>SPCX · 美国</small></div><div class="stbadge">超配</div><div class="base">+105%</div><div class="bull">+311%</div><div class="role"><b>主权连接</b>·卫星互联网</div></div>
+        <div class="strow"><div class="nm">兆易创新 GigaDevice<small>603986.SS · 中国</small></div><div class="stbadge">超配</div><div class="base">+120%</div><div class="bull">+281%</div><div class="role"><b>存储/MCU</b>·国产替代</div></div>
+        <div class="strow"><div class="nm">中微公司 AMEC<small>688012.SS · 中国</small></div><div class="stbadge">超配</div><div class="base">+48%</div><div class="bull">+186%</div><div class="role"><b>刻蚀设备</b>·半导体本土化</div></div>
+        <div class="strow"><div class="nm">三星电子 Samsung<small>005930.KS · 韩国</small></div><div class="stbadge">超配</div><div class="base">+42%</div><div class="bull">+60%</div><div class="role"><b>HBM/存储/代工</b></div></div>
+        <div class="strow"><div class="nm">工业富联 Foxconn Ind<small>601138.SS · 中国</small></div><div class="stbadge">超配</div><div class="base">+27%</div><div class="bull">+90%</div><div class="role"><b>AI 服务器</b>·代工</div></div>
+        <div class="strow"><div class="nm">寒武纪 Cambricon<small>688256.SS · 中国</small></div><div class="stbadge">超配</div><div class="base">+27%</div><div class="bull">+141%</div><div class="role"><b>AI 芯片</b>·国产算力</div></div>
+        <div class="strow"><div class="nm">中芯国际 SMIC<small>0981.HK · 中国</small></div><div class="stbadge">超配</div><div class="base">+26%</div><div class="bull">+104%</div><div class="role"><b>晶圆代工</b>龙头</div></div>
+      </div>
+      <div class="src" style="margin-top:6px;">评级、目标价与情景空间以 Morgan Stanley 为准，价格截至报告日；基准/牛市为相对当前的上行空间。另：Texas Instruments 评级为<b>低配</b>（美国模拟芯片）。</div>
+    </div>
+
+    <div>
+      <div class="qrcard" style="margin-top:4px;">
+        <div class="qrinner">
+          <div class="qrbox"><img src="qr.png" alt="THE PORT 微信二维码"></div>
+          <div class="qrtxt">
+            <div class="qbrand"><div class="qdot"></div><div class="qn">THE&nbsp;PORT</div></div>
+            <div class="qh">读懂全球投行的<span class="r">核心观点</span></div>
+            <div class="qs">扫码添加，每日获取高盛、摩根士丹利、摩根大通、瑞银等一线机构研报的精华解读与可视化速览。</div>
+            <div class="qcta">微信扫一扫 · 或长按识别二维码</div>
+          </div>
+        </div>
+      </div>
+      <div class="disc">本文基于 Morgan Stanley 于 2026-08-19《AI Sovereignty: Policy, Market, and Economic Implications》（分析师 Ariana Salvatore、Daniel Blake 等）整理；评级、目标价、情景值以原报告为准，个股取自 Exhibit 12/40。本可视化由 THE PORT 制作，仅供参考、不构成投资建议；投资有风险，决策须谨慎。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>怎么投：三情景 + 选股 · How to Invest</span>
+    <span class="pg">03 / 03</span>
+  </div>
+</section>
+
+</body>
+</html>

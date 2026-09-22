@@ -1,6 +1,6 @@
 ---
 name: stocki-financial-reader
-version: 0.3.0
+version: 0.4.0
 description: "Institutional-grade financial data skill for OpenClaw. Real-time quotes, financials, valuation time series, OHLCV history, industry membership, consensus forecasts, composite analysis. Covers cn/hk/us markets and stock/index/etf/futures/crypto. For structured market/financial data, use this skill."
 metadata:
   openclaw:
@@ -31,7 +31,7 @@ Institutional-grade financial data analyst skill. Aggregates 8 reference docs th
 
 All references share these conventions. The router enforces them globally; individual references may override only with explicit justification.
 
-- **Base URL**: `$STOCKI_GATEWAY_URL` (env var). Set to `http://localhost:9996` in dev or `https://api.stocki.com.cn` in prod.
+- **Base URL**: `$STOCKI_GATEWAY_URL` (env var). Set to `http://localhost:9996` in dev or `https://skill.stocki.com.cn` in prod.
 - **Auth**: every request carries `Authorization: Bearer $STOCKI_API_KEY`. localhost dev mode does not validate but the header MUST still be sent (no environment-conditional code paths).
 - **Content-Type**: `application/json` for all POST.
 - **Error code mapping** (mirrors `scripts/_http.py` exit codes):
@@ -91,6 +91,7 @@ The stocki gateway v3 默认按 50 行截断 `response.data`;超过部分目前 
 | Tier | Trigger keywords (CN / EN) | Reference |
 |---|---|---|
 | 0 (preprocessor) | metric name not in `fundamentals-panel` cheatsheet | `references/metric-resolver.md` |
+| 0 (preprocessor) | NL company / ticker / concept / sector / index name (not already a bare code); default strict, LLM may bypass when very confident in the canonical identifier | `references/name-resolver.md` |
 | 1 (composite-first, cn/hk only) | analyze X / 分析 / 综合 / 贵不贵 / 健康吗 / 业务结构 / 哪条业务最快 / 为什么涨/跌 / 共识修正轨迹 | `references/financial-context.md` |
 | 2 (current snapshot) | now / 现价 / 实时 / intraday / "PE 现在" / "ROE 现在" | `references/realtime-quote.md` |
 | 2 (price time series) | history / K 线 / OHLCV / 区间收益 / 复权 / 走势 | `references/price-history.md` |
@@ -105,7 +106,7 @@ Apply in order. Later rules can override earlier ones if user intent is specific
 
 - **R1. Open-ended fundamentals analysis → `financial-context`** (cn/hk only). User asks generically without naming a specific metric ("分析下 X / X 基本面怎么样 / X 贵不贵 / X 健康吗 / 业务结构 / 哪条业务最快 / 为什么涨跌 / 共识修正轨迹"). Pick L1 / L2 / L3 by depth. Do NOT chain `fundamentals-panel + consensus-and-target + price-history` to recreate what one composite call returns.
 
-- **R2. `financial-context` only ships pre-computed 5-year valuation percentile fields** (`pe_ttm_percentile_5y` / `pb_percentile_5y` / `ps_ttm_percentile_5y` etc.). It does NOT compute arbitrary windows. User asks 5y percentile → use these fields directly (even when a specific metric like PE/PB is named, do NOT go to `fundamentals-panel` to recompute). User asks any other window (3y / 10y / "历史" without specifying) → upstream does NOT serve this directly. Pull raw daily series via `fundamentals-panel` `data_type=valuation` and EITHER (a) compute percentile rank from the series and label clearly as "approximation from raw series", OR (b) tell the user only 5y is directly supported.
+- **R2. `financial-context` only ships pre-computed 5-year valuation percentile fields** (`valuation` 段里 key 后缀含 `percentile_5y` 的字段即是;具体字段名以响应实际为准,不假定固定前缀)。It does NOT compute arbitrary windows. User asks 5y percentile → use these fields directly (even when a specific metric like PE/PB is named, do NOT go to `fundamentals-panel` to recompute). User asks any other window (3y / 10y / "历史" without specifying) → upstream does NOT serve this directly. Pull raw daily series via `fundamentals-panel` `data_type=valuation` and EITHER (a) compute percentile rank from the series and label clearly as "approximation from raw series", OR (b) tell the user only 5y is directly supported.
 
 - **R3. Full consensus time series is exclusive to `financial-context` L3** (≥132 records). When using L3, do NOT additionally call `consensus-and-target`.
 
@@ -117,7 +118,9 @@ Apply in order. Later rules can override earlier ones if user intent is specific
 
 - **R7. Multi-call is allowed and expected.** A query like "AAPL 现价 + 一致预期 + 行业" correctly results in 3 reference calls. Do NOT collapse into a single reference at the cost of correctness.
 
-- **R8. `metric-resolver` is a preprocessor, not a routing target.** Runs *before* `fundamentals-panel` (or `financial-context` field lookup) when user mentions a metric name not in the cheatsheet, returning canonical raw key + EN/CN label for the actual data call.
+- **R8. Two Tier 0 preprocessors, not routing targets.**
+  - `metric-resolver` runs *before* `fundamentals-panel` / `financial-context` field lookup when user mentions a metric name not in the cheatsheet, returning canonical raw key + EN/CN label.
+  - `name-resolver` runs *before* any reference that needs a bare code or collection symbol, when the user supplied a natural-language name (company / concept / sector / index). Default is strict (always call); LLM may bypass when very confident in the canonical identifier for mainstream names.
 
 **R1 vs R5 litmus test**: Did user name a specific metric? No → R1; yes + single point → R4; yes + multi-period panel → R5; any + 5y percentile → R2 override.
 
@@ -128,8 +131,8 @@ When relaying response content to user-visible text, **never expose** any data-v
 | Category | Forbidden form | Required form |
 |---|---|---|
 | symbol | pipe-delimited (`AAPL\|ST\|USA`) | bare code (`AAPL`, `600519`) |
-| metric | uppercase canonical (`OPER_REV`, `WAA_ROE`) | EN label ("Total Revenue") or CN label ("营业总收入") by user language |
-| industry | vendor prefix (`wind-`, `sw-`, `申万-`, `中信-`) | category itself ("食品饮料") |
+| metric | raw column key (e.g. `oper_rev`, `waa_roe`, `roe_deducted`, `pe_ttm`) | EN label ("Total Revenue") or CN label ("营业总收入") by user language |
+| industry | source-tagged prefix (形如 `<src>-<category>`) | category itself ("食品饮料") |
 
 **Why**: data-vendor identity is implementation detail. Leaking it locks the output format and prevents future source switches. Each reference's `Response Fields — Raw → User-Facing Label` table is the source of truth for label mappings; metric-resolver's `name` field is fallback when not in the cheatsheet.
 

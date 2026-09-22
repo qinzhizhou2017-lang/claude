@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>港股盘中实时分析 · 2026-06-03</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'PingFang SC','Microsoft YaHei',sans-serif; background: #0d1117; color: #e6edf3; min-height: 100vh; }
+
+  .header {
+    background: linear-gradient(135deg, #161b22 0%, #0d1117 100%);
+    border-bottom: 1px solid #21262d;
+    padding: 20px 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .header h1 { font-size: 22px; font-weight: 700; color: #58a6ff; }
+  .header .meta { font-size: 13px; color: #8b949e; margin-top: 3px; }
+  .status-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #1c3a2a; border: 1px solid #2ea043; border-radius: 20px;
+    padding: 4px 14px; font-size: 12px; color: #3fb950;
+  }
+  .status-badge::before { content:''; width:7px; height:7px; border-radius:50%; background:#3fb950; animation:pulse 1.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+  .main { padding: 24px 32px; max-width: 1400px; margin: 0 auto; }
+
+  .section-title {
+    font-size: 13px; font-weight: 600; color: #8b949e;
+    text-transform: uppercase; letter-spacing: .08em;
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-title::before { content:''; width:3px; height:14px; background:#58a6ff; border-radius:2px; }
+
+  /* Index Grid */
+  .index-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; margin-bottom: 24px; }
+  .index-card {
+    background: #161b22; border: 1px solid #21262d; border-radius: 12px;
+    padding: 20px 22px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .index-card.down-bg { border-color: rgba(63,185,80,.22); background: rgba(63,185,80,.04); }
+  .idx-left .idx-name { font-size: 16px; font-weight: 700; color: #e6edf3; }
+  .idx-left .idx-sub  { font-size: 11px; color: #8b949e; margin-top: 3px; }
+  .idx-right { text-align: right; }
+  .idx-right .idx-val { font-size: 28px; font-weight: 700; }
+  .idx-right .idx-pct { font-size: 14px; font-weight: 600; margin-top: 2px; }
+  .idx-right .idx-detail { font-size: 11px; color: #8b949e; margin-top: 4px; }
+  .up { color: #f85149; } .dn { color: #3fb950; } .flat { color: #8b949e; }
+
+  .panel { background:#161b22; border:1px solid #21262d; border-radius:10px; padding:18px; }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+  .row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:16px; }
+
+  /* Breadth */
+  .breadth-stats { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:16px; }
+  .stat-box { background:#161b22; border:1px solid #21262d; border-radius:8px; padding:14px; text-align:center; }
+  .stat-box .sv { font-size:24px; font-weight:700; }
+  .stat-box .sl { font-size:11px; color:#8b949e; margin-top:3px; }
+
+  /* Distribution bar */
+  .dist-bar { display:flex; height:30px; border-radius:7px; overflow:hidden; margin-bottom:8px; }
+  .dist-seg { display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:600; color:#fff; }
+  .dist-legend { display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+  .dist-item { display:flex; align-items:center; gap:4px; font-size:11px; color:#8b949e; }
+  .dist-dot { width:8px; height:8px; border-radius:2px; }
+  .c1{background:#7b2d00;} .c2{background:#b05000;} .c3{background:#d4380d;} .c4{background:#f85149;}
+  .c5{background:#21262d;} .c6{background:#2ea043;} .c7{background:#238636;} .c8{background:#155724;}
+
+  /* Tables */
+  table { width:100%; border-collapse:collapse; font-size:12px; }
+  th { color:#8b949e; font-weight:500; text-align:left; padding:6px 8px; border-bottom:1px solid #21262d; font-size:11px; }
+  td { padding:7px 8px; border-bottom:1px solid #161b22; }
+  tr:last-child td { border-bottom:none; }
+  tr:hover td { background:rgba(255,255,255,.02); }
+  .chip { display:inline-block; background:#21262d; border-radius:4px; padding:1px 6px; font-size:10px; color:#8b949e; }
+
+  /* Stock bars */
+  .bar-row { display:flex; align-items:center; gap:8px; margin-bottom:9px; font-size:12px; }
+  .bar-name { width:100px; color:#c9d1d9; flex-shrink:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .bar-wrap { flex:1; height:20px; background:#21262d; border-radius:4px; overflow:hidden; position:relative; }
+  .bar-fill { height:100%; border-radius:4px; transition:width .4s; }
+  .bar-val  { width:55px; text-align:right; flex-shrink:0; font-weight:600; }
+  .bar-amt  { width:48px; text-align:right; flex-shrink:0; color:#8b949e; font-size:11px; }
+
+  /* Alert cards */
+  .alert-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:16px; }
+  .alert-card { background:#161b22; border-radius:10px; padding:16px; }
+  .alert-card.risk { border:1px solid rgba(248,81,73,.3); }
+  .alert-card.oppo { border:1px solid rgba(63,185,80,.3); }
+  .alert-card .atitle { font-size:13px; font-weight:700; margin-bottom:10px; }
+  .alert-card.risk .atitle { color:#f85149; }
+  .alert-card.oppo .atitle { color:#3fb950; }
+  .alert-card ul { list-style:none; }
+  .alert-card li { font-size:12px; color:#c9d1d9; padding:4px 0; padding-left:14px; position:relative; line-height:1.65; }
+  .alert-card li::before { content:'›'; position:absolute; left:0; color:#8b949e; }
+
+  .footer { text-align:center; padding:20px; color:#8b949e; font-size:11px; border-top:1px solid #21262d; margin-top:10px; }
+
+  @media(max-width:900px){
+    .index-grid,.row2,.row3,.alert-grid{grid-template-columns:1fr;}
+    .breadth-stats{grid-template-columns:repeat(3,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>🇭🇰 港股盘中实时分析</h1>
+    <div class="meta">数据时间：2026-06-03 10:42 CST · 实时行情 · 港股市场开盘中</div>
+  </div>
+  <div class="status-badge">开盘交易中</div>
+</div>
+
+<div class="main">
+
+  <!-- ===== 主要指数 ===== -->
+  <div class="section-title">主要指数实时行情</div>
+  <div class="index-grid">
+    <div class="index-card down-bg">
+      <div class="idx-left">
+        <div class="idx-name">恒生指数</div>
+        <div class="idx-sub">Hang Seng Index · HSI</div>
+        <div style="margin-top:12px;font-size:11px;color:#8b949e;line-height:1.8;">
+          开盘 <span style="color:#c9d1d9;">25,953</span><br>
+          最高 <span style="color:#f85149;">25,953</span> &nbsp;最低 <span style="color:#3fb950;">25,605</span><br>
+          昨收 <span style="color:#c9d1d9;">26,038</span>
+        </div>
+      </div>
+      <div class="idx-right">
+        <div class="idx-val dn">25,645</div>
+        <div class="idx-pct dn">▼ -1.51%</div>
+        <div class="idx-detail">跌幅 -392 点</div>
+        <div style="margin-top:10px;font-size:11px;color:#8b949e;">成交额 <span style="color:#58a6ff;">491亿 HKD</span></div>
+      </div>
+    </div>
+    <div class="index-card down-bg">
+      <div class="idx-left">
+        <div class="idx-name">恒生科技指数</div>
+        <div class="idx-sub">Hang Seng Tech Index · HSTECH</div>
+        <div style="margin-top:12px;font-size:11px;color:#8b949e;line-height:1.8;">
+          开盘 <span style="color:#c9d1d9;">5,162</span><br>
+          最高 <span style="color:#f85149;">5,162</span> &nbsp;最低 <span style="color:#3fb950;">5,068</span><br>
+          昨收 <span style="color:#c9d1d9;">5,199</span>
+        </div>
+      </div>
+      <div class="idx-right">
+        <div class="idx-val dn">5,078</div>
+        <div class="idx-pct dn">▼ -2.32%</div>
+        <div class="idx-detail">跌幅 -120 点</div>
+        <div style="margin-top:10px;font-size:11px;color:#8b949e;">成交额 <span style="color:#58a6ff;">387亿 HKD</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 今日背景说明 ===== -->
+  <div class="panel" style="margin-bottom:16px;border-color:rgba(88,166,255,.2);">
+    <div style="display:flex;align-items:flex-start;gap:14px;">
+      <div style="font-size:24px;flex-shrink:0;">📌</div>
+      <div style="font-size:13px;line-height:1.8;color:#c9d1d9;">
+        <strong style="color:#58a6ff;">今日核心背景</strong>：港股开盘即下跌，恒生指数低开约 <strong style="color:#f85149;">-0.32%</strong> 后持续走弱，盘中一度跌超 1.5%。恒生科技受互联网巨头集体重挫拖累，下跌 -2.32%，但半导体/光通信板块因 A 股同题材强势溢出，呈现逆势上涨。市场整体呈现
+        <strong style="color:#f85149;">「科技硬件强、互联网平台弱」</strong> 的显著分化格局。
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 市场宽度 ===== -->
+  <div class="section-title">市场宽度 · 情绪面板</div>
+  <div class="breadth-stats">
+    <div class="stat-box">
+      <div class="sv up">511</div>
+      <div class="sl">上涨家数</div>
+    </div>
+    <div class="stat-box">
+      <div class="sv dn">1,014</div>
+      <div class="sl">下跌家数</div>
+    </div>
+    <div class="stat-box">
+      <div class="sv flat">276</div>
+      <div class="sl">平盘家数</div>
+    </div>
+    <div class="stat-box">
+      <div class="sv up">28.4%</div>
+      <div class="sl">上涨占比</div>
+    </div>
+    <div class="stat-box">
+      <div class="sv" style="color:#58a6ff;">930亿</div>
+      <div class="sl">总成交额(HKD)</div>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-bottom:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <span style="font-size:13px;font-weight:600;">全市场涨跌分布（1,801 只有效标的）</span>
+      <span style="font-size:12px;color:#8b949e;">上涨 <span style="color:#f85149;">28.4%</span> · 下跌 <span style="color:#3fb950;">56.3%</span> · 平盘 15.3%</span>
+    </div>
+    <div class="dist-bar">
+      <div class="dist-seg c4" style="flex:129" title="≥5% 129只">129</div>
+      <div class="dist-seg c3" style="flex:68"  title="3~5% 68只"></div>
+      <div class="dist-seg c2" style="flex:192" title="1~3% 192只"></div>
+      <div class="dist-seg c1" style="flex:122" title="0~1% 122只"></div>
+      <div class="dist-seg c5" style="flex:554" title="平盘/微幅 554只">平</div>
+      <div class="dist-seg c6" style="flex:212" title="-1~0% 212只"></div>
+      <div class="dist-seg c7" style="flex:496" title="-3~-1% 496只">-1~-3%</div>
+      <div class="dist-seg c8" style="flex:189" title="-3~-5% 189只"></div>
+      <div class="dist-seg" style="flex:117;background:#0a2218;border:1px solid #3fb950;" title="≤-5% 117只">-5%+</div>
+    </div>
+    <div class="dist-legend">
+      <div class="dist-item"><div class="dist-dot c4"></div><span>≥5%(129)</span></div>
+      <div class="dist-item"><div class="dist-dot c3"></div><span>3~5%(68)</span></div>
+      <div class="dist-item"><div class="dist-dot c2"></div><span>1~3%(192)</span></div>
+      <div class="dist-item"><div class="dist-dot c1"></div><span>0~1%(398)</span></div>
+      <div class="dist-item"><div class="dist-dot c5"></div><span>平盘(276)</span></div>
+      <div class="dist-item"><div class="dist-dot c6"></div><span>-1~0%(212)</span></div>
+      <div class="dist-item"><div class="dist-dot c7"></div><span>-1~-3%(496)</span></div>
+      <div class="dist-item"><div class="dist-dot c8"></div><span>-3~-5%(189)</span></div>
+      <div class="dist-item" style="border:1px solid #3fb950;border-radius:3px;padding:0 4px;"><span style="color:#3fb950;">≤-5%(117)</span></div>
+    </div>
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid #21262d;font-size:12px;color:#8b949e;line-height:1.8;">
+      ⚠️ 今日下跌家数 <strong style="color:#f85149;">1,014只（56.3%）</strong>，上涨仅 511只，情绪明显偏弱。逾跌 5% 的个股达 <strong style="color:#f85149;">117只</strong>，市场抛售压力集中。
+      相比之下，有 129 只标的涨超 5%，多数为小市值股或半导体/光通信题材。
+    </div>
+  </div>
+
+  <!-- ===== 主力大盘股 vs 板块分化 ===== -->
+  <div class="row2">
+
+    <!-- 大盘核心股表现 -->
+    <div class="panel">
+      <div class="section-title" style="margin-bottom:14px;">核心大盘股涨跌（按成交额排序）</div>
+
+      <!-- 涨的 -->
+      <div style="font-size:11px;color:#8b949e;margin-bottom:6px;padding-bottom:4px;border-bottom:1px solid #21262d;">▲ 逆势上涨</div>
+      <div class="bar-row">
+        <div class="bar-name">中芯国际</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:33.6%;background:linear-gradient(90deg,#d4380d,#f85149);"></div></div>
+        <div class="bar-val up">+3.36%</div>
+        <div class="bar-amt">42亿</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">长飞光纤光缆</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,#b05000,#f85149);"></div></div>
+        <div class="bar-val up">+12.63%</div>
+        <div class="bar-amt">35.8亿</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">华虹半导体</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:49.4%;background:#d4380d;"></div></div>
+        <div class="bar-val up">+4.94%</div>
+        <div class="bar-amt">31.8亿</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">宁德时代(港)</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:9.6%;background:#f85149;opacity:.8;"></div></div>
+        <div class="bar-val up">+0.96%</div>
+        <div class="bar-amt">9.3亿</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">舜宇光学</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:14.5%;background:#f85149;opacity:.7;"></div></div>
+        <div class="bar-val up">+1.45%</div>
+        <div class="bar-amt">8.7亿</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">澜起科技(港)</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:100%;background:linear-gradient(90deg,#b05000,#f85149);"></div></div>
+        <div class="bar-val up">+10.84%</div>
+        <div class="bar-amt">14.4亿</div>
+      </div>
+
+      <!-- 跌的 -->
+      <div style="font-size:11px;color:#8b949e;margin:10px 0 6px;padding-top:8px;border-top:1px solid #21262d;">▼ 重挫下跌</div>
+      <div class="bar-row">
+        <div class="bar-name" style="color:#f85149;font-weight:600;">腾讯控股</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:35.3%;background:#238636;float:right;"></div></div>
+        <div class="bar-val dn">-3.53%</div>
+        <div class="bar-amt" style="color:#f85149;font-weight:600;">110.8亿</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">阿里巴巴-W</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:29%;background:#238636;float:right;"></div></div>
+        <div class="bar-val dn">-2.90%</div>
+        <div class="bar-amt">47.5亿</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">联想集团</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:39.1%;background:#238636;float:right;"></div></div>
+        <div class="bar-val dn">-3.91%</div>
+        <div class="bar-amt">38.7亿</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name" style="color:#f85149;">美团-W</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:62%;background:#155724;float:right;"></div></div>
+        <div class="bar-val dn">-6.20%</div>
+        <div class="bar-amt">29.2亿</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">小米集团-W</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:29.7%;background:#238636;float:right;"></div></div>
+        <div class="bar-val dn">-2.97%</div>
+        <div class="bar-amt">15.6亿</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">快手-W</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:40%;background:#238636;float:right;"></div></div>
+        <div class="bar-val dn">-4.00%</div>
+        <div class="bar-amt">8.9亿</div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-name">京东集团-SW</div>
+        <div class="bar-wrap"><div class="bar-fill" style="width:43.3%;background:#155724;float:right;"></div></div>
+        <div class="bar-val dn">-4.33%</div>
+        <div class="bar-amt">3.9亿</div>
+      </div>
+    </div>
+
+    <!-- 右侧：成交额TOP + 异动股 -->
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <!-- 成交额TOP15 -->
+      <div class="panel" style="flex:1;">
+        <div class="section-title" style="margin-bottom:12px;">成交额 TOP 15（亿 HKD）</div>
+        <table>
+          <thead>
+            <tr><th>#</th><th>股票</th><th>涨跌幅</th><th>成交(亿)</th><th>标签</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="color:#8b949e;">1</td><td style="font-weight:600;color:#f85149;">腾讯控股</td><td class="dn">-3.53%</td><td style="color:#f85149;font-weight:700;">110.8</td><td><span class="chip">互联网</span></td></tr>
+            <tr><td style="color:#8b949e;">2</td><td>阿里巴巴-W</td><td class="dn">-2.90%</td><td>47.5</td><td><span class="chip">电商</span></td></tr>
+            <tr><td style="color:#8b949e;">3</td><td>中芯国际</td><td class="up">+3.36%</td><td>42.1</td><td><span class="chip">晶圆代工</span></td></tr>
+            <tr><td style="color:#8b949e;">4</td><td>联想集团</td><td class="dn">-3.91%</td><td>38.7</td><td><span class="chip">PC/AI服务器</span></td></tr>
+            <tr><td style="color:#8b949e;">5</td><td style="color:#f85149;">长飞光纤光缆</td><td class="up">+12.63%</td><td>35.8</td><td><span class="chip">光通信</span></td></tr>
+            <tr><td style="color:#8b949e;">6</td><td>华虹半导体</td><td class="up">+4.94%</td><td>31.8</td><td><span class="chip">半导体</span></td></tr>
+            <tr><td style="color:#8b949e;">7</td><td style="color:#f85149;">美团-W</td><td class="dn">-6.20%</td><td>29.2</td><td><span class="chip">本地生活</span></td></tr>
+            <tr><td style="color:#8b949e;">8</td><td>泡泡玛特</td><td class="dn">-1.67%</td><td>15.9</td><td><span class="chip">潮玩</span></td></tr>
+            <tr><td style="color:#8b949e;">9</td><td>小米集团-W</td><td class="dn">-2.97%</td><td>15.6</td><td><span class="chip">智能硬件</span></td></tr>
+            <tr><td style="color:#8b949e;">10</td><td>澜起科技(港)</td><td class="up">+10.84%</td><td>14.4</td><td><span class="chip">AI芯片</span></td></tr>
+            <tr><td style="color:#8b949e;">11</td><td>建滔积层板</td><td class="up">+5.11%</td><td>13.4</td><td><span class="chip">PCB材料</span></td></tr>
+            <tr><td style="color:#8b949e;">12</td><td>康方生物</td><td class="dn">-4.98%</td><td>10.2</td><td><span class="chip">创新药</span></td></tr>
+            <tr><td style="color:#8b949e;">13</td><td>宁德时代(港)</td><td class="up">+0.96%</td><td>9.3</td><td><span class="chip">动力电池</span></td></tr>
+            <tr><td style="color:#8b949e;">14</td><td>兆易创新(港)</td><td class="up">+6.96%</td><td>9.2</td><td><span class="chip">存储芯片</span></td></tr>
+            <tr><td style="color:#8b949e;">15</td><td>快手-W</td><td class="dn">-4.00%</td><td>8.9</td><td><span class="chip">短视频</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== 板块分化热力图 ===== -->
+  <div class="panel" style="margin-bottom:16px;">
+    <div class="section-title" style="margin-bottom:14px;">板块分化热力图（今日实时）</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+
+      <!-- 光通信 -->
+      <div style="background:#2d1200;border:1px solid #b05000;border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-size:12px;color:#ffa500;font-weight:700;margin-bottom:6px;">📡 光通信</div>
+        <div style="font-size:22px;font-weight:800;color:#f85149;">+10~13%</div>
+        <div style="font-size:11px;color:#8b949e;margin-top:4px;">长飞光纤 +12.6%<br>剑桥科技 +10.6%</div>
+        <div style="margin-top:6px;font-size:10px;padding:2px 6px;background:rgba(248,81,73,.15);border-radius:4px;color:#f85149;">🔥 今日主线</div>
+      </div>
+
+      <!-- 半导体 -->
+      <div style="background:#1e1200;border:1px solid #8b5e00;border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-size:12px;color:#ffa500;font-weight:700;margin-bottom:6px;">🔬 半导体</div>
+        <div style="font-size:22px;font-weight:800;color:#f85149;">+3~7%</div>
+        <div style="font-size:11px;color:#8b949e;margin-top:4px;">中芯 +3.4% · 华虹 +4.9%<br>兆易创新 +7.0%</div>
+        <div style="margin-top:6px;font-size:10px;padding:2px 6px;background:rgba(248,81,73,.1);border-radius:4px;color:#f85149;">强势</div>
+      </div>
+
+      <!-- AI芯片 -->
+      <div style="background:#1a1200;border:1px solid #6b4f00;border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-size:12px;color:#ffa500;font-weight:700;margin-bottom:6px;">🤖 AI芯片</div>
+        <div style="font-size:22px;font-weight:800;color:#f85149;">+6~11%</div>
+        <div style="font-size:11px;color:#8b949e;margin-top:4px;">澜起科技 +10.8%<br>曦智科技 +20.2%</div>
+        <div style="margin-top:6px;font-size:10px;padding:2px 6px;background:rgba(248,81,73,.1);border-radius:4px;color:#f85149;">强势</div>
+      </div>
+
+      <!-- 生物医药 -->
+      <div style="background:#161b22;border:1px solid #3a4a5a;border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-size:12px;color:#8b949e;font-weight:700;margin-bottom:6px;">💊 生物医药</div>
+        <div style="font-size:22px;font-weight:800;color:#8b949e;">-1~+19%</div>
+        <div style="font-size:11px;color:#8b949e;margin-top:4px;">金斯瑞 +18% · 银诺 +12%<br>康方 -5%（分化大）</div>
+        <div style="margin-top:6px;font-size:10px;padding:2px 6px;background:rgba(255,255,255,.05);border-radius:4px;color:#8b949e;">分化剧烈</div>
+      </div>
+
+      <!-- 互联网平台 -->
+      <div style="background:#0a1a10;border:1px solid #155724;border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-size:12px;color:#3fb950;font-weight:700;margin-bottom:6px;">🌐 互联网平台</div>
+        <div style="font-size:22px;font-weight:800;color:#3fb950;">-2~-6%</div>
+        <div style="font-size:11px;color:#8b949e;margin-top:4px;">腾讯 -3.5% · 美团 -6.2%<br>快手 -4.0% · 京东 -4.3%</div>
+        <div style="margin-top:6px;font-size:10px;padding:2px 6px;background:rgba(63,185,80,.12);border-radius:4px;color:#3fb950;">⚠️ 今日最弱</div>
+      </div>
+
+      <!-- 新能源车 -->
+      <div style="background:#0a1a10;border:1px solid #155724;border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-size:12px;color:#3fb950;font-weight:700;margin-bottom:6px;">🚗 新能源车</div>
+        <div style="font-size:22px;font-weight:800;color:#3fb950;">-2~-4%</div>
+        <div style="font-size:11px;color:#8b949e;margin-top:4px;">比亚迪 -2.2%<br>小鹏 -3.8%</div>
+        <div style="margin-top:6px;font-size:10px;padding:2px 6px;background:rgba(63,185,80,.1);border-radius:4px;color:#3fb950;">承压</div>
+      </div>
+
+      <!-- 银行/金融 -->
+      <div style="background:#0d1117;border:1px solid #21262d;border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-size:12px;color:#8b949e;font-weight:700;margin-bottom:6px;">🏦 银行/金融</div>
+        <div style="font-size:22px;font-weight:800;color:#8b949e;">-0.8~-1.2%</div>
+        <div style="font-size:11px;color:#8b949e;margin-top:4px;">建设银行 -1.2%<br>工商银行 -1.2%</div>
+        <div style="margin-top:6px;font-size:10px;padding:2px 6px;background:rgba(255,255,255,.04);border-radius:4px;color:#8b949e;">小幅走弱</div>
+      </div>
+
+      <!-- 地产/公用事业 -->
+      <div style="background:#0d1117;border:1px solid #21262d;border-radius:8px;padding:14px;text-align:center;">
+        <div style="font-size:12px;color:#8b949e;font-weight:700;margin-bottom:6px;">🏢 地产/公用</div>
+        <div style="font-size:22px;font-weight:800;color:#8b949e;">-0.1~-2.8%</div>
+        <div style="font-size:11px;color:#8b949e;margin-top:4px;">新鸿基 -2.8% · 中电 -0.2%<br>港灯 -0.1%</div>
+        <div style="margin-top:6px;font-size:10px;padding:2px 6px;background:rgba(255,255,255,.04);border-radius:4px;color:#8b949e;">偏弱</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== 重大异动个股 ===== -->
+  <div class="row2">
+    <div class="panel">
+      <div class="section-title" style="margin-bottom:12px;">今日重大涨幅异动（成交额较大）</div>
+      <table>
+        <thead>
+          <tr><th>股票</th><th>涨幅</th><th>现价(HKD)</th><th>成交(亿)</th><th>背景</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span style="color:#f85149;">长飞光纤光缆</span></td><td class="up">+12.63%</td><td>262.2</td><td>35.8</td><td style="color:#8b949e;font-size:11px;">光通信需求爆发，A股同题材溢出</td></tr>
+          <tr><td><span style="color:#f85149;">澜起科技(港)</span></td><td class="up">+10.84%</td><td>421.4</td><td>14.4</td><td style="color:#8b949e;font-size:11px;">A+H同步，AI芯片主线</td></tr>
+          <tr><td><span style="color:#f85149;">剑桥科技</span></td><td class="up">+10.63%</td><td>148.8</td><td>9.0</td><td style="color:#8b949e;font-size:11px;">光纤网络设备，算力基础设施</td></tr>
+          <tr><td><span style="color:#f85149;">兆易创新(港)</span></td><td class="up">+6.96%</td><td>760.5</td><td>9.2</td><td style="color:#8b949e;font-size:11px;">存储芯片，A+H同步</td></tr>
+          <tr><td><span style="color:#f85149;">华虹半导体</span></td><td class="up">+4.94%</td><td>155.2</td><td>31.8</td><td style="color:#8b949e;font-size:11px;">国产替代+AI芯片需求</td></tr>
+          <tr><td>中芯国际</td><td class="up">+3.36%</td><td>84.7</td><td>42.1</td><td style="color:#8b949e;font-size:11px;">半导体龙头随板块走强</td></tr>
+          <tr><td>金斯瑞生物科技</td><td class="up">+18.12%</td><td>14.34</td><td>5.7</td><td style="color:#8b949e;font-size:11px;">个股消息驱动，量较大</td></tr>
+          <tr><td>建滔积层板</td><td class="up">+5.11%</td><td>52.05</td><td>13.4</td><td style="color:#8b949e;font-size:11px;">PCB材料，受益算力建设</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <div class="section-title" style="margin-bottom:12px;">今日重大跌幅异动（含风险信号）</div>
+      <table>
+        <thead>
+          <tr><th>股票</th><th>跌幅</th><th>现价(HKD)</th><th>成交(亿)</th><th>风险</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span style="color:#f85149;">首钢朗泽</span></td><td class="dn">-18.93%</td><td>22.7</td><td>7.4</td><td style="color:#f85149;font-size:11px;">⚠️ 跌幅最大，注意个股黑天鹅</td></tr>
+          <tr><td><span style="color:#f85149;">美团-W</span></td><td class="dn">-6.20%</td><td>80.2</td><td>29.2</td><td style="color:#f85149;font-size:11px;">⚠️ 大市值重挫，拖累指数</td></tr>
+          <tr><td>康方生物</td><td class="dn">-4.98%</td><td>101.2</td><td>10.2</td><td style="color:#8b949e;font-size:11px;">创新药板块整体承压</td></tr>
+          <tr><td>京东集团-SW</td><td class="dn">-4.33%</td><td>114.9</td><td>3.9</td><td style="color:#8b949e;font-size:11px;">互联网平台集体走弱</td></tr>
+          <tr><td>快手-W</td><td class="dn">-4.00%</td><td>47.02</td><td>8.9</td><td style="color:#8b949e;font-size:11px;">互联网平台集体走弱</td></tr>
+          <tr><td>小鹏集团-W</td><td class="dn">-3.82%</td><td>69.25</td><td>5.1</td><td style="color:#8b949e;font-size:11px;">新能源车情绪走弱</td></tr>
+          <tr><td>腾讯控股</td><td class="dn">-3.53%</td><td>464.6</td><td style="color:#f85149;font-weight:700;">110.8</td><td style="color:#f85149;font-size:11px;">⚠️ 成交最大，抛压沉重</td></tr>
+          <tr><td>联想集团</td><td class="dn">-3.91%</td><td>25.54</td><td>38.7</td><td style="color:#8b949e;font-size:11px;">AI服务器叙事遭回调</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== 机会与风险 ===== -->
+  <div class="section-title">综合研判：值得留意 vs 需要警惕</div>
+  <div class="alert-grid">
+
+    <div class="alert-card oppo">
+      <div class="atitle">✅ 值得留意的机会</div>
+      <ul>
+        <li><strong>光通信是今日港股最强主线</strong>：长飞光纤光缆大涨 +12.63%，成交 35.8 亿港元；剑桥科技 +10.63%，成交 9 亿。这与今日 A 股通信 ETF +6.3%、天孚通信 +12.7% 形成 A+H 共振，算力扩张需求带动光纤/光模块板块持续景气，可持续关注。</li>
+        <li><strong>国产半导体逆市走强</strong>：中芯国际 +3.36%（42亿大量），华虹半导体 +4.94%（32亿），澜起科技(港) +10.84%（14亿），兆易创新(港) +6.96%。美国半导体限制背景下，国产替代逻辑持续强化，机构资金今日明显加仓。</li>
+        <li><strong>PCB/基板材料受益算力</strong>：建滔积层板 +5.11%（13.4亿），受算力硬件需求拉动，PCB 材料链出现较强量价配合。</li>
+        <li><strong>A+H 同步的标的可重点关注</strong>：澜起科技、兆易创新均在两市同步大涨，说明资金共识极强，跨市场验证了趋势有效性。</li>
+        <li><strong>宁德时代(港) 逆势微涨</strong>：在整体市场偏弱时宁德时代 +0.96%，表现相对抗跌，可作为防守标的观察。</li>
+      </ul>
+    </div>
+
+    <div class="alert-card risk">
+      <div class="atitle">⚠️ 需要警惕的风险</div>
+      <ul>
+        <li><strong>腾讯 -3.53%、成交 110 亿，是最大风险信号</strong>：港股第一大权重股遭巨量抛售，今日成交额占全市场 ~12%，跌幅超 3.5%，严重拖累恒生指数。腾讯若不止跌，指数难以企稳。需密切关注午后是否有护盘资金入场。</li>
+        <li><strong>互联网平台全面失守</strong>：美团 -6.2%、快手 -4%、京东 -4.3%、阿里 -2.9%，互联网平台形成共振下跌，资金轮动明显从互联网流出。持有相关标的需警惕止损位。</li>
+        <li><strong>首钢朗泽 -18.93%，个股黑天鹅警报</strong>：成交 7.4 亿，跌幅高达近 19%，氢能赛道遭大额抛售，有个股层面负面事件驱动风险。</li>
+        <li><strong>市场整体情绪极差</strong>：1014 只下跌 vs 511 只上涨，下跌数量约为上涨 2 倍，且逾 117 只跌超 5%。指数由少数半导体股托举，真实市场情绪偏空。</li>
+        <li><strong>恒生指数两大风险位</strong>：指数已跌破 26,000 整数关口（前收 26,038），若恒指失守 25,600 支撑，下一支撑看 25,000~25,200 区间。追多需注意位置风险。</li>
+        <li><strong>康方生物等创新药大市值股回撤</strong>：康方 -5%（10亿成交）说明创新药板块整体情绪偏弱，高估值生物科技类继续承压。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== 综合结论 ===== -->
+  <div class="panel" style="margin-bottom:16px;">
+    <div class="section-title" style="margin-bottom:14px;">盘中综合结论</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+      <div style="background:#0d1117;border-radius:8px;padding:14px;border:1px solid #21262d;">
+        <div style="font-size:11px;color:#8b949e;margin-bottom:6px;">🎯 今日核心主题</div>
+        <div style="font-size:13px;line-height:1.7;color:#c9d1d9;">
+          <strong style="color:#f85149;">光通信 + 半导体</strong> 是今日港股唯一强势主线，A+H 共振。互联网平台遭集体抛售，科技板块内部 <strong>「硬件科技强 vs 平台经济弱」</strong> 的分化极为显著。
+        </div>
+      </div>
+      <div style="background:#0d1117;border-radius:8px;padding:14px;border:1px solid #21262d;">
+        <div style="font-size:11px;color:#8b949e;margin-bottom:6px;">🌡️ 市场情绪判断</div>
+        <div style="font-size:13px;line-height:1.7;color:#c9d1d9;">
+          整体偏 <strong style="color:#3fb950;">弱势</strong>。恒指 -1.5%、恒科 -2.3%，下跌家数达上涨 2 倍。腾讯大量抛售为市场最大压制力，情绪偏空。属于 <strong>「局部主题多，整体指数空」</strong> 格局。
+        </div>
+      </div>
+      <div style="background:#0d1117;border-radius:8px;padding:14px;border:1px solid #21262d;">
+        <div style="font-size:11px;color:#8b949e;margin-bottom:6px;">🎯 操作提示</div>
+        <div style="font-size:13px;line-height:1.7;color:#c9d1d9;">
+          光通信、半导体可顺势持有；<strong style="color:#3fb950;">规避互联网平台（尤其腾讯、美团）</strong>。关注恒指 <strong>25,600</strong> 支撑能否守住。午后若腾讯企稳，可观察反弹机会；若持续破位，防御优先。
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  数据来源：实时行情 API · 数据截止：2026-06-03 10:42 CST · 本报告仅供信息参考，不构成任何投资建议
+</div>
+
+</body>
+</html>

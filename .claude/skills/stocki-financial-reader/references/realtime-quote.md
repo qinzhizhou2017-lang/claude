@@ -116,7 +116,7 @@ All `data[*].fundamentals.*` values are pipe-delim strings of shape `"<value>|<C
 | `data[*].fundamentals.price_chg_5d` | 5-Day Price Change | 5日涨跌幅 | pipe-delim |
 | `data[*].fundamentals.price_chg_20d` | 20-Day Price Change | 20日涨跌幅 | pipe-delim |
 
-**Output discipline**: never pass raw key (`pe_ttm`, `gross_margin_qfa`, pipe-delim symbol like `AAPL|ST|USA`, `wind-`/`sw-`/`申万-` industry prefix) to user-visible text. Agent picks EN or CN label based on the user's language. For fundamentals pipe-delim values: surface `split("|")[0]` as the number; the embedded `split("|")[1]` Chinese label can be used directly OR mapped to the EN label above.
+**Output discipline**: never pass raw key (`pe_ttm`, `gross_margin_qfa`, pipe-delim symbol like `AAPL|ST|USA`, source-tagged industry prefix 形如 `<src>-<category>`) to user-visible text. Agent picks EN or CN label based on the user's language. For fundamentals pipe-delim values: surface `split("|")[0]` as the number; the embedded `split("|")[1]` Chinese label can be used directly OR mapped to the EN label above.
 
 ## Cross-ref
 

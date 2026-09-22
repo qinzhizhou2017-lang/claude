@@ -9,7 +9,7 @@ Three query categories bundled together: (A) industry / SW classification (datar
 - 中文："茅台是什么行业 / 食品饮料板块 / 申万分类 / 沪深 300 成分 / 中证 500 都有哪些 / 茅台公司简介 / 注册地 / 股本变动 / 流通 A 股 / 解禁 / 上市日期"
 - English: "industry of X / sector / SW classification / CSI300 constituents / company briefing / registration / shareholding change / IPO date / list date"
 - Boundaries:
-  - "白酒板块都有哪些 / AI 概念股都有哪些" (sector / concept **name** → symbol list) → **OUT-OF-SCOPE** (requires `match_collection`; this skill does not implement it). Do not pretend you can resolve a collection name to a symbol list. Ask the user to supply a symbol list, or suggest stock-screening with a sector/concept filter (see next bullet for its current status).
+  - "白酒板块都有哪些 / AI 概念股都有哪些 / 沪深300 成分股" (sector / concept / index **name** → symbol list) → **走 `references/name-resolver.md` §B + §C 双步**: §B 把 NL collection 名 resolve 成 `collection.symbol`,§C `get_symbols_from_collection` 把 collection symbol 反查成股票列表。返回结果按本 reference 的 Response 纪律展示给用户(bare code + 中文名,不带 pipe-delim)。
   - "PE 最低 20 只 / ROE > 15%" → the stock-screening skill is **not yet delivered** (upstream limitation; tracked separately). Tell the user this capability is temporarily unavailable.
   - "茅台一键综合分析" → `financial-context.md`
 
@@ -160,17 +160,17 @@ NA values are normal — `share` is an event series, not a daily panel.
 | `metadata.data_path` | CSV Path | CSV 路径 | triggered when `total_records > inline_threshold` (default 50). CSV not directly fetchable from the runtime — **prefer raising `inline_threshold` (max 1000) on the request** rather than relying on this path. |
 | `metadata.warnings` | Warnings | 警告 | upstream errors / truncation; MUST be surfaced to the user |
 
-**Industry-prefix discipline (flagship case)**: `data[*].industry` and `data[*].category` values may arrive with supplier prefixes such as `申万-食品饮料` / `wind-Banking` / `中信-计算机` / `sw_食品饮料` / `gics-*` / `nbis-*` / `csrc-*`. ALWAYS strip the supplier prefix before showing the value to the user — surface only the classification itself ("食品饮料" / "Banking" / "计算机"). Leaking supplier identity (`申万-`, `wind-`, …) violates output discipline and locks the publish-form into a single upstream forever.
+**Industry-prefix discipline (flagship case)**: `data[*].industry` and `data[*].category` values may arrive with a source-tagged prefix 形如 `<src>-<category>`(e.g. 一段 source tag + 分隔符 + 分类名)。ALWAYS strip the prefix before showing the value to the user — surface only the classification itself ("食品饮料" / "Banking" / "计算机")。Leaking the source tag violates output discipline and locks the publish-form into a single upstream forever。LLM 按常识识别"前缀-分类名"模式即可,不依赖固定 vendor 清单。
 
 **Index-name presentation rule**: never show `.SH / .SZ / .HI / .GI` suffixes to the user. Map `000300.SH` → "沪深300" / CSI 300; `399006.SZ` → "创业板指" / ChiNext; `HSI.HI` → "恒生指数" / Hang Seng Index; etc. Pick CN or EN per user's language.
 
-**Output discipline**: never pass raw key (`float_a_shares`, `comp_name_eng`, `index_code` suffixes like `.SH / .SZ / .HI`, supplier prefixes like `wind-` / `sw-` / `申万-` / `中信-` / `gics-`) to user-visible text. Agent picks EN or CN label based on the user's language.
+**Output discipline**: never pass raw key (`float_a_shares`, `comp_name_eng`, `index_code` suffixes like `.SH / .SZ / .HI`, source-tagged industry prefix 形如 `<src>-<category>`) to user-visible text. Agent picks EN or CN label based on the user's language.
 
 ## Cross-ref
 
+- For "concept / sector / index **name** → constituent stocks" lookup, use `name-resolver.md` §B + §C (resolve the collection name, then fetch constituents).
 - "茅台 PE / 营收 / ROE" → `fundamentals-panel.md`
 - "茅台业务结构 / segments" → `consensus-and-target.md` (revenue_breakdown) or `financial-context.md` L2
 - "茅台一键综合分析" → `financial-context.md`
-- Sector / concept **name → symbol list** → `match_collection` (API Platform symbol_resolver; **OUT-OF-SCOPE**, not implemented in this skill batch). Ask the user for an explicit symbol list, or point them at stock-screening (see next bullet for its current status).
 - High-PE screening / filtering by sector or concept → the stock-screening skill is **not yet delivered** (upstream limitation; tracked separately). For "top-30 highest-PE" style asks, suggest running a market-wide valuation pull and sorting client-side, or wait for stock-screening to land.
 - Pure market status / trading-day queries → `market-calendar.md`

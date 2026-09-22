@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>中国经济 · AI 重塑贸易 · 研报精华</title>
+<style>
+@font-face{font-family:'Inter';src:url('fonts/Inter-var.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:block;}
+@font-face{font-family:'Fraunces';src:url('fonts/Fraunces-600.woff2') format('woff2');font-weight:600;font-style:normal;font-display:block;}
+
+:root{
+  --ink:#17191E; --ink2:#4C535D; --ink3:#8A909A; --ink4:#B4B0A6;
+  --paper:#F4F1EA; --paper2:#EDE8DD; --card:#FFFFFF;
+  --line:#E3DCCE; --line2:#ECE7DD;
+  --navy:#1B2440; --navy2:#2E3A5C;
+  --red:#C0271C; --redsoft:#F4E5E1; --redink:#9A1E15;
+  --green:#12705C; --greensoft:#E2ECE7;
+  --gold:#9A7B3F; --goldsoft:#F0E8D6;
+  --f-display:'Fraunces','Noto Serif CJK SC',Georgia,serif;
+  --f-head:'Noto Serif CJK SC','Fraunces',Georgia,serif;
+  --f-body:'Inter','Noto Sans CJK SC',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+body{font-family:var(--f-body);color:var(--ink);background:#c9c4b8;font-feature-settings:'tnum' 1,'ss01' 1;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision;}
+@page{size:A4;margin:0;}
+
+.page{width:210mm;height:297mm;background:var(--paper);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;padding:13mm 13mm 9mm 13mm;page-break-after:always;}
+.page:last-child{page-break-after:auto;}
+.main{flex:1;display:flex;flex-direction:column;justify-content:space-between;min-height:0;}
+.grp>*+*{margin-top:12px;}
+
+/* ---------- header / footer ---------- */
+.mast{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1.5px solid var(--ink);padding-bottom:7px;flex:none;}
+.mast .brand{display:flex;align-items:center;gap:8px;}
+.mast .dot{width:19px;height:19px;border-radius:50%;background:var(--red);position:relative;flex:none;}
+.mast .dot::after{content:"P";position:absolute;inset:0;color:#fff;font-family:var(--f-display);font-weight:600;font-size:15.0px;display:flex;align-items:center;justify-content:center;}
+.mast .bname{font-weight:800;font-size:16.2px;letter-spacing:.14em;color:var(--ink);}
+.mast .bsub{font-size:10.9px;letter-spacing:.34em;color:var(--ink3);margin-top:1px;font-weight:600;}
+.mast .mright{text-align:right;font-size:11.2px;letter-spacing:.06em;color:var(--ink2);line-height:1.65;}
+.mast .mright b{color:var(--ink);font-weight:700;}
+
+.foot{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:6px;margin-top:9px;font-size:10.5px;letter-spacing:.05em;color:var(--ink3);flex:none;}
+.foot .pg{font-weight:700;color:var(--ink2);letter-spacing:.12em;}
+.foot b{color:var(--ink2);font-weight:600;}
+
+.eyebrow{font-size:11.7px;font-weight:700;letter-spacing:.26em;color:var(--red);text-transform:uppercase;}
+.rule-gold{height:2px;background:var(--gold);width:44px;border-radius:2px;}
+.sectlabel{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
+.sectlabel .no{font-family:var(--f-display);font-weight:600;font-size:18.0px;color:var(--red);line-height:1;}
+.sectlabel .tt{font-family:var(--f-head);font-weight:700;font-size:19.0px;color:var(--ink);letter-spacing:.01em;}
+.sectlabel .en{font-size:10.5px;letter-spacing:.24em;color:var(--ink3);font-weight:700;text-transform:uppercase;margin-left:auto;}
+.src{font-size:10.5px;color:var(--ink3);letter-spacing:.02em;margin-top:6px;}
+
+/* ================= PAGE 1 — COVER ================= */
+.cv-eyerow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:11px;}
+.cv-tickers{margin-left:auto;font-size:12.3px;color:var(--ink2);letter-spacing:.04em;font-weight:600;}
+.cv-tickers b{color:var(--ink);}
+.headline{font-family:var(--f-head);font-weight:800;color:var(--ink);font-size:53.0px;line-height:1.12;letter-spacing:-.01em;margin-top:13px;}
+.headline .hl{color:var(--red);}
+.headline .box{border-bottom:5px solid var(--gold);padding-bottom:1px;}
+.subhead{font-size:15.1px;line-height:1.75;color:var(--ink2);max-width:174mm;margin-top:16px;font-weight:450;}
+.subhead b{color:var(--ink);font-weight:700;}
+
+.judg{display:flex;gap:0;background:var(--navy);border-radius:9px;overflow:hidden;}
+.judg .lab{background:var(--red);color:#fff;font-family:var(--f-head);font-weight:800;font-size:18.0px;letter-spacing:.16em;padding:0 17px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.3;flex:none;}
+.judg .body{padding:15px 18px;color:#EDEEF2;font-size:14.2px;line-height:1.68;display:flex;align-items:center;}
+.judg .body b{color:#fff;font-weight:700;}
+.judg .body .big{color:#fff;font-family:var(--f-display);font-weight:600;}
+
+.cv-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;}
+.mcard{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:16px 16px 15px;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.02);}
+.mcard .top{font-size:11.7px;font-weight:700;letter-spacing:.12em;color:var(--ink3);text-transform:uppercase;}
+.mcard .fig{font-family:var(--f-display);font-weight:600;color:var(--ink);font-size:43.5px;line-height:1;margin:11px 0 5px;letter-spacing:-.01em;}
+.mcard .fig .u{font-size:17.9px;color:var(--ink2);font-weight:600;margin-left:1px;}
+.mcard .fig.g{color:var(--green);}
+.mcard .cap{font-size:13.5px;color:var(--ink2);line-height:1.62;font-weight:500;}
+.mcard .cap b{color:var(--ink);font-weight:700;}
+.mcard .tag{position:absolute;top:15px;right:15px;font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--green);}
+
+.cv-two{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.wide{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:15px 17px;display:flex;align-items:center;gap:14px;}
+.wide .ic{width:36px;height:36px;border-radius:8px;flex:none;display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:600;font-size:19.0px;}
+.wide .ic.gold{background:var(--goldsoft);color:var(--gold);}
+.wide .ic.navy{background:#E7EAF1;color:var(--navy);}
+.wide .t{font-size:13.5px;font-weight:700;letter-spacing:.03em;color:var(--ink);margin-bottom:3px;}
+.wide .d{font-size:13.0px;color:var(--ink2);line-height:1.62;}
+.wide .d b{color:var(--red);font-weight:700;}
+.wide .d .bg{color:var(--green);font-weight:700;}
+
+.toc{display:grid;grid-template-columns:repeat(3,1fr);border-top:1.5px solid var(--ink);padding-top:12px;}
+.toc .ti{padding:0 18px;border-right:1px solid var(--line);}
+.toc .ti:first-child{padding-left:0;}
+.toc .ti:last-child{border-right:none;padding-right:0;}
+.toc .tn{font-family:var(--f-display);font-weight:600;font-size:18.0px;color:var(--red);line-height:1;}
+.toc .tt2{font-family:var(--f-head);font-weight:700;font-size:15.0px;color:var(--ink);margin-top:5px;}
+.toc .td{font-size:11.7px;color:var(--ink2);margin-top:4px;line-height:1.45;}
+
+/* ================= data page shared ================= */
+.callout{border-left:4px solid var(--red);background:linear-gradient(90deg,var(--redsoft),rgba(244,229,225,0));padding:13px 16px;border-radius:0 8px 8px 0;}
+.callout .q{font-family:var(--f-head);font-weight:600;font-size:17.4px;line-height:1.62;color:var(--ink);letter-spacing:.005em;}
+.callout .q b{color:var(--red);}
+.callout.green{border-left-color:var(--green);background:linear-gradient(90deg,var(--greensoft),rgba(226,236,231,0));}
+.callout.green .q b{color:var(--green);}
+.callout.navy{border-left-color:var(--navy);background:linear-gradient(90deg,#E9ECF3,rgba(233,236,243,0));}
+
+.panel{background:var(--card);border:1px solid var(--line2);border-radius:11px;padding:17px 19px;}
+.panel-t{font-family:var(--f-head);font-weight:700;font-size:18.0px;color:var(--ink);line-height:1.35;}
+.panel-t .accent{color:var(--red);}
+.panel-sub{font-size:13.3px;color:var(--ink2);line-height:1.6;margin-top:6px;font-weight:450;}
+.panel-sub b{font-weight:700;}
+
+svg{display:block;width:100%;height:auto;overflow:visible;}
+.axlab{font-family:var(--f-body);font-size:13.2px;fill:var(--ink3);font-weight:600;}
+.ptlab{font-family:var(--f-body);font-size:15.6px;font-weight:800;}
+
+.bars{display:flex;flex-direction:column;gap:11px;margin-top:6px;}
+.bar{display:grid;grid-template-columns:78px 1fr 46px;align-items:center;gap:10px;}
+.bar .nm{font-size:13.0px;font-weight:600;color:var(--ink2);text-align:right;line-height:1.15;}
+.bar .nm b{display:block;font-size:13.7px;color:var(--ink);font-weight:700;}
+.bar .track{height:17px;background:var(--paper2);border-radius:4px;position:relative;overflow:hidden;}
+.bar .fill{height:100%;border-radius:4px;background:var(--navy2);}
+.bar.hl .fill{background:var(--green);}
+.bar .val{font-size:14.4px;font-weight:800;color:var(--ink);text-align:left;}
+.bar.hl .val{color:var(--green);}
+
+.dumb{display:flex;flex-direction:column;}
+.drow{display:grid;grid-template-columns:106px 1fr 52px;align-items:center;gap:12px;padding:15px 0;border-bottom:1px solid var(--line2);}
+.drow:last-child{border-bottom:none;}
+.drow .mk{font-size:13.7px;color:var(--ink);font-weight:700;line-height:1.2;}
+.drow .mk span{display:block;font-size:10.5px;color:var(--ink3);font-weight:600;letter-spacing:.02em;margin-top:2px;}
+.drow .tr{position:relative;height:24px;}
+.drow .base{position:absolute;top:11px;left:0;right:0;height:2px;background:var(--line);}
+.seg{position:absolute;top:10px;height:4px;background:var(--navy2);border-radius:2px;}
+.drow.hot .seg{background:var(--red);}
+.dot{position:absolute;top:6px;width:12px;height:12px;border-radius:50%;transform:translateX(-50%);}
+.dot.o{background:var(--card);border:2.5px solid var(--ink3);}
+.dot.n{background:var(--navy2);border:2.5px solid var(--navy2);}
+.drow.hot .dot.n{background:var(--red);border-color:var(--red);}
+.vlab{position:absolute;top:-7px;font-size:11.7px;font-weight:800;transform:translateX(-50%);color:var(--ink3);}
+.vlab.n{color:var(--navy);} .drow.hot .vlab.n{color:var(--red);}
+.delta{font-size:13.8px;font-weight:800;text-align:right;color:var(--navy);}
+.drow.hot .delta{color:var(--red);}
+
+.kpirow{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+.kpi{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:13px 14px;}
+.kpi .k{font-size:11.2px;font-weight:700;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;line-height:1.2;}
+.kpi .v{font-family:var(--f-display);font-weight:600;font-size:31.8px;color:var(--ink);line-height:1;margin:9px 0 5px;}
+.kpi .v .u{font-size:15.6px;color:var(--ink2);}
+.kpi .v.g{color:var(--green);}
+.kpi .s{font-size:11.4px;color:var(--ink2);line-height:1.62;}
+.kpi .s b{color:var(--ink);font-weight:700;}
+
+.split{display:grid;grid-template-columns:1.02fr 1fr;gap:13px;}
+.capband{background:var(--navy);border-radius:11px;padding:16px 18px;color:#fff;display:flex;flex-direction:column;}
+.capband .h{font-family:var(--f-head);font-weight:700;font-size:16.2px;color:#fff;display:flex;align-items:center;gap:8px;}
+.capband .h .g{color:var(--goldsoft);}
+.capstat{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.13);}
+.capstat:last-child{border-bottom:none;}
+.capstat .l{font-size:12.5px;color:#C7CCDA;line-height:1.4;max-width:60%;}
+.capstat .r{font-family:var(--f-display);font-weight:600;font-size:21.3px;color:#fff;white-space:nowrap;}
+.capstat .r .u{font-size:13.0px;color:#AEB4C6;}
+.capnote{font-size:10.7px;color:#AEB4C6;margin-top:10px;line-height:1.65;}
+
+.vecs{display:flex;flex-direction:column;gap:10px;}
+.vec{background:var(--card);border:1px solid var(--line2);border-radius:10px;padding:12px 14px;display:flex;gap:11px;align-items:flex-start;flex:1;}
+.vec .vi{font-family:var(--f-display);font-weight:600;font-size:13.2px;letter-spacing:.02em;color:var(--gold);background:var(--goldsoft);border-radius:6px;padding:5px 7px;flex:none;min-width:36px;text-align:center;}
+.vec .vt{font-size:13.5px;font-weight:700;color:var(--ink);}
+.vec .vd{font-size:12.2px;color:var(--ink2);line-height:1.62;margin-top:3px;}
+.vec .vd b{color:var(--green);font-weight:700;}
+
+/* ================= PAGE 4 ================= */
+.val2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.valcard{background:var(--card);border:1px solid var(--line2);border-radius:11px;padding:16px 18px;}
+.valcard .vh{display:flex;justify-content:space-between;align-items:center;}
+.valcard .vh .nm{font-weight:800;font-size:15.6px;color:var(--ink);letter-spacing:.02em;}
+.valcard .vh .tk{font-size:11.1px;color:var(--ink3);font-weight:600;letter-spacing:.04em;}
+.valcard .prices{display:flex;align-items:center;gap:12px;margin:13px 0 4px;flex-wrap:nowrap;white-space:nowrap;}
+.valcard .nowcol{display:flex;flex-direction:column;line-height:1.1;}
+.valcard .nowlab{font-size:11.1px;color:var(--ink3);font-weight:700;letter-spacing:.1em;}
+.valcard .nowval{font-family:var(--f-display);font-weight:600;font-size:18.0px;color:var(--ink2);margin-top:3px;}
+.valcard .arr{color:var(--ink4);font-size:17.9px;}
+.valcard .ptcol{display:flex;align-items:baseline;gap:7px;}
+.valcard .pt{font-family:var(--f-display);font-weight:600;font-size:32.9px;color:var(--green);line-height:1;}
+.valcard .up{display:inline-block;background:var(--greensoft);color:var(--green);font-size:13.2px;font-weight:800;padding:2px 8px;border-radius:100px;margin-left:2px;vertical-align:middle;}
+.valcard .meta{font-size:11.7px;color:var(--ink2);margin-top:11px;letter-spacing:.02em;font-weight:600;}
+
+.fcast{display:flex;justify-content:space-between;gap:6px;background:var(--paper2);border-radius:9px;padding:13px 8px;}
+.fcast .fc{flex:1;text-align:center;border-right:1px solid var(--line);}
+.fcast .fc:last-child{border-right:none;}
+.fcast .fc .fk{font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--ink3);text-transform:uppercase;}
+.fcast .fc .fv{font-family:var(--f-display);font-weight:600;font-size:20.2px;color:var(--ink);margin-top:4px;line-height:1;}
+.fcast .fc .fv .u{font-size:11.7px;color:var(--ink2);}
+.fcast .fc .fs{font-size:10.5px;color:var(--green);font-weight:700;margin-top:3px;}
+
+.watch{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.wbox{border-radius:10px;padding:14px 16px;}
+.wbox.up{background:var(--greensoft);border:1px solid #CADED6;}
+.wbox.dn{background:var(--redsoft);border:1px solid #EBD3CD;}
+.wbox .wh{font-family:var(--f-head);font-weight:700;font-size:15.0px;display:flex;align-items:center;gap:6px;margin-bottom:8px;}
+.wbox.up .wh{color:var(--green);} .wbox.dn .wh{color:var(--red);}
+.wbox ul{list-style:none;display:flex;flex-direction:column;gap:6px;}
+.wbox li{font-size:12.7px;line-height:1.45;color:var(--ink);padding-left:13px;position:relative;font-weight:500;}
+.wbox li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;}
+.wbox.up li::before{background:var(--green);} .wbox.dn li::before{background:var(--red);}
+
+.track-chips{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
+.track-chips .tl{font-size:11.7px;font-weight:700;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase;margin-right:2px;}
+.tchip{font-size:12.2px;font-weight:600;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:100px;padding:5px 12px;}
+
+.qrcard{background:linear-gradient(135deg,#1B2440,#2C3860);border-radius:14px;padding:5px;box-shadow:0 6px 20px rgba(27,36,64,.18);}
+.qrinner{background:var(--card);border-radius:11px;padding:16px 18px;display:flex;align-items:center;gap:18px;}
+.qrbox{background:#fff;border:1px solid var(--line2);border-radius:12px;padding:8px;flex:none;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.qrbox img{display:block;width:40mm;height:40mm;image-rendering:crisp-edges;}
+.qrtxt{flex:1;}
+.qrtxt .qbrand{display:flex;align-items:center;gap:8px;}
+.qrtxt .qdot{width:20px;height:20px;border-radius:50%;background:var(--red);position:relative;flex:none;}
+.qrtxt .qdot::after{content:"P";position:absolute;inset:0;color:#fff;font-family:var(--f-display);font-weight:600;font-size:15.6px;display:flex;align-items:center;justify-content:center;}
+.qrtxt .qn{font-weight:800;font-size:18.0px;letter-spacing:.1em;color:var(--ink);}
+.qrtxt .qh{font-family:var(--f-head);font-weight:700;font-size:19.0px;color:var(--ink);margin-top:12px;line-height:1.35;}
+.qrtxt .qh .r{color:var(--red);}
+.qrtxt .qs{font-size:13.0px;color:var(--ink2);line-height:1.65;margin-top:7px;font-weight:500;}
+.qrtxt .qcta{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12.2px;font-weight:700;color:var(--navy);letter-spacing:.02em;}
+.qrtxt .qcta::before{content:"";width:16px;height:2px;background:var(--gold);}
+
+.disc{font-size:10.5px;color:var(--ink3);line-height:1.6;letter-spacing:.01em;margin-top:11px;}
+</style>
+</head>
+<body>
+<style>
+  /* ===== enlarged components so pages fill (big/full treatment) ===== */
+  .callout{padding:23px 26px;}
+  .callout .q{font-size:18px;line-height:1.72;}
+  .panel{padding:24px 27px;}
+  .panel-t{font-size:16.5px;}
+  .panel-sub{font-size:12.5px;line-height:1.72;}
+  .vec{padding:20px 22px;}
+  .vec .vi{font-size:14px;padding:9px 12px;min-width:60px;}
+  .vec .vt{font-size:14.5px;}
+  .vec .vd{font-size:12.5px;line-height:1.7;margin-top:6px;}
+  .vecs{gap:16px;}
+  .wbox{padding:26px 28px;}
+  .wbox .wh{font-size:18px;margin-bottom:16px;}
+  .wbox ul{gap:15px;}
+  .wbox li{font-size:14.5px;line-height:1.66;padding-left:17px;}
+  .wbox li::before{width:6px;height:6px;top:8px;}
+  .fcast{padding:24px 14px;}
+  .fcast .fc .fk{font-size:10.5px;}
+  .fcast .fc .fv{font-size:25px;margin-top:6px;}
+  .fcast .fc .fs{font-size:10.5px;margin-top:5px;}
+  .tchip{font-size:13px;padding:11px 18px;}
+  .track-chips{gap:12px;}
+  .track-chips .tl{font-size:12px;}
+  .mcard{padding:24px 22px 22px;}
+  .mcard .top{font-size:12px;}
+  .mcard .fig{font-size:46px;margin:14px 0 8px;}
+  .mcard .cap{font-size:13.5px;line-height:1.62;}
+  .mcard .tag{font-size:11px;}
+  .wide{padding:22px 24px;}
+  .wide .t{font-size:13.5px;margin-bottom:4px;}
+  .wide .d{font-size:13px;line-height:1.6;}
+  .wide .ic{width:46px;height:46px;font-size:21px;}
+  .judg .body{font-size:15px;padding:23px 26px;line-height:1.74;}
+  .judg .lab{font-size:16.5px;padding:0 21px;}
+  .subhead{line-height:1.85;}
+  .sectlabel .tt{font-size:19px;}
+  /* KPI row bigger */
+  .kpi{padding:18px 18px;}
+  .kpi .k{font-size:11px;}
+  .kpi .v{font-size:33px;margin:11px 0 7px;}
+  .kpi .s{font-size:11px;line-height:1.55;}
+</style>
+
+<!-- ============================= PAGE 1 : COVER ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>机构研究 · 可视化精华</b><br>来源：UBS 瑞银 China Economic Perspectives · 2026.07.30<br>经济学家 Jennifer Zhong、Yu Song、William Deng、Grace Wang</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="cv-eyerow">
+        <span class="eyebrow">中国经济 · China Economic Perspectives</span>
+        <span class="cv-tickers">出口 <b>+18%</b>&nbsp;·&nbsp;进口 <b>+26%</b>（1H26）</span>
+      </div>
+      <div class="rule-gold"></div>
+      <h1 class="headline">AI 撑起中国贸易<span class="hl">半壁</span><br>但这轮火爆，主要靠<span class="box">涨价</span></h1>
+      <p class="subhead">2026 上半年中国贸易远超预期——出口 <b>+18%</b>、进口 <b>+26%</b>。瑞银判断 <b>AI 相关贸易是主引擎</b>，贡献了近一半的增长（出口 <b>49%</b> / 进口 <b>47%</b>）。但这轮更多是<b>价格、而非量</b>：芯片出口额 <b>+96%</b>，出货量却只 <b>+6%</b>。瑞银大幅上调 2026 预测，但因是"涨价拉动"，对 GDP 的贡献反而更小。</p>
+    </div>
+
+    <div class="judg">
+      <div class="lab"><span>核心</span><span>判断</span></div>
+      <div class="body"><div><b>AI 正在重塑中国贸易故事。</b>&nbsp;瑞银上调 2026：出口 <span class="big">+18%</span>（原 3%）、进口 <b>+24%</b>（原 1.8%）。但增长"含价高"，净出口对 GDP 仅 <b>+0.8ppt</b>（2025 为 1.6ppt）——<b>内需须挑大梁</b>。</div></div>
+    </div>
+
+    <div class="cv-metrics">
+      <div class="mcard">
+        <div class="top">AI 对贸易增长的贡献</div>
+        <div class="fig">~49<span class="u">%</span></div>
+        <div class="cap">出口增长的近一半来自 AI 相关贸易（<b>进口 47%</b>）</div>
+      </div>
+      <div class="mcard">
+        <div class="tag" style="color:var(--red)">价格幻觉</div>
+        <div class="top">芯片出口 · 额 vs 量</div>
+        <div class="fig">+96<span class="u">%</span></div>
+        <div class="cap">出口额 +96%，<b>出货量却仅 +6%</b>——几乎全是涨价</div>
+      </div>
+      <div class="mcard">
+        <div class="top">净出口拉动 GDP</div>
+        <div class="fig">+0.8<span class="u">ppt</span></div>
+        <div class="cap">自 2025 的 <b>1.6ppt</b> 大幅回落——内需须补位</div>
+      </div>
+    </div>
+
+    <div class="cv-two">
+      <div class="wide">
+        <div class="ic navy">升</div>
+        <div><div class="t">大幅上调 2026 预测</div><div class="d">出口 <b>+18%</b>（原 3%）、进口 <b>+24%</b>（原 1.8%）</div></div>
+      </div>
+      <div class="wide">
+        <div class="ic gold">价</div>
+        <div><div class="t">但"含金量"存疑</div><div class="d">名义靠涨价，<span class="bg">实际出口仅 +8–9%</span>，对 GDP 贡献缩水</div></div>
+      </div>
+    </div>
+
+    <div class="toc">
+      <div class="ti"><div class="tn">02</div><div class="tt2">一半增长来自 AI</div><div class="td">而 AI 这轮，主要是价格、不是量</div></div>
+      <div class="ti"><div class="tn">03</div><div class="tt2">AI 之外的韧性</div><div class="td">车与绿色扛旗，消费品掉队；进口靠涨价</div></div>
+      <div class="ti"><div class="tn">04</div><div class="tt2">上调预测与风险</div><div class="td">名义≠GDP；记忆体价格是关键变量</div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>数据以 UBS 原报告为准 · 仅供参考，不构成投资建议</span>
+    <span class="pg">01 / 04</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 2 : AI + PRICES ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>中国经济 · China Economic Perspectives</b><br>UBS 瑞银 · 2026.07.30</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">01</span><span class="tt">一半增长来自 AI——而 AI 靠涨价</span><span class="en">It's AI, and It's Prices</span></div>
+      <div class="callout">
+        <div class="q">"出口 +18%、进口 +26%"的火爆，很容易被读成"中国贸易全面走强"。但瑞银点破：近一半增长来自 <b>AI 相关贸易</b>，而 AI 这轮更是一场<b>价格故事、不是量的周期</b>——芯片出口额 <b>+96%</b>，出货量却只 <b>+6%</b>。</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-t">价在飞、量在爬：<span class="accent">芯片贸易几乎全靠涨价</span></div>
+      <div class="panel-sub">电子集成电路（IC）1H26 贸易增速。价值狂飙，出货量几乎没动——这轮 AI 贸易是"名义价格"驱动。</div>
+      <svg viewBox="0 0 680 250" role="img" aria-label="芯片IC贸易：出口额+96%出货量+6%，进口额+56%出货量+8%" style="margin-top:8px;">
+        <g stroke="#ECE7DD" stroke-width="1">
+          <line x1="58" y1="34" x2="664" y2="34"/><line x1="58" y1="86" x2="664" y2="86"/><line x1="58" y1="138" x2="664" y2="138"/>
+        </g>
+        <line x1="58" y1="190" x2="664" y2="190" stroke="#D9D2C4" stroke-width="1.5"/>
+        <g font-size="12.5" font-weight="700" font-family="Inter" text-anchor="end" fill="#B4B0A6"><text x="52" y="38">100</text><text x="52" y="142">33</text><text x="52" y="194">0</text></g>
+        <!-- scale: 104 => plot 156 (190-34) => 1.5px per % -->
+        <!-- Group 1 出口 center 205 -->
+        <rect x="150" y="46" width="52" height="144" rx="5" fill="#2E3A5C"/>
+        <rect x="212" y="181" width="52" height="9" rx="4" fill="#12705C"/>
+        <text x="176" y="38" text-anchor="middle" font-size="17" font-weight="800" font-family="Inter" fill="#2E3A5C">+96%</text>
+        <text x="238" y="173" text-anchor="middle" font-size="15" font-weight="800" font-family="Inter" fill="#12705C">+6%</text>
+        <text x="207" y="212" text-anchor="middle" font-size="14" font-weight="700" font-family="'Noto Sans CJK SC',Inter" fill="#17191E">芯片出口</text>
+        <!-- Group 2 进口 center 480 -->
+        <rect x="428" y="106" width="52" height="84" rx="5" fill="#2E3A5C"/>
+        <rect x="490" y="178" width="52" height="12" rx="4" fill="#12705C"/>
+        <text x="454" y="98" text-anchor="middle" font-size="17" font-weight="800" font-family="Inter" fill="#2E3A5C">+56%</text>
+        <text x="516" y="170" text-anchor="middle" font-size="15" font-weight="800" font-family="Inter" fill="#12705C">+8%</text>
+        <text x="482" y="212" text-anchor="middle" font-size="14" font-weight="700" font-family="'Noto Sans CJK SC',Inter" fill="#17191E">芯片进口</text>
+        <!-- legend -->
+        <g font-size="12.5" font-weight="700" font-family="Inter">
+          <rect x="548" y="30" width="14" height="14" rx="3" fill="#2E3A5C"/><text x="568" y="41" fill="#4C535D">价值额</text>
+          <rect x="548" y="52" width="14" height="14" rx="3" fill="#12705C"/><text x="568" y="63" fill="#4C535D">出货量</text>
+        </g>
+      </svg>
+      <div class="src">电子集成电路，%YoY，1H26。价格驱动为主。来源：CEIC、UBS 估算（Figure 6）。</div>
+    </div>
+
+    <div class="split">
+      <div class="panel" style="padding:20px 22px;">
+        <div class="panel-t" style="font-size:15px;">AI 已占中国贸易<span class="accent">近三成</span></div>
+        <div class="panel-sub" style="margin-top:8px;">AI 相关占出口 <b>23%</b>、进口 <b>30%</b>（2023 年为 17% / 22%）。AI 贸易 <b>+47% YoY</b>，贡献出口 / 进口增长的 <b>49% / 47%</b>。逾七成与亚洲经济体相连。</div>
+      </div>
+      <div class="panel" style="padding:20px 22px;">
+        <div class="panel-t" style="font-size:15px;">为什么<span class="accent">是价格</span></div>
+        <div class="panel-sub" style="margin-top:8px;">供给不足 + 产品升级，产能转向高端 AI，抬高整体科技品价格。<b>出口价 +6.5%、进口价 +18%</b>；实际出口增速仅约 <b>+10%</b>。</div>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <div class="q"><b>投资含义</b>&nbsp;这轮 AI 贸易更像"<b>名义繁荣</b>"——真实增量有限。判断 GDP、政策与全球通胀时，都要<b>把价格水分挤掉</b>再看。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>一半增长来自 AI · It's AI, and It's Prices</span>
+    <span class="pg">02 / 04</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 3 : BEYOND AI ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>中国经济 · China Economic Perspectives</b><br>UBS 瑞银 · 2026.07.30</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">02</span><span class="tt">AI 之外：车与绿色扛旗，消费掉队</span><span class="en">Beyond AI</span></div>
+      <div class="kpirow">
+        <div class="kpi"><div class="k">非 AI 出口</div><div class="v">+11<span class="u">%</span></div><div class="s">1H26 同比<br>结构分化明显</div></div>
+        <div class="kpi"><div class="k">汽车出口</div><div class="v g">+60<span class="u">%</span></div><div class="s">EV +57%<br>混动 +115%</div></div>
+        <div class="kpi"><div class="k">绿色出口</div><div class="v g">+31<span class="u">%</span></div><div class="s">电池 +40%<br>光伏 +24%</div></div>
+        <div class="kpi"><div class="k">黄金进口</div><div class="v">+189<span class="u">%</span></div><div class="s">投资需求<br>占进口增长逾 1/4</div></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-t">扛旗的是<span class="accent">车与绿色</span>，掉队的是消费品</div>
+      <div class="panel-sub">非 AI 出口 1H26 同比增速。车与绿色是真正的量增引擎；传统消费品受全球需求疲弱拖累。</div>
+      <svg viewBox="0 0 680 214" role="img" aria-label="非AI出口增速：汽车+60%、绿色+31%、非AI整体+11%、消费品玩具-12%" style="margin-top:10px;">
+        <!-- fixed label column right-aligned at x=168; zero line at x=292; scale 5.2px per % -->
+        <line x1="292" y1="16" x2="292" y2="192" stroke="#D9D2C4" stroke-width="1.5"/>
+        <text x="292" y="208" text-anchor="middle" font-size="11.5" font-weight="700" font-family="Inter" fill="#B4B0A6">0</text>
+        <g font-size="14.5" font-weight="700" font-family="'Noto Sans CJK SC',Inter" fill="#17191E" text-anchor="end">
+          <text x="168" y="43">汽车出口</text><text x="168" y="87">绿色出口</text><text x="168" y="131">非 AI 整体</text><text x="168" y="175">消费品·玩具</text>
+        </g>
+        <!-- 汽车 +60 (w=312) -->
+        <rect x="292" y="28" width="312" height="26" rx="5" fill="#12705C"/>
+        <text x="612" y="46" font-size="15.5" font-weight="800" font-family="Inter" fill="#12705C">+60%</text>
+        <!-- 绿色 +31 (w=161) -->
+        <rect x="292" y="72" width="161" height="26" rx="5" fill="#12705C"/>
+        <text x="461" y="90" font-size="15.5" font-weight="800" font-family="Inter" fill="#12705C">+31%</text>
+        <!-- 非AI +11 (w=57) -->
+        <rect x="292" y="116" width="57" height="26" rx="5" fill="#2E3A5C"/>
+        <text x="357" y="134" font-size="15.5" font-weight="800" font-family="Inter" fill="#2E3A5C">+11%</text>
+        <!-- 消费品 -12 (w=62, left of zero) -->
+        <rect x="230" y="160" width="62" height="26" rx="5" fill="#C0271C"/>
+        <text x="222" y="178" text-anchor="end" font-size="15.5" font-weight="800" font-family="Inter" fill="#C0271C">−12%</text>
+      </svg>
+      <div class="src">%YoY，1H26。纺服 +1.4%、鞋帽 −5%、家具 +0.6%、玩具 −12%。来源：CEIC、China Customs、UBS 估算。</div>
+    </div>
+
+    <div class="vecs" style="flex-direction:row;gap:14px;margin-top:6px;">
+      <div class="vec" style="flex:1;"><div class="vi">汽车</div><div><div class="vt">从进口国到出口国</div><div class="vd">2023 年起成净出口国，2030 年或占全球 <b>1/3</b>；EV +57%、混动 +115%。</div></div></div>
+      <div class="vec" style="flex:1;"><div class="vi">绿色</div><div><div class="vt">电动化红利</div><div class="vd">电池 +40%、光伏 +24%、电气设备 +24%；<b>欧洲政策</b>是关键变量。</div></div></div>
+      <div class="vec" style="flex:1;"><div class="vi">进口</div><div><div class="vt">强，但靠涨价</div><div class="vd">非 AI 进口 +19% 主要是<b>价格</b>；黄金 +189%（投资），油 2Q 量跌 −30%。</div></div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>AI 之外的韧性 · Beyond AI</span>
+    <span class="pg">03 / 04</span>
+  </div>
+</section>
+
+<!-- ============================= PAGE 4 : FORECASTS / RISK / QR ============================= -->
+<section class="page">
+  <div class="mast">
+    <div class="brand"><div class="dot"></div><div><div class="bname">THE&nbsp;PORT</div><div class="bsub">全 球 投 行 研 报 精 选</div></div></div>
+    <div class="mright"><b>中国经济 · China Economic Perspectives</b><br>UBS 瑞银 · 2026.07.30</div>
+  </div>
+
+  <div class="main">
+    <div>
+      <div class="sectlabel"><span class="no">03</span><span class="tt">上调预测、风险与后市</span><span class="en">Upgraded &amp; What Matters</span></div>
+      <div class="callout navy">
+        <div class="q">瑞银大幅上调 2026 贸易预测：出口 <b style="color:var(--navy)">+18%</b>（原 3%）、进口 <b style="color:var(--navy)">+24%</b>（原 1.8%）。但<b style="color:var(--navy)">名义 ≠ GDP</b>——实际出口仅 +8–9%，净出口拉动 GDP <b style="color:var(--navy)">+0.8ppt</b>（2025 为 1.6ppt），内需须挑大梁。</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="fcast">
+        <div class="fc"><div class="fk">2026 出口(名义)</div><div class="fv">+18<span class="u">%</span></div><div class="fs">原 3%</div></div>
+        <div class="fc"><div class="fk">2026 进口(名义)</div><div class="fv">+24<span class="u">%</span></div><div class="fs">原 1.8%</div></div>
+        <div class="fc"><div class="fk">实际出口</div><div class="fv">+8–9<span class="u">%</span></div><div class="fs">2025 为 9–10%</div></div>
+        <div class="fc"><div class="fk">净出口拉动 GDP</div><div class="fv">+0.8<span class="u">ppt</span></div><div class="fs">2025：1.6ppt</div></div>
+        <div class="fc"><div class="fk">DDR 合约价 3Q26</div><div class="fv">+32<span class="u">%</span></div><div class="fs">环比 QoQ</div></div>
+      </div>
+
+      <div class="watch" style="margin-top:15px;">
+        <div class="wbox up">
+          <div class="wh">▲&nbsp;会强化逻辑</div>
+          <ul>
+            <li>AI capex 继续扩张，记忆体缺货延续至 <b>2027–28</b></li>
+            <li>DDR / NAND 合约价续涨（3Q26 +32% / +30% QoQ）</li>
+            <li>汽车与绿色出口延续量增</li>
+            <li>人民币稳中有升，PBoC 允许渐进升值</li>
+          </ul>
+        </div>
+        <div class="wbox dn">
+          <div class="wh">▼&nbsp;会挑战逻辑</div>
+          <ul>
+            <li>全球 AI 周期回撤——价格驱动，<b>记忆体价是关键</b></li>
+            <li>关税 / 301 调查、欧盟趋严</li>
+            <li>大宗价格 2H 回落，价格顺风消退</li>
+            <li>2Q 内需走弱持续，进口量或不及预期</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="track-chips" style="margin-top:15px;">
+        <span class="tl">重点跟踪</span>
+        <span class="tchip">记忆体现货 / 合约价</span>
+        <span class="tchip">全球 AI capex</span>
+        <span class="tchip">301 / 关税</span>
+        <span class="tchip">大宗（铜 / 油 / 金）</span>
+        <span class="tchip">人民币</span>
+        <span class="tchip">2Q 内需</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="qrcard">
+        <div class="qrinner">
+          <div class="qrbox"><img src="qr.png" alt="THE PORT 微信二维码"></div>
+          <div class="qrtxt">
+            <div class="qbrand"><div class="qdot"></div><div class="qn">THE&nbsp;PORT</div></div>
+            <div class="qh">读懂全球投行的<span class="r">核心观点</span></div>
+            <div class="qs">扫码添加，每日获取高盛、摩根士丹利、瑞银等一线机构研报的精华解读与可视化速览。</div>
+            <div class="qcta">微信扫一扫 · 或长按识别二维码</div>
+          </div>
+        </div>
+      </div>
+      <div class="disc">本文基于 UBS（瑞银）Securities Asia 于 2026-07-30 发布的《China Economic Perspectives: AI is reshaping China's trade story》（经济学家 Jennifer Zhong、Yu Song、William Deng、Grace Wang）整理，所有数字与预测均以原报告为准；数据为 1H26 或全年预测口径。本可视化由 THE PORT 编辑制作，仅供信息参考与交流，不构成任何投资建议或要约；投资有风险，决策须谨慎。</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>THE PORT</b> · 全球投行研报精选</span>
+    <span>上调预测 · 风险 · 后市 · What Matters</span>
+    <span class="pg">04 / 04</span>
+  </div>
+</section>
+
+</body>
+</html>

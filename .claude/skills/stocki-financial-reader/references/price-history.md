@@ -135,7 +135,7 @@ Expected: `{"action":"error","data":[],"metadata":{"warnings":["fetch failed: Mi
 
 **Futures roll-over discipline**: when surfacing return / cumulative-pnl figures for `asset_type=futures`, explicitly note any roll-overs in the window — never silently use raw `close` head-vs-tail to claim a long-horizon return.
 
-**Output discipline**: never pass raw key (`adj_close`, `pct_change`, pipe-delim symbol like `AAPL|ST|USA`, `wind-`/`sw-`/`申万-` industry prefix) to user-visible text. Agent picks EN or CN label based on the user's language.
+**Output discipline**: never pass raw key (`adj_close`, `pct_change`, pipe-delim symbol like `AAPL|ST|USA`, source-tagged industry prefix 形如 `<src>-<category>`) to user-visible text. Agent picks EN or CN label based on the user's language.
 
 ## Cross-ref
 

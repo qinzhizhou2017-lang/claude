@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic Reality 研报可视化</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #e9e8e4;
+    --paper: #fcfcfb;
+    --ink: #14171f;
+    --ink-2: #4a4f5c;
+    --ink-3: #868b97;
+    --rule: #dcdad4;
+    --rule-2: #eceae5;
+    --navy: #16233f;
+    /* validated semantic trio (light surface): long / contested / short */
+    --long: #2a5fb0;
+    --mid: #b58300;
+    --short: #c42a4a;
+    --long-bg: #eaf0fa;
+    --mid-bg: #f8f1e0;
+    --short-bg: #faeaee;
+    --area: #dfe5f0;
+    --num-font: 'Inter', 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: 'Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'WenQuanYi Zen Hei', sans-serif;
+    padding: 40px 16px; -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    width: 1600px; height: 1000px; margin: 0 auto 40px; background: var(--paper);
+    padding: 36px 48px 30px; display: flex; flex-direction: column; position: relative;
+    box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 8px 30px rgba(0,0,0,.06);
+  }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ---------- page chrome ---------- */
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; letter-spacing: .14em; color: var(--ink-3); font-weight: 600;
+    padding-bottom: 12px; border-bottom: 2px solid var(--navy);
+  }
+  .topbar .brand { color: var(--navy); }
+  .topbar .pg { color: var(--navy); }
+  .title-row { display: flex; justify-content: space-between; align-items: flex-end; margin: 18px 0 20px; gap: 40px; }
+  h1 { font-size: 38px; font-weight: 900; letter-spacing: -.01em; line-height: 1.15; color: var(--navy); }
+  h1 em { font-style: normal; color: var(--long); }
+  .subtitle { font-size: 16px; color: var(--ink-2); margin-top: 8px; line-height: 1.5; }
+  .title-note { font-size: 13px; color: var(--ink-3); text-align: right; line-height: 1.6; flex-shrink: 0; }
+  .footer {
+    margin-top: auto; padding-top: 10px; border-top: 1px solid var(--rule);
+    display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-3);
+  }
+  .sec {
+    font-size: 13px; font-weight: 700; letter-spacing: .08em; color: var(--navy);
+    display: flex; align-items: center; gap: 8px; margin-bottom: 12px;
+  }
+  .sec::before { content: ''; width: 4px; height: 14px; background: var(--navy); }
+  .sec small { font-weight: 500; color: var(--ink-3); letter-spacing: 0; font-size: 12px; }
+  .card { border: 1px solid var(--rule); background: #fff; padding: 16px 18px; }
+  .tk { font-family: var(--num-font); font-weight: 700; font-size: .92em; letter-spacing: .01em; }
+  .chip {
+    display: inline-block; font-size: 12px; font-weight: 600; padding: 3px 8px; margin: 0 4px 5px 0;
+    border: 1px solid var(--rule); background: #fff; color: var(--ink);
+  }
+  .chip.l { border-color: #c5d4ec; background: var(--long-bg); color: #1d4a8f; }
+  .chip.s { border-color: #efc4cf; background: var(--short-bg); color: #9d1f3a; }
+  .tag {
+    display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .08em;
+    padding: 2px 6px; border: 1px solid currentColor;
+  }
+  .tag.te { color: #7a4fb0; } .tag.in { color: #2a5fb0; } .tag.at { color: #b58300; } .tag.as { color: #3b7d5c; }
+
+  /* ================= PAGE 1 ================= */
+  .p1-body { display: grid; grid-template-columns: 430px 1fr; gap: 28px; flex: 1; min-height: 0; }
+  .event { background: var(--navy); color: #fff; padding: 20px 22px; }
+  .event .eyebrow { font-size: 11px; letter-spacing: .14em; color: #9fb3d6; font-weight: 700; }
+  .event h3 { font-size: 22px; font-weight: 800; margin: 6px 0 4px; }
+  .event p { font-size: 13px; color: #c9d3e6; line-height: 1.6; }
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #2c3b5c; margin-top: 16px; }
+  .kpi { background: var(--navy); padding: 12px 10px 4px 0; }
+  .kpi b { display: block; font-family: var(--num-font); font-size: 30px; font-weight: 800; line-height: 1; }
+  .kpi b small { font-size: 15px; font-weight: 700; margin-left: 2px; }
+  .kpi span { display: block; font-size: 11.5px; color: #9fb3d6; margin-top: 6px; line-height: 1.4; }
+
+  .timeline { position: relative; margin: 6px 0 0 6px; }
+  .timeline::before { content: ''; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 2px; background: var(--rule); }
+  .tl { position: relative; padding-left: 26px; margin-bottom: 16px; }
+  .tl::before { content: ''; position: absolute; left: 0; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: #fff; border: 2px solid var(--ink-3); }
+  .tl.hot::before { background: var(--short); border-color: var(--short); }
+  .tl.key::before { border-color: var(--long); background: var(--long); }
+  .tl .d { font-family: var(--num-font); font-size: 12px; font-weight: 700; color: var(--ink-3); }
+  .tl .t { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+  .tl .x { font-size: 12px; color: var(--ink-2); line-height: 1.45; }
+
+  .record { display: grid; grid-template-columns: 96px 1fr 58px; row-gap: 8px; align-items: center; font-size: 12.5px; }
+  .record .lb { color: var(--ink-2); }
+  .record .axis { position: relative; height: 18px; }
+  .record .axis::before { content: ''; position: absolute; left: 40%; top: -4px; bottom: -4px; width: 1px; background: var(--ink-3); }
+  .record .bar { position: absolute; top: 3px; height: 12px; }
+  .record .v { font-family: var(--num-font); font-weight: 700; text-align: right; }
+
+  .rents { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .rent { border: 1px solid var(--rule); background: #fff; padding: 14px 14px 12px; display: flex; flex-direction: column; }
+  .rent .no { font-family: var(--num-font); font-size: 13px; font-weight: 800; color: var(--mid); }
+  .rent h4 { font-size: 19px; font-weight: 900; color: var(--navy); margin-top: 2px; }
+  .rent h4 small { font-family: var(--num-font); font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--ink-3); margin-left: 6px; }
+  .rent .q { font-size: 12.5px; color: var(--ink-2); margin: 4px 0 10px; padding-bottom: 10px; border-bottom: 2px solid var(--navy); min-height: 42px; line-height: 1.45; }
+  .rent .lab { font-size: 10.5px; letter-spacing: .12em; color: var(--ink-3); font-weight: 700; margin-bottom: 4px; }
+  .rent ul { list-style: none; font-size: 12.5px; line-height: 1.65; margin-bottom: 8px; min-height: 104px; }
+  .rent ul li::before { content: '▪'; color: var(--navy); margin-right: 6px; }
+  .rent .does { font-size: 12.5px; font-weight: 600; line-height: 1.5; min-height: 56px; }
+  .rent svg { width: 100%; height: auto; margin: 10px 0 8px; display: block; }
+  .meter { display: grid; grid-template-columns: 58px 58px 1fr; align-items: center; font-size: 11.5px; margin-top: 5px; }
+  .meter .k { color: var(--ink-3); font-weight: 700; letter-spacing: .06em; }
+  .meter .sq { display: flex; gap: 3px; }
+  .meter .sq i { width: 10px; height: 10px; border: 1.5px solid var(--navy); display: block; }
+  .meter .sq i.f { background: var(--navy); }
+  .meter .t { color: var(--ink-2); }
+
+  .quote { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .quote div { padding: 12px 16px 12px 44px; position: relative; background: #f3f2ee; font-size: 14px; font-weight: 700; color: var(--navy); line-height: 1.55; }
+  .quote div::before { content: '“'; position: absolute; left: 12px; top: 0; font-size: 44px; color: var(--mid); font-family: Georgia, serif; }
+  .quote div small { display: block; font-size: 11.5px; font-weight: 500; color: var(--ink-3); margin-top: 4px; }
+  .plays { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 16px; }
+  .play { padding: 12px 16px; border-left: 4px solid; background: #fff; border-top: 1px solid var(--rule); border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .play .h { font-size: 15px; font-weight: 800; }
+  .play .h span { font-size: 11px; letter-spacing: .12em; font-weight: 700; margin-right: 8px; }
+  .play p { font-size: 12.5px; color: var(--ink-2); margin-top: 4px; line-height: 1.5; }
+  .play.l { border-left-color: var(--long); } .play.l span { color: var(--long); }
+  .play.m { border-left-color: var(--mid); } .play.m span { color: var(--mid); }
+  .play.s { border-left-color: var(--short); } .play.s span { color: var(--short); }
+
+  /* ================= PAGE 2 ================= */
+  .p2-body { display: grid; grid-template-columns: 860px 1fr; gap: 28px; flex: 1; min-height: 0; }
+  .matrix-wrap { display: grid; grid-template-columns: 34px 1fr; grid-template-rows: 1fr 40px; }
+  .ylab { position: relative; font-size: 11px; color: var(--ink-3); font-weight: 700; }
+  .ylab span { position: absolute; left: 0; width: 26px; text-align: center; }
+  .ylab span:first-child { top: 4px; } .ylab span:last-child { bottom: 4px; }
+  .ylab b { position: absolute; top: 50%; left: 13px; transform: translate(-50%,-50%) rotate(-90deg); white-space: nowrap; color: var(--navy); letter-spacing: .14em; }
+  .matrix { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; border: 1.5px solid var(--navy); }
+  .quad { padding: 14px 16px; position: relative; display: flex; flex-direction: column; }
+  .quad:nth-child(1) { border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); background: #f4f7fc; }
+  .quad:nth-child(2) { border-bottom: 1px solid var(--rule); background: #fcf8ee; }
+  .quad:nth-child(3) { border-right: 1px solid var(--rule); background: #f7f8fa; }
+  .quad:nth-child(4) { background: #fcf2f4; }
+  .quad .qh { font-size: 13px; font-weight: 800; letter-spacing: .06em; margin-bottom: 4px; }
+  .quad .qs { font-size: 11.5px; color: var(--ink-2); margin-bottom: 10px; }
+  .quad .items { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 14px; flex: 1; align-content: space-evenly; padding-bottom: 8px; }
+  .it { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; font-weight: 600; line-height: 1.3; }
+  .it i { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; box-shadow: 0 0 0 2px #fff; }
+  .it small { display: block; font-size: 10px; font-weight: 700; letter-spacing: .08em; color: var(--ink-3); margin-top: 2px; }
+  .q-l .qh { color: var(--long); } .q-l i { background: var(--long); }
+  .q-m .qh { color: var(--mid); } .q-m i { background: var(--mid); }
+  .q-g .qh { color: #5d6b85; } .q-g i { background: #8190ad; }
+  .q-s .qh { color: var(--short); } .q-s i { background: var(--short); }
+  .quad .note { position: absolute; left: 16px; bottom: 12px; font-size: 11.5px; color: var(--ink-3); font-style: italic; }
+  .xlab { grid-column: 2; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--ink-3); font-weight: 700; letter-spacing: .1em; padding-top: 6px; }
+  .xlab b { color: var(--navy); letter-spacing: .14em; }
+  .legend-row { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11.5px; color: var(--ink-2); margin-top: 10px; align-items: center; }
+
+  .rcol { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+  .rcol .card { padding: 12px 16px; }
+  .rcol .sec { margin-bottom: 8px; }
+  .flow { display: grid; grid-template-columns: 1fr 22px 1fr 22px 1fr; align-items: stretch; margin-top: 4px; }
+  .flow .st { background: var(--long-bg); padding: 10px 10px; font-size: 12px; line-height: 1.5; color: var(--ink-2); }
+  .flow .st b { display: block; color: var(--navy); font-size: 13px; margin-bottom: 3px; }
+  .flow .ar { display: flex; align-items: center; justify-content: center; color: var(--long); font-weight: 900; }
+  .inod { display: grid; grid-template-columns: 0.9fr 1.25fr 1fr; gap: 12px; margin-top: 4px; }
+  .inod .s b { font-family: var(--num-font); font-size: 24px; font-weight: 800; color: var(--navy); display: block; line-height: 1.1; }
+  .inod .s span { font-size: 11.5px; color: var(--ink-2); line-height: 1.4; display: block; margin-top: 3px; }
+  .path { display: flex; align-items: flex-end; gap: 0; margin-top: 10px; font-family: var(--num-font); }
+  .risk { font-size: 12px; color: var(--ink-2); margin-top: 8px; padding: 6px 10px; background: var(--short-bg); line-height: 1.5; border-left: 3px solid var(--short); }
+  .pe { display: grid; grid-template-columns: 110px 1fr 44px; gap: 8px 10px; align-items: center; font-size: 12.5px; margin-top: 4px; }
+  .pe .bar { height: 14px; background: var(--long); border-radius: 0 4px 4px 0; }
+  .pe .bar.hl { background: var(--navy); }
+  .pe .v { font-family: var(--num-font); font-weight: 700; text-align: right; }
+  .eco { display: grid; grid-template-columns: 86px 1fr; row-gap: 2px; font-size: 12.5px; align-items: baseline; }
+  .eco .k { color: var(--ink-3); font-weight: 700; font-size: 11.5px; }
+  .wrong { font-size: 12.5px; padding: 7px 12px; background: var(--mid-bg); border-left: 3px solid var(--mid); line-height: 1.5; }
+
+  /* ================= PAGE 3 ================= */
+  .p3-body { display: grid; grid-template-columns: 960px 1fr; gap: 28px; }
+  table.pairs { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .pairs thead th { background: var(--navy); color: #fff; text-align: left; font-size: 11px; letter-spacing: .1em; font-weight: 700; padding: 9px 10px; }
+  .pairs td { padding: 13px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.5; }
+  .pairs tr:nth-child(even) td { background: #fafaf8; }
+  .pairs td.lg { color: #1d4a8f; font-weight: 700; width: 210px; }
+  .pairs td.sh { color: #a3203d; font-weight: 700; width: 210px; }
+  .pairs td.rt { width: 118px; white-space: nowrap; }
+  .pairs td.why { color: var(--ink-2); }
+  .pairs td .tag { margin: 0 3px 3px 0; }
+
+  .rates { margin-top: 2px; }
+  .rate-row { display: grid; grid-template-columns: 110px 1fr 56px; gap: 10px; align-items: center; font-size: 12.5px; margin-bottom: 7px; }
+  .rate-row .track { position: relative; height: 16px; }
+  .rate-row .fill { position: absolute; left: 0; top: 0; bottom: 0; background: #b9c0cd; border-radius: 0 4px 4px 0; }
+  .rate-row.hl .fill { background: var(--long); }
+  .rate-row.hl .nm { font-weight: 800; color: var(--ink); }
+  .rate-row .v { font-family: var(--num-font); font-weight: 700; text-align: right; }
+  .rate-row .rf { position: absolute; top: -4px; bottom: -4px; width: 0; border-left: 1.5px dashed var(--ink-2); }
+  .big { display: flex; gap: 14px; align-items: center; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--rule-2); }
+  .big > b { font-family: var(--num-font); font-size: 40px; font-weight: 800; color: var(--short); line-height: 1; white-space: nowrap; }
+  .big span { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; }
+
+  .ltv { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .ltv div { padding: 8px 10px; background: var(--short-bg); font-size: 12px; line-height: 1.45; color: var(--ink-2); }
+  .ltv b { display: block; font-size: 15px; color: var(--short); font-family: var(--num-font); }
+  .losers { display: grid; grid-template-columns: 70px 1fr; row-gap: 6px; font-size: 12.5px; align-items: baseline; }
+  .losers .k { font-size: 11.5px; font-weight: 700; color: var(--ink-3); }
+
+  .zircon { margin-top: 16px; background: var(--navy); color: #fff; padding: 16px 22px 16px; }
+  .zircon .zh { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+  .zircon .zh b { font-size: 17px; font-weight: 800; }
+  .zircon .zh span { font-size: 11.5px; color: #9fb3d6; }
+  .zgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #2c3b5c; }
+  .zc { background: var(--navy); padding: 4px 18px 2px 0; }
+  .zc + .zc { padding-left: 18px; }
+  .zc .zt { font-size: 11px; letter-spacing: .1em; color: #e3b54a; font-weight: 700; }
+  .zc h5 { font-size: 14.5px; font-weight: 800; margin: 4px 0 6px; line-height: 1.35; }
+  .zc p { font-size: 12px; color: #c9d3e6; line-height: 1.55; }
+  .zc p b { color: #fff; }
+</style>
+</head>
+<body>
+
+<!-- ======================================================= PAGE 1 -->
+<section class="page" id="page1">
+  <div class="topbar">
+    <span class="brand">CITRINI RESEARCH · AGENTIC REALITY</span>
+    <span>研报可视化 v3 · 核心框架</span>
+    <span class="pg">01 / 03</span>
+  </div>
+  <div class="title-row">
+    <div>
+      <h1>消费级 Agent 的“吉卜力时刻”：<em>靠人性摩擦收租的生意</em>开始被重新定价</h1>
+      <div class="subtitle">Agent 为消费者打工——比价、切换、谈判、退订都不再费力。谁的利润建立在“人会嫌麻烦”之上，谁就站在了逆风口。</div>
+    </div>
+    <div class="title-note">发布日期 2026-09-22<br>原文 39 页 · 付费研报</div>
+  </div>
+
+  <div class="p1-body">
+    <!-- left column -->
+    <div style="display:flex;flex-direction:column;justify-content:space-between;gap:18px;">
+      <div class="event">
+        <div class="eyebrow">触发事件 · 2026.09.08</div>
+        <h3>Meta 发布消费级 Agent「Muse」</h3>
+        <p>能记住偏好、跨 App 协作、用浏览器执行任务，关掉 App 后仍在后台运行；付款等敏感操作前先征得同意。Citrini 认为这是 Agent 第一次真正触达大众消费者。</p>
+        <div class="kpis">
+          <div class="kpi"><b class="num">#1</b><span>上线 10 天登顶美区 App Store 免费榜，评分 4.9</span></div>
+          <div class="kpi"><b class="num">70<small>万+</small></b><span>首日下载量</span></div>
+          <div class="kpi"><b class="num">1<small>亿</small></b><span>免费版每周 token 额度</span></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec">Citrini 的思考脉络</div>
+        <div class="timeline">
+          <div class="tl"><div class="d">2023.06</div><div class="t">Less Deus, More Machina</div><div class="x">首篇 AI 输家研究：呼叫中心、BPO、图库、人力外包</div></div>
+          <div class="tl"><div class="d">2026.02</div><div class="t">The 2028 Global Intelligence Crisis</div><div class="x">设想 Agent 消除摩擦 → 中介层租金崩塌</div></div>
+          <div class="tl key"><div class="d">2026.03 – 06</div><div class="t">Agentic Utilities / State of the Themes</div><div class="x">基础设施软件、网络安全、Shopify 被错杀</div></div>
+          <div class="tl hot"><div class="d">2026.09.22</div><div class="t">Agentic Reality（本文）</div><div class="x">从推演走向实证：谁赢，谁输</div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="sec">过往判断回测 <small>2023.06 发布至今</small></div>
+        <div class="record">
+          <span class="lb">标普 500 (SPY)</span>
+          <div class="axis"><div class="bar" style="left:40%;width:45%;background:var(--long);border-radius:0 4px 4px 0"></div></div>
+          <span class="v num" style="color:var(--long)">+75%</span>
+          <span class="lb">Citrini 空头篮子</span>
+          <div class="axis"><div class="bar" style="right:60%;width:24%;background:var(--short);border-radius:4px 0 0 4px"></div></div>
+          <span class="v num" style="color:var(--short)">≈ −40%</span>
+        </div>
+        <div style="font-size:11.5px;color:var(--ink-3);margin-top:8px;line-height:1.5">此外：Google 在“搜索已死”的悲观叙事中被点名为受益者后，上涨约 80%。</div>
+      </div>
+    </div>
+
+    <!-- right column -->
+    <div style="display:flex;flex-direction:column;min-height:0;">
+      <div class="sec">四种“摩擦租金”：Agent 先杀乏味，最后才动注意力 <small>谁在收租 · Agent 如何瓦解 · 衰减曲线形态</small></div>
+      <div class="rents">
+        <!-- 1 tedium -->
+        <div class="rent">
+          <div class="no">01</div>
+          <h4>乏味租<small>TEDIUM</small></h4>
+          <div class="q">你嫌麻烦的那部分活儿，别人替你干了并收费</div>
+          <div class="lab">谁在收租</div>
+          <ul><li>在线旅行社（OTA）</li><li>报税服务</li><li>买方地产经纪</li><li>保险代理</li><li>比价网站</li></ul>
+          <div class="lab">AGENT 做了什么</div>
+          <div class="does">Agent 本身就是“干苦活”的那一方，后台免费完成，再无可收费之处。</div>
+          <svg viewBox="0 0 280 120" aria-label="乏味租衰减曲线：Agent 到来后断崖式归零">
+            <path d="M0,22 H80 C96,22 100,96 132,101 H280 V110 H0 Z" fill="var(--area)"/>
+            <path d="M0,22 H80 C96,22 100,96 132,101 H280" fill="none" stroke="var(--navy)" stroke-width="2.5"/>
+            <line x1="80" y1="8" x2="80" y2="110" stroke="var(--short)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="84" y="14" font-size="10" fill="var(--short)" font-weight="700">Agent 到来</text>
+            <text x="276" y="94" font-size="10" fill="var(--ink-2)" text-anchor="end">收入趋近于零</text>
+            <line x1="0" y1="110" x2="280" y2="110" stroke="var(--ink-3)"/>
+          </svg>
+          <div class="meter"><span class="k">衰减速度</span><span class="sq"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span><span class="t">最快，断崖</span></div>
+          <div class="meter"><span class="k">租金池</span><span class="sq"><i class="f"></i><i class="f"></i><i></i><i></i></span><span class="t">中等</span></div>
+        </div>
+        <!-- 2 inertia -->
+        <div class="rent">
+          <div class="no">02</div>
+          <h4>惰性租<small>INERTIA</small></h4>
+          <div class="q">因为你一直懒得离开，所以一直在付钱</div>
+          <div class="lab">谁在收租</div>
+          <ul><li>自动续费与免费试用</li><li>宽带/电信优惠到期涨价</li><li>浮动电价</li><li><b>券商现金扫款（cash sweep）</b></li><li><b>积分过期沉淀（breakage）</b></li></ul>
+          <div class="lab">AGENT 做了什么</div>
+          <div class="does">每次续费都重新比价，不用即退订。按日历衰减而非断崖——四者中最可建模。</div>
+          <svg viewBox="0 0 280 120" aria-label="惰性租衰减曲线：每个续费周期下一个台阶">
+            <path d="M0,22 H80 V52 H122 V72 H166 V86 H210 V94 H280 V110 H0 Z" fill="var(--area)"/>
+            <path d="M0,22 H80 V52 H122 V72 H166 V86 H210 V94 H280" fill="none" stroke="var(--navy)" stroke-width="2.5"/>
+            <line x1="80" y1="8" x2="80" y2="110" stroke="var(--short)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="84" y="14" font-size="10" fill="var(--short)" font-weight="700">Agent 到来</text>
+            <text x="276" y="44" font-size="10" fill="var(--ink-2)" text-anchor="end">每个续费周期</text>
+            <text x="276" y="57" font-size="10" fill="var(--ink-2)" text-anchor="end">下一个台阶</text>
+            <line x1="0" y1="110" x2="280" y2="110" stroke="var(--ink-3)"/>
+          </svg>
+          <div class="meter"><span class="k">衰减速度</span><span class="sq"><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span><span class="t">逐个续费日</span></div>
+          <div class="meter"><span class="k">租金池</span><span class="sq"><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span><span class="t">大</span></div>
+        </div>
+        <!-- 3 attention -->
+        <div class="rent">
+          <div class="no">03</div>
+          <h4>注意力租<small>ATTENTION</small></h4>
+          <div class="q">因为你累了，排在第一位的默认选项就赢了</div>
+          <div class="lab">谁在收租</div>
+          <ul><li>Google 点击竞价</li><li>你总是打开的打车/外卖 App</li><li>跑鞋上的品牌溢价</li><li>付费推广位与应用商店默认位</li></ul>
+          <div class="lab">AGENT 做了什么</div>
+          <div class="does">机器没有习惯，也不看广告；只按价格与匹配度优化，无视谁是默认项。</div>
+          <svg viewBox="0 0 280 120" aria-label="注意力租衰减曲线：随 Agent 购物占比上升而缓慢侵蚀">
+            <path d="M0,22 H80 C150,32 215,48 280,56 V110 H0 Z" fill="var(--area)"/>
+            <path d="M0,22 H80 C150,32 215,48 280,56" fill="none" stroke="var(--navy)" stroke-width="2.5"/>
+            <line x1="80" y1="8" x2="80" y2="110" stroke="var(--short)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="84" y="14" font-size="10" fill="var(--short)" font-weight="700">Agent 到来</text>
+            <text x="276" y="80" font-size="10" fill="var(--ink-2)" text-anchor="end">随 Agent 购物占比</text>
+            <text x="276" y="93" font-size="10" fill="var(--ink-2)" text-anchor="end">上升而缓慢侵蚀</text>
+            <line x1="0" y1="110" x2="280" y2="110" stroke="var(--ink-3)"/>
+          </svg>
+          <div class="meter"><span class="k">衰减速度</span><span class="sq"><i class="f"></i><i></i><i></i><i></i></span><span class="t">最慢</span></div>
+          <div class="meter"><span class="k">租金池</span><span class="sq"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span><span class="t">最大</span></div>
+        </div>
+        <!-- 4 asymmetry -->
+        <div class="rent">
+          <div class="no">04</div>
+          <h4>信息差租<small>ASYMMETRY</small></h4>
+          <div class="q">平台比你懂得多，于是抽一笔“介绍费”</div>
+          <div class="lab">谁在收租</div>
+          <ul><li>房地产佣金</li><li>按揭经纪</li><li>汽车经销商金融保险</li><li><b>用 4 只 ETF 收管理费的财富管理</b></li></ul>
+          <div class="lab">AGENT 做了什么</div>
+          <div class="does">数据一旦开放即刻崩塌；只剩必须持牌或需要资产负债表的部分能活下来。</div>
+          <svg viewBox="0 0 280 120" aria-label="信息差租衰减曲线：迅速跌至牌照底线">
+            <path d="M0,22 H80 C92,22 100,74 142,80 H280 V110 H0 Z" fill="var(--area)"/>
+            <path d="M0,22 H80 C92,22 100,74 142,80 H280" fill="none" stroke="var(--navy)" stroke-width="2.5"/>
+            <line x1="0" y1="80" x2="280" y2="80" stroke="var(--mid)" stroke-width="1.5" stroke-dasharray="6 4"/>
+            <line x1="80" y1="8" x2="80" y2="110" stroke="var(--short)" stroke-width="1.5" stroke-dasharray="4 3"/>
+            <text x="84" y="14" font-size="10" fill="var(--short)" font-weight="700">Agent 到来</text>
+            <text x="276" y="74" font-size="10" fill="var(--mid)" font-weight="700" text-anchor="end">牌照底线</text>
+            <line x1="0" y1="110" x2="280" y2="110" stroke="var(--ink-3)"/>
+          </svg>
+          <div class="meter"><span class="k">衰减速度</span><span class="sq"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span><span class="t">数据开放即瞬间</span></div>
+          <div class="meter"><span class="k">租金池</span><span class="sq"><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span><span class="t">大</span></div>
+        </div>
+      </div>
+
+      <div class="quote">
+        <div>我们高估了“人际关系”的价值——很多所谓的关系，不过是带着笑脸的摩擦。<small>原文对地产经纪等“关系型”中介的判断</small></div>
+        <div>机器不在乎你最爱用哪个 App，也不会被精心设计的结账页吸引；它们不会累，也不会默认“我一直在这家买”。<small>Agent 与人类消费心理的根本差异</small></div>
+      </div>
+
+      <div class="plays">
+        <div class="play l"><div class="h"><span>做多</span>受益者：Agent 赋能方</div><p>构建 Agent、让 Agent 更强、或为 Agent 提供运行基础设施的公司。</p></div>
+        <div class="play m"><div class="h"><span>配对</span>去中介化</div><p>做多 Agent 需要却无法“vibe-code”出来的资产，做空它顺手消灭的租金。</p></div>
+        <div class="play s"><div class="h"><span>做空</span>输家：订阅制与聚合平台</div><p>LTV 被截短、CAC 被抬高，靠流失摩擦和信息差维系的模式首当其冲。</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer"><span>来源：Citrini Research《Agentic Reality: The Ramifications of Agentic Consumer Adoption》(2026-09-22)；图表为基于原文的重绘与中文整理</span><span>仅供内部研究参考，不构成投资建议</span></div>
+</section>
+
+<!-- ======================================================= PAGE 2 -->
+<section class="page" id="page2">
+  <div class="topbar">
+    <span class="brand">CITRINI RESEARCH · AGENTIC REALITY</span>
+    <span>研报可视化 v3 · 利润迁移与受益者</span>
+    <span class="pg">02 / 03</span>
+  </div>
+  <div class="title-row">
+    <div>
+      <h1>利润往哪里迁移：Agent 接管工作流后，<em>谁还握有定价权？</em></h1>
+      <div class="subtitle">新框架不再只看“冲击 × 适应力”，而是看赢家的定价权与输家的租金暴露。Meta 同时出现在两处：作为消费级 Agent 平台受益，作为社交网络则面临争夺。</div>
+    </div>
+  </div>
+
+  <div class="p2-body">
+    <div style="display:flex;flex-direction:column;">
+      <div class="sec">AI Agent 利润迁移矩阵 <small>纵轴：经济护城河 · 横轴：对存量利润池的影响</small></div>
+      <div class="matrix-wrap" style="flex:1">
+        <div class="ylab"><span>高</span><b>经济护城河 →</b><span>低</span></div>
+        <div class="matrix">
+          <div class="quad q-l">
+            <div class="qh">持久受益者</div>
+            <div class="qs">护城河高 × 利润池顺风</div>
+            <div class="items">
+              <div class="it"><i></i><div>推理算力与边缘芯片</div></div>
+              <div class="it"><i></i><div>安全、身份与数据恢复</div></div>
+              <div class="it"><i></i><div>Agent 云、边缘与 API</div></div>
+              <div class="it"><i></i><div>支付与商业交易轨道<small>惰性 · 信息差</small></div></div>
+              <div class="it"><i></i><div>专家数据与 Agent 评测</div></div>
+              <div class="it"><i></i><div>消费级 Agent 平台</div></div>
+            </div>
+          </div>
+          <div class="quad q-m">
+            <div class="qh">可防御，但经济性被争夺</div>
+            <div class="qs">护城河高 × 利润池承压</div>
+            <div class="items">
+              <div class="it"><i></i><div>权威数据与核心记录<small>信息差</small></div></div>
+              <div class="it"><i></i><div>电信与续费定价<small>惰性</small></div></div>
+              <div class="it"><i></i><div>搜索与意图广告<small>注意力</small></div></div>
+              <div class="it"><i></i><div>交易市场与零售媒体<small>注意力</small></div></div>
+              <div class="it"><i></i><div>高频内容与社交网络<small>注意力</small></div></div>
+              <div class="it"><i></i><div>常规投顾与闲置现金利差<small>惰性 · 信息差</small></div></div>
+              <div class="it"><i></i><div>核心 ERP / CRM 应用<small>惰性</small></div></div>
+              <div class="it"><i></i><div>旅行与比价中介<small>注意力 · 信息差</small></div></div>
+            </div>
+          </div>
+          <div class="quad q-g">
+            <div class="qh">受益，但定价权较弱</div>
+            <div class="qs">护城河低 × 利润池顺风</div>
+            <div class="items">
+              <div class="it"><i></i><div>语音与消息通道</div></div>
+              <div class="it"><i></i><div>模型 API 与通用 AI 工具</div></div>
+              <div class="it" style="grid-column:1 / span 2"><i></i><div>透明市场里的最低成本供应商<small>酒店航司直销 · MVNO · 低价保险</small></div></div>
+            </div>
+            <div class="note">仅有更多交易活动，并不构成持久的利润池。</div>
+          </div>
+          <div class="quad q-s">
+            <div class="qh">可被替代的工作 / 客户惰性</div>
+            <div class="qs">护城河低 × 利润池逆风</div>
+            <div class="items">
+              <div class="it"><i></i><div>人力招聘<small>乏味 · 信息差</small></div></div>
+              <div class="it"><i></i><div>常规软件开发<small>乏味</small></div></div>
+              <div class="it"><i></i><div>常规报税、法务、辅导<small>乏味</small></div></div>
+              <div class="it"><i></i><div>BPO 与常规理赔处理<small>乏味</small></div></div>
+              <div class="it"><i></i><div>通用效率与日程工具<small>乏味</small></div></div>
+              <div class="it"><i></i><div>低使用率订阅<small>惰性</small></div></div>
+              <div class="it"><i></i><div>转录与同质化内容<small>乏味</small></div></div>
+              <div class="it"><i></i><div>退订阻挠 / 议价摩擦<small>惰性</small></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="xlab"><span>顺风</span><b>对存量利润池的影响 →</b><span>逆风</span></div>
+      </div>
+    </div>
+
+    <div class="rcol">
+      <div class="card">
+        <div class="sec">首选受益者：Meta <span class="tk" style="color:var(--long);letter-spacing:0">META US</span></div>
+        <div class="flow">
+          <div class="st"><b>Muse 入口</b>日历、邮件、跨 App 购物、退订行为全部可见</div>
+          <div class="ar">→</div>
+          <div class="st"><b>行为数据</b>“买什么”之外，更知道“取消什么”</div>
+          <div class="ar">→</div>
+          <div class="st"><b>ARPU 上行</b>广告更精准；未来或参与交易分成</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="sec">被忽视的上游：Innodata <span class="tk" style="color:var(--long);letter-spacing:0">INOD US</span></div>
+        <div class="inod">
+          <div class="s"><b class="num">58%</b><span>2025 年收入来自 Meta（约 1.46 亿美元）；8 月新签“长程 Agent 个性化”项目</span></div>
+          <div class="s"><b class="num">$4→$121.5→$57</b><span>2023 初 → 6 月收盘高点 → 当前，客户集中度风险显现</span></div>
+          <div class="s"><b class="num">≈$31M</b><span>第二大科技客户季度贡献翻倍；另签一家前沿 AI 实验室</span></div>
+        </div>
+        <div class="risk"><b>风险：</b>Meta 以 143 亿美元入股 Scale AI 49%；最大客户季度收入已下滑约 1/3，头两大客户占 2026 年收入 2/3 以上。</div>
+      </div>
+
+      <div class="card">
+        <div class="sec">语音 / 通信 Agent 工具链 <small>远期市盈率</small></div>
+        <div class="pe">
+          <span><span class="tk">RNG</span> RingCentral</span><div><div class="bar hl" style="width:33%"></div></div><span class="v num">~15x</span>
+          <span><span class="tk">BAND</span> Bandwidth</span><div><div class="bar" style="width:67%"></div></div><span class="v num">30x</span>
+          <span><span class="tk">TWLO</span> Twilio</span><div><div class="bar" style="width:100%"></div></div><span class="v num">45x</span>
+        </div>
+        <div style="font-size:11.5px;color:var(--ink-3);margin-top:6px">RNG 同样具备完整电话能力与生成式语音 AI，估值最低。</div>
+      </div>
+
+      <div class="card" style="padding-bottom:12px">
+        <div class="sec">生态受益者</div>
+        <div class="eco">
+          <span class="k">身份 / 安全</span><div><span class="chip l">SAIL</span><span class="chip l">RBRK</span><span class="chip l">OKTA</span><span class="chip l">ZS</span><span class="chip l">NTSK</span></div>
+          <span class="k">支付 / 网络</span><div><span class="chip l">V</span><span class="chip l">MA</span><span class="chip">Stripe（未上市）</span><span class="chip l">NET 首选</span><span class="chip l">FSLY</span><span class="chip l">AKAM</span></div>
+          <span class="k">电商</span><div><span class="chip l">SHOP</span> <span style="font-size:11.5px;color:var(--ink-2)">Agent 绕过店面，但仍用 Shopify 的目录、结账与支付</span></div>
+          <span class="k">交易基建*</span><div><span class="chip l">LYV</span><span class="chip l">AIG</span><span class="chip l">YOU</span><span class="chip">SRAD（待观察）</span></div>
+        </div>
+      </div>
+
+      <div class="wrong"><b>Citrini 自承看错：</b>卡组织（AXP / V / MA）大概率不是输家——用户乐于把卡交给 Agent，交易量上升对网络是净利好。</div>
+    </div>
+  </div>
+
+  <div class="footer"><span>* 投机性受益：Ticketmaster 接入 Muse 提升转化；AIG 为 Stripe Link 的 Agent 购物提供保障；CLEAR 为医疗数据连接器做身份核验；SRAD 出现在 Muse 源码中。来源：Citrini Research、Hunterbrook</span><span>仅供内部研究参考，不构成投资建议</span></div>
+</section>
+
+<!-- ======================================================= PAGE 3 -->
+<section class="page" id="page3">
+  <div class="topbar">
+    <span class="brand">CITRINI RESEARCH · AGENTIC REALITY</span>
+    <span>研报可视化 v3 · 交易清单与启示</span>
+    <span class="pg">03 / 03</span>
+  </div>
+  <div class="title-row">
+    <div>
+      <h1>做多 Agent 需要的资产，<em>做空它消灭的租金</em></h1>
+      <div class="subtitle">券商被点名：传统平台在闲置现金和融资利率上的超额利差，只因客户“不知道、懒得搬”而存在——恰是 Agent 最先拿走的低垂果实。</div>
+    </div>
+  </div>
+
+  <div class="p3-body">
+    <div>
+      <div class="sec">Agentic Reality 配对交易</div>
+      <table class="pairs">
+        <thead><tr><th>做多：Agent 需要的资产</th><th>做空：Agent 消灭的租金</th><th>租金类型</th><th>配对逻辑</th></tr></thead>
+        <tbody>
+          <tr><td class="lg">盈透证券 IBKR</td><td class="sh">嘉信理财 SCHW</td><td class="rt"><span class="tag in">惰性</span></td><td class="why">IBKR 本就为闲置现金付息；嘉信的扫款收入依赖客户永远不挪钱。Agent 每晚都会挪。</td></tr>
+          <tr><td class="lg">Federated Hermes FHI</td><td class="sh">LPL Financial LPLA</td><td class="rt"><span class="tag in">惰性</span></td><td class="why">Agent 把闲置现金转入货币基金；FHI 获得付费资产，LPL 失去现金扫款利差。</td></tr>
+          <tr><td class="lg">Equifax EFX、Experian EXPN</td><td class="sh">Intuit INTU、Gen Digital GEN</td><td class="rt"><span class="tag te">乏味</span><span class="tag in">惰性</span></td><td class="why">征信局拥有 Agent 必读的信用档案，没人能 vibe-code 一个征信局；TurboTax 收的是报税乏味费，诺顿/LifeLock 是自动续费。</td></tr>
+          <tr><td class="lg">Progressive PGR、GEICO（BRK.B）</td><td class="sh">Allstate ALL、Hanover THG、Selective SIGI</td><td class="rt"><span class="tag te">乏味</span></td><td class="why">直销保险公司保留承保利润；代理渠道佣金被 Agent 取代。美银估算风险敞口超 150 亿美元。</td></tr>
+          <tr><td class="lg">万豪 MAR、希尔顿 HLT、凯悦 H、温德姆 WH</td><td class="sh">Expedia EXPE、Tripadvisor TRIP；Booking BKNG 较轻</td><td class="rt"><span class="tag te">乏味</span></td><td class="why">Agent 直接向库存方订房（如经 Duffel 直连航司），OTA 抽成即被移除的“过路费”。EXPE 暴露最大。</td></tr>
+          <tr><td class="lg">Costco COST、沃尔玛 WMT</td><td class="sh">Instacart CART、Uber UBER</td><td class="rt"><span class="tag at">注意力</span></td><td class="why">Agent 比较整篮总价并路由到最低价；Instacart 的加价与推广位就是租金。</td></tr>
+          <tr><td class="lg">T-Mobile TMUS</td><td class="sh">Charter CHTR、Comcast CMCSA</td><td class="rt"><span class="tag in">惰性</span></td><td class="why">固定无线让 Agent 的“要走”威胁变得可信；有线的优惠到期与挽留定价就是租金。</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card">
+        <div class="sec">券商专题：美元融资利率对比 <small>$25K 档</small></div>
+        <div class="rates">
+          <div class="rate-row hl"><span class="nm">盈透 IBKR</span><div class="track"><div class="fill" style="width:44.1%"></div></div><span class="v num">5.38%</span></div>
+          <div class="rate-row"><span class="nm">嘉信 Schwab</span><div class="track"><div class="fill" style="width:94.9%"></div></div><span class="v num">11.58%</span></div>
+          <div class="rate-row"><span class="nm">富达 Fidelity</span><div class="track"><div class="fill" style="width:94.9%"></div></div><span class="v num">11.58%</span></div>
+          <div class="rate-row"><span class="nm">先锋 Vanguard</span><div class="track"><div class="fill" style="width:96.3%"></div></div><span class="v num">11.75%</span></div>
+          <div class="rate-row"><span class="nm">E*Trade</span><div class="track"><div class="fill" style="width:100%"></div></div><span class="v num">12.20%</span></div>
+        </div>
+        <div style="font-size:11.5px;color:var(--ink-3)">$300K 档：IBKR 5.05%，其余 10.25%–10.70%。来源：Interactive Brokers。Robinhood 亦提供有竞争力的利率。</div>
+        <div class="big"><b class="num">~$90亿</b><span>Citrini 粗算嘉信每年靠<b>超额利差</b>多赚的税前利润。Agent 会建议客户把现金转进货基、把账户转去 IBKR。</span></div>
+      </div>
+
+      <div class="card">
+        <div class="sec">输家：订阅制与聚合平台</div>
+        <div class="ltv">
+          <div><b>LTV ↓</b>Agent 截短客户关系时长，并替用户谈挽留折扣</div>
+          <div><b>CAC ↑</b>留存变贵，内容更新沦为获客成本</div>
+        </div>
+        <div class="losers">
+          <span class="k">出版</span><div><span class="chip s">NYT</span><span class="chip s">PPLI</span><span class="chip s">FUTR</span><span class="chip s">ZD</span><span class="chip s">TDAY</span></div>
+          <span class="k">音频/流媒</span><div><span class="chip s">SIRI</span><span class="chip s">STRZ</span><span class="chip s">AMCX</span><span class="chip s">ANGX</span> <span style="font-size:11px;color:var(--ink-2)">SIRI 95% 为自付，月流失 1.4% 创史低</span></div>
+          <span class="k">聚合</span><div><span class="chip s">NRDS</span><span class="chip s">TREE</span><span class="chip s">EVER</span><span class="chip s">MAX</span><span class="chip s">QNST</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="zircon">
+    <div class="zh"><b>对卓锐证券的启示：别做被 Agent 绕过的“界面层”，要做 Agent 必须调用的“供给端”</b><span>产品视角解读 · 非原文观点</span></div>
+    <div class="zgrid">
+      <div class="zc"><div class="zt">01 · 现金与融资</div><h5>主动让出惰性利差，换取 AUM</h5><p>闲置现金收益与融资利率是 Agent 最先比价的项目。建议<b>默认开启现金自动理财（货基）</b>、分档公示利率，把“利差收入”转化为“资产留存”。</p></div>
+      <div class="zc"><div class="zt">02 · 会员与积分</div><h5>积分价值不能靠“过期沉淀”</h5><p>报告把积分 breakage 列为惰性租。积分体系应以<b>真实兑换价值与行为激励</b>为核心，考核兑换率而非沉淀率，避免被 Agent 一次性“薅平”。</p></div>
+      <div class="zc"><div class="zt">03 · 资讯与社区</div><h5>从“流量位”转向“权威数据”</h5><p>注意力租衰减最慢但终将衰减；矩阵中“权威数据与核心记录”仍可防御。应强化<b>独家研报、持仓关联解读、社区真实交易数据</b>等 Agent 无法生成的内容。</p></div>
+      <div class="zc"><div class="zt">04 · Agent 接入</div><h5>提前布局 Agent 可调用能力</h5><p>参照 Stripe Link、Experian Agent Trust：探索<b>行情 / 资讯 / 下单的受控 API 与 Agent 身份授权</b>，在香港/美国监管框架内先做只读与模拟场景试点。</p></div>
+    </div>
+  </div>
+
+  <div class="footer"><span>来源：Citrini Research《Agentic Reality》(2026-09-22)；融资利率数据来自 Interactive Brokers 官网对比表（原文引用）</span><span>仅供内部研究参考，不构成投资建议</span></div>
+</section>
+
+</body>
+</html>

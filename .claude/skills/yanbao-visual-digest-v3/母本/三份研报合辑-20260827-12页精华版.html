@@ -1,0 +1,724 @@
+<title>香港先歇一歇、无限 token 与英伟达的 70% · 2026-08-27 三份研报精译合辑</title>
+<style>
+  :root{
+    --paper:#E9EAEC; --surface:#FFFFFF; --surface-2:#F4F5F7; --surface-3:#EFF1F4;
+    --ink:#141D2A; --ink-soft:#37424F; --muted:#69737F; --hair:#D3D8DE; --hair-soft:#E3E6EA;
+    --gold:#8E5A0C; --gold-bright:#B07818; --gold-fill:#F5E7C8; --gold-line:#DFA53C;
+    --bull:#0D6E55; --bull-fill:#DCEFE8; --bear:#B93A30; --bear-fill:#F7E1DE;
+    --neu:#4E5C72; --neu-fill:#E5E9EF;
+    --deep:#111A26; --deep-2:#1B2635;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:"PingFang SC","Helvetica Neue","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --serif:"Songti SC","STSong",Georgia,"Times New Roman",serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-size:19.5px;line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .num,.tk{font-family:var(--mono);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+  /* ---------- PAGE FRAME ---------- */
+  .page{width:210mm;height:296.6mm;background:var(--surface);position:relative;
+    padding:7mm 12mm 8mm;overflow:hidden;margin:0 auto 16px;box-shadow:0 6px 26px -10px rgba(20,32,46,.35)}
+  .page:last-child{margin-bottom:0}
+  .pg-head{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--hair);padding-bottom:5px;margin-bottom:8px}
+  .pg-head .r{margin-left:auto;color:var(--gold-bright);font-weight:700}
+  .pg-foot{position:absolute;left:12mm;right:12mm;bottom:5mm;display:flex;align-items:center;
+    font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.08em;
+    border-top:1px solid var(--hair-soft);padding-top:5px}
+  .pg-foot .r{margin-left:auto;font-weight:700;color:var(--ink-soft)}
+
+  /* ---------- COVER / HEADINGS ---------- */
+  .eyebrow{font-family:var(--mono);font-size:13.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold-bright);font-weight:700;display:flex;align-items:center;gap:9px}
+  .eyebrow::before{content:"";width:28px;height:2px;background:var(--gold-line)}
+  h1{font-weight:800;letter-spacing:-.015em;font-size:52px;line-height:1.1;margin:12px 0 0}
+  .dek{font-size:21px;color:var(--ink-soft);line-height:1.5;margin:12px 0 0;font-weight:500;max-width:54ch}
+  .metaline{margin-top:12px;padding-top:9px;border-top:1px solid var(--hair-soft);
+    font-family:var(--mono);font-size:13px;color:var(--muted);line-height:1.68}
+  .metaline b{color:var(--ink-soft);font-weight:600}
+  .flags{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+  .flag{font-family:var(--mono);font-size:12px;letter-spacing:.03em;padding:4px 11px;border-radius:999px;
+    border:1px solid var(--hair);color:var(--muted);background:var(--surface-2)}
+
+  .tldr{background:var(--surface-2);border:1px solid var(--hair);border-radius:12px;
+    padding:13px 16px 12px;margin:12px 0 0;position:relative;overflow:hidden}
+  .tldr::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold-line)}
+  .tldr h2{font-size:14px;font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold-bright);margin:0 0 7px;font-weight:700}
+  .tldr .kick{font-family:var(--serif);font-size:25px;line-height:1.32;margin:0 0 9px;font-weight:400}
+  .tldr ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+  .tldr li{display:flex;gap:10px;font-size:18px;color:var(--ink-soft);align-items:baseline;line-height:1.44}
+  .tldr li b{color:var(--ink)}
+  .tldr li .mk{flex:0 0 auto;width:8px;height:8px;border-radius:2px;margin-top:8px;background:var(--gold-line)}
+
+  .sec-eye{font-family:var(--mono);font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .sec-eye .no{color:var(--gold-bright);font-weight:800}
+  .sec-eye::after{content:"";flex:1;height:1px;background:repeating-linear-gradient(90deg,var(--hair) 0 5px,transparent 5px 10px)}
+  h2.sec{font-size:34px;line-height:1.12;font-weight:800;letter-spacing:-.015em;margin:0 0 6px}
+  h3{font-size:22px;font-weight:800;margin:9px 0 4px;letter-spacing:-.01em}
+  p{margin:0 0 7px}
+  p.lead{font-size:20px}
+  .hl{background:linear-gradient(180deg,transparent 62%,var(--gold-fill) 62%);padding:0 1px}
+  strong{font-weight:700;color:var(--ink)}
+  .sub{color:var(--muted);font-size:16px;margin:-3px 0 8px;line-height:1.4}
+
+  .pull{font-family:var(--serif);font-size:26px;line-height:1.4;font-weight:400;
+    margin:10px 0;padding:2px 0 2px 20px;border-left:3px solid var(--gold-line)}
+  .pull .by{display:block;font-family:var(--mono);font-size:13px;letter-spacing:.03em;color:var(--muted);margin-top:8px;font-weight:600}
+
+  /* FACTS */
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:5px 0 3px}
+  .facts.f3{grid-template-columns:repeat(3,1fr)}
+  .fact{border:1px solid var(--hair);border-radius:10px;background:var(--surface-2);padding:9px 10px 8px;position:relative;overflow:hidden}
+  .fact::after{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold-line)}
+  .fact .big{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:800;font-size:30px;
+    line-height:1;color:var(--gold);letter-spacing:-.02em}
+  .fact .big i{font-style:normal;font-size:17px;font-weight:700}
+  .fact .big.g{color:var(--bull)} .fact .big.r{color:var(--bear)}
+  .fact .txt{font-size:15px;color:var(--ink-soft);margin-top:5px;line-height:1.3}
+  .fact .txt b{color:var(--ink)}
+  .fact .src{font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:4px;padding-top:4px;border-top:1px solid var(--hair-soft)}
+
+  /* THEME CARD */
+  .theme{border:1px solid var(--hair);border-radius:11px;background:var(--surface-2);padding:9px 13px;margin:6px 0}
+  .theme-h{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-bottom:4px}
+  .theme-h .cn{font-size:21px;font-weight:800}
+  .theme-h .en{font-family:var(--mono);font-size:13px;color:var(--muted)}
+  .theme-h .stat{margin-left:auto;font-family:var(--mono);font-size:13px;font-weight:800;color:var(--gold);
+    background:var(--gold-fill);padding:3px 10px;border-radius:999px}
+  .theme p{margin:0;font-size:17.5px;color:var(--ink-soft);line-height:1.4}
+  .theme p+p{margin-top:4px}
+  .theme p b{color:var(--ink)}
+
+  /* TABLE */
+  .tw{border:1px solid var(--hair);border-radius:10px;overflow:hidden;margin:5px 0 4px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:16px}
+  thead th{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);
+    text-align:right;padding:6px 9px;border-bottom:1px solid var(--hair);font-weight:700;white-space:nowrap;background:var(--surface-3)}
+  thead th:first-child,tbody td:first-child{text-align:left}
+  tbody td{padding:5px 9px;text-align:right;border-bottom:1px solid var(--hair-soft);white-space:nowrap;
+    font-family:var(--mono);font-variant-numeric:tabular-nums}
+  tbody tr:last-child td{border-bottom:0}
+  td.thm{font-family:var(--sans);font-weight:700;text-align:left;white-space:normal}
+  td.thm .en2{display:block;font-family:var(--mono);font-weight:400;font-size:12px;color:var(--muted);margin-top:1px}
+  td.wrap{font-family:var(--sans);text-align:left;white-space:normal;font-size:15.5px;line-height:1.3;color:var(--ink-soft)}
+  .up{color:var(--bull);font-weight:800} .dn{color:var(--bear);font-weight:800}
+  .cap{font-size:13px;color:var(--muted);margin:0 0 5px;font-family:var(--mono);line-height:1.42}
+  .pill{font-family:var(--mono);font-size:12px;font-weight:800;padding:2px 7px;border-radius:4px}
+  .pill.ow{background:var(--bull-fill);color:var(--bull)} .pill.ew{background:var(--neu-fill);color:var(--neu)}
+  .pill.uw{background:var(--bear-fill);color:var(--bear)}
+
+  .callout{border:1px solid var(--gold-line);background:var(--gold-fill);border-radius:11px;padding:9px 13px;margin:7px 0}
+  .callout p{margin:0;font-size:17.5px;color:var(--ink);line-height:1.4}
+  .callout .cl{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--gold);font-weight:800;display:block;margin-bottom:4px}
+
+  /* two-column pro/con */
+  .pc{border:1px solid var(--hair);border-radius:11px;overflow:hidden;margin:6px 0}
+  .pc-h{display:flex;align-items:baseline;gap:9px;background:var(--surface-3);padding:5px 12px;border-bottom:1px solid var(--hair)}
+  .pc-h .cn{font-size:20px;font-weight:800}
+  .pc-h .en{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+  .pc-b{display:grid;grid-template-columns:1fr 1fr}
+  .pc-b>div{padding:7px 12px}
+  .pc-b>div:first-child{border-right:1px solid var(--hair-soft)}
+  .pc-t{font-family:var(--mono);font-size:12px;letter-spacing:.11em;text-transform:uppercase;font-weight:800;margin-bottom:5px}
+  .pc-t.g{color:var(--bull)} .pc-t.r{color:var(--bear)}
+  .pc ul{margin:0;padding:0;list-style:none;display:grid;gap:4px}
+  .pc li{font-size:16px;line-height:1.34;color:var(--ink-soft);padding-left:13px;position:relative}
+  .pc li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:1px;background:var(--gold-line)}
+  .pc li b{color:var(--ink)}
+
+  /* takeaways */
+  .takes{counter-reset:t;display:grid;gap:4px;margin:4px 0}
+  .take{display:grid;grid-template-columns:auto 1fr;column-gap:13px;row-gap:2px;align-items:start;
+    border-bottom:1px solid var(--hair-soft);padding-bottom:4px}
+  .take:last-child{border-bottom:0}
+  .take::before{counter-increment:t;content:counter(t,decimal-leading-zero);grid-column:1;grid-row:1 / span 2;
+    font-family:var(--mono);font-size:17px;font-weight:800;color:var(--gold-bright)}
+  .take b{grid-column:2;grid-row:1;font-size:19px}
+  .take span{grid-column:2;grid-row:2;font-size:17px;color:var(--ink-soft);line-height:1.38}
+
+  .risks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:5px 0 3px}
+  .risk{border:1px solid var(--hair);border-radius:10px;background:var(--surface-2);padding:9px 10px}
+  .risk .rh{font-size:17px;font-weight:800;margin-bottom:4px}
+  .risk .rt2{font-size:15px;color:var(--ink-soft);line-height:1.3}
+
+  .jargon{background:var(--surface-2);border:1px solid var(--hair);border-radius:11px;padding:11px 14px 10px;margin:7px 0}
+  .jargon dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:2px 18px}
+  .jargon dt{font-family:var(--mono);font-weight:800;font-size:15px;color:var(--gold-bright);margin-top:6px}
+  .jargon dd{margin:2px 0 3px;font-size:15.5px;color:var(--ink-soft);line-height:1.4}
+  .disc{font-size:13.5px;color:var(--muted);line-height:1.44;border-top:1px solid var(--hair);padding-top:7px;margin-top:7px}
+  .disc b{color:var(--ink-soft)}
+
+  /* ---------- TOC ---------- */
+  .toc{display:grid;gap:7px;margin-top:10px}
+  .toc-item{display:grid;grid-template-columns:auto 1fr auto;column-gap:15px;align-items:start;
+    border:1px solid var(--hair);border-radius:11px;background:var(--surface-2);padding:9px 13px}
+  .toc-no{font-family:var(--mono);font-size:32px;font-weight:800;color:var(--gold-line);line-height:1}
+  .toc-b .t{font-size:22px;font-weight:800;line-height:1.24}
+  .toc-b .en{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.35}
+  .toc-b .d{font-size:16px;color:var(--ink-soft);margin-top:4px;line-height:1.34}
+  .toc-b .pgs{margin-top:4px;display:flex;flex-wrap:wrap;gap:6px}
+  .toc-b .pgs span{font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    background:var(--surface);border:1px solid var(--hair);border-radius:5px;padding:2px 8px}
+  .toc-pg{font-family:var(--mono);font-size:14px;font-weight:800;color:var(--gold);
+    background:var(--gold-fill);border-radius:6px;padding:4px 9px;white-space:nowrap}
+
+  /* ---------- COVER / 简目录页 ---------- */
+  .page.cover{display:flex;flex-direction:column;padding-bottom:13mm}
+  .cover-mid{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .cover-mid h1{font-size:60px;line-height:1.1;margin:16px 0 0}
+  .cover-mid .dek{font-size:22px;margin:16px 0 0;max-width:42ch;line-height:1.5}
+  .menu{margin-top:44px;border-top:1px solid var(--hair)}
+  .mi{display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:22px;
+    padding:19px 2px;border-bottom:1px solid var(--hair)}
+  .mno{font-family:var(--mono);font-size:26px;font-weight:800;color:var(--gold-line);line-height:1}
+  .mt{font-size:27px;font-weight:800;line-height:1.22}
+  .mt em{display:block;font-style:normal;font-family:var(--mono);font-size:13.5px;color:var(--muted);
+    font-weight:400;margin-top:6px;letter-spacing:.02em;line-height:1.4}
+  .mt i{display:block;font-style:normal;font-size:17px;color:var(--ink-soft);font-weight:400;margin-top:8px;line-height:1.45}
+  .mpg{font-family:var(--mono);font-size:15px;font-weight:800;color:var(--gold);
+    background:var(--gold-fill);border-radius:6px;padding:5px 11px;white-space:nowrap}
+  .cover-note{margin-top:30px;font-family:var(--mono);font-size:14.5px;color:var(--muted);letter-spacing:.02em;line-height:1.7}
+  .cover-note b{color:var(--ink-soft);font-weight:700}
+
+  /* ---------- DIVIDER PAGE ---------- */
+  .page.div{background:var(--deep);color:#F2F4F7;display:flex;flex-direction:column;padding:16mm 15mm 12mm}
+  .page.div .pg-head{border-bottom-color:#31404F;color:#8FA0B2}
+  .page.div .pg-head .r{color:var(--gold-line)}
+  .page.div .pg-foot{border-top-color:#31404F;color:#8FA0B2}
+  .page.div .pg-foot .r{color:#D8DEE6}
+  .div-mid{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .end-mark{font-family:var(--mono);font-size:15px;letter-spacing:.35em;text-transform:uppercase;
+    color:var(--gold-line);font-weight:700;display:flex;align-items:center;gap:14px}
+  .end-mark::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gold-line),transparent)}
+  .div-cn{font-size:84px;font-weight:800;line-height:1.08;letter-spacing:-.02em;margin:22px 0 0;color:#FFFFFF}
+  .div-en{font-family:var(--mono);font-size:26px;line-height:1.32;color:#9FB2C6;margin:18px 0 0;font-weight:500;max-width:30ch}
+  .div-rule{height:2px;background:var(--gold-line);width:120px;margin:26px 0 0}
+  .div-sum{margin-top:26px;display:grid;gap:11px;max-width:60ch}
+  .div-sum li{list-style:none;display:flex;gap:12px;font-size:19px;line-height:1.5;color:#C9D4DF}
+  .div-sum li b{color:#FFFFFF;font-weight:700}
+  .div-sum li .mk{flex:0 0 auto;width:8px;height:8px;border-radius:2px;margin-top:9px;background:var(--gold-line)}
+  .div-next{margin-top:auto;padding-top:20px;border-top:1px solid #31404F;
+    display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .div-next .lb{font-family:var(--mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:#8FA0B2;font-weight:700}
+  .div-next .nx{font-size:26px;font-weight:800;color:#FFFFFF}
+  .div-next .nxen{font-family:var(--mono);font-size:14px;color:#9FB2C6}
+
+  /* 局部收紧变体：只压间距，不动字号 */
+  .page.tight .tldr{padding:11px 15px 10px;margin-top:10px}
+  .page.tight .tldr ul{gap:5px}
+  .page.tight .theme{padding:8px 12px;margin:5px 0}
+  .page.tight .callout{padding:8px 12px;margin:6px 0}
+  .page.tight p{margin-bottom:6px}
+  .page.tight tbody td{padding:4px 9px}
+  .page.tight thead th{padding:5px 9px}
+  .page.tight .tw{margin:4px 0 3px}
+  .page.tight .pc-b>div{padding:6px 12px}
+  .page.tight .pc-h{padding:4px 12px}
+  .page.tight .fact{padding:8px 10px 7px}
+  .page.tight .risk{padding:8px 10px}
+  .page.tight h3{margin:8px 0 4px}
+  .page.tight .takes{gap:3px}
+  .page.tight .toc{gap:6px}
+  .page.tight .toc-item{padding:8px 13px}
+  .page.tight .disc{padding-top:6px;margin-top:6px}
+  .page.tighter .theme{padding:7px 12px;margin:4px 0}
+  .page.tighter .callout{padding:7px 12px;margin:5px 0}
+  .page.tighter .facts{margin:4px 0 2px}
+  .page.tighter tbody td{padding:3px 9px}
+  .page.tighter thead th{padding:4px 9px}
+  .page.tighter .risk{padding:7px 10px}
+
+  /* 第三级收紧：仍然不动字号，只压间距 */
+  .page.tightest .tldr{padding:9px 15px 8px;margin-top:9px}
+  .page.tightest .tldr ul{gap:4px}
+  .page.tightest .theme{padding:6px 12px;margin:3px 0}
+  .page.tightest .callout{padding:6px 12px;margin:4px 0}
+  .page.tightest .facts{margin:3px 0 2px}
+  .page.tightest .fact{padding:6px 10px}
+  .page.tightest .tw{margin:3px 0 2px}
+  .page.tightest tbody td{padding:2px 9px}
+  .page.tightest thead th{padding:3px 9px}
+  .page.tightest .jargon{padding:8px 14px 7px;margin:5px 0}
+  .page.tightest .risks{margin:4px 0 2px}
+  .page.tightest .risk{padding:6px 10px}
+  .page.tightest h3{margin:6px 0 3px}
+  .page.tightest .cap{margin:0 0 3px}
+
+  @media print{
+    body{background:#fff}
+    .page{margin:0;box-shadow:none;break-after:page;page-break-after:always}
+    .page:last-child{break-after:auto;page-break-after:auto}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+  @page{size:A4;margin:0}
+</style>
+
+<!-- ================= PAGE 1 · MS 1 ================= -->
+<div class="page tight tighter tightest">
+  <div class="pg-head"><span>研报一 · Morgan Stanley</span><span class="r">01 / 03 · 大判断</span></div>
+
+  <div class="sec-eye"><span class="no">01</span><span>China Equity Strategy · 中国股票策略</span></div>
+  <h2 class="sec">香港先坐回后排，<br>钱重新流向 A 股</h2>
+  <p class="sub">Hong Kong Takes a Backseat, for Now｜2026 年 8 月 26 日｜Laura Wang / Chloe Liu / Vicky Wu（摩根士丹利亚洲股票策略）</p>
+
+  <div class="tldr">
+    <h2>一分钟速览</h2>
+    <p class="kick">"我们 7 月开始看多香港的那几条理由，现在基本都被价格吃掉了。"</p>
+    <ul>
+      <li><span class="mk"></span><span><b>动作：从香港获利了结，重新聚焦 A 股。</b>7 月初那笔"超配香港"把恒指相对沪深 300 从 87 推到 107（约 <b>+23%</b>），大摩这次选择收手。</span></li>
+      <li><span class="mk"></span><span><b>换边不是因为香港变差，而是 A 股这边三件事在改善：</b>全球市场企稳、AI 超级周期重拾动能；长鑫存储与宇树两笔巨型 IPO 造成的流动性挤压在逐步消化；国家队 7 月起重新入场当稳定器。</span></li>
+      <li><span class="mk"></span><span><b>香港下一个窗口大概在 9 月底</b>——AI 催化剂密集 + 中美元首会晤 + 宏观数据若再走弱带来的政策加码预期。</span></li>
+    </ul>
+  </div>
+
+  <div class="facts">
+    <div class="fact"><div class="big">42.0<i>%</i></div><div class="txt">沪深 300 里<b>高端制造与硬科技</b>权重；MSCI 中国只有 13.6%、恒指 8.4%</div><div class="src">MS / Datastream · 8-26</div></div>
+    <div class="fact"><div class="big g">+23<i>%</i></div><div class="txt">7 月至今<b>恒指相对沪深 300</b> 的反弹幅度，这波交易已经兑现</div><div class="src">相对指数 87 → 107</div></div>
+    <div class="fact"><div class="big r">71</div><div class="txt">MSCI 中国<b>相对 EM</b> 的比值（2012=100），6 月刚创全序列新低 64</div><div class="src">MSCI / FactSet · 8-24</div></div>
+    <div class="fact"><div class="big">EW</div><div class="txt">大摩当前对 MSCI 中国的区域配置立场：<b>中性</b>，2024 年底从低配上调至今</div><div class="src">MS 评级历史</div></div>
+  </div>
+
+  <div class="pc">
+    <div class="pc-h"><span class="cn">换边的两侧账本</span><span class="en">Why switch now</span></div>
+    <div class="pc-b">
+      <div>
+        <div class="pc-t g">A 股这边：三件事在变好</div>
+        <ul>
+          <li><b>全球共振。</b>A 股的半导体、电子、电气设备权重高，与全球 AI 资本开支周期同步性强，全球市场一稳它就跟着回来</li>
+          <li><b>抽血在过去。</b>长鑫存储、宇树两笔大 IPO 的近端流动性挤压正被逐步消化</li>
+          <li><b>国家队回来了。</b>7 月全球 AI 回调期间，境内被动资金重新流入沪深 300</li>
+        </ul>
+      </div>
+      <div>
+        <div class="pc-t r">香港这边：四条利好已 price in</div>
+        <ul>
+          <li><b>盈利见底。</b>2Q 财报证明互联网/电商触底，源头是 4 月中监管开始管住价格战</li>
+          <li><b>AI 进展。</b>新模型发布 + 老生态加 AI 功能，缓解了对中国云厂资本开支的担忧</li>
+          <li><b>解禁消化。</b>5 月以来堆积的巨量 IPO 解禁压力，7、8 两月已稳步吸收</li>
+          <li><b>外部助攻。</b>全球回撤中针对香港的融资空头平仓；全球投资者本就极低配</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="cl">一句话操作</span>
+    <p>从香港获利了结、切回 A 股；但战术上<b>把内容互联网重新加回超配</b>，用来接住香港这轮回升的尾巴。切换信号盯两个：全球市场状况，以及北京的政策加码。</p>
+  </div>
+
+  <div class="pg-foot"><span>三份研报精译合辑 · 2026-08-27</span><span class="r">01 / 12</span></div>
+</div>
+
+<!-- ================= PAGE 2 · MS 2 ================= -->
+<div class="page tight">
+  <div class="pg-head"><span>研报一 · Morgan Stanley</span><span class="r">02 / 03 · 靶位与数字</span></div>
+
+  <div class="sec-eye"><span class="no">02</span><span>Index Targets · 指数靶位</span></div>
+  <h2 class="sec">牛熊之间隔着 60 个百分点</h2>
+  <p class="sub">目标日期 2027 年 6 月｜现价与估值数据截至 2026 年 8 月 24 日</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>指数</th><th>现价</th><th>基准目标</th><th>空间</th><th>牛市</th><th>熊市</th><th>基准 P/E</th></tr></thead>
+      <tbody>
+        <tr><td class="thm">恒生指数<span class="en2">Hang Seng</span></td><td>25,517</td><td>28,400</td><td class="up">+11%</td><td>32,400 <span class="up">+27%</span></td><td>18,000 <span class="dn">−29%</span></td><td>11.4x</td></tr>
+        <tr><td class="thm">国企指数<span class="en2">HSCEI</span></td><td>8,471</td><td>9,900</td><td class="up">+17%</td><td>11,000 <span class="up">+30%</span></td><td>6,200 <span class="dn">−27%</span></td><td>9.7x</td></tr>
+        <tr><td class="thm">MSCI 中国<span class="en2">MSCI China</span></td><td>75</td><td>91</td><td class="up">+20%</td><td>103 <span class="up">+37%</span></td><td>60 <span class="dn">−20%</span></td><td>12.2x</td></tr>
+        <tr><td class="thm">沪深 300<span class="en2">CSI 300</span></td><td>4,563</td><td>5,400</td><td class="up">+18%</td><td>6,090 <span class="up">+33%</span></td><td>3,550 <span class="dn">−22%</span></td><td>14.8x</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">基准情形下沪深 300 的上行空间（+18%）高于恒生（+11%）——这就是"换边"落到数字上的样子。牛熊两端相差约 56–60 个百分点，说明这轮判断的置信区间并不窄。</p>
+
+  <div class="theme">
+    <div class="theme-h"><span class="cn">盈利</span><span class="en">Earnings — 还要下修，但在减速</span><span class="stat">6.6 港元</span></div>
+    <p>MSCI 中国基准情形 <b>Dec-26 EPS 6.6 港元（+7%）</b>，而市场一致预期是 6.5（+14%）。大摩认为 2026 年盈利预测<b>还要往下修，但下修速度在放缓</b>——2Q26 财报的负超预期幅度已经比前几个季度明显收窄，能不能持续是关键。分行业看，汽车与零部件（+86%）、资本品（+52%）、多元金融（+36%）是 2026 年 EPS 增长的主要贡献方，银行（−1%）拖后腿。</p>
+  </div>
+
+  <div class="theme">
+    <div class="theme-h"><span class="cn">估值</span><span class="en">Valuation — 便宜，但不是白菜价</span><span class="stat">10.7x</span></div>
+    <p>MSCI 中国 12 个月前瞻市盈率 <b>10.7 倍</b>，只比 MSCI 新兴市场的 10.1 倍略高一点；沪深 300 <b>13.2 倍</b>，对 MSCI 中国溢价约 <b>23%</b>。A 股的溢价买的正是那 42% 的硬科技含量。</p>
+  </div>
+
+  <div class="theme">
+    <div class="theme-h"><span class="cn">宏观</span><span class="en">Macro — K 型经济还在加深</span><span class="stat">4.4%</span></div>
+    <p>三季度实际 GDP 跟踪值 <b>4.4% 同比</b>（2026 年增长目标 4.5–5.0%）。出口与科技/高端制造在加速，消费与地产原地踏步——K 型的两条腿越叉越开。一手底牌是<b>还有约 2 万亿人民币未动用的财政与准财政额度</b>：如果宏观继续恶化，财政发力是最关键的近端摇摆项，而任何有分量的政策加码对港股和 A 股都是正面催化。</p>
+  </div>
+
+  <div class="callout">
+    <span class="cl">大摩的七因子中国框架 · 现在读数</span>
+    <p>经济与盈利预期、估值、流动性三项<b>中性</b>；政策周期、人民币汇率、监管与政策优先级三项<b>正面</b>；中美与地缘政治停在"<b>阶段性休战</b>"。对比 2018 年那次七项全灭、2025 年底那次几乎全绿，现在是个中间态——这也解释了为什么结论是"换边"而不是"撤退"。</p>
+  </div>
+
+  <div class="pg-foot"><span>研报一 · 摩根士丹利中国股票策略</span><span class="r">02 / 12</span></div>
+</div>
+
+<!-- ================= PAGE 3 · MS 3 ================= -->
+<div class="page tight tighter tightest">
+  <div class="pg-head"><span>研报一 · Morgan Stanley</span><span class="r">03 / 03 · 交易清单</span></div>
+
+  <div class="sec-eye"><span class="no">03</span><span>Trades &amp; Supply Risk · 怎么做</span></div>
+  <h2 class="sec">五条交易、一张超配表，<br>和 9 月那笔最大解禁</h2>
+  <p class="sub">未来 6–12 个月的推荐动作，以及供给端最需要盯的三件事</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>立场</th><th>主动风险</th><th>行业（GICS 行业组）</th></tr></thead>
+      <tbody>
+        <tr><td class="thm"><span class="pill ow">超配</span></td><td>+50bp</td><td class="wrap">金融、能源、材料、工业、<b>互联网</b>、半导体</td></tr>
+        <tr><td class="thm"><span class="pill ew">中性</span></td><td>0</td><td class="wrap">电信服务、公用事业、医疗保健、可选消费、IT</td></tr>
+        <tr><td class="thm"><span class="pill uw">低配</span></td><td>−50bp</td><td class="wrap">必需消费、科技硬件</td></tr>
+        <tr><td class="thm"><span class="pill uw">低配</span></td><td>−100bp</td><td class="wrap">房地产、汽车及零部件</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">互联网是本次唯一"加回来"的超配项，目的就是捕捉香港这轮回升的尾段。</p>
+
+  <h3>五条推荐交易</h3>
+  <div class="takes">
+    <div class="take"><b>从香港获利了结、切回 A 股</b><span>盯两个切换信号：全球市场状况、北京政策是否加码</span></div>
+    <div class="take"><b>中国/香港焦点名单 + A 股主题焦点名单</b><span>大摩自有组合，等权重、有增减即再平衡</span></div>
+    <div class="take"><b>中国最佳商业模式（26 只 / 16 个行业组）</b><span>腾讯、阿里、宁德时代、北方华创、澜起科技、工业富联、立讯精密、紫金矿业、长江电力等，按"AI 使能者 / AI 采用者 / 免受 AI 冲击"三分类打标签</span></div>
+    <div class="take"><b>中国全球出口冠军</b><span>基准情形下中国全球出口份额升至 16.5%，电子与新能源供应链直接受益</span></div>
+    <div class="take"><b>基于港股通资格审查的事件驱动配对交易</b><span>纯战术仓，围绕纳入/剔除时点做</span></div>
+  </div>
+
+  <h3>供给端三件事</h3>
+  <div class="risks">
+    <div class="risk"><div class="rh">9 月是解禁最大月</div><div class="rt2">2H26 港股单月解禁市值峰值在 9 月，约 <b>HK$2,713 亿</b>（7 月 2,272 亿次之）。但历史上解禁规模与恒指月度涨跌<b>没有稳定关系</b>，指数层面冲击有限。</div></div>
+    <div class="risk"><div class="rh">板块层面并不均匀</div><div class="rt2">2H26 解禁按板块：<b>信息科技 HK$3,476 亿</b>（占板块市值 14.3%）、<b>材料 HK$2,405 亿</b>（占板块市值 <b>30.0%</b>）。这两块的实际供给压力远大于指数层面。</div></div>
+    <div class="risk"><div class="rh">IPO 还在抽血</div><div class="rt2">香港 IPO 募资 2025 年 <b>367 亿美元</b>、2026 年至今 <b>423 亿美元</b>，全球仅次于美国。A 股这边长鑫、宇树的挤压效应仍在消化。</div></div>
+  </div>
+
+  <div class="callout">
+    <span class="cl">什么时候把香港加回来</span>
+    <p>大摩自己给的时间窗是<b>九月下旬</b>：腾讯全球数字生态大会与微信 AI 发布、阿里 Qwen 4.0 与云栖大会、百度潜在双重主要上市并纳入港股通、MiniMax 与 Z.AI 新模型——再叠加中美元首会晤前的关系缓和信号。届时香港还多一层"防御属性"：万一全球波动因财政可持续性、债券收益率或 AI 投资周期的怀疑重新抬头，港股的低估值反而抗跌。</p>
+  </div>
+
+  <div class="pg-foot"><span>研报一 · 摩根士丹利中国股票策略</span><span class="r">03 / 12</span></div>
+</div>
+
+<!-- ================= PAGE 4 · 分隔页 ================= -->
+<div class="page div">
+  <div class="pg-head"><span>研报一 · 完</span><span class="r">Report 01 of 03 · Complete</span></div>
+  <div class="div-mid">
+    <div class="end-mark">第一份 · 讲完了</div>
+    <div class="div-cn">香港先坐<br>回后排</div>
+    <div class="div-en">Morgan Stanley · China Equity Strategy<br>Hong Kong Takes a Backseat, for Now</div>
+    <div class="div-rule"></div>
+    <ul class="div-sum">
+      <li><span class="mk"></span><span>7 月那笔"超配香港"已兑现 <b>+23%</b>（恒指相对沪深 300），现在<b>获利了结、切回 A 股</b></span></li>
+      <li><span class="mk"></span><span>换边的底层理由是含 AI 量：<b>沪深 300 硬科技权重 42.0%</b>，MSCI 中国 13.6%、恒指仅 8.4%</span></li>
+      <li><span class="mk"></span><span>基准目标（2027 年 6 月）：沪深 300 <b>+18%</b> vs 恒生 <b>+11%</b>；香港回归窗口看<b>九月下旬</b></span></li>
+    </ul>
+  </div>
+  <div class="div-next">
+    <span class="lb">接下来 · Next</span>
+    <span class="nx">研报二 · 摩根大通：无限的 token，有限的原子</span>
+    <span class="nxen">J.P. Morgan — Infinite Tokens, Finite Atoms</span>
+  </div>
+  <div class="pg-foot"><span>分隔页 · 一份研报结束</span><span class="r">04 / 12</span></div>
+</div>
+
+<!-- ================= PAGE 5 · JPM 1 ================= -->
+<div class="page tight tighter">
+  <div class="pg-head"><span>研报二 · J.P. Morgan</span><span class="r">01 / 03 · 需求端</span></div>
+
+  <div class="sec-eye"><span class="no">01</span><span>Gen AI Demand · 需求还在加速</span></div>
+  <h2 class="sec">token 是无限的，<br>但原子是有限的</h2>
+  <p class="sub">Infinite Tokens, Finite Atoms｜2026 年 9 月｜Gokul Hariharan / Sangsik Lee（摩根大通亚太科技）</p>
+
+  <div class="tldr">
+    <h2>一分钟速览</h2>
+    <p class="kick">"所有指标指向的都是加速，而不是减速——哪怕基数已经这么大了。"</p>
+    <ul>
+      <li><span class="mk"></span><span><b>token 需求三级跳：</b>聊天机器人时代 <b>5 倍</b>、推理模型时代 <b>4 倍</b>、智能体时代 <b>10 倍</b>。OpenRouter 的周处理量从 2025 年初约 2 万亿涨到 2026 年 6 月约 <b>58 万亿</b>。</span></li>
+      <li><span class="mk"></span><span><b>谷歌全端口月处理量两年 300 倍以上：</b>从 2024 年 4 月的 9.7 万亿 token 到 2026 年 4 月的 <b>3,200 万亿</b>。</span></li>
+      <li><span class="mk"></span><span><b>所以这份报告的真问题不是需求，而是三样有限的东西：</b>芯片（chips）、瓦特（watts）、美元（dollars）。</span></li>
+    </ul>
+  </div>
+
+  <div class="facts">
+    <div class="fact"><div class="big">300<i>x+</i></div><div class="txt">谷歌全端口月 token 两年增幅<br><b>9.7 万亿 → 3,200 万亿</b></div><div class="src">Google / JPM · Apr-24→Apr-26</div></div>
+    <div class="fact"><div class="big">10<i>x</i></div><div class="txt">智能体时代的 token 增速档位<br>前两档分别是 <b>5x、4x</b></div><div class="src">OpenRouter / JPM</div></div>
+    <div class="fact"><div class="big">60<i>%</i></div><div class="txt">2026 年<b>推理</b>占 token 工作负载比例<br>2024 年这个数还是 40%</div><div class="src">AMD</div></div>
+    <div class="fact"><div class="big g">81<i>%</i></div><div class="txt">美国<b>科技业</b>付费订阅 AI 工具的企业占比；金融 73%、制造 60%、全行业 56%。企业 AI 支出占费用比例 <b>4.5% → 5.8%</b></div><div class="src">Ramp AI · Jul-26；JPM 企业调研</div></div>
+  </div>
+
+  <div class="theme">
+    <div class="theme-h"><span class="cn">开源抢量，闭源赚钱</span><span class="en">Open-weight vs closed-weight</span><span class="stat">$0.4 vs $5</span></div>
+    <p>开源模型的 token 份额在上升，把混合成交均价往下拽，反过来又把整体采用率推上去；闭源前沿模型则在一个算力受限的世界里继续高速增长，收入依然由它们主导。<b>闭源均价从 2025 年 11 月的低点约 $1.8 一路回到 2026 年 7 月的约 $5</b>（美元/百万 token，OpenRouter 成交量加权）——注意方向：<b>是涨价，不是降价</b>。开源那条线则常年贴地在 $0.3–0.5。</p>
+  </div>
+
+  <div class="theme">
+    <div class="theme-h"><span class="cn">负载从训练滑向推理</span><span class="en">Training → Inference</span><span class="stat">60:40 → 40:60</span></div>
+    <p>训练与推理的比例：<b>2024 年 60:40 → 2025 年 50:50 → 2026 年 40:60</b>。推手是智能体。但摩根大通留了个口子：如果 <b>RSI（递归自我改进）</b>真的起来，这个比例可能再翻回训练那一侧。</p>
+  </div>
+
+  <div class="pg-foot"><span>研报二 · 摩根大通 AI 基础设施</span><span class="r">05 / 12</span></div>
+</div>
+
+<!-- ================= PAGE 6 · JPM 2 ================= -->
+<div class="page tight tighter tightest">
+  <div class="pg-head"><span>研报二 · J.P. Morgan</span><span class="r">02 / 03 · 三道闸门</span></div>
+
+  <div class="sec-eye"><span class="no">02</span><span>Chips · Watts · Dollars</span></div>
+  <h2 class="sec">芯片、瓦特、美元：<br>三道闸门，依次卡住</h2>
+  <p class="sub">当下卡在第一道，2028–29 年瓶颈会从芯片换挡到电力</p>
+
+  <div class="theme">
+    <div class="theme-h"><span class="cn">闸门一 · 芯片</span><span class="en">Near-term constraint</span><span class="stat">2028 年前难平衡</span></div>
+    <p><b>先进制程晶圆（N3/N2）是当下第一瓶颈。</b>台积电 N3 产出 76.3 万片（2024）→ 123.2 万（2025）→ 201.9 万（2026E）→ 294.0 万（2027E）→ 319.2 万片（2028E）；N2 从 31.6 万（2026E）→ 113.4 万 → 208.6 万片（2028E）。资本开支在加速，<b>但 2028 年之前供需难以平衡</b>。</p>
+    <p>下一个卡口是 <b>CoWoS / SoIC 先进封装</b>，再下一个是<b>存储</b>：HBM 仍短缺，但"HBM 降规格 + 把 KV cache 卸载到 NAND"能缓解一部分。HBM 位元增速 73%（2025）→ 76% → 63% → 44%（2028E）。</p>
+  </div>
+
+  <div class="theme">
+    <div class="theme-h"><span class="cn">闸门二 · 瓦特</span><span class="en">Not imminent — but watch 2028-29</span><span class="stat">0.78 TW</span></div>
+    <p><b>美国基载发电装机六年纹丝不动：0.78TW（2024 → 2029E）</b>，总装机 1.19 → 1.35TW 的增量全来自可再生。而 AI 数据中心用电从 2024 年约 100TWh 冲到 <b>2028E 约 1,040TWh</b>。</p>
+    <p>绕道方案已经在跑：<b>表后自发电</b>（承诺 2030 年 100% 自发电的数据中心比例，从 2024 年 4 月的 1% 升到 2025 年 11 月的 <b>33%</b>）、比特币矿场改造、迁往海外——甚至上天（SpaceX 轨道算力 2029E 8.4GW → 2031E <b>75.1GW</b>）。<b>换挡时点：2028–29 年</b>。</p>
+  </div>
+
+  <div class="theme">
+    <div class="theme-h"><span class="cn">闸门三 · 美元</span><span class="en">Worrying now — but headroom left</span><span class="stat">$1.7 万亿</span></div>
+    <p>这是当下市场最担心的一条，但摩根大通认为<b>还有余量</b>。超大厂资本开支 2026 年翻倍以上，2030 年上限口径达 <b>3 万亿美元</b>；市场一直在系统性低估——2027 年一致预期已从一季度末的 9,500 亿抬到 <b>1.4 万亿</b>。</p>
+    <p>钱从哪来：经营性现金流<b>不够了</b>（多数超大厂 2027 年起自由现金流转负）；债券发行从 2024 年约 180 亿跳到 2026 年约 2,550 亿美元，净负债/权益 4% → 13%，<b>触及配置上限前仍有约 1.7 万亿美元投资级发行空间</b>；股权融资也开闸，2026 年至今头部超大厂已发行约 <b>1,800 亿美元</b>（2025 年仅 15 亿）。</p>
+  </div>
+
+  <div class="facts">
+    <div class="fact"><div class="big">0.78<i>TW</i></div><div class="txt">美国<b>基载</b>发电装机<br>2024 → 2029E 六年零增长</div><div class="src">EIA / JPM</div></div>
+    <div class="fact"><div class="big r">1,040<i>TWh</i></div><div class="txt">AI 数据中心 <b>2028E</b> 全年用电<br>2024 年还只有约 100TWh</div><div class="src">JPM 估算 · UTR 65%</div></div>
+    <div class="fact"><div class="big">$3<i>万亿</i></div><div class="txt">2030 年<b>超大厂资本开支</b>上限口径<br>2027–30 年 CAGR +28%</div><div class="src">JPM Cloud Capex Dataset</div></div>
+    <div class="fact"><div class="big g">$1.7<i>万亿</i></div><div class="txt">触及配置上限前剩余的<br><b>投资级债券发行空间</b></div><div class="src">JULI 指数 3% 口径</div></div>
+  </div>
+
+  <div class="pg-foot"><span>研报二 · 摩根大通 AI 基础设施</span><span class="r">06 / 12</span></div>
+</div>
+
+<!-- ================= PAGE 7 · JPM 3 ================= -->
+<div class="page tight tighter tightest">
+  <div class="pg-head"><span>研报二 · J.P. Morgan</span><span class="r">03 / 03 · 算一笔账</span></div>
+
+  <div class="sec-eye"><span class="no">03</span><span>Unit Economics · 1GW 的账本</span></div>
+  <h2 class="sec">1GW 花 420 亿美元，<br>一年能挣回多少？</h2>
+  <p class="sub">这是"AI 是不是泡沫"这场辩论的全部数字基础</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>建 1GW，钱去了哪 / 谁赚走</th><th>收入</th><th>毛利</th><th>占比与说明</th></tr></thead>
+      <tbody>
+        <tr><td class="thm">IT 硬件</td><td>—</td><td>—</td><td class="wrap"><b>280 亿美元</b>，占总投资约 2/3</td></tr>
+        <tr><td class="thm">基建与电力</td><td>—</td><td>—</td><td class="wrap"><b>150 亿美元</b>，含土地、外壳、供电、冷却</td></tr>
+        <tr><td class="thm">GPU 厂商</td><td>~275 亿</td><td class="up">~190 亿</td><td class="wrap">假设按整机柜口径确认收入，毛利率近 70%</td></tr>
+        <tr><td class="thm">服务器 / ODM EMS</td><td>~275 亿</td><td>~7 亿</td><td class="wrap">收入一样大，<b>毛利只有 GPU 厂商的 1/27</b></td></tr>
+        <tr><td class="thm">存储</td><td>~36.5 亿</td><td class="up">~29 亿</td><td class="wrap">零部件里最赚钱的一环</td></tr>
+        <tr><td class="thm">晶圆代工</td><td>~11 亿</td><td>~7.8 亿</td><td class="wrap">电源 / 液冷 / 封测 / 基板各约 2–3.5 亿</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">合计 <b>约 420 亿美元 / GW</b>。同一笔投资里，GPU 厂商一家拿走了绝大部分利润池。</p>
+
+  <div class="facts f3">
+    <div class="fact"><div class="big g">$310<i>亿</i></div><div class="txt"><b>卖 token</b> 的一年能从 1GW 收多少<br>毛利 140 亿、毛利率 44%（一年前只有 100 亿）</div><div class="src">JPM 估算</div></div>
+    <div class="fact"><div class="big g">$170<i>亿</i></div><div class="txt"><b>公有云卖 GPU 算力</b>一年能收多少<br>毛利 90 亿、毛利率 54%</div><div class="src">JPM 估算</div></div>
+    <div class="fact"><div class="big">5.6</div><div class="txt">B200 月租价（相对口径），2025 年 3 月起步、年中 5.3、年底回落 4.4、<b>2026 年 7 月创新高</b></div><div class="src">Bloomberg · 现货已高于存量合同</div></div>
+  </div>
+
+  <div class="callout">
+    <span class="cl">这笔账怎么读</span>
+    <p>420 亿的资本开支，卖 token 的一年能收 310 亿、卖算力的一年能收 170 亿——<b>回本周期大致在 1.5 到 2.5 年之间</b>，前提是 token 价格与 GPU 租金不跌。而未来五年 AI 基建的融资需求测算：2026 年 6,300 亿、2027 年 9,600 亿、2028 年 1.14 万亿、2029 年 1.31 万亿、2030 年 1.40 万亿美元，对应 AI 数据中心装机从 40GW 升到 160GW。</p>
+  </div>
+
+  <h3>资本市场上还没吵完的五个问题</h3>
+  <div class="takes">
+    <div class="take"><b>开源 vs 闭源，谁在赢</b><span>以及它怎么反过来影响 AI 资本开支</span></div>
+    <div class="take"><b>RSI（递归自我改进）来了会怎样</b><span>是压制还是加速这轮基建投资周期</span></div>
+    <div class="take"><b>卖算力的和买算力的，哪边更健康</b><span>两个阵营的资产负债表分别撑得住多久</span></div>
+    <div class="take"><b>会不会出现数据中心/电力挤兑</b><span>导致 AI 加速卡堆成库存</span></div>
+    <div class="take"><b>除了写代码，什么时候能看到更广泛的落地</b><span>企业侧渗透率目前整体 56%，但深度还很浅</span></div>
+  </div>
+
+  <div class="pg-foot"><span>研报二 · 摩根大通 AI 基础设施</span><span class="r">07 / 12</span></div>
+</div>
+
+<!-- ================= PAGE 8 · 分隔页 ================= -->
+<div class="page div">
+  <div class="pg-head"><span>研报二 · 完</span><span class="r">Report 02 of 03 · Complete</span></div>
+  <div class="div-mid">
+    <div class="end-mark">第二份 · 讲完了</div>
+    <div class="div-cn">无限的 token<br>有限的原子</div>
+    <div class="div-en">J.P. Morgan · Asia Pacific Technology<br>Infinite Tokens, Finite Atoms</div>
+    <div class="div-rule"></div>
+    <ul class="div-sum">
+      <li><span class="mk"></span><span>需求端毫无减速迹象：智能体时代 token 增速 <b>10 倍</b>档，谷歌两年 <b>300 倍以上</b></span></li>
+      <li><span class="mk"></span><span>三道闸门依次卡住：现在是<b>先进制程晶圆</b>，<b>2028–29 年换挡到电力</b>，美元这道还剩 1.7 万亿投资级空间</span></li>
+      <li><span class="mk"></span><span>单位经济：<b>1GW 造价 420 亿美元</b>，卖 token 年收 310 亿、卖算力年收 170 亿</span></li>
+    </ul>
+  </div>
+  <div class="div-next">
+    <span class="lb">接下来 · Next</span>
+    <span class="nx">研报三 · 花旗：英伟达把 CY27 的底线抬到了 +70%</span>
+    <span class="nxen">Citi Research — NVIDIA Corp (NVDA.O), Maintain Buy</span>
+  </div>
+  <div class="pg-foot"><span>分隔页 · 一份研报结束</span><span class="r">08 / 12</span></div>
+</div>
+
+<!-- ================= PAGE 9 · Citi 1 ================= -->
+<div class="page tight tighter tightest">
+  <div class="pg-head"><span>研报三 · Citi Research</span><span class="r">01 / 03 · 核心结论</span></div>
+
+  <div class="sec-eye"><span class="no">01</span><span>NVIDIA Corp (NVDA.O) · 维持买入</span></div>
+  <h2 class="sec">英伟达把 CY27 的<br>底线抬到了 +70%</h2>
+  <p class="sub">CY27 Revenue Outlook Above Expectations; Maintain Buy｜2026 年 8 月 27 日｜Atif Malik / Papa Sylla / Elizabeth Sun（花旗研究）</p>
+
+  <div class="tldr">
+    <h2>一分钟速览</h2>
+    <p class="kick">"更高的收入，被更薄的毛利率抵掉了一部分。"</p>
+    <ul>
+      <li><span class="mk"></span><span><b>7 月季超预期：</b>收入 <b>962 亿美元</b>、非 GAAP EPS <b>2.22 美元</b>，高于花旗的 930 亿 / 2.16 和市场的 923 亿 / 2.11。</span></li>
+      <li><span class="mk"></span><span><b>FY28（对应 CY27）收入指引 +70% 同比。</b>管理层把这次加速归因于<b>智能体 AI 的需求外溢</b>——企业、主权、AI 云——而不是份额变化；并强调需求仍然高于供给。客户自己的预测口径是"翻倍"。</span></li>
+      <li><span class="mk"></span><span><b>但毛利率被重设：</b>FY28 从市场预期的 75% 下调到 <b>72–73%</b>，1 月季是低点，原因是存储涨价，靠系统级提价对冲一部分。</span></li>
+    </ul>
+  </div>
+
+  <div class="facts">
+    <div class="fact"><div class="big">$315</div><div class="txt">目标价（原 <b>300</b>），基于 CY27 EPS 的 <b>21 倍</b>——倍数反而从 24x 降下来了</div><div class="src">Citi · 现价 $209.66</div></div>
+    <div class="fact"><div class="big g">+70<i>%</i></div><div class="txt">FY28 收入增长指引，管理层口径<br>花旗此前的假设是 <b>+40%</b></div><div class="src">公司业绩会</div></div>
+    <div class="fact"><div class="big r">72–73<i>%</i></div><div class="txt">FY28 毛利率新口径<br>原市场预期 <b>75%</b>，1 月季为低点</div><div class="src">存储成本是主因</div></div>
+    <div class="fact"><div class="big g">+50.3<i>%</i></div><div class="txt">花旗给出的<b>预期总回报</b><br>市值约 5.05 万亿美元</div><div class="src">Citi · 8-26 收盘</div></div>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>花旗 EPS（非 GAAP，美元）</th><th>调整后</th><th>调整前</th><th>变动</th><th>市场一致</th></tr></thead>
+      <tbody>
+        <tr><td class="thm">FY27（≈ CY26）</td><td>9.26</td><td>9.09</td><td class="up">+2%</td><td>9.04</td></tr>
+        <tr><td class="thm">FY28（≈ CY27）</td><td>15.17</td><td>12.13</td><td class="up">+25%</td><td>13.11</td></tr>
+        <tr><td class="thm">FY29（≈ CY28）</td><td>19.98</td><td>14.43</td><td class="up">+38%</td><td>15.87</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="cap">净效果：更高的销售被更薄的毛利率抵掉一部分，仍把 FY28/29 的 EPS 抬了 25% 和 38%；而估值倍数主动下调，反映的是整体市场倍数下移。</p>
+
+  <div class="theme">
+    <div class="theme-h"><span class="cn">一句话读懂这次指引</span><span class="en">Supply-constrained, not demand-constrained</span><span class="stat">需求 &gt; 供给</span></div>
+    <p>管理层反复强调的是<b>"受供给约束，而不是受需求约束"</b>。+70% 之所以让市场安心，不在于有多高，而在于它是在"客户自己预测需求翻倍、公司明说供不上"的背景下给出的<b>下限</b>。</p>
+  </div>
+
+  <div class="callout">
+    <span class="cl">定价怎么定的</span>
+    <p>英伟达在包括 Vera Rubin 在内的多条系统线上<b>提了价</b>；管理层强调定价是<b>按整系统定、而不是按零件逐个定</b>，并且<b>刻意自己吃下了一部分存储涨价</b>——这是理解 72–73% 毛利率口径的钥匙。</p>
+  </div>
+
+  <div class="pg-foot"><span>研报三 · 花旗 NVIDIA</span><span class="r">09 / 12</span></div>
+</div>
+
+<!-- ================= PAGE 10 · Citi 2 ================= -->
+<div class="page tight tighter tightest">
+  <div class="pg-head"><span>研报三 · Citi Research</span><span class="r">02 / 03 · 拆开这一季</span></div>
+
+  <div class="sec-eye"><span class="no">02</span><span>Jul-Q Review · 分部拆解</span></div>
+  <h2 class="sec">ACIE 正在追上超大厂</h2>
+  <p class="sub">7 月季（FY27 Q2）分部数字与 10 月季指引</p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>分部</th><th>收入</th><th>环比</th><th>同比</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td class="thm">数据中心 合计</td><td>~890 亿</td><td class="up">+18%</td><td>—</td><td class="wrap">花旗与市场原本都只预期 +15%</td></tr>
+        <tr><td class="thm">├ 超大厂 Hyperscale</td><td>487 亿</td><td class="up">+13%</td><td class="up">+101.5%</td><td class="wrap">占数据中心 <b>55%</b>，一年前 61%</td></tr>
+        <tr><td class="thm">├ AI 云/工业/企业 ACIE</td><td>403 亿</td><td class="up">+25.2%</td><td class="up">+138.1%</td><td class="wrap">占 <b>45%</b>，一年前 39%</td></tr>
+        <tr><td class="thm">├ 网络</td><td>—</td><td class="up">+16%</td><td class="up">+138%</td><td class="wrap">上一季同比还是 +199%</td></tr>
+        <tr><td class="thm">边缘计算</td><td>72 亿</td><td class="up">+13%</td><td class="up">+27%</td><td class="wrap">工作站强，消费级 GPU 被存储涨价拖累</td></tr>
+        <tr><td class="thm">全公司</td><td>962 亿</td><td>—</td><td>—</td><td class="wrap">10 月季指引 <b>1,080 亿</b>（+12% 环比 / +90% 同比），毛利率指引 74%</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="theme">
+    <div class="theme-h"><span class="cn">Rubin 已经在跑了</span><span class="en">Vera Rubin ramp</span><span class="stat">Q3 占 DC 20%</span></div>
+    <p>Vera Rubin 已从试产转入<b>全面量产</b>，合作伙伴站点的机柜正在运行，初始铺开面比当年 Blackwell 同阶段更广，三季度预计占数据中心收入的 <b>20%</b>。Blackwell 继续出货，但管理层形容尾巴"<b>越来越瘦</b>"；GB300 在 Blackwell 内部占比可能已超过 70%，Blackwell 整体约占本季约 720 亿美元算力收入的 80%+。</p>
+  </div>
+
+  <div class="theme">
+    <div class="theme-h"><span class="cn">口径变了，读份额要打折</span><span class="en">One customer reclassified</span><span class="stat">ACIE → Hyperscale</span></div>
+    <p>本季有一家客户从 ACIE 划到超大厂（花旗猜是 SpaceX），份额变化要打点折扣。但方向清楚：<b>ACIE 需求更分散，对高度集中的超大厂资本开支周期依赖更低</b>——这正是"增长可持续性"叙事的关键，而且超大厂自己也在从新云厂商租算力。</p>
+  </div>
+
+  <div class="callout">
+    <span class="cl">两份研报对上了</span>
+    <p>英伟达管理层给的口径是：Vera Rubin 世代下，<b>1GW 规模的 AI 工厂大约对应 400 亿美元收入</b>（含算力、网络、CPU、LPX 系统等）。摩根大通独立测算的 1GW 造价是 <b>420 亿美元</b>，其中 IT 硬件 280 亿。两家从完全不同的方向，算到了同一个数量级。</p>
+  </div>
+
+  <div class="jargon">
+    <dl>
+      <dt>ACIE</dt><dd>AI Clouds / Industrial / Enterprise，英伟达数据中心里"非超大厂"的那一半客户</dd>
+      <dt>CoWoS / SoIC</dt><dd>台积电先进封装，把 GPU 裸片与 HBM 堆在一起，是继晶圆之后的下一个瓶颈</dd>
+      <dt>LPS</dt><dd>Land, Power &amp; Shell，土地、电力、厂房外壳——建 AI 工厂最难搞的三样</dd>
+      <dt>ROFR</dt><dd>优先受让权；英伟达用它锁定未来园区产能，而不必立刻出钱</dd>
+    </dl>
+  </div>
+
+  <div class="pg-foot"><span>研报三 · 花旗 NVIDIA</span><span class="r">10 / 12</span></div>
+</div>
+
+<!-- ================= PAGE 11 · Citi 3 ================= -->
+<div class="page tight tighter">
+  <div class="pg-head"><span>研报三 · Citi Research</span><span class="r">03 / 03 · 承诺与风险</span></div>
+
+  <div class="sec-eye"><span class="no">03</span><span>Commitments · TAM · Risks</span></div>
+  <h2 class="sec">3,500 亿美元的承诺，<br>和它背后的三层结构</h2>
+  <p class="sub">供应承诺、云服务协议、尚未启用的数据中心租约——以及它们各自的风险</p>
+
+  <div class="facts f3">
+    <div class="fact"><div class="big">$3,500<i>亿</i></div><div class="txt">总供应与产能承诺规模，覆盖存储、HBM、晶圆、CoWoS、基板；<b>存储占一半以上</b></div><div class="src">财报口径 commitments 由 1,190 亿跳至 2,790 亿</div></div>
+    <div class="fact"><div class="big">$5,000<i>亿</i></div><div class="txt">融资联合体规模（Apollo、贝莱德、黑石、博枫、高盛、KKR）<b>目前一分钱未提取</b></div><div class="src">第三方算力融资框架</div></div>
+    <div class="fact"><div class="big g">$260<i>亿</i></div><div class="txt">本季回购加分红，<b>创纪录</b>；年内已返还自由现金流 60%（原目标 50%），剩余授权 990 亿</div><div class="src">Citi / 公司报告</div></div>
+  </div>
+
+  <div class="theme">
+    <div class="theme-h"><span class="cn">三类承诺，别混着看</span><span class="en">Commitments structure</span></div>
+    <p><b>① 供应与产能承诺：</b>存储、HBM、晶圆、CoWoS、基板等，锁定未来三年可见度。<b>② 云服务协议：</b>英伟达为基础设施商的云服务协议做基价兜底，帮它们拿到融资、把产能建起来；超过基价的收益一般与运营商 <b>50/50 分成</b>，目前这类协议数量很少。<b>③ 尚未启用的数据中心租约与担保：</b>土地、电力、外壳（LPS）以及 Portsmouth 相关义务，可转派、可出售、可自用。</p>
+    <p>其中 <b>Portsmouth 项目</b>最大：约 8GW+ 的园区，英伟达控制第一批产能并对剩余部分有优先受让权（ROFR），租户是头部模型厂商，算力部署预计在 <b>2028 年底到 2029 年初</b>。管理层认为土地—电力—外壳在美国"非常紧"，但到 2027 年底至 2028 年会略微改善；<b>今天真正的约束仍是供给，而不是 LPS</b>。</p>
+  </div>
+
+  <div class="theme">
+    <div class="theme-h"><span class="cn">花旗上修了整个 TAM</span><span class="en">TAM revision</span><span class="stat">$1 万亿 by C2030</span></div>
+    <p>GPU 出货：FY27E 维持 1,030 万颗（Blackwell 760 万 + Rubin 200 万），<b>FY28E 上调到 1,510 万颗（+42%）</b>，Rubin 家族同比 +360%。AI GPU 销售额从原来的 4,060 亿上调到 <b>5,000 亿美元</b>（+23%），约占 FY28E 数据中心收入的 75%——上调主要来自 Rubin 占比提高与存储涨价的转嫁（估计转嫁比例 15–20%）。到 C2028E，商用 GPU 与 ASIC 分别达 <b>7,510 亿</b>与 <b>2,830 亿</b>美元；AI 加速器合计 TAM 到 C2030E 达 <b>1 万亿</b>（原 9,800 亿），数据中心半导体 TAM 达 <b>1.7 万亿</b>。</p>
+  </div>
+
+  <div class="risks">
+    <div class="risk"><div class="rh">毛利率</div><div class="rt2">1 月季是低点。管理层<b>明确说是刻意吸收了一部分存储涨价</b>，没有全额转嫁——能否只转嫁 15–20% 就守住 72–73%，是全年最大变数。</div></div>
+    <div class="risk"><div class="rh">表外结构</div><div class="rt2">收入分成、土地电力外壳担保、优先受让权，需求一旦转向就会从"加速器"变成"包袱"。管理层认为风险低，理由是未满足需求足够深、产能可转派。</div></div>
+    <div class="risk"><div class="rh">现金流转化</div><div class="rt2">本季自由现金流转化变差，原因是给两家投资级大客户放了更长账期——<b>是规模问题，不是信用问题</b>（管理层口径）。递延收入单季增加约 150 亿（上季 25 亿），来自软件与网络服务。</div></div>
+  </div>
+
+  <div class="pg-foot"><span>研报三 · 花旗 NVIDIA</span><span class="r">11 / 12</span></div>
+</div>
+
+<!-- ================= PAGE 12 · 分隔页 · 全篇终 ================= -->
+<div class="page div">
+  <div class="pg-head"><span>研报三 · 完</span><span class="r">Report 03 of 03 · Complete</span></div>
+  <div class="div-mid">
+    <div class="end-mark">第三份 · 讲完了 · 全篇结束</div>
+    <div class="div-cn">更高的收入<br>更薄的毛利</div>
+    <div class="div-en">Citi Research · NVIDIA Corp (NVDA.O)<br>CY27 Revenue Outlook Above Expectations</div>
+    <div class="div-rule"></div>
+    <ul class="div-sum">
+      <li><span class="mk"></span><span>FY28 收入指引 <b>+70%</b>，毛利率却从 75% 重设到 <b>72–73%</b>，1 月季是低点</span></li>
+      <li><span class="mk"></span><span>EPS 上调 <b>2% / 25% / 38%</b>，目标价 300 → <b>315 美元</b>，但估值倍数从 24x 主动降到 21x</span></li>
+      <li><span class="mk"></span><span><b>三份连起来是一条线：</b>AI 资本开支往哪走钱就往哪走——大摩因此把仓位从港股切回硬科技含量 42% 的 A 股；摩根大通把这条链一路追到瓦特与美元；花旗则给出了卖铲子那一家的最新报价</span></li>
+    </ul>
+  </div>
+  <div class="div-next">
+    <span class="lb">三份合辑 · 全篇终</span>
+    <span class="nx">共 12 页 · 2026 年 8 月 27 日</span>
+    <span class="nxen">第三方研报中文精译 · 观点归属原机构 · 非投资建议</span>
+  </div>
+  <div class="pg-foot"><span>END · 三份研报精译合辑</span><span class="r">12 / 12</span></div>
+</div>

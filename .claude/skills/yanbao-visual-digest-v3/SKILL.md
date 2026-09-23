@@ -36,8 +36,9 @@ description: >-
 > **云端会话（手机发起）用仓库里 skill 目录下的母本副本**（2026-09-23 加）：
 > `.claude/skills/yanbao-visual-digest-v3/母本/` 下同名的两份 HTML。
 > 护栏 `references/`、脚本 `scripts/` 也在这个 skill 目录里，不在 `~/.claude/skills/`。
-> 需要的文件和现在的状态见同目录 `文件清单.md`。**缺哪份就在第一条回复里点名，
-> 不许拿 7.26 旧版或临时手写的东西顶替。**
+> 云端容器每次都是新的：**用 `scripts/` 之前先跑一次 `bash 云端/setup.sh`**（装依赖、中文字体、
+> 把 PingFang / 宋体映射到 Noto、挂 Chromium）。文件状态见同目录 `文件清单.md`。
+> **缺哪份就在第一条回复里点名，不许拿 7.26 旧版或临时手写的东西顶替。**
 
 只沿用它的**工程件**：固定页容器 `.page`(210mm×296.6mm)、`.pg-head`/`.pg-foot`、分隔页 `.page.div`、
 收紧类 `.tight/.tighter/.tightest`、打印 CSS。**视觉层按第二节重做，不要原样复刻卡片堆叠；

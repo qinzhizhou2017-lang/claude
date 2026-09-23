@@ -7,7 +7,7 @@
 | 目录 | 内容 |
 |---|---|
 | `.claude/skills/stocki-financial-reader/` | 港股 / 美股 / A股行情、财务、估值、一致预期数据 Skill（v0.4.0） |
-| `.claude/skills/yanbao-visual-digest/` | 研报可视化 Skill：机构研报 → 3–4 页 A4 可视化精华 PDF |
+| `.claude/skills/yanbao-visual-digest-v3/` | 研报可视化 Skill · 标准指令 v3（唯一现行版，7.26 旧版已删除）：机构研报 → 按正文长度 2–4 页的中文提炼型可视化精华 PDF |
 | `research_visual_digest/` | 研报可视化成品，按 `日期_主题/` 归档 |
 | `reports/` | 一次性分析报告（行情日报、个股、基金、Skill 测试），按 `日期_主题/` 归档 |
 | `docs/` | 业务文档：资讯与行情技术文档、活水计划、卓锐产品分析（OST） |

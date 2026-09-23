@@ -33,6 +33,12 @@ description: >-
 - 单篇 / 少篇 A4 分页版：`/Users/zhizhouqin/Claude Code/MS-科创板IPO扫描2026-3页精华版.html`
 - 多份合辑版：`/Users/zhizhouqin/Claude Code/三份研报合辑-20260827-12页精华版.html`
 
+> **云端会话（手机发起）用仓库里 skill 目录下的母本副本**（2026-09-23 加）：
+> `.claude/skills/yanbao-visual-digest-v3/母本/` 下同名的两份 HTML。
+> 护栏 `references/`、脚本 `scripts/` 也在这个 skill 目录里，不在 `~/.claude/skills/`。
+> 需要的文件和现在的状态见同目录 `文件清单.md`。**缺哪份就在第一条回复里点名，
+> 不许拿 7.26 旧版或临时手写的东西顶替。**
+
 只沿用它的**工程件**：固定页容器 `.page`(210mm×296.6mm)、`.pg-head`/`.pg-foot`、分隔页 `.page.div`、
 收紧类 `.tight/.tighter/.tightest`、打印 CSS。**视觉层按第二节重做，不要原样复刻卡片堆叠；
 更不要把母本里的编辑习惯（比如标题直译）当成规范继承下来。**

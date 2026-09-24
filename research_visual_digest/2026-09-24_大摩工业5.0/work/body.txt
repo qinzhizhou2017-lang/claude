@@ -1,0 +1,963 @@
+
+
+===== P1 =====
+M
+ Foundation
+Investor Presentation  | Asia Pacific
+China Emerging Frontiers: 
+Industry 5.0 - China's Next 
+Industrial Revolution
+Morgan Stanley Asia Limited+
+Sheng Zhong
+Equity Analyst
+                        Sheng.Zhong@morganstanley.com                                                +852 2239-7821                    
+Andy Huang
+Research Associate
+                        Huang.Andy@morganstanley.com                                                +852 3963-4023                    
+Carlos Chai
+Research Associate
+                        Carlos.Chai@morganstanley.com                                                +852 3963-3180                    
+China Industrials
+Asia Pacific
+Industry View In-LineChina is entering a new phase of industrial development, moving 
+beyond its historical advantages of low cost and manufacturing 
+scale towards ecosystem and innovation leadership. We see 
+profound implications for China's industrial super-cycle, 
+manufacturing profit migration, and position in global 
+manufacturing value chains.
+China's Emerging Frontiers: China's Next Industrial Revolution (9 Sep 2026)  
+Morgan Stanley does and seeks to do business with 
+companies covered in Morgan Stanley Research. As a result, 
+investors should be aware that the firm may have a conflict of 
+interest that could affect the objectivity of Morgan Stanley 
+Research. Investors should consider Morgan Stanley 
+Research as only a single factor in making their investment 
+decision.
+For analyst certification and other important disclosures, 
+refer to the Disclosure Section, located at the end of this 
+report.
++= Analysts employed by non-U.S. affiliates are not registered 
+with FINRA, may not be associated persons of the member 
+and may not be subject to FINRA restrictions on 
+communications with a subject company, public appearances 
+and trading securities held by a research analyst account. 
+September 21, 2026 04:36 PM GMT
+
+===== P2 =====
+M
+ Foundation
+2
+1
+• China’s Industry 5.0 Transition
+• Industry 5.0’s Three Pillars and Five Trends
+• A Decade-long Capex Supercycle
+• Three Main Economic Benefits
+• China Industrials’ Two Megatrends
+• Equity Implications
+• Appendix – Historical Industrial Revolutions, China’s Unique 
+Industrial Ecosystem
+
+===== P3 =====
+M
+ Foundation
+Morgan Stanley Research 3
+2
+China’s Industry 5.0 Transition
+Source: Madison Project Data, IMF, Morgan Stanley Research estimates
+• Historically, China’s advantage has been centered around low cost and manufacturing scale
+• Looking ahead, China is moving towards ecosystem and innovation leadership
+
+
+===== P4 =====
+M
+ Foundation
+4
+3
+China’s Industry 5.0 has a Strong Start
+Source: WITS, Morgan Stanley Research Note: HS all-4 digit products refer to product categories under Harmonized 
+System (HS), a system used by customs to identify goods for global trade.
+Breadth: Product-level export leadership doubled Complexity: Capabilities continue to broaden
+Scale: China widened its manufacturing lead Mix: Technology-intensive exports moved up
+Source: World Bank, Morgan Stanley Research
+Source: The Observatory of Economic Complexity (OEC), Morgan Stanley Research
+Source: OECD, Morgan Stanley Research
+
+
+===== P5 =====
+M
+ Foundation
+Morgan Stanley Research 5
+4
+• China’s Industry 5.0 Transition
+• Industry 5.0’s Three Pillars and Five Trends
+• A Decade-long Capex Supercycle
+• Three Main Economic Benefits
+• China Industrials’ Two Megatrends
+• Equity Implications
+• Appendix – Historical Industrial Revolutions, China’s Unique 
+Industrial Ecosystem
+
+===== P6 =====
+M
+ Foundation
+6
+5
+Industry 5.0 is Built on Three Pillars, with Five  Trends
+Source: Morgan Stanley Research 
+
+===== P7 =====
+M
+ Foundation
+Morgan Stanley Research 7
+6
+Trend #1: AI-native Manufacturing Operating Systems – Automated Becomes Adaptive
+Source: Morgan Stanley Research 
+Manufacturing workflow is shifting from automated to adaptive
+The adaptive factory would improve productivity through 1) higher labor productivity, 2) higher equipment productivity, 3) lower 
+quality and material losses, and 4) realizing economical mass customization
+
+
+===== P8 =====
+M
+ Foundation
+8
+7
+Trend #1: AI-native Manufacturing Operating Systems – Automated Becomes Adaptive (Cont’d)
+Source: Haver, Government websites, Morgan Stanley Research
+Why is China able to lead?
+
+===== P9 =====
+M
+ Foundation
+Morgan Stanley Research 9
+8
+Trend #1: AI-native Manufacturing Operating Systems – Automated Becomes Adaptive (Cont’d)
+Source: CATL
+Case study: CATL's manufacturing – Complexity and Intelligence…
+• CATL's manufacturing demonstrates exceptional complexity and intelligence, characterized by self-developed production 
+lines, extensive real-time quality control, and massive data processing capabilities that create significant competitive 
+advantages and high barriers to entry
+• This is achieved through 1) Platformization – CATL's replicable intelligence + data loop compounding for 20 years; and 2) 
+end-to-end adaptivity – from manual design to forward design and prediction
+
+===== P10 =====
+M
+ Foundation
+10
+9
+Trend #2: Embodied AI – Physical Labor Becomes Software-upgradable Capital
+Source: Morgan Stanley Research estimates
+China's robot market to reach US$5 trillion in revenue by 
+2050...
+…with an annual sales volume of 375mn in 2050
+Source: Morgan Stanley Research estimates
+• A traditional robot’s function is largely fixed at installation, ie, task-specific
+• With embodied AI…
+o Physical labor becomes software-upgradable capital equipment
+o The embodied AI platform converts deployment into data generation
+• And beyond humanoids, embodied AI is much broader, including autonomous commercial vehicles, industrial robots, mobile 
+manipulators, collaborative robots, AMRs/AGVs, drones/VToLs, etc.
+• The embodied-AI-driven manufacturing productivity improvement (incl. direct operating productivity, capital productivity and 
+manufacturing flexibility, and learning productivity and network effects) will offset demographic and skills constraints
+
+
+===== P11 =====
+M
+ Foundation
+Morgan Stanley Research 11
+10
+Trend #2: Embodied AI – Physical Labor Becomes Software-upgradable Capital (Cont’d)
+Source: AlphaWise, Morgan Stanley Research. Total respondents n=86
+Looking ahead to 2027, 62% of respondents plan to launch 
+pilots or significant projects using humanoid robots, 
+according to our China humanoid survey in 2025
+China's humanoid development has been rapid, but we are only 
+in the early stage of n
+Source: Morgan Stanley Research
+Why is China able to lead?
+• China has a broad physical-AI ecosystem that spans across autonomous vehicles, robots, drones, etc
+• Fast adoption in real factories could provide useful feedback, which should support faster product and model iteration
+o Initial adoption examples include logistics sorting (SF Express), industrial material handling (Sany RE), battery pack 
+production (CATL), F&B reception (Haidilao)
+o Government targets also provide a key support
+
+
+===== P12 =====
+M
+ Foundation
+12
+11
+Trend #3: Sovereign Industrial Stack Development – Localization Gives Architectural Autonomy
+Source: Morgan Stanley Research
+• The key difference between localization and autonomy is that localization lets China keep producing, while an evolvable 
+sovereign stack lets China keep improving
+• Achieving industrial architecture autonomy is critical. It not only ensures production continuity, but faster domestic 
+innovation loops, higher domestic value-added and profit-pool migration (to software, chips, high-end equipment and 
+materials, services, etc), and we also expect these foundational abilities to enable frontier industries and ecosystem exports
+
+===== P13 =====
+M
+ Foundation
+Morgan Stanley Research 13
+12
+Trend #3: Sovereign Industrial Stack Development – Localization Gives Architectural Autonomy (Cont’d)
+Source: Morgan Stanley Research
+Where are China’s most significant sovereignty gaps, and hence the opportunities?
+• We use a six-factor framework: criticality, current gap, downstream anchor, technical traceability, stack leverage, profit-pool 
+quality
+
+
+===== P14 =====
+M
+ Foundation
+14
+13
+Trend #3: Sovereign Industrial Stack Development – Localization Gives Architectural Autonomy (Cont’d)
+Source: NBS, MIIT, Morgan Stanley Research
+How can China advance from localization to industry technology sovereignty?
+• Leveraging a structural advantage that few other economies possess – a very large downstream manufacturing system 
+capable of financing, testing and refining upstream technologies at commercial scale
+
+
+===== P15 =====
+M
+ Foundation
+Morgan Stanley Research 15
+14
+Trend #3: Sovereign Industrial Stack Development – Localization Gives Architectural Autonomy (Cont’d)
+Source: NBS, MIIT, Morgan Stanley Research estimates
+China now combines rising enterprise-led R&D, n infrastructure, localization progress and growing overseas 
+validation
+
+
+===== P16 =====
+M
+ Foundation
+16
+15
+Trend #4: Exporting Ecosystems – from Products to Architecture and Industry Standards 
+Source: Ministry of Commerce, SAFE, CEIC, Morgan Stanley Research
+• We see five stages unfolding in China's industrial globalization, with many companies already at stages 1-4, and more 
+companies will achieve stage 5
+• How can China become an ecosystem exporter?
+o China possesses powerful market share
+o Overseas investment is shifting China from exporter to local operator, with solid ODI growth
+o China’s cost position makes ecosystem adoption affordable, especially in emerging markets
+
+===== P17 =====
+M
+ Foundation
+Morgan Stanley Research 17
+16
+Trend #4: Exporting Ecosystems – from Products to Architecture and Industry Standards (Cont’d)
+Source: Morgan Stanley Research
+Potential ecosystem-export opportunities from existing leaders, emerging industries and frontier industries
+
+===== P18 =====
+M
+ Foundation
+18
+17
+Trend #5: AI-accelerated Industrial Discoveries: Increasing the Lab-to-fab Pathway 
+Source: WIPO Statistic Database, Morgan Stanley Research
+China’s R&D spending rose to 2.8% of GDP in 2025 China enters the Global Innovation Index's top 10 for the first time 
+in 2025
+Source: WIPO
+• This is the least mature of the five breakthroughs, but potentially the most transformative
+• In the AI era, the advantage will support upstream extension, into discovery by shortening the cycle between scientific 
+knowledge, simulation, experimentation, pilot production, manufacturing feedback, achieving a closed discovery-to-
+manufacturing loop, narrowing the “lab-to-fab” gap
+• China has already showcased its evolution from an adopter to leader, with rapid rise in R&D
+China is filing the most patent applications globally
+Source: World Bank, CEIC, Morgan Stanley Research
+
+
+===== P19 =====
+M
+ Foundation
+Morgan Stanley Research 19
+18
+Trend #5: AI-accelerated Industrial Discoveries: Increasing the Lab-to-fab Pathway (Cont’d)
+Source: Morgan Stanley Research
+• China could achieve breakthroughs across a broad range of industries, in our view, with upstream advanced materials and 
+equipment serving as the foundational layer underpinning progress across the industrial value chain
+• Foundational innovation has a much larger multiplier. Leading in selected foundational layers gives the ability to define cost 
+curves, product specifications, process standards and export platforms. 
+
+
+===== P20 =====
+M
+ Foundation
+20
+19
+• China’s Industry 5.0 Transition
+• Industry 5.0’s Three Pillars and Five Trends
+• A Decade-long Capex Supercycle
+• Three Main Economic Benefits
+• China Industrials’ Two Megatrends
+• Equity Implications
+• Appendix – Historical Industrial Revolutions, China’s Unique 
+Industrial Ecosystem
+
+===== P21 =====
+M
+ Foundation
+Morgan Stanley Research 21
+20
+Industry 5.0 is Driven by a Decade-long Capex Supercycle
+Source: Haver, Morgan Stanley Research
+Unlocking US$12tn additional industrial capex over the 
+next decade, though with a slow start due to constraints 
+from lingering excess capacity…
+…which would partly offset slower structural capex in property 
+and traditional infrastructure
+35
+42 48 50 52 53 53 53
+2
+7
+15
+23
+33
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+100
+2020-21 2022-23 2024-25 2026-27E 2028-29E 2030-31E 2032-33E 2034-35E
+Industrial Capex, RMB Trn
+CAGR:
+7.4%
+CAGR:
+5.7%
+CAGR:
+4.8%
+CAGR:
+6.6%
+CAGR:
+7.0%
+CAGR:
+6.4%
+CAGR:
+6.0%
+Cumulative industrial 5.0-
+induced capex increase in 
+2026-35E: ~Rmb80trn
+2025:
+17.4%
+2035E:
+19.6%
+2025:
+7.6%
+2035E:
+4.2%
+2025:
+3.3% 2035E:
+3.0%
+0%
+5%
+10%
+15%
+20%
+2005
+2007
+2009
+2011
+2013
+2015
+2017
+2019
+2021
+2023
+2025
+2027E
+2029E
+2031E
+2033E
+2035E
+Investment/GDP Industrial Sector (incl. Electricity Production)
+Traditional Infrastructure excl. Electricity
+Real Estate
+
+===== P22 =====
+M
+ Foundation
+22
+21
+$12 Trillion Incremental Industrial Capex to Infrastructure, Factory Upgrade and New Capacity
+Source: Morgan Stanley Research
+Of the US$12tn incremental capex : ~US$0.5bn for infrastructure, ~US$5.5bn for factory upgrades and ~US$6bn for new 
+capacity from existing industries' expansion and new frontier industries
+
+
+===== P23 =====
+M
+ Foundation
+Morgan Stanley Research 23
+22
+~US$5.5bn Factory Upgrades
+Source: Morgan Stanley Research 
+• Industrial AI fundamentally restructures the manufacturing process, which drives both software and hardware upgrades…
+o Previously a local optimization loop: data → dashboard → human decision
+o Now an end-to-end adaptive operating system: multi-source data → AI reasoning → governed execution → continuous 
+learning
+• We expect intelligent equipment and smart robot penetration will further accelerate in an AI agent factory in the Industrial 5.0 
+era
+
+
+===== P24 =====
+M
+ Foundation
+24
+23
+~US$5.5bn Factory Upgrades (Cont’d)
+Source: Manufacturing Leadership Council's Industrial AI Survey of April 1, 2026, Morgan Stanley Research
+We are at the inflection point – the adoption of AI is accelerating
+More than 70% of manufacturers surveyed are currently 
+using GenAI products (up 24ppt from 2024), as well as 
+strong (potential) adoption of Agentic AI
+For GenAI applications, the high adoption areas currently focus 
+on knowledge, analysis; the adoption rate for management, 
+control, maintenance is relatively low
+Source: Manufacturing Leadership Council's Industrial AI Survey of April 1, 2026, Morgan Stanley Research
+
+
+===== P25 =====
+M
+ Foundation
+Morgan Stanley Research 25
+24
+~US$5.5bn Factory Upgrades (Cont’d)
+Source: MIR, Morgan Stanley Research estimates
+Robotics will penetrate broadly and be more versatile
+We estimate China's robotics market TAM will grow at 
++30% CAGR in 2026-35, vs. +15% CAGR without Industry 
+5.0, implying ~Rmb10tn value uplift
+We expect China's robotics TAM to grow at 20% CAGR in 2025-50 
+and reach US$4.7tn in 2050 – autonomous vehicle and humanoid 
+manufacturers are key direct beneficiaries
+Source: Morgan Stanley Research estimates
+
+
+===== P26 =====
+M
+ Foundation
+26
+25
+~US$5.5bn Factory Upgrades (Cont’d)
+Source: Bain analysis. Notes: I/O is input/output module; PLC is programmable logic controller; DCS is distributed control sy stem; SCADA is supervisory control and data acquisition; HMI is human-machine interface; MC is motion control; MOM 
+is manufacturing operations management; MES is manufacturing execution system; IT is information technology; OP is operationa l technology
+• Software becomes more valuable in smart factories
+• China's industrial software was a ~Rmb340bn market in 2025, according to MIIT, representing ~7% of manufacturing 
+equipment capex. We expect it to grow to ~17% in 2035 (vs ~8% without AI-driven factory upgrade)
+• As the role of software grows, the automation tech stack shape is shifting from a pyramid to an hourglass
+
+
+===== P27 =====
+M
+ Foundation
+Morgan Stanley Research 27
+26
+~US$6bn New Capacity
+Source: NBS, Morgan Stanley Research estimates
+We assume China’s manufacturing capex as a percentage 
+of manufacturing GDP will continue to rise mildly from 
+~49% in 2025 to ~52% in 2035 with Industry 5.0…
+…translating into ~Rmb70tn incremental China manufacturing 
+value-add in 2026-35, meaning new capex expansion of ~Rmb40tn 
+(~US$6tn)
+Source: NBS, Morgan Stanley Research estimates
+New capacity for both new and existing industries will be supported by…
+• Policy support, given 15th FYP’s guidance to “keep the share of manufacturing in the national economy at an appropriate 
+level”
+• Industry 5.0 could offset the demographic drag that would normally dilute manufacturing
+• Manufacturing should become more value-add intensive, not just larger in volume
+
+
+===== P28 =====
+M
+ Foundation
+28
+27
+How to Finance the US$12tn Capex?
+Source: CEIC, WIND, PBOC, NFRA, IMF, PE Data, Company data, Morgan Stanley Research
+Bank loans to remain the anchor at ~47% of funding over 
+the next decade, implying ~6.3% annual growth in industrial 
+medium- and long-term loans
+Capital markets will be an increasingly important source, with 
+rising industrial capital demand to facilitate China's equity market 
+fundraisings in the next three years
+Source: CEIC, WIND, PBOC, NFRA, Company data, Morgan Stanley Research
+
+
+===== P29 =====
+M
+ Foundation
+Morgan Stanley Research 29
+28
+• China’s Industry 5.0 Transition
+• Industry 5.0’s Three Pillars and Five Trends
+• A Decade-long Capex Supercycle
+• Three Main Economic Benefits
+• China Industrials’ Two Megatrends
+• Equity Implications
+• Appendix – Historical Industrial Revolutions, China’s Unique 
+Industrial Ecosystem
+
+===== P30 =====
+M
+ Foundation
+30
+29
+Benefit #1: Industrial Margin and ROE Recovery
+Source: NBS, Morgan Stanley Research estimates
+We expect China’s industrial-enterprise profit margin to recover from ~5% in 2025 to ~8% by 2035, with a shift towards higher 
+quality profit pools
+
+
+===== P31 =====
+M
+ Foundation
+Morgan Stanley Research 31
+30
+Benefit #1: Industrial Margin and ROE Recovery (Cont’d)
+Source: MIR, FactSet, Wind, Company Data, Morgan Stanley Research. Note: the darker color in the pie charts shows the localization rate. Blue pie is 
+downstream localization rate, yellow pie is midstream equipment localization rate, and green pie is upstream localization rat e.
+Source: Company data, Morgan Stanley Research. Auto parts include Fuyao Glass, 
+Minth Group, Ningbo Tuopu, Desay, Joyson, Huayu, Nexteer; Auto OEM include 
+Geely, SAIC Motor, Great Wall, Li Auto, XPeng, NIO, Changan Auto
+Margin driver #1: Industrial structure should become more margin-accretive as the investment cycle rotates from downstream 
+scale industries into foundational layers
+In most industries, the mid and upstream margin is higher than the downstream, 
+and there is still plenty of room for more localization in mid and upstream 
+manufacturing, to support the margin upward movement, in our view
+Case study –  Upstream auto parts GPM 
+vs. downstream auto OEM GPM
+
+
+===== P32 =====
+M
+ Foundation
+32
+31
+Benefit #1: Industrial Margin and ROE Recovery (Cont’d)
+Source: Company data, Morgan Stanley Research. The leading companies include Baosteel, Angang, Maanshan, Hesteel
+Case study – Steel industry’s supply-side reform in 2016 marked a turning point for sharp decline in margins
+Margin driver #2: Overcapacity issue to be resolved gradually amid Chinese government's anti-involution initiative
+• China's anti-involution policy is a significant recalibration of the country's economic development model, aiming for a better 
+balance between growth, innovation, and sustainability. While some effects are already visible, the full impact and success of 
+these policies are expected to unfold over 2026 and beyond
+Chinese leading steel companies' average GPM trend
+
+===== P33 =====
+M
+ Foundation
+Morgan Stanley Research 33
+32
+Benefit #1: Industrial Margin and ROE Recovery (Cont’d)
+Source: Company data, Morgan Stanley Research. 
+The CM names include Sany Heavy, Zoomlion, XCMG, Hangcha, Dingli
+Case study – Construction machinery’s overseas 
+expansion drives margin uplift…
+…as export revenue contribution continues to rise
+Source: Company data, Morgan Stanley Research. 
+The CM names include Sany Heavy, Zoomlion, XCMG, Hangcha, Dingli
+Margin driver #3: Leading Chinese industrial companies are moving from domestic competition to global expansion
+Source: JATO, Morgan Stanley Research
+Capital goods could support exports with demand created 
+by global supply chain de-risking and China's stronger 
+competitiveness
+We expect China's global export market share to rise to 16.5% by 
+2030
+Source: Haver, Morgan Stanley Research estimates
+
+
+===== P34 =====
+M
+ Foundation
+34
+33
+Benefit #1: Industrial Margin and ROE Recovery (Cont’d)
+Source: Morgan Stanley Research
+Margin driver #4: Chinese companies are increasingly positioned to lead new 0–1 industries directly, rather than entering only 
+after global leaders have already defined the market
+
+
+===== P35 =====
+M
+ Foundation
+Morgan Stanley Research 35
+34
+Benefit #1: Industrial Margin and ROE Recovery (Cont’d)
+Source: Thomson Reuters. Morgan Stanley Research. Data as of July 31, 2026
+Amid Industry 5.0, we expect Energy (up 6-7%), Materials (up 2-3%), Industrials (up 2-3%), and Information Technology (up 8-
+9%) to all see a round of ROE improvement by 2028, contributing around 2% to MSCI China’s overall index ROE
+
+
+===== P36 =====
+M
+ Foundation
+36
+35
+Benefit #2: A Boost to Potential GDP
+Source: CEIC, Morgan Stanley Research estimates
+J-curve in AI & Industry 5.0 impact on China's potential 
+GDP growth
+AI & Industry 5.0's boost to capex and productivity improvement 
+to be more notable beyond the near term
+Source: CEIC, Morgan Stanley Research estimates
+
+
+===== P37 =====
+M
+ Foundation
+Morgan Stanley Research 37
+36
+Benefit #3: Higher Global Manufacturing Share
+Source: Haver, Morgan Stanley Research estimates
+China manufacturing's global market share to grow from ~28% in 2025 to 30% by 2035, as production data, supplier depth, 
+engineering speed and system integration become more important sources of competitiveness than scale and labor costs 
+alone
+
+===== P38 =====
+M
+ Foundation
+38
+37
+Industry 5.0 Will Not Be Linear – Potential Bottlenecks and Risks
+Source: CEIC, Morgan Stanley Research estimates
+Our bull / bear case – policy, technology, and geopolitics are the key swing factors
+
+
+===== P39 =====
+M
+ Foundation
+Morgan Stanley Research 39
+38
+Implications for a Multipolar World – “Made in China” Shifting to “Made by China”
+Source: UN Comtrade, Growth Lab at Harvard University, Morgan Stanley Research. Note: based on latest available 
+Product Complexity Rankings.
+China has greater export capacity in high-complexity 
+goods than all other major Asian economies combined
+We estimate that only ~40% of China-to-US exports can be readily 
+substituted: supplier depth, process know-how and capital-
+equipment ecosystems are considerably harder to replicate than 
+assembly lines
+Source: Growth Lab at Harvard University, United Nations, UN Comtrade, Morgan Stanley Research.
+• Tariffs, technology controls and China+1 strategies have reduced direct US–China trade, but the evidence points more to 
+trade rerouting and selective final-assembly relocation than wholesale migration of productive capacity
+• We see a reconfigured form of globalization: final production becomes more geographically dispersed, while Chinese 
+capabilities remain embedded in industrial expansion overseas. In other words, it marks a shift from “made in China” toward 
+a broader “made by China” model
+
+===== P40 =====
+M
+ Foundation
+40
+39
+• China’s Industry 5.0 Transition
+• Industry 5.0’s Three Pillars and Five Trends
+• A Decade-long Capex Supercycle
+• Three Main Economic Benefits
+• China Industrials’ Two Megatrends
+• Equity Implications
+• Appendix – Historical Industrial Revolutions, China’s Unique 
+Industrial Ecosystem
+
+===== P41 =====
+M
+ Foundation
+Morgan Stanley Research 41
+40
+China Industrials’ Two Megatrends – #1: Factory Upgrades 
+Source: CCMA, CAAM, MIR, GGII, NBS, CPIA, China Laser Development Report 2022. Morgan Stanley Research estimates. *Automation excludes industrial software; **High-end hydraulics only, which represents 50% of the total hydraulics market 
+based on our checks with Hengli.
+Leading players will likely continue to gain market share, with higher value for price vs. global brands
+We estimate China's automation TAM to grow at a 6% 
+CAGR in 2025-35, up from 3% in 2018-25
+China automation brands' localization rate has increased quickly 
+and we estimate it will grow to >70% in 2030
+Source: MIR, Morgan Stanley Research estimates Source: MIR, Morgan Stanley Research estimates
+Note: The key FA products include low-voltage AC drives, servos, and PLC
+• Automation, intelligent equipment and robotics are the key direct beneficiaries of Industry 5.0
+• Localization provides another growth driver, with the trend evolving from general equipment to more advanced 
+equipment/precision components (such as in 5-axis CNC machine tools, screws, linear guides, etc.)
+
+===== P42 =====
+M
+ Foundation
+42
+41
+China Industrials’ Two Megatrends – #2: Equipment Companies’ Overseas Growth Potential 
+Source: CEIC, Morgan Stanley Research
+Capital goods could support exports with demand created by global 
+supply chain de-risking and China's own outbound capex in other EMs
+Source: China Customs, CEIC, Morgan Stanley Research. Note: export segments are classified 
+by Morgan Stanley Research, data is adjusted for LNY seasonality.
+Capital goods could support exports with 
+demand created by global supply chain de-
+risking and China's own outbound capex in 
+other EMs
+• The competitive edge of Chinese equipment makers is shifting from pure cost advantage to product capability, differentiation 
+and customization
+• Riding on Chinese downstream customers’ overseas expansion, with accelerating expansion seen from major downstreams 
+(such as autos, batteries, and electronics)
+
+===== P43 =====
+M
+ Foundation
+Morgan Stanley Research 43
+42
+• China’s Industry 5.0 Transition
+• Industry 5.0’s Three Pillars and Five Trends
+• A Decade-long Capex Supercycle
+• Three Main Economic Benefits
+• China Industrials’ Two Megatrends
+• Equity Implications
+• Appendix – Historical Industrial Revolutions, China’s Unique 
+Industrial Ecosystem
+
+===== P44 =====
+M
+ Foundation
+44
+43
+Equity Implications – Key Beneficiaries of the Five Trends
+Source: Morgan Stanley Research 
+
+
+===== P45 =====
+M
+ Foundation
+Morgan Stanley Research 45
+44
+Equity Implications – 45 Stocks to Own
+Source: Morgan Stanley Research
+
+
+===== P46 =====
+M
+ Foundation
+46
+45
+Equity Implications – China's Industry 5.0 Stock List
+Source: FactSet, Morgan Stanley Research. Note: Prices as of Sep 21, 2026.
+Market cap Avg daily trading 
+volume Share price close TP
+US$mn US$mn 9/21/2026 Local currency
+Auto
+002594-CN 002594.SZ BYD Consumer Discretionary 115,908 343 HKD 85.22 Overweight 113.00 32.6% Hsiao, Tim Leadership 
+9660-HK 9660.HK Horizon Robotics Information Technology 8,609 60 HKD 4.26 Overweight 8.70 104.5% Hsiao, Tim Industrial Intelligence & Leadership 
+600660-CN 600660.SS Fuyao Glass Consumer Discretionary 21,102 76 HKD 54.14 Equal-Weight 56.20 3.8% Wang, Shelley Leadership 
+Consumer 
+000333-CN 000333.SZ Midea Consumer Discretionary 92,077 288 RMB 80.90 Overweight 99.00 22.4% Lou, Lillian Industrial intelligence & Leadership 
+Energy
+300750-CN 300750.SZ CATL Industrials 204,063 1,598 HKD 297.10 Overweight 595.00 100.3% Lu, Jack Industrial Intelligence & Leadership & Resilience
+Healthcare
+688271-CN 688271.SS United Imaging Health Care 12,523 55 RMB 102.58 Equal-Weight 140.00 36.5% Yan, Alexis Leadership 
+300760-CN 300760.SZ Mindray Health Care 28,590 203 RMB 158.05 Overweight 210.00 32.9% Yan, Alexis Leadership 
+2675-HK 2675.HK Edge Medical Health Care 1,767 2 RMB 35.54 Overweight 75.00 111.0% Yan, Alexis Leadership 
+853-HK 0853.HK MicroPort Health Care 1,485 8 RMB 6.08 Equal-Weight 10.50 72.8% Yan, Alexis Leadership 
+6699-HK 6699.HK Angelalign Health Care 1,907 8 RMB 87.15 Equal-Weight 105.00 20.5% Yan, Alexis Leadership 
+2359-HK 2359.HK WuXi AppTec Health Care 78,719 112 RMB 208.00 Overweight 220.00 5.8% Tam, Laurence Resilience & Leadership 
+600521-CN 600521.SS  Huahai Pharmaceutical Health Care 3,708 56 RMB 16.66 Overweight 21.00 26.1% Tam, Laurence Leadership 
+603707-CN 603707.SS King-friend Health Care 1,902 14 RMB 7.89 Overweight 11.00 39.4% Tam, Laurence Leadership 
+Industrials
+601100-CN 601100.SS Hengli Hydraulic Industrials 18,720 105 RMB 93.48 Overweight 145.00 55.1% Zhong, Sheng Industrial intelligence & Leadership 
+2338-HK 2338.HK Weichai Power Industrials 34,315 83 RMB 31.34 Overweight 46.00 46.8% Zhong, Sheng Leadership 
+600031-CN 600031.SS Sany Heavy Industrials 24,197 193 RMB 17.76 Overweight 32.00 80.2% Zhong, Sheng Leadership 
+3808-HK 3808.HK Sinotruk Industrials 13,022 39 RMB 37.36 Equal-Weight 45.00 20.4% Zhong, Sheng Leadership 
+688017-CN 688017.SS Leaderdrive Industrials 7,910 248 RMB 288.88 Overweight 631.00 118.4% Zhong, Sheng Industrial intelligence & Leadership 
+688188-CN 688188.SS Shanghai Bochu Information Technology 5,795 28 RMB 95.67 Overweight 122.00 27.5% Wang, Chelsea Industrial intelligence & Leadership 
+002008-CN 002008.SZ Han's Laser Industrials 14,847 620 RMB 96.55 Overweight 188.00 94.7% Wang, Chelsea Industrial intelligence & Leadership 
+Materials 
+601899-CN 601899.SS Zijin Mining Materials 123,642 1,088 RMB 31.30 Overweight 58.00 85.3% Zhang, Rachel Resilience & Leadership 
+603993-CN 603993.SS CMOC Materials 55,929 522 RMB 17.59 Overweight 24.50 39.3% Zhang, Rachel Resilience & Leadership 
+2600-HK 2600.HK Chalco Materials 17,311 43 RMB 7.92 Overweight 11.20 41.4% Zhang, Rachel Resilience & Leadership 
+1378-HK 1378.HK Hongqiao Materials 27,111 84 RMB 21.66 Overweight 28.60 32.0% Yang, Hannah Resilience & Leadership 
+9696-HK 9696.HK Tianqi Lithium Materials 6,920 21 RMB 31.70 Overweight 66.20 108.8% Zhang, Rachel Resilience & Leadership 
+1772-HK 1772.HK Ganfeng Lithium Materials 9,178 54 RMB 34.56 Overweight 70.00 102.5% Zhang, Rachel Resilience & Leadership 
+6680-HK 6680.HK JL Mag Industrials 2,799 4 RMB 15.93 Overweight 27.80 74.5% Zhang, Rachel Resilience & Leadership 
+600176-CN 600176.SS China Jushi Materials 27,404 1,550 RMB 45.87 Overweight 88.50 92.9% Zhang, Rachel Resilience & Leadership 
+688295-CN 688295.SS Zhongfu Shenying Materials 5,073 24 RMB 38.11 Overweight 63.80 67.4% Yang, Hannah Resilience & Leadership 
+603799-CN 603799.SS Huayou Cobalt Industrials 10,182 235 RMB 36.07 Overweight 75.00 107.9% Jiang, Chris Resilience & Leadership 
+Semiconductor 
+2577-HK 2577.HK Innoscience Information Technology 5,224 22 RMB 44.88 Equal-Weight 60.00 33.7% Dai, Daisy Industrial intelligence & Resilience & Leadership
+300373-CN 300373.SZ Yangjie Technology  Information Technology 7,527 179 RMB 93.13 Overweight 136.00 46.0% Dai, Daisy Industrial intelligence & Resilience & Leadership
+603986-CN 603986.SS Gigadevice Information Technology 41,149 1,783 RMB 391.71 Overweight 750.00 91.5% Yen, Daniel Industrial intelligence & Resilience & Leadership
+688256-CN 688256.SS Cambricon Information Technology 104,506 1,574 RMB 1,112.77 Overweight 1408.00 26.5% Chan, Charlie Industrial intelligence & Resilience & Leadership
+603501-CN 603501.SS Omnivision Information Technology 15,088 164 RMB 80.78 Equal-Weight 111.00 37.4% Chan, Charlie Industrial intelligence & Resilience & Leadership
+TMT
+1810-HK 1810.HK Xiaomi Information Technology 90,026 430 HKD 27.58 Overweight 33.00 19.7% Meng, Andy Industrial Intelligence & Leadership 
+100-HK 0100.HK Minimax Information Technology 13,266 634 HKD 298.00 Overweight 900.00 202.0% Yu, Gary Industrial Intelligence
+2513-HK 2513.HK Z.AI Information Technology 49,348 842 HKD 794.00 Overweight 1800.00 126.7% Yu, Gary Industrial Intelligence
+BIDU-US BIDU.O Baidu Communication Services 25,012 229 HKD 90.56 Underweight 80.00 (11.7%) Yu, Gary Industrial Intelligence & Leadership 
+BABA-US BABA.N Alibaba Consumer Discretionary 282,591 1,231 HKD 113.69 Overweight 180.00 58.3% Yu, Gary Industrial Intelligence & Leadership 
+700-HK 0700.HK Tencent Communication Services 493,890 1,038 HKD 430.00 Overweight 550.00 27.9% Yu, Gary Industrial Intelligence & Leadership 
+Utility
+300274-CN 300274.SZ Sungrow Industrials 27,255 693 RMB 88.47 Overweight 230.72 160.8% Hou, Eva Industrial intelligence & Leadership 
+002028-CN 002028.SZ Sieyuan Electric Industrials 16,233 257 RMB 138.89 Overweight 237.00 70.6% Hou, Eva Leadership 
+002487-CN 002487.SZ Dajin Heavy Industrials 3,781 236 RMB 39.70 Overweight 42.90 8.1% Hou, Eva Leadership 
+603308-CN 603308.SS Anhui Yingliu Industrials 4,566 160 RMB 41.97 Overweight 60.50 44.2% Li, Tom  Leadership 
+CategoryAnalyst nameTrading currencyTicker Company name GICS Sector MS stock rating Upside to target price
+
+===== P47 =====
+M
+ Foundation
+Morgan Stanley Research 47
+46
+Appendix
+
+===== P48 =====
+M
+ Foundation
+48
+47
+Appendix I | Evolving Through Industry 1.0 to 5.0
+Source: Morgan Stanley Research
+• From Industry 1.0 to 3.0, the central objectives were efficiency maximization
+• Industry 4.0 marked the shift toward connectivity and established the foundation for Industry 5.0
+• The breakthrough of Industry 5.0 lies in 'cognitive physicalization’ – Industry 4.0 connected the factory; Industry 5.0 allows it 
+to think, adapt, and respond
+
+===== P49 =====
+M
+ Foundation
+Morgan Stanley Research 49
+48
+Appendix I | Evolving Through Industry 1.0 to 5.0 (Cont’d)
+Source: Maddison Project, Morgan Stanley Research. 
+Note: There is no consensus on the exact year of each industrial evolution. Industry 1.0 happened as early as mid-18th century, the above chart shows 1820-1850 only due to data availability.
+Industrial Revolution driving global GDP growth
+
+===== P50 =====
+M
+ Foundation
+50
+49
+Appendix II | China's Unique Industrial Ecosystem
+Source: Morgan Stanley Research
+• In the past decades, China has built the most comprehensive industrial ecosystem in the world – A uniquely integrated 
+system of forward-looking government leadership (central + local government), efficient industry execution along the whole 
+value chain, and vast supporting systems including financial, education, and infrastructure
+• These have resulted in China's industrial ecosystem, which is now the world's largest with a rising mix of green and high 
+value-added sectors. The supply chain is comprehensive, decentralized and highly efficient. Continuous R&D efforts have 
+propelled China to global leadership in various fields, instead of just a follower. All these elements reinforced each other, 
+improving China's competitiveness in the global market
+
+===== P51 =====
+M
+ Foundation
+Morgan Stanley Research 51
+50
+Appendix II | China's Unique Industrial Ecosystem (Cont’d)
+Source: Rhodium Group compilation based on official documents and literature review. Morgan Stanley Research.
+China's industrial policy covers an increasing number of 
+emerging sectors
+The 15th FYP elevated "AI+" as a cross-cutting productivity 
+strategy
+Source: Government websites, Morgan Stanley Research. 
+• Government policy has served as high level guidance for industrial development, often acting as both a growth accelerator 
+and a risk mitigator
+• Government policy is constantly evolving, pushing the industrial sectors to develop 
+• China has set AI+ as the centerpiece in China's 2026-30 Five Year Plan to drive productivity gains, explicitly linking digital 
+and intelligent upgrading to sustained productivity gains, and targeting labor-productivity growth that outpaces GDP growth.
+
+
+===== P52 =====
+M
+ Foundation
+52
+51
+Appendix II | China's Unique Industrial Ecosystem (Cont’d)
+Capital – Industrial bond issuance has surged over the past 
+two decades, reaching Rmb8tn in 2025
+Talent – China has the world's largest STEM graduates base with 
+new majors being offered at an accelerated rate
+The Backbone for Industrial Leadership – Capital+Talent+Infra
+• Capital – A state-directed platform to support industry
+• Talent – China has a large technical labor base
+• Infra – China's ample and efficient base for industrials
+Source: Wind as of May 19, 2026, Morgan Stanley Research Source: OECD, Ministry of Education, Morgan Stanley Research.
+Infra – Highly efficient power supply and among the lowest 
+cost across major manufacturing economies
+Infra – Highly connected logistics network
+Source: es , Morgan Stanley Research.
+Source: NBS, Morgan Stanley Research
+Source: US Energy Information Administration, Morgan Stanley 
+Research. Note: this represents total energy production including coal, 
+natural gas, petroleum & other liquids, nuclear, renewable and other. In 
+quadrillion British Thermal Units (BTU).
+
+
+===== P53 =====
+M
+ Foundation
+Morgan Stanley Research 53
+52
+Appendix III | Long Capex Cycle for Industrial Revolutions Historically
+Source: National Bureau of Economic Research (NBER), Morgan Stanley Research
+US gross capital formation as a percentage of GNP – 
+remained at >20% for ~40 years
+Electricity’s share of primary horsepower in US manufacturing 
+increased from 4% in 1899 to 75% by 1929
+Source: National Bureau of Economic Research (NBER), Morgan Stanley Research
+US electrification (1880s-1920s)
+• US electrification shows that a general-purpose technology can sustain elevated capex intensity for decades, not just years. 
+It was not a one-off equipment replacement cycle – it created a new physical layer for the economy
+• The physical build-out was significant. The capex cycle was not only about building power plants and grids; factories 
+themselves had to be rewired around electric motors, new layouts and new production methods
+Similarly, for China Industry 5.0 AI-native manufacturing, it also requires both an infrastructure layer and a factory-rebuild layer: 
+compute, grid, storage, cooling, industrial software, robotics, sensors, edge AI and factory automation
+
+
+===== P54 =====
+M
+ Foundation
+54
+53
+Appendix III | Long Capex Cycle for Industrial Revolutions Historically (Cont’d)
+Source: World Bank, Morgan Stanley Research
+Japan's gross capital formation as a percentage of GDP – 
+staying at >30% for ~20 years
+Toyota passenger car production in Japan – it surged ~55x times 
+in 20 years
+Source: Toyota, Morgan Stanley Research
+Japan's heavy n (1960s -1975)
+• Japan’s postwar heavy-n cycle shows that a capex supercycle can last far longer than a normal replacement 
+cycle. Japan’s high-growth period ran from the mid-1950s to the early 1970s, with real GDP growth frequently exceeding 10%
+• The cycle was driven by an “investment-inducing-investment” mechanism: an initial rise in investment created demand for 
+machinery, steel, construction, electricity and other industrial inputs, which then created the need for another round of 
+investment
+The read-across to China Industry 5.0 is that if AI infrastructure, factory automation, industrial software, power equipment, 
+robotics and physical AI adoption reinforce each other, China’s cycle can also become a multi-year, possibly decade-long 
+industrial reinvestment regime
+
+
+===== P55 =====
+M
+ Foundation
+Morgan Stanley Research 55
+54
+Appendix III | Long Capex Cycle for Industrial Revolutions Historically (Cont’d)
+Source: World Bank, Morgan Stanley Research
+China's gross capital formation as % of GDP rose from 
+30%+ in 1990s to 40%+ after 2000s – and stayed at high 
+levels for a long period
+China has largest share of global exports, with fastest share 
+expansion from 2000-2015
+Source: OECD, Morgan Stanley Research
+China's economic boom after joining WTO (2000s-2015), with three key structural changes:
+• China was taking global market share, with its share of world exports rising to 10.3% in 2014, from 3.2% in 2000
+• Urbanization provided the domestic-demand flywheel, with urbanization rate rising to 55.8% in 2014, from 36.4% in 2000. 
+Urban migration created housing, transport, utilities, appliance, auto and services demand, while also expanding the urban 
+labor pool for export manufacturing
+• Automation was the late-cycle upgrade kicker. China was in industrial upgrade from labor-intensive to capital-intensive and 
+gradually introduced automation into factories 
+• The WTO-era case suggests China's Industry 5.0 capex cycle this time should be analyzed also as a reinforcing system, not a 
+simple equipment replacement cycle

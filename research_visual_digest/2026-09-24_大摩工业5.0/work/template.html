@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>大摩 · 工业 5.0 · 4 页精华版</title>
+<style>
+  :root{
+    --paper:#E9EAEC; --surface:#FFFFFF; --surface-2:#F4F5F7;
+    --ink:#141D2A; --ink-soft:#37424F; --muted:#69737F; --hair:#D3D8DE; --hair-soft:#E3E6EA;
+    --gold:#8E5A0C; --gold-bright:#B07818; --gold-fill:#F5E7C8;
+    --bull:#0D6E55; --bear:#B93A30;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:"PingFang SC","Helvetica Neue","Hiragino Sans GB",system-ui,-apple-system,"Segoe UI",sans-serif;
+    --serif:"Songti SC","STSong",Georgia,"Times New Roman",serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-size:19.5px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  .num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+  /* ---------- 工程件（沿用母本）---------- */
+  .page{width:210mm;height:296.6mm;background:var(--surface);position:relative;
+    padding:7mm 12mm 8mm;overflow:hidden;margin:0 auto 16px;box-shadow:0 6px 26px -10px rgba(20,32,46,.35)}
+  .page:last-child{margin-bottom:0}
+  .pg-head{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+    border-bottom:1px solid var(--hair);padding-bottom:5px;margin-bottom:10px}
+  .pg-head .r{margin-left:auto;color:var(--ink-soft);font-weight:700}
+  .pg-foot{position:absolute;left:12mm;right:12mm;bottom:5mm;display:flex;align-items:center;
+    font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.08em;
+    border-top:1px solid var(--hair-soft);padding-top:5px}
+  .pg-foot .r{margin-left:auto;font-weight:700;color:var(--ink-soft)}
+
+  /* ---------- 标题层 ---------- */
+  .eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold-bright);font-weight:700}
+  h1{font-weight:800;letter-spacing:-.015em;font-size:52px;line-height:1.14;margin:10px 0 0}
+  .en{font-family:var(--mono);font-size:14px;color:var(--muted);margin-top:9px;line-height:1.4}
+  .thesis{font-family:var(--serif);font-size:21.5px;line-height:1.58;color:var(--ink);margin:14px 0 0;max-width:34em}
+  .srcline{font-family:var(--mono);font-size:12.5px;color:var(--muted);line-height:1.62;
+    border-top:1px solid var(--hair);padding-top:7px;margin-top:13px}
+  .srcline b{color:var(--ink-soft);font-weight:700}
+
+  .sec-eye{font-family:var(--mono);font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--muted);display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .sec-eye .no{color:var(--gold-bright);font-weight:800}
+  .sec-eye::after{content:"";flex:1;height:1px;background:var(--hair)}
+  h2.sec{font-size:34px;line-height:1.16;font-weight:800;letter-spacing:-.015em;margin:0 0 8px}
+  h3{font-size:22px;font-weight:800;margin:0 0 5px;letter-spacing:-.01em;line-height:1.3}
+  p{margin:0 0 7px}
+  .lead{color:var(--ink-soft);max-width:34em;margin-bottom:10px}
+  b,strong{font-weight:700;color:var(--ink)}
+  .calc{color:var(--muted);font-size:.86em;font-weight:400}
+
+  /* ---------- 图 ---------- */
+  .fig-t{font-size:16.5px;font-weight:700;color:var(--ink);margin:0 0 6px;line-height:1.35}
+  .fig-t i{font-style:normal;font-weight:400;color:var(--muted)}
+  .sv{width:100%;height:auto;display:block;overflow:visible}
+  .sv text{font-family:var(--mono)}
+  .sv .in{font-size:14px;font-weight:700;fill:#37424F}
+  .sv .inc{font-size:15px;font-weight:800;fill:#8E5A0C}
+  .sv .ax{font-size:13px;fill:#69737F}
+  .sv .br{font-family:var(--sans);font-size:14.5px;font-weight:600;fill:#37424F}
+  .sv .val{font-size:15px;font-weight:800;fill:#141D2A}
+  .sv .lab{font-family:var(--sans);font-size:15px;font-weight:700;fill:#141D2A}
+  .sv .labd{font-family:var(--sans);font-size:15px;font-weight:700;fill:#141D2A}
+  .sv .labw{font-family:var(--sans);font-size:15px;font-weight:700;fill:#FFFFFF}
+  .sv .grp{font-family:var(--sans);font-size:14.5px;fill:#37424F}
+  .sv .rl{font-family:var(--sans);font-size:16px;fill:#141D2A}
+  .sv .val2{font-size:14px;font-weight:700;fill:#37424F}
+  .sv .v0{font-size:14px;fill:#69737F}
+  .sv .v1{font-size:14.5px;font-weight:800;fill:#8E5A0C}
+  .sv .sup{font-size:11px;fill:#69737F}
+  .cap{font-size:16px;color:var(--ink-soft);line-height:1.5;margin:8px 0 0;max-width:42em}
+  .cap .key{color:var(--gold);font-weight:800;font-family:var(--mono)}
+  .fn{font-size:13px;color:var(--muted);line-height:1.5;margin:6px 0 0}
+
+  /* ---------- 三栏裸排（细线分组，不加盒子）---------- */
+  .trio{display:grid;grid-template-columns:1.05fr .9fr 1.05fr;column-gap:22px;margin-top:14px}
+  .trio>div{border-top:1px solid var(--ink);padding-top:8px}
+  .k-t{font-size:15.5px;font-weight:700;color:var(--ink);margin-bottom:6px;line-height:1.35}
+  .k-t i{font-style:normal;font-weight:400;color:var(--muted);font-family:var(--mono);font-size:12.5px;display:block;margin-top:1px}
+  .rows{display:grid;gap:5px}
+  .row{display:flex;align-items:baseline;gap:8px;font-size:16px;border-bottom:1px solid var(--hair-soft);padding-bottom:4px}
+  .row:last-child{border-bottom:0}
+  .row .nm{color:var(--ink-soft);flex:1}
+  .row .v{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:15.5px;color:var(--ink);white-space:nowrap}
+  .row .v b{font-weight:800}
+  .up{color:var(--bull)} .dn{color:var(--bear)}
+
+  .box{background:var(--surface-2);border-radius:8px;padding:12px 16px}
+  .bl{font-weight:800;color:var(--ink);margin-right:8px}
+
+  /* ---------- KPI 大数字（P2 主角）---------- */
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);column-gap:22px;margin-top:4px}
+  .kpi{border-top:1px solid var(--ink);padding-top:10px}
+  .kpi .big{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:800;font-size:40px;
+    line-height:1.05;letter-spacing:-.03em;color:var(--ink);white-space:nowrap}
+  .kpi .big.au{color:var(--gold)}
+  .kpi .big .ar{font-size:26px;color:var(--muted);font-weight:400;margin:0 3px}
+  .kpi .big .vs{font-size:18px;color:var(--muted);font-weight:400;margin:0 5px;letter-spacing:0}
+  .kpi .kl{font-size:17px;font-weight:700;margin:9px 0 6px;line-height:1.35}
+  .kpi p{font-size:16px;color:var(--ink-soft);line-height:1.52;margin:0}
+
+  .duo{display:grid;grid-template-columns:330px 1fr;column-gap:26px;align-items:start}
+
+  /* ---------- 表（三条线，表头不填色）---------- */
+  table{border-collapse:collapse;width:100%;font-size:16px}
+  thead th{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--muted);font-weight:700;
+    text-align:right;padding:0 9px 6px;border-bottom:1.5px solid var(--ink);white-space:nowrap}
+  tbody td{padding:5.5px 9px;text-align:right;border-bottom:1px solid var(--hair-soft);white-space:nowrap;
+    font-family:var(--mono);font-variant-numeric:tabular-nums}
+  tbody tr:last-child td{border-bottom:0}
+  th.l,td.l{text-align:left}
+  td.co{font-family:var(--sans);font-weight:700}
+  td.grp{font-family:var(--sans);font-weight:700;color:var(--ink);white-space:normal;vertical-align:top;
+    border-bottom:1px solid var(--hair);padding-top:7px;line-height:1.35}
+  td.grp i{display:block;font-style:normal;font-weight:400;font-size:13px;color:var(--muted);margin-top:2px}
+  tr.gend td{border-bottom:1px solid var(--hair)}
+  td.grp.last{border-bottom:0}
+  td.tk{color:var(--muted);font-size:14.5px}
+  td.rt{font-family:var(--sans);font-size:15px;color:var(--ink-soft)}
+  td.upv{font-weight:800}
+
+  .stats{display:grid;grid-template-columns:1.25fr 1fr 1fr;column-gap:22px;margin:4px 0 14px}
+  .stats>div{border-top:1px solid var(--ink);padding-top:7px}
+  .stats .n{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:30px;font-weight:800;line-height:1.1;letter-spacing:-.02em}
+  .stats .n.au{color:var(--gold)}
+  .stats .n small{font-size:16px;font-weight:600;color:var(--muted);letter-spacing:0}
+  .stats .t{font-size:15px;color:var(--ink-soft);margin-top:3px;line-height:1.4}
+
+  .scen{display:grid;grid-template-columns:repeat(3,1fr);column-gap:22px}
+  .scen>div{border-top:1px solid var(--ink);padding-top:7px}
+  .scen .h{font-size:17px;font-weight:800;line-height:1.3}
+  .scen .h i{font-style:normal;font-weight:400;font-size:14px;color:var(--muted);display:block}
+  .scen p{font-size:15.5px;color:var(--ink-soft);line-height:1.5;margin:5px 0 0}
+  .scen .g{font-family:var(--mono);font-size:15.5px;color:var(--ink);margin-top:5px;white-space:nowrap}
+
+  /* ---------- 末页角标（走正常流）---------- */
+  .tailrow{display:flex;align-items:flex-end;gap:20px;border-top:1px solid var(--hair);padding-top:9px}
+  .tailrow .disc{flex:1;font-size:13.5px;color:var(--muted);line-height:1.5}
+  .tailrow .disc b{color:var(--ink-soft)}
+  .portmark{display:flex;align-items:flex-end;gap:11px;flex:0 0 auto}
+  .portmark .pm-t{text-align:right;font-size:13.5px;line-height:1.45;color:var(--ink-soft)}
+  .portmark .pm-t b{display:block;font-size:15px;color:var(--ink)}
+  .portmark .pm-q{width:84px;height:84px;display:block}
+
+  .mt-br{margin-top:11mm}   /* 每页唯一的呼吸区：挂在一个分组的上方，结构上属于该分组 */
+
+  /* 局部收紧：只压间距，不动字号 */
+  .page.tight p{margin-bottom:6px}
+  .page.tight tbody td{padding:4.5px 9px}
+  .page.tight .trio{margin-top:12px}
+  .page.tighter tbody td{padding:3.5px 9px}
+  .page.tighter .rows{gap:4px}
+  .page.tightest tbody td{padding:3px 9px}
+  .page.tightest .cap{margin-top:6px}
+
+  @media print{
+    body{background:#fff}
+    .page{margin:0;box-shadow:none;break-after:page;page-break-after:always}
+    .page:last-child{break-after:auto;page-break-after:auto}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+  @page{size:A4;margin:0}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 · 账单与节奏 ============ -->
+<div class="page p1">
+  <div class="pg-head"><span>Morgan Stanley Research · 中国工业</span><span class="r">01 / 04 · 账单与节奏</span></div>
+
+  <div class="eyebrow">大摩 · 中国新兴前沿 · 2026.09.21</div>
+  <h1>12 万亿美元前轻后重：<br>先搬的是利润池，不是产能</h1>
+  <div class="en">China Emerging Frontiers: Industry 5.0 - China's Next Industrial Revolution</div>
+  <p class="thesis">大摩测算中国十年多出约 12 万亿美元工业资本开支，<!--src: MS p21 标题 US$12tn-->但近九成落在 2030 年后（本文测算），<!--src: 测算 = (15+23+33)/(2+7+15+23+33)=71/80=88.75%，据 MS p21 图-->2026–27 年对潜在 GDP 拉动为 0。<!--src: MS p36 右图 0.0%-->过剩未消化的几年里，看点不是多建厂，而是利润池搬向软件、机器人、卡脖子和海外。</p>
+  <div class="srcline"><b>来源</b> Morgan Stanley · China Industrials（In-Line）· Sheng Zhong 等 · 2026-09-21<br>
+    <b>正文 46 页</b>（原报告 61 页，P47–P55 附录、P56–P61 披露未纳入）· 标题与主线为本文判断<!--src: MS p1 封面 分析师/行业评级 In-Line/日期 2026-09-21--></div>
+
+  <div class="mt-br">
+    <div class="fig-t">工业资本开支（万亿元人民币，每两年合计）<i>　灰＝基线　金＝工业 5.0 增量</i></div>
+    {{SVG_CAPEX}}
+    <p class="cap">这张图想说：基线在 50–53 万亿元走平，<!--src: MS p21 图 50/52/53/53/53-->增量从 2 万亿元爬到 33 万亿元，<!--src: MS p21 图 +2 / +33-->2030 年起的六年拿走 <span class="key">89%</span>（本文测算）；<!--src: 测算 = 71/80=88.75%，据 MS p21 图-->大摩的解释是“起步慢”，过剩产能还在拖。<!--src: MS p21 小标题 slow start due to constraints from lingering excess capacity--></p>
+  </div>
+
+  <div class="trio">
+    <div>
+      <div class="k-t">投资占 GDP<i>2025 → 2035E</i></div>
+      <div class="rows">
+        <div class="row"><span class="nm">工业</span><span class="v">17.4% → <b>19.6%</b> <span class="up">▲</span></span></div><!--src: MS p21 右图 Industrial Sector (incl. Electricity) 2025 17.4% / 2035E 19.6%-->
+        <div class="row"><span class="nm">传统基建</span><span class="v">7.6% → <b>4.2%</b> <span class="dn">▼</span></span></div><!--src: MS p21 右图 7.6% / 4.2%-->
+        <div class="row"><span class="nm">地产</span><span class="v">3.3% → <b>3.0%</b> <span class="dn">▼</span></span></div><!--src: MS p21 右图 3.3% / 3.0%-->
+      </div>
+    </div>
+    <div>
+      <div class="k-t">潜在 GDP 增速拉动<i>百分点 · J 曲线</i></div>
+      {{SVG_JCURVE}}
+    </div>
+    <div>
+      <div class="k-t">谁来出钱<i>资金结构 2025 → 2035E</i></div>
+      <div class="rows">
+        <div class="row"><span class="nm">银行贷款</span><span class="v">49.8% → <b>47.3%</b></span></div><!--src: MS p28 左图 49.8% / 47.3%-->
+        <div class="row"><span class="nm">股权融资</span><span class="v">7.3% → <b>15.3%</b></span></div><!--src: 测算 = 一级 3.4%+二级 3.9%=7.3%；7.9%+7.4%=15.3%，据 MS p28 左图-->
+      </div>
+      <p class="fn">股权＝一级＋二级之和（本文测算）</p>
+    </div>
+  </div>
+
+  <div class="box" style="margin-top:14px">
+    <p style="margin:0;font-size:17.5px;line-height:1.55;color:var(--ink-soft)"><span class="bl">预期差</span>市场看“投资见顶＋过剩”；大摩看工业是唯一向上的投资腿，利润率 <span style="white-space:nowrap">~5% → ~8%</span>（2035E）。<!--src: MS p30 标题 ~5% in 2025 to ~8% by 2035--><b>分歧不在方向，在节奏。</b></p>
+  </div>
+
+  <div class="pg-foot"><span>大摩 · Industry 5.0 · 第三方研报提炼</span><span class="r">01 / 04</span></div>
+</div>
+
+<!-- ============ PAGE 2 · 钱花在哪 ============ -->
+<div class="page p2">
+  <div class="pg-head"><span>钱花在哪</span><span class="r">02 / 04 · 利润池</span></div>
+  <div class="sec-eye"><span class="no">02</span>钱花在哪</div>
+  <h2 class="sec">12 万亿美元里，5.5 万亿用来改工厂</h2>
+  <p class="lead">大摩把拖慢起步的原因归于过剩产能。我们的读法（本文判断）：这对“建新厂”约束最直接，对“改工厂”影响小——而改工厂那 5.5 万亿美元里，有两个放大器：软件和机器人。</p>
+
+  <div class="fig-t">未来十年增量工业资本开支拆账（万亿美元）</div>
+  {{SVG_ALLOC}}
+  <p class="fn">基建 0.5 ＝ AI 基建 0.2 ＋ 能源 0.3。原报告 P22–P27 小标题把 5.5／6／0.5 写成 “bn”；P22 瀑布图坐标为 US$tn、合计 12，应为万亿美元，此处按万亿计。</p>
+
+  <div class="kpis mt-br" style="margin-top:11.8mm">
+    <div class="kpi">
+      <div class="big au">7%<span class="ar">→</span>17%</div>
+      <div class="kl">工业软件占制造业设备资本开支</div>
+      <p>2025 → 2035E；没有 AI 驱动的工厂升级只到 ~8%。<!--src: MS p26 正文 ~7% → ~17% in 2035 (vs ~8%)-->2025 年市场约 3,400 亿元（工信部口径）。<!--src: MS p26 正文 ~Rmb340bn-->自动化架构从“金字塔”变“沙漏”，价值向软件层集中。<!--src: MS p26 图 pyramid to hourglass--></p>
+    </div>
+    <div class="kpi">
+      <div class="big">30%<span class="vs">vs</span>15%</div>
+      <div class="kl">机器人 TAM 年复合增速，2026–35</div>
+      <p>有／无工业 5.0 两种情形，差出约 10 万亿元。<!--src: MS p25 左图标题 +30% vs +15% CAGR, ~Rmb10tn value uplift-->拉长到 2050 年，TAM 约 4.7 万亿美元，<!--src: MS p25 右图标题 US$4.7tn in 2050, 20% CAGR 2025-50-->自动驾驶与人形机器人厂商是直接受益者。</p>
+    </div>
+    <div class="kpi">
+      <div class="big">~5%<span class="ar">→</span>~8%</div>
+      <div class="kl">工业企业利润率，2025 → 2035E</div>
+      <p><!--src: MS p30 标题 ~5% → ~8%-->四个驱动：投资转向毛利更高的中上游；<!--src: MS p31 Margin driver #1-->反内卷出清过剩；<!--src: MS p32 Margin driver #2-->龙头从国内竞争转向出海；<!--src: MS p33 Margin driver #3-->直接定义 0–1 新产业。<!--src: MS p34 Margin driver #4--></p>
+    </div>
+  </div>
+
+  <div class="duo" style="margin-top:16px">
+    <div>
+      <div class="fig-t">制造业 GenAI 用在哪<i>　受访企业占比</i></div>
+      {{SVG_GENAI}}
+    </div>
+    <div style="border-top:1px solid var(--ink);padding-top:8px">
+      <h3>AI 已进办公室，还没进产线</h3>
+      <p style="font-size:16.5px;color:var(--ink-soft);line-height:1.55">71% 的受访制造企业已在用 GenAI，较 2024 年 +24ppt；<!--src: MS p24 左图 71%，标题 up 24ppt from 2024-->但落地集中在知识与分析，预测性维护、机器人、CNC 控制只有 8–20%。<!--src: MS p24 右图 20% / 10% / 8%-->控制层正是“改工厂”要填的空（本文判断）。</p>
+      <p style="font-size:16.5px;color:var(--ink-soft);line-height:1.55;margin:0">指数层面，大摩预计到 2028 年 IT、能源 ROE 分别提升 8–9%、6–7%，材料、工业各 2–3%，合计为 MSCI China 指数 ROE 贡献约 2%。<!--src: MS p35 标题 Energy 6-7%, Materials 2-3%, Industrials 2-3%, IT 8-9%, ~2% to MSCI China ROE--></p>
+    </div>
+  </div>
+  <p class="fn" style="margin-top:10px">注：2050 年机器人 TAM，P10 标题写 “US$5 trillion”、同页图为 4,633 十亿美元，P25 写 4.7 万亿美元（图 4,689），原报告前后不一，此处取 P25。<!--src: MS p10 标题与图 4,633；MS p25 标题与图 4,689--></p>
+
+  <div class="pg-foot"><span>大摩 · Industry 5.0 · 第三方研报提炼</span><span class="r">02 / 04</span></div>
+</div>
+
+<!-- ============ PAGE 3 · 卡脖子与出海 ============ -->
+<div class="page p3">
+  <div class="pg-head"><span>上游与海外</span><span class="r">03 / 04 · 卡脖子与出海</span></div>
+  <div class="sec-eye"><span class="no">03</span>利润往两头走</div>
+  <h2 class="sec">国产化率最低的地方，抬升空间最大</h2>
+  <p class="lead">下游称王的赛道国产化率已在 90%–97%，卡在 50% 以下的全是精密部件和设备。大摩的尺子是关键接口的控制力、认证与良率，不是平均国产化率。<!--src: MS p12 图底 Investment lens--></p>
+
+  <div class="fig-t">国产化率：2025 → 2030E<i>　空心点＝当前，金色＝大摩目标</i></div>
+  {{SVG_LOCAL}}
+  <p class="cap">这张图想说：下游已近饱和，增量在 50% 以下的精密上游；WFE 要翻一倍多（本文测算）。<!--src: 测算 = 30/13.5=2.2 倍，据 MS p15 图--></p>
+  <p class="fn">¹ WFE 为 2024 → 2027–29E（P15）。² 工业机器人 2030E：P41 表为 70–80%，P15 图为 60–70%，原报告两处不一致，此处照录 P41 表。<!--src: MS p41 表 70-80%；MS p15 图 60–70%--></p>
+
+  <p class="mt-br" style="margin-top:11.8mm;font-size:17px;color:var(--ink-soft);line-height:1.58;border-top:1px solid var(--ink);padding-top:9px;max-width:none"><b>缺口最大的在哪</b>　大摩六因子框架下，主权缺口与 2035 年机会都评“很高”的是<b>工业软件与控制</b>（PLC／DCS、MES／SCADA）和<b>半导体与算力</b>（设备、EDA、先进封装）。<!--src: MS p13 表--></p>
+
+  <div class="box" style="margin-top:12px">
+    <h3>Made in China → Made by China</h3>
+    <p style="font-size:16.5px;color:var(--ink-soft);line-height:1.55">关税与“中国+1”改变的多是终端组装地，不是产能本身。大摩估算中国对美出口里只有约 <b>40%</b> 能被轻易替代——供应商深度、工艺诀窍和设备生态比组装线难搬得多。<!--src: MS p39 右图标题 ~40%-->出海的形态也在变：2019–24 年中国 ODI 年复合增长 19%，<!--src: MS p16 19% China ODI CAGR, 2019–24-->2021–23 年制造业 ODI 里汽车占 63%，<!--src: MS p16 63% Autos' share of manufacturing ODI, 2021–23-->从卖产品走向在当地运营。</p>
+    <div class="fig-t" style="font-size:14.5px;font-weight:600;color:var(--ink-soft);margin-bottom:5px">中国对美出口按“中国以外可替代产能”分三档（占美国自华进口）</div>
+    {{SVG_SUBST}}
+    <div class="rows" style="margin-top:9px;grid-template-columns:repeat(3,1fr);column-gap:18px;display:grid">
+      <div class="row" style="display:block;border:0"><span class="v"><b>16.5%</b> <span style="font-size:13px;color:var(--muted)">乐观 18／悲观 15</span></span><br><span class="nm" style="font-size:14.5px">全球出口份额 2030E</span></div><!--src: MS p33 右图 16.5% / 18% / 15%-->
+      <div class="row" style="display:block;border:0"><span class="v"><b>8% → 11%</b></span><br><span class="nm" style="font-size:14.5px">覆盖公司海外收入占比 2020–24</span></div><!--src: MS p14 第 5 栏 overseas revenue mix rose 8%→11% in 2020–24-->
+      <div class="row" style="display:block;border:0"><span class="v"><b>15–20%</b></span><br><span class="nm" style="font-size:14.5px">设备出口年增速 2020–25</span></div><!--src: MS p14 第 5 栏 Equipment exports grew 15–20% p.a. in 2020–25-->
+    </div>
+  </div>
+
+  <div class="pg-foot"><span>大摩 · Industry 5.0 · 第三方研报提炼</span><span class="r">03 / 04</span></div>
+</div>
+
+<!-- ============ PAGE 4 · 名单与情景 ============ -->
+<div class="page p4 tight">
+  <div class="pg-head"><span>落到股票</span><span class="r">04 / 04 · 名单与情景</span></div>
+  <div class="sec-eye"><span class="no">04</span>落到股票</div>
+  <h2 class="sec">45 只名单，按“利润池往哪搬”重排</h2>
+
+  <div class="stats">
+    <div><div class="n">37／7／1</div><div class="t">增持／中性／减持（本文统计）</div></div><!--src: MS p46 表 MS stock rating 列计数 37/7/1，合计 45-->
+    <div><div class="n au">46%</div><div class="t">上行空间中位数（本文测算）</div></div><!--src: 测算 = 45 只上行空间中位数（第 23 位，扬杰科技 46.0%），据 MS p46 表-->
+    <div><div class="n">10<small> 只</small></div><div class="t">上行空间 ≥100%（本文统计）</div></div><!--src: 测算 = MS p46 表上行空间 ≥100% 计数-->
+  </div>
+
+  <table>
+    <thead><tr><th class="l" style="width:22%">主线（本文归类）</th><th class="l">公司</th><th class="l">代码</th><th class="l">大摩评级</th><th>目标价上行空间</th></tr></thead>
+    <tbody>
+      <tr><td class="grp" rowspan="4">工厂里面<i>部件／装备／软件</i></td><td class="l co">绿的谐波</td><td class="l tk">688017.SS</td><td class="l rt">增持</td><td class="upv">118.4%</td></tr><!--src: MS p46 表 Leaderdrive OW 118.4%-->
+      <tr><td class="l co">大族激光</td><td class="l tk">002008.SZ</td><td class="l rt">增持</td><td class="upv">94.7%</td></tr><!--src: MS p46 表 Han's Laser OW 94.7%-->
+      <tr><td class="l co">恒立液压</td><td class="l tk">601100.SS</td><td class="l rt">增持</td><td class="upv">55.1%</td></tr><!--src: MS p46 表 Hengli OW 55.1%-->
+      <tr class="gend"><td class="l co">柏楚电子</td><td class="l tk">688188.SS</td><td class="l rt">增持</td><td class="upv">27.5%</td></tr><!--src: MS p46 表 Shanghai Bochu OW 27.5%-->
+      <tr><td class="grp" rowspan="4">上游卡脖子<i>芯片／材料</i></td><td class="l co">中国巨石</td><td class="l tk">600176.SS</td><td class="l rt">增持</td><td class="upv">92.9%</td></tr><!--src: MS p46 表 China Jushi OW 92.9%-->
+      <tr><td class="l co">兆易创新</td><td class="l tk">603986.SS</td><td class="l rt">增持</td><td class="upv">91.5%</td></tr><!--src: MS p46 表 Gigadevice OW 91.5%-->
+      <tr><td class="l co">金力永磁</td><td class="l tk">6680.HK</td><td class="l rt">增持</td><td class="upv">74.5%</td></tr><!--src: MS p46 表 JL Mag OW 74.5%-->
+      <tr class="gend"><td class="l co">寒武纪</td><td class="l tk">688256.SS</td><td class="l rt">增持</td><td class="upv">26.5%</td></tr><!--src: MS p46 表 Cambricon OW 26.5%-->
+      <tr><td class="grp last" rowspan="4">出海与生态输出<i>电力／电池／工程机械</i></td><td class="l co">阳光电源</td><td class="l tk">300274.SZ</td><td class="l rt">增持</td><td class="upv">160.8%</td></tr><!--src: MS p46 表 Sungrow OW 160.8%-->
+      <tr><td class="l co">宁德时代</td><td class="l tk">300750.SZ</td><td class="l rt">增持</td><td class="upv">100.3%</td></tr><!--src: MS p46 表 CATL OW 100.3%-->
+      <tr><td class="l co">三一重工</td><td class="l tk">600031.SS</td><td class="l rt">增持</td><td class="upv">80.2%</td></tr><!--src: MS p46 表 Sany Heavy OW 80.2%-->
+      <tr><td class="l co">思源电气</td><td class="l tk">002028.SZ</td><td class="l rt">增持</td><td class="upv">70.6%</td></tr><!--src: MS p46 表 Sieyuan OW 70.6%-->
+    </tbody>
+  </table>
+  <p class="fn">分组为本文归类（大摩原按智能／韧性／领先打标）。全名单上行空间第一、第三是 AI 模型公司 MiniMax 202.0%、智谱 126.7%（第二为阳光电源）；<!--src: MS p46 表 Minimax 202.0%、Sungrow 160.8%、Z.AI 126.7%-->唯一减持是百度（−11.7%），<!--src: MS p46 表 Baidu UW (11.7%)-->P45 维恩图同位置却是石头科技，此处照录 P46。<!--src: MS p45 维恩图含 Roborock、无 Baidu-->原表“交易币种”列与上市地多处不符（如 A 股标 HKD），故不列股价与目标价；上行空间按 2026-09-21 收盘价。</p>
+
+  <div class="mt-br">
+    <div class="fig-t" style="font-size:19px">不会是直线：大摩的三种情景<i>　GDP 增速依次为 2026–27／2028–30／2031–35</i></div>
+    <div class="scen">
+      <div>
+        <div class="h">基准<i>温和再平衡，低通胀延续</i></div>
+        <div class="g">4.6／4.3／3.9%</div><!--src: MS p38 基准 4.6% / 4.3% / 3.9%-->
+        <p>平减指数 2027 年滑到 0.2%，2028 年起 0.5–1.0%；2035 年全球制造业份额 30%。<!--src: MS p38 基准 deflator 0.2% in 2027, 0.5–1.0% from 2028；p37 Base 30%--></p>
+      </div>
+      <div>
+        <div class="h">乐观<i>果断再平衡，健康再通胀</i></div>
+        <div class="g">4.7／4.5／4.2%</div><!--src: MS p38 乐观 4.7% / 4.5% / 4.2%-->
+        <p>平减指数中期 1.5–2%；份额约 33%。触发：社保改革释放消费、工业 AI 突破。<!--src: MS p38 乐观 1.5–2%，~33%；p37 Bull 假设--></p>
+      </div>
+      <div>
+        <div class="h">悲观<i>通缩固化</i></div>
+        <div class="g">4.4／4.0／3.5%</div><!--src: MS p38 悲观 4.4% / 4.0% / 3.5%-->
+        <p>2027 年起通缩，中期 −0.5% 至 −1.0%；份额约 27%。触发：财政过早收紧、AI 无序扩张。<!--src: MS p38 悲观 -0.5% to -1.0%，~27%；p37 Bear 假设--></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tailrow" style="margin-top:14px">
+    <div class="disc"><b>说明</b>　本文为 Morgan Stanley 研报的中文提炼，观点属原机构，不构成投资建议；标“本文测算／判断／归类／统计”者为本文据原文数据所作。</div>
+    <div class="portmark">
+      <div class="pm-t"><b>全球投行研报精选</b>微信扫码 · 每日研报精华</div>
+      <img class="pm-q" src="data:image/png;base64,{{QR_B64}}" alt="THE PORT 微信二维码">
+    </div>
+  </div>
+
+  <div class="pg-foot"><span>大摩 · Industry 5.0 · 第三方研报提炼</span><span class="r">04 / 04</span></div>
+</div>
+
+</body>
+</html>

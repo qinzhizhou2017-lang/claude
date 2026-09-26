@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>大摩 · 工业 5.0 · 6 页精华版</title>
+<style>
+{{BASE_CSS}}
+  /* ================= 6 页版新增组件 ================= */
+  .page.cover{display:flex;flex-direction:column;padding-bottom:15.5mm}
+  .cv-mid{flex:1;display:flex;flex-direction:column;justify-content:center}
+  h1.cv{font-size:58px;line-height:1.14;margin-top:12px}
+  .bignums{display:grid;grid-template-columns:1fr 1fr 1fr;column-gap:22px;margin-top:26px}
+  .bignums>div{border-top:1px solid var(--ink);padding-top:10px}
+  .bignums .n{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:50px;font-weight:800;line-height:1.05;letter-spacing:-.03em;white-space:nowrap}
+  .bignums .n small{font-size:18px;font-weight:600;color:var(--muted);letter-spacing:0;margin-left:4px}
+  .bignums .n.au{color:var(--gold)}
+  .bignums .t{font-size:16px;color:var(--ink-soft);margin-top:7px;line-height:1.45}
+
+  .menu{border-top:1px solid var(--hair);margin-top:16px}
+  .mi{display:grid;grid-template-columns:34px auto 1fr auto;column-gap:12px;align-items:baseline;
+    padding:7px 0;border-bottom:1px solid var(--hair-soft)}
+  .mi .no{font-family:var(--mono);font-size:15px;font-weight:800;color:var(--muted)}
+  .mi .t{font-size:17.5px;font-weight:800;line-height:1.4;white-space:nowrap}
+  .mi .d{font-size:16px;color:var(--ink-soft);line-height:1.4}
+  .mi .pg{font-family:var(--mono);font-size:13px;color:var(--muted)}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;column-gap:26px;align-items:start}
+  .two>.c{border-top:1px solid var(--ink);padding-top:8px}
+
+  .hist{display:grid;grid-template-columns:repeat(3,1fr);column-gap:22px}
+  .hist>div{border-top:1px solid var(--ink);padding-top:8px}
+  .hist .h{font-size:16px;font-weight:800;line-height:1.35}
+  .hist .h i{font-style:normal;font-weight:400;font-family:var(--mono);font-size:12.5px;color:var(--muted);margin-left:6px}
+  .hist .n{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:24px;font-weight:800;line-height:1.2;margin-top:4px;white-space:nowrap}
+  .hist p{font-size:15px;color:var(--ink-soft);line-height:1.5;margin:3px 0 0}
+
+  .road{display:grid;grid-template-columns:repeat(3,1fr);column-gap:22px}
+  .road>div{border-top:1px solid var(--ink);padding-top:8px}
+  .road .yr{font-family:var(--mono);font-size:15px;font-weight:800;color:var(--ink-soft)}
+  .road .h{font-size:17.5px;font-weight:800;line-height:1.3;margin-top:1px}
+  .road p{font-size:15.5px;color:var(--ink-soft);line-height:1.5;margin:4px 0 0}
+  .road p.ar{font-size:14.5px;color:var(--muted)}
+
+  td.wrap{font-family:var(--sans);text-align:left;white-space:normal;font-size:15px;line-height:1.4;color:var(--ink-soft)}
+  td.lvl{font-family:var(--sans);text-align:left;font-size:15.5px}
+  td.lvl.hi{font-weight:800;color:var(--ink)}
+
+  .ucv{display:grid;grid-template-columns:192px 1fr 170px;column-gap:14px;align-items:start}
+  .lst .lh{font-size:14.5px;font-weight:800;margin:0 0 5px;line-height:1.35;color:var(--ink)}
+  .lst .lh i{display:block;font-style:normal;font-weight:400;color:var(--muted);font-size:13px}
+  .lst ol{margin:0;padding:0;list-style:none;counter-reset:n}
+  .lst li{font-size:14.5px;line-height:1.5;color:var(--ink-soft);display:flex;gap:7px;
+    border-bottom:1px solid var(--hair-soft);padding:0}
+  .lst li:last-child{border-bottom:0}
+  .lst li::before{counter-increment:n;content:counter(n,decimal-leading-zero);font-family:var(--mono);
+    font-size:11.5px;color:var(--muted);flex:0 0 auto;padding-top:2px}
+  .eng{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+  .eng li{font-size:15.5px;color:var(--ink-soft);line-height:1.5}
+  .eng li b{color:var(--ink)}
+
+  .sv .ann{font-family:var(--sans);font-size:13.5px;fill:#37424F}
+  .sv .zl{font-family:var(--sans);font-size:14px;font-weight:700;fill:#141D2A}
+  .sv .rl2{font-family:var(--sans);font-size:15px;fill:#141D2A}
+  .sv .lab2{font-family:var(--sans);font-size:14px;font-weight:700;fill:#37424F}
+  .sv .val3{font-size:14px;font-weight:700;fill:#141D2A}
+  .sv .val3w{font-size:14px;font-weight:700;fill:#FFFFFF}
+  .sv .ax2{font-size:14px;font-weight:700;fill:#37424F}
+</style>
+</head>
+<body>
+
+<!-- ============ PAGE 1 · 封面 · 一屏读懂 ============ -->
+<div class="page cover">
+  <div class="pg-head"><span>Morgan Stanley Research · 中国工业</span><span class="r">01 / 06 · 一屏读懂</span></div>
+
+  <div class="cv-mid">
+    <div class="eyebrow">大摩 · 中国新兴前沿 · 2026.09.21</div>
+    <h1 class="cv">12 万亿美元前轻后重：<br>先搬的是利润池，不是产能</h1>
+    <div class="en">China Emerging Frontiers: Industry 5.0 - China's Next Industrial Revolution</div>
+    <p class="thesis">大摩测算中国十年多出约 12 万亿美元工业资本开支，<!--src: MS p21 标题 US$12tn-->但近九成落在 2030 年后（本文测算），<!--src: 测算 = (15+23+33)/(2+7+15+23+33)=71/80=88.75%，据 MS p21 图-->2026–27 年对潜在 GDP 拉动为 0。<!--src: MS p36 右图 0.0%-->过剩未消化的几年里，看点不是多建厂，而是利润池搬向软件、机器人、卡脖子和海外。</p>
+
+    <div class="bignums">
+      <div><div class="n">12<small>万亿美元</small></div><div class="t">2026–35 年增量工业资本开支，约合 80 万亿元人民币</div></div><!--src: MS p21 标题 US$12tn；图注 ~Rmb80trn-->
+      <div><div class="n au">89%</div><div class="t">增量落在 2030–35 年<span style="white-space:nowrap">（本文测算）</span></div></div><!--src: 测算 = 71/80=88.75%，据 MS p21 图-->
+      <div><div class="n">0.0<small>pp</small></div><div class="t">2026–27 年潜在 GDP 增速拉动</div></div><!--src: MS p36 右图 0.0%-->
+    </div>
+  </div>
+
+  <div class="box" style="margin-top:18px">
+    <p style="margin:0;font-size:17.5px;line-height:1.55;color:var(--ink-soft)"><span class="bl">预期差</span>市场看“投资见顶＋过剩”；大摩看工业是三条投资腿里唯一向上的一条，<!--src: MS p21 右图 工业 17.4%→19.6%，基建与地产下行-->利润率 <span style="white-space:nowrap">~5% → ~8%</span>（2035E）。<!--src: MS p30 标题 ~5% in 2025 to ~8% by 2035--><b>分歧不在方向，在节奏。</b></p>
+  </div>
+
+  <div class="menu">
+    <div class="mi"><span class="no">02</span><span class="t">节奏</span><span class="d">头两年只落地 2 万亿元；资本开支周期按十年计</span><span class="pg">P2</span></div><!--src: MS p21 图 +2；MS p53–p54 附录-->
+    <div class="mi"><span class="no">03</span><span class="t">改工厂</span><span class="d">软件占设备投资 7% → 17%，机器人增速 30% vs 15%</span><span class="pg">P3</span></div><!--src: MS p26 7%→17%；p25 30% vs 15%-->
+    <div class="mi"><span class="no">04</span><span class="t">卡脖子</span><span class="d">国产化率最低处抬升最大：半导体设备 13.5% → 30%</span><span class="pg">P4</span></div><!--src: MS p15 图 WFE 13.5%→30%-->
+    <div class="mi"><span class="no">05</span><span class="t">利润池与出海</span><span class="d">利润率 5% → 8%；对美出口仅约 40% 易被替代</span><span class="pg">P5</span></div><!--src: MS p30 标题；MS p39 右图标题 ~40%-->
+    <div class="mi"><span class="no">06</span><span class="t">落到股票</span><span class="d">45 只名单：37 只增持，上行空间中位数 46%</span><span class="pg">P6</span></div><!--src: MS p46 表评级计数 37；测算 中位数 46.0%，据 MS p46 表-->
+  </div>
+
+  <div class="srcline"><b>来源</b> Morgan Stanley · China Industrials（In-Line）· Sheng Zhong 等 · 2026-09-21<!--src: MS p1 封面 分析师/行业评级 In-Line/日期 2026-09-21--><br>
+    <b>正文 46 页</b>（原报告 61 页；附录只引 P53–P55 历史参照，P56–P61 披露未纳入）· 标题与主线为本文判断</div>
+
+  <div class="pg-foot"><span>大摩 · Industry 5.0 · 第三方研报提炼</span><span class="r">01 / 06</span></div>
+</div>
+
+<!-- ============ PAGE 2 · 节奏 ============ -->
+<div class="page p2">
+  <div class="pg-head"><span>账单与节奏</span><span class="r">02 / 06 · 节奏</span></div>
+  <div class="sec-eye"><span class="no">02</span>节奏</div>
+  <h2 class="sec">账单前轻后重：头两年只落地 2 万亿元</h2>
+  <p class="lead">按大摩的分年数字，2026–27 年增量只有 2 万亿元，2034–35 年是 33 万亿元；<!--src: MS p21 图 +2 / +33-->它给的原因是“起步慢”，过剩产能还在拖。<!--src: MS p21 小标题 slow start due to constraints from lingering excess capacity--></p>
+
+  <div class="fig-t">工业资本开支（万亿元人民币，每两年合计）<i>　灰＝基线　金＝工业 5.0 增量</i></div>
+  {{SVG_CAPEX}}
+  <p class="cap">这张图想说：基线走平，<!--src: MS p21 图 50/52/53/53/53-->增长全靠增量；2030 年起的六年拿走增量的 <span class="key">89%</span>（本文测算）。<!--src: 测算 = 71/80=88.75%，据 MS p21 图--></p>
+
+  <div class="two mt-br">
+    <div class="c">
+      <div class="k-t">投资占 GDP：三条腿只有一条向上<i>2025 → 2035E</i></div>
+      <div class="rows">
+        <div class="row"><span class="nm">工业（含电力）</span><span class="v">17.4% → <b>19.6%</b> <span class="up">▲</span></span></div><!--src: MS p21 右图 Industrial Sector (incl. Electricity) 2025 17.4% / 2035E 19.6%-->
+        <div class="row"><span class="nm">传统基建</span><span class="v">7.6% → <b>4.2%</b> <span class="dn">▼</span></span></div><!--src: MS p21 右图 7.6% / 4.2%-->
+        <div class="row"><span class="nm">地产</span><span class="v">3.3% → <b>3.0%</b> <span class="dn">▼</span></span></div><!--src: MS p21 右图 3.3% / 3.0%-->
+      </div>
+    </div>
+    <div class="c">
+      <div class="k-t">对潜在 GDP 增速的拉动<i>百分点 · J 曲线</i></div>
+      {{SVG_JCURVE}}
+    </div>
+  </div>
+
+  <div style="margin-top:14px">
+    <div class="fig-t">历史参照：通用技术带来的资本开支周期，都以十年计<i>　原报告附录</i></div>
+    <div class="hist">
+      <div>
+        <div class="h">美国电气化<i>1880s–1920s</i></div>
+        <div class="n">~40 年</div>
+        <p>资本形成占 GNP &gt;20%；1899→1929 年工厂电气化率 4%→75%。<!--src: MS p53 >20% for ~40 years；Electricity's share of primary horsepower in US manufacturing 4% in 1899 to 75% by 1929--></p>
+      </div>
+      <div>
+        <div class="h">日本重化工<i>1960s–1975</i></div>
+        <div class="n">~20 年</div>
+        <p>资本形成占 GDP &gt;30%；丰田国内乘用车产量 20 年增约 55 倍。<!--src: MS p54 >30% for ~20 years；Toyota ~55x in 20 years--></p>
+      </div>
+      <div>
+        <div class="h">中国入世<i>2000s–2015</i></div>
+        <div class="n">3.2% → 10.3%</div>
+        <p>中国占全球出口份额（2000→2014）；城镇化率 36.4% → 55.8%。<!--src: MS p55 10.3% in 2014, from 3.2% in 2000；55.8% from 36.4%--></p>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:14px">
+    <div class="fig-t">谁来出钱：资本开支的资金结构<i>　股权＝一级＋二级市场</i></div>
+    {{SVG_FUNDING}}
+    <p class="cap" style="margin-top:4px">股权融资占比 7.3% → 15.3%，翻倍（本文测算）；银行贷款仍占约 47%。<!--src: 测算 = 3.4+3.9 / 7.9+7.4，据 MS p28 左图；MS p28 标题 ~47%--></p>
+  </div>
+
+  <div class="pg-foot"><span>大摩 · Industry 5.0 · 第三方研报提炼</span><span class="r">02 / 06</span></div>
+</div>
+
+<!-- ============ PAGE 3 · 改工厂 ============ -->
+<div class="page p3">
+  <div class="pg-head"><span>改工厂</span><span class="r">03 / 06 · 5.5 万亿美元</span></div>
+  <div class="sec-eye"><span class="no">03</span>改工厂</div>
+  <h2 class="sec">改工厂的 5.5 万亿美元：软件和机器人是放大器</h2>
+  <p class="lead">过剩产能拖住的是“建新厂”，“改工厂”不必等出清（本文判断）。大摩拆出的 12 万亿美元里，改工厂占 5.5 万亿。<!--src: MS p22 图 工厂升级 1.5+3.0+1.0=5.5--></p>
+
+  <div class="fig-t">未来十年增量工业资本开支拆账（万亿美元）</div>
+  {{SVG_ALLOC}}
+  <p class="fn">基建 0.5 ＝ AI 基建 0.2 ＋ 能源 0.3。原报告 P22–P27 小标题把 5.5／6／0.5 写成 “bn”；P22 瀑布图坐标为 US$tn、合计 12，应为万亿美元，此处按万亿计。</p>
+
+  <div class="kpis mt-br" style="margin-top:11.8mm">
+    <div class="kpi">
+      <div class="big au">7%<span class="ar">→</span>17%</div>
+      <div class="kl">工业软件占制造业设备资本开支</div>
+      <p>2025 → 2035E；没有 AI 驱动的升级只到 ~8%。<!--src: MS p26 正文 ~7% → ~17% in 2035 (vs ~8%)-->2025 年市场约 3,400 亿元。<!--src: MS p26 正文 ~Rmb340bn-->自动化架构从“金字塔”变“沙漏”，价值向软件层集中。<!--src: MS p26 图 pyramid to hourglass--></p>
+    </div>
+    <div class="kpi">
+      <div class="big">30%<span class="vs">vs</span>15%</div>
+      <div class="kl">机器人 TAM 年复合增速，2026–35</div>
+      <p>有／无工业 5.0 两种情形，差出约 10 万亿元。<!--src: MS p25 左图标题 +30% vs +15% CAGR, ~Rmb10tn value uplift-->到 2050 年 TAM 约 4.7 万亿美元、年销量约 3.75 亿台¹，<!--src: MS p25 右图标题 US$4.7tn in 2050；MS p10 右图 375mn in 2050-->自动驾驶与人形机器人厂商直接受益。</p>
+    </div>
+    <div class="kpi">
+      <div class="big">1,000<span class="vs">个</span></div>
+      <div class="kl">2027 年“AI+制造”目标：高水平工业智能体</div>
+      <p>同一方案还要 3–5 个通用大模型深度用于制造、100 个高质量工业数据集、500 个典型场景。<!--src: MS p8 第 3 栏 Key 2027 targets 3–5 / 1,000 / 100 / 500-->政策重心从“数字工厂”转向“工业智能体”。<!--src: MS p8 第 3 栏标题--></p>
+    </div>
+  </div>
+
+  <div class="two" style="margin-top:16px">
+    <div class="c">
+      <div class="fig-t">卓越级智能工厂的实测回报</div>
+      {{SVG_FACTORY}}
+      <p class="fn">230+ 家卓越级工厂的均值，非全国平均（原报告注）。<!--src: MS p15 第 2 栏注 230+ excellent smart factories; averages, not the national average--></p>
+      <div class="rows" style="margin-top:8px">
+        <div class="row"><span class="nm">基础级智能工厂</span><span class="v"><b>&gt;30,000</b></span></div><!--src: MS p8 第 2 栏 >30,000 Basic-level（by early 2025）-->
+        <div class="row"><span class="nm">先进级</span><span class="v"><b>&gt;1,200</b></span></div><!--src: MS p8 第 2 栏 >1,200 Advanced-level-->
+        <div class="row"><span class="nm">卓越级（上图口径）</span><span class="v"><b>&gt;230</b></span></div><!--src: MS p8 第 2 栏 >230 Excellence-level-->
+      </div>
+      <p class="fn">2025 年初数据。卓越级不到基础级的 1%（本文测算）：回报已验证，但远未铺开。<!--src: 测算 = 230/30,000=0.77%，据 MS p8 第 2 栏--></p>
+    </div>
+    <div class="c">
+      <div class="fig-t">制造业 GenAI 用在哪<i>　受访企业占比</i></div>
+      {{SVG_GENAI}}
+      <p class="fn">71% 已在用 GenAI（较 2024 年 +24ppt），<!--src: MS p24 左图 71%，标题 up 24ppt from 2024-->但控制层只有 8–20%——这是改工厂要填的空（本文判断）。</p>
+      <p class="fn">人形机器人：大摩 2025 年调研中，62% 的受访企业计划在 2027 年前启动试点或重大项目（n=86）。<!--src: MS p11 左图标题 62%，n=86--></p>
+    </div>
+  </div>
+  <p class="fn" style="margin-top:10px">¹ 2050 年机器人 TAM：P10 标题写 US$5tn、图为 4,633 十亿美元；P25 为 4.7 万亿美元（图 4,689），此处取 P25。<!--src: MS p10 标题与图 4,633 / 375；MS p25 标题与图 4,689--></p>
+
+  <div class="pg-foot"><span>大摩 · Industry 5.0 · 第三方研报提炼</span><span class="r">03 / 06</span></div>
+</div>
+
+<!-- ============ PAGE 4 · 卡脖子 ============ -->
+<div class="page p4 tight tighter">
+  <div class="pg-head"><span>卡脖子</span><span class="r">04 / 06 · 国产替代</span></div>
+  <div class="sec-eye"><span class="no">04</span>卡脖子</div>
+  <h2 class="sec">国产化率最低的地方，抬升空间最大</h2>
+  <p class="lead">下游称王的赛道国产化率已在 90%–97%，卡在 50% 以下的全是精密部件和设备。大摩的尺子是关键接口的控制力、认证与良率，不是平均国产化率。<!--src: MS p12 图底 Investment lens--></p>
+
+  <div class="fig-t">国产化率：2025 → 2030E<i>　空心点＝当前，金色＝大摩目标</i></div>
+  {{SVG_LOCAL}}
+  <p class="cap">这张图想说：下游已近饱和，增量在 50% 以下的精密上游；WFE 要翻一倍多（本文测算）。<!--src: 测算 = 30/13.5=2.2 倍，据 MS p15 图--></p>
+  <p class="fn">¹ WFE 为 2024 → 2027–29E。² 工业机器人：P41 表 70–80%、P15 图 60–70%，原报告不一致，照录 P41。<!--src: MS p41 表 70-80%；MS p15 图 60–70%--></p>
+
+  <div class="mt-br">
+    <div class="fig-t">从“能替代”到“能自主”：大摩的三段路线</div>
+    <div class="road">
+      <div>
+        <div class="yr">2026–30</div><div class="h">可用与认证</div>
+        <p>替换单一来源依赖、过认证</p>
+        <p class="ar">WFE 模块、EDA、工业软件、数控、传感器、功率芯片等</p>
+      </div><!--src: MS p12 Execution roadmap 2026-30-->
+      <div>
+        <div class="yr">2028–33</div><div class="h">栈互通</div>
+        <p>国产部件连成可靠系统</p>
+        <p class="ar">国产产线栈、工厂控制栈、机床生态、智能能源系统</p>
+      </div><!--src: MS p12 Execution roadmap 2028-33-->
+      <div>
+        <div class="yr">2030–35+</div><div class="h">架构自主</div>
+        <p>做出国际级的替代设计与平台</p>
+        <p class="ar">先进封装与芯粒、AI 原生机床、具身智能栈、航空航天等</p>
+      </div><!--src: MS p12 Execution roadmap 2030-35+-->
+    </div>
+  </div>
+
+  <div style="margin-top:14px">
+    <div class="fig-t">主权缺口在哪：大摩六因子框架下的六个技术栈</div>
+    <table>
+      <thead><tr><th class="l">技术栈</th><th class="l">主权缺口</th><th class="l">2035 年机会</th><th class="l">主要限制</th></tr></thead>
+      <tbody>
+        <tr><td class="l co">半导体与算力</td><td class="lvl hi">很高</td><td class="lvl hi">很高（选择性）</td><td class="wrap">前沿制程设备与先进算力受限</td></tr>
+        <tr><td class="l co">工业软件与控制</td><td class="lvl hi">很高</td><td class="lvl hi">很高</td><td class="wrap">客户黏性强、验证周期长、变现弱</td></tr>
+        <tr><td class="l co">机床、计量与仪器</td><td class="lvl">高</td><td class="lvl hi">很高</td><td class="wrap">精度、可靠性与工艺诀窍要长期积累</td></tr>
+        <tr><td class="l co">先进材料与基础工艺</td><td class="lvl">高</td><td class="lvl">高</td><td class="wrap">认证周期与批次一致性</td></tr>
+        <tr><td class="l co">航空航天与战略交通</td><td class="lvl hi">很高</td><td class="lvl">中高（选择性）</td><td class="wrap">认证周期长、系统集成复杂</td></tr>
+        <tr><td class="l co">科学与医疗仪器</td><td class="lvl">高</td><td class="lvl">中高</td><td class="wrap">量小、验证门槛高、依赖科研生态</td></tr>
+      </tbody>
+    </table><!--src: MS p13 表 Sovereignty gap / 2035 opportunity / Main limitation-->
+  </div>
+
+  <div class="pg-foot"><span>大摩 · Industry 5.0 · 第三方研报提炼</span><span class="r">04 / 06</span></div>
+</div>
+
+<!-- ============ PAGE 5 · 利润池与出海 ============ -->
+<div class="page p5">
+  <div class="pg-head"><span>利润池与出海</span><span class="r">05 / 06 · 利润池</span></div>
+  <div class="sec-eye"><span class="no">05</span>利润池与出海</div>
+  <h2 class="sec">利润率从 5% 回到 8%：钱往 0-1 和海外走</h2>
+  <p class="lead">大摩预计工业企业利润率从 2025 年 ~5% 修复到 2035 年 ~8%。<!--src: MS p30 标题 ~5% → ~8%-->它的路径图是一条 U 型：新产业 0-1 时利润最高，国产化与内卷时最低，出海后长期修复再企稳。<!--src: MS p34 示意图--></p>
+
+  <div class="ucv">
+    <div class="lst">
+      <div class="lh">未来十年<i>中国可能从 0-1 领先的产业</i></div>
+      <ol>
+        <li>核聚变与先进核能</li><li>商业航天与卫星互联网</li><li>6G／空天地一体网络</li>
+        <li>人形机器人与具身智能</li><li>AI 智能体与工业基础模型</li><li>量子计算与量子网络</li>
+        <li>合成生物与生物制造</li><li>脑机接口与神经科技</li><li>新材料</li><li>先进储能与氢能</li>
+      </ol>
+    </div><!--src: MS p34 左栏 Future 10 Years: Frontier Industries China Can Lead From 0-1-->
+    <div>
+      <div class="fig-t" style="text-align:center">行业利润率的一轮周期（示意）</div>
+      {{SVG_UCURVE}}
+    </div>
+    <div class="lst">
+      <div class="lh">过去十年<i>走完这一轮的 10 个行业</i></div>
+      <ol>
+        <li>新能源车</li><li>光伏</li><li>锂电池与储能</li><li>风电设备</li><li>消费电子／手机</li>
+        <li>家电</li><li>LED 照明与显示</li><li>工程机械</li><li>钢铁与基础材料</li><li>纺织服装</li>
+      </ol>
+    </div><!--src: MS p34 右栏 Past 10 Years in China: 10 Major Industries Through This Cycle-->
+  </div>
+
+  <div class="two" style="margin-top:14px">
+    <div class="c">
+      <div class="k-t">未来十年的双引擎（大摩）</div>
+      <ul class="eng">
+        <li><b>优势产业出海</b>：拓海外市场、建全球品牌与渠道、价值链上移、拿全球定价权。</li>
+        <li><b>0-1 突破</b>：从头领先、定全球标准、拿高毛利 IP、避开只在国内打的价格战。</li>
+      </ul><!--src: MS p34 底部 Dual Engines for Profit Margin Improvement-->
+    </div>
+    <div class="c">
+      <div class="k-t">2028E ROE（%）<i>括号内为大摩预计提升幅度</i></div>
+      {{SVG_ROE}}
+    </div>
+  </div>
+
+  <div class="box" style="margin-top:6.5mm">
+    <h3>Made in China → Made by China</h3>
+    <p style="font-size:16.5px;color:var(--ink-soft);line-height:1.55">关税与“中国+1”改变的多是终端组装地，不是产能本身。大摩估算中国对美出口里只有约 <b>40%</b> 能被轻易替代——供应商深度、工艺诀窍和设备生态比组装线难搬得多。<!--src: MS p39 右图标题 ~40%--></p>
+    <p style="font-size:16px;color:var(--ink-soft);line-height:1.55"><b>出海的五级台阶</b>：出口产品 → 跟随中国客户出海 → 本地生产与服务 → 打入全球客户 → 生态与标准。大摩看许多公司已在第 1–4 级，走到第 5 级的会越来越多。<!--src: MS p16 正文 five stages, many companies already at stages 1-4；图 Globalization ladder--></p>
+    <div class="fig-t" style="font-size:14.5px;font-weight:600;color:var(--ink-soft);margin-bottom:5px">中国对美出口按“中国以外可替代产能”分三档（占美国自华进口）</div>
+    {{SVG_SUBST}}
+    <div class="rows" style="margin-top:9px;grid-template-columns:repeat(3,1fr);column-gap:18px;display:grid">
+      <div class="row" style="display:block;border:0"><span class="v"><b>775</b> <span style="font-size:13px;color:var(--muted)">（2001 年 338）</span></span><br><span class="nm" style="font-size:14.5px">全球出口前三的品类数，2023</span></div><!--src: MS p4 左下图 China 775 (2023) / 338 (2001)-->
+      <div class="row" style="display:block;border:0"><span class="v"><b>416</b> <span style="font-size:13px;color:var(--muted)">（2001 年 662）</span></span><br><span class="nm" style="font-size:14.5px">同口径：美国，2023</span></div><!--src: MS p4 左下图 United States 416 (2023) / 662 (2001)-->
+      <div class="row" style="display:block;border:0"><span class="v"><b>16.5%</b> <span style="font-size:13px;color:var(--muted)">乐观 18／悲观 15</span></span><br><span class="nm" style="font-size:14.5px">全球出口份额 2030E</span></div><!--src: MS p33 右图 16.5% / 18% / 15%-->
+    </div>
+  </div>
+
+  <div class="pg-foot"><span>大摩 · Industry 5.0 · 第三方研报提炼</span><span class="r">05 / 06</span></div>
+</div>
+
+<!-- ============ PAGE 6 · 名单与情景 ============ -->
+<div class="page p6 tight">
+  <div class="pg-head"><span>落到股票</span><span class="r">06 / 06 · 名单与情景</span></div>
+  <div class="sec-eye"><span class="no">06</span>落到股票</div>
+  <h2 class="sec">45 只名单，按“利润池往哪搬”重排</h2>
+
+  <div class="stats">
+    <div><div class="n">37／7／1</div><div class="t">增持／中性／减持（本文统计）</div></div><!--src: MS p46 表 MS stock rating 列计数 37/7/1，合计 45-->
+    <div><div class="n au">46%</div><div class="t">上行空间中位数（本文测算）</div></div><!--src: 测算 = 45 只上行空间中位数（第 23 位，扬杰科技 46.0%），据 MS p46 表-->
+    <div><div class="n">10<small> 只</small></div><div class="t">上行空间 ≥100%（本文统计）</div></div><!--src: 测算 = MS p46 表上行空间 ≥100% 计数-->
+  </div>
+
+  <table>
+    <thead><tr><th class="l" style="width:22%">主线（本文归类）</th><th class="l">公司</th><th class="l">代码</th><th class="l">大摩评级</th><th>目标价上行空间</th></tr></thead>
+    <tbody>
+      <tr><td class="grp" rowspan="4">工厂里面<i>部件／装备／软件</i></td><td class="l co">绿的谐波</td><td class="l tk">688017.SS</td><td class="l rt">增持</td><td class="upv">118.4%</td></tr><!--src: MS p46 表 Leaderdrive OW 118.4%-->
+      <tr><td class="l co">大族激光</td><td class="l tk">002008.SZ</td><td class="l rt">增持</td><td class="upv">94.7%</td></tr><!--src: MS p46 表 Han's Laser OW 94.7%-->
+      <tr><td class="l co">恒立液压</td><td class="l tk">601100.SS</td><td class="l rt">增持</td><td class="upv">55.1%</td></tr><!--src: MS p46 表 Hengli OW 55.1%-->
+      <tr class="gend"><td class="l co">柏楚电子</td><td class="l tk">688188.SS</td><td class="l rt">增持</td><td class="upv">27.5%</td></tr><!--src: MS p46 表 Shanghai Bochu OW 27.5%-->
+      <tr><td class="grp" rowspan="4">上游卡脖子<i>芯片／材料</i></td><td class="l co">中国巨石</td><td class="l tk">600176.SS</td><td class="l rt">增持</td><td class="upv">92.9%</td></tr><!--src: MS p46 表 China Jushi OW 92.9%-->
+      <tr><td class="l co">兆易创新</td><td class="l tk">603986.SS</td><td class="l rt">增持</td><td class="upv">91.5%</td></tr><!--src: MS p46 表 Gigadevice OW 91.5%-->
+      <tr><td class="l co">金力永磁</td><td class="l tk">6680.HK</td><td class="l rt">增持</td><td class="upv">74.5%</td></tr><!--src: MS p46 表 JL Mag OW 74.5%-->
+      <tr class="gend"><td class="l co">寒武纪</td><td class="l tk">688256.SS</td><td class="l rt">增持</td><td class="upv">26.5%</td></tr><!--src: MS p46 表 Cambricon OW 26.5%-->
+      <tr><td class="grp last" rowspan="4">出海与生态输出<i>电力／电池／工程机械</i></td><td class="l co">阳光电源</td><td class="l tk">300274.SZ</td><td class="l rt">增持</td><td class="upv">160.8%</td></tr><!--src: MS p46 表 Sungrow OW 160.8%-->
+      <tr><td class="l co">宁德时代</td><td class="l tk">300750.SZ</td><td class="l rt">增持</td><td class="upv">100.3%</td></tr><!--src: MS p46 表 CATL OW 100.3%-->
+      <tr><td class="l co">三一重工</td><td class="l tk">600031.SS</td><td class="l rt">增持</td><td class="upv">80.2%</td></tr><!--src: MS p46 表 Sany Heavy OW 80.2%-->
+      <tr><td class="l co">思源电气</td><td class="l tk">002028.SZ</td><td class="l rt">增持</td><td class="upv">70.6%</td></tr><!--src: MS p46 表 Sieyuan OW 70.6%-->
+    </tbody>
+  </table>
+  <p class="fn">分组为本文归类（大摩原按智能／韧性／领先打标）。全名单上行空间第一、第三是 AI 模型公司 MiniMax 202.0%、智谱 126.7%（第二为阳光电源）；<!--src: MS p46 表 Minimax 202.0%、Sungrow 160.8%、Z.AI 126.7%-->唯一减持是百度（−11.7%），<!--src: MS p46 表 Baidu UW (11.7%)-->P45 维恩图同位置却是石头科技，此处照录 P46。<!--src: MS p45 维恩图含 Roborock、无 Baidu-->原表“交易币种”列与上市地多处不符（如 A 股标 HKD），故不列股价与目标价；上行空间按 2026-09-21 收盘价。</p>
+
+  <div class="mt-br">
+    <div class="fig-t" style="font-size:19px">不会是直线：大摩的三种情景<i>　GDP 增速依次为 2026–27／2028–30／2031–35</i></div>
+    <div class="scen">
+      <div>
+        <div class="h">基准<i>温和再平衡，低通胀延续</i></div>
+        <div class="g">4.6／4.3／3.9%</div><!--src: MS p38 基准 4.6% / 4.3% / 3.9%-->
+        <p>平减指数 2027 年滑到 0.2%，2028 年起 0.5–1.0%；2035 年全球制造业份额 30%。<!--src: MS p38 基准 deflator 0.2% in 2027, 0.5–1.0% from 2028；p37 Base 30%--></p>
+      </div>
+      <div>
+        <div class="h">乐观<i>果断再平衡，健康再通胀</i></div>
+        <div class="g">4.7／4.5／4.2%</div><!--src: MS p38 乐观 4.7% / 4.5% / 4.2%-->
+        <p>平减指数中期 1.5–2%；份额约 33%。触发：社保改革释放消费、工业 AI 突破。<!--src: MS p38 乐观 1.5–2%，~33%；p37 Bull 假设--></p>
+      </div>
+      <div>
+        <div class="h">悲观<i>通缩固化</i></div>
+        <div class="g">4.4／4.0／3.5%</div><!--src: MS p38 悲观 4.4% / 4.0% / 3.5%-->
+        <p>2027 年起通缩，中期 −0.5% 至 −1.0%；份额约 27%。触发：财政过早收紧、AI 无序扩张。<!--src: MS p38 悲观 -0.5% to -1.0%，~27%；p37 Bear 假设--></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tailrow" style="margin-top:14px">
+    <div class="disc"><b>说明</b>　本文为大摩研报的中文提炼，观点属原机构，不构成投资建议；标“本文测算／判断／归类／统计”者为本文所作。</div>
+    <div class="portmark">
+      <div class="pm-t"><b>全球投行研报精选</b>微信扫码 · 每日研报精华</div>
+      <img class="pm-q" src="data:image/png;base64,{{QR_B64}}" alt="THE PORT 微信二维码">
+    </div>
+  </div>
+
+  <div class="pg-foot"><span>大摩 · Industry 5.0 · 第三方研报提炼</span><span class="r">06 / 06</span></div>
+</div>
+
+</body>
+</html>

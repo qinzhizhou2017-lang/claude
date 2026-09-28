@@ -5,10 +5,10 @@
 
 ## 2 分钟竖屏视频（2026-09-28）
 
-- 成品：`大摩-工业5.0-2分钟视频.mp4`（1080×1920，30fps，2:00，字幕烧录，静音音轨）｜字幕 `大摩-工业5.0-2分钟视频_字幕.srt`｜分镜与口播稿 `大摩-工业5.0-2分钟视频_分镜与口播稿.md`
-- 内容取自 6 页版已核对的数字，9 个分镜：开场 → 节奏 ×2 → 改工厂 ×2 → 卡脖子 → 利润池与出海 → 股票 → 结尾
-- 重做：`python3 video/build_video.py`（生成 `video/stage.html` 与 SRT）→ `python3 video/render_video.py`（逐帧截图，4 路并行，H.264）
-- 容器里没有中文 TTS，视频不带配音；口播稿和 SRT 可直接进剪映做 AI 配音
+- 成品：`大摩-工业5.0-2分钟视频_女声配音.mp4`（1080×1920，30fps，2:00，中文女声配音＋烧录字幕）；无配音版 `大摩-工业5.0-2分钟视频.mp4`（同一时间轴，给剪映换配音用）
+- 字幕 `大摩-工业5.0-2分钟视频_字幕.srt`｜分镜、口播稿与逐句回听结果 `大摩-工业5.0-2分钟视频_分镜与口播稿.md`
+- 配音：Kokoro v1.1-zh 女声 #9（Apache-2.0，可商用），离线合成；每句 7 档语速择优，成品编码后逐句语音识别回听，读音错误率 2.0%（同音字不计）；多音字逐个查过词典并做了同音替换
+- 重做：`video/tts/synth_voiceover.py plan` → `video/build_video.py` → `video/render_video.py` → `video/tts/synth_voiceover.py mix` → `video/gen_storyboard.py`；TTS／ASR 模型放在会话 scratchpad（从 GitHub 的 sherpa-onnx 发布页下载），不入库
 
 ## 6 页版（2026-09-26）
 

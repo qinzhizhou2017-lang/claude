@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>大摩 · 工业 5.0 · 2 分钟竖屏视频（舞台）</title>
+<style>
+  :root{
+    --ink:#141D2A; --ink-soft:#37424F; --muted:#69737F; --hair:#D3D8DE; --hair-soft:#E3E6EA;
+    --gold:#8E5A0C; --gold-b:#B07818; --bull:#0D6E55; --bear:#B93A30;
+    --mono:"DejaVu Sans Mono",ui-monospace,monospace;
+    --sans:"Noto Sans CJK SC","PingFang SC",sans-serif;
+    --serif:"Noto Serif CJK SC","Songti SC",serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:#FFFFFF}
+  body{font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;position:relative}
+  .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  b{font-weight:800}
+  .au{color:var(--gold)!important}
+  .calc{font-size:.72em;font-weight:400;color:var(--muted);white-space:nowrap}
+
+  /* ---------- 全局框架 ---------- */
+  #prog{position:absolute;left:0;top:0;width:1080px;height:8px;background:var(--gold-b);transform-origin:left center}
+  #head{position:absolute;left:80px;right:80px;top:52px;height:64px;display:flex;align-items:center;gap:14px;
+    border-bottom:2px solid var(--hair);font-family:var(--mono);font-size:25px;letter-spacing:.1em;color:var(--muted)}
+  #head .lab{color:var(--ink-soft);font-family:var(--sans);letter-spacing:.06em;font-weight:700}
+  #head .r{margin-left:auto;color:var(--ink-soft);font-weight:700}
+  .scene{position:absolute;left:80px;top:150px;width:920px;height:1160px;opacity:0;visibility:hidden}
+  #sub{position:absolute;left:70px;right:70px;top:1334px;height:150px;display:flex;align-items:flex-start;justify-content:center;
+    text-align:center;font-size:46px;line-height:1.42;font-weight:700;color:var(--ink);opacity:0;text-wrap:balance}
+  #src{position:absolute;left:80px;right:80px;top:1516px;border-top:2px solid var(--hair-soft);padding-top:14px;
+    font-family:var(--mono);font-size:21px;color:var(--muted);text-align:center;letter-spacing:.02em}
+
+  /* ---------- 场景通用 ---------- */
+  .eye{font-family:var(--mono);font-size:28px;letter-spacing:.24em;color:var(--gold-b);font-weight:700;margin-top:24px}
+  h2{font-size:66px;font-weight:800;line-height:1.18;margin-top:10px;letter-spacing:-.01em}
+  .cap1{font-size:30px;font-weight:700;margin-top:34px;line-height:1.3}
+  .cap1 i{font-style:normal;font-weight:400;color:var(--muted)}
+  .sv{display:block;margin-top:18px;overflow:visible}
+  .sv text{font-family:var(--mono)}
+  .sv .in{font-size:28px;font-weight:700;fill:#37424F}
+  .sv .inc{font-size:34px;font-weight:800;fill:#8E5A0C}
+  .sv .ax{font-size:26px;fill:#69737F}
+  .sv .br{font-family:var(--sans);font-size:28px;font-weight:700;fill:#37424F}
+  .sv .val{font-size:40px;font-weight:800;fill:#141D2A}
+  .sv .lab{font-family:var(--sans);font-size:28px;font-weight:700;fill:#141D2A}
+  .sv .labb{font-family:var(--sans);font-size:34px;font-weight:800;fill:#141D2A}
+  .sv .labd{font-family:var(--sans);font-size:32px;font-weight:800;fill:#141D2A}
+  .sv .labw{font-family:var(--sans);font-size:32px;font-weight:800;fill:#FFFFFF}
+  .sv .grp{font-family:var(--sans);font-size:30px;fill:#37424F}
+  .sv .grpg{font-family:var(--sans);font-size:36px;font-weight:800;fill:#8E5A0C}
+  .sv .rl{font-family:var(--sans);font-size:34px;fill:#141D2A}
+  .sv .v0{font-size:26px;fill:#69737F}
+  .sv .v1{font-size:30px;font-weight:800;fill:#8E5A0C}
+  .sv .ann{font-family:var(--sans);font-size:30px;font-weight:700;fill:#37424F}
+  .sv .zl{font-family:var(--sans);font-size:32px;font-weight:800;fill:#141D2A}
+  .a[data-fx="gx"]{transform-box:fill-box;transform-origin:left center}
+  .a[data-fx="gy"]{transform-box:fill-box;transform-origin:center bottom}
+  .a[data-fx="pop"]{transform-box:fill-box;transform-origin:center}
+  .note{font-size:36px;line-height:1.5;color:var(--ink-soft);margin-top:24px}
+  .fn{font-size:24px;line-height:1.5;color:var(--muted);margin-top:18px}
+
+  /* S0 */
+  .hero1{margin-top:110px;display:flex;align-items:baseline;gap:18px}
+  .bn{font-family:var(--mono);font-weight:800;font-size:250px;line-height:1;letter-spacing:-.04em}
+  .bn.b2{font-size:210px}
+  .bu{font-size:72px;font-weight:800}
+  .hl{font-size:44px;font-weight:700;color:var(--ink-soft);margin-top:18px;line-height:1.4}
+  .rule{height:3px;background:var(--ink);margin-top:80px;width:920px}
+  .hero2{margin-top:36px}
+  .tag{font-family:var(--serif);font-size:48px;color:var(--ink);margin-top:110px;line-height:1.45}
+
+  /* S2 */
+  .legs{margin-top:22px;display:grid;gap:26px}
+  .ln{font-size:36px;font-weight:800;margin-bottom:8px}
+  .bar{display:flex;align-items:center;height:46px;gap:0}
+  .bar .yr{width:120px;font-family:var(--mono);font-size:24px;color:var(--muted)}
+  .bar i{display:block;height:30px;background:#C9CFD6}
+  .bar i.up{background:var(--bull)} .bar i.dn{background:var(--bear)}
+  .bar .v{font-family:var(--mono);font-size:32px;margin-left:16px;white-space:nowrap}
+  .v.up{color:var(--bull)} .v.dn{color:var(--bear)}
+
+  /* S3 KPI */
+  .kpi{margin-top:40px;border-top:3px solid var(--ink);padding-top:18px}
+  .kb{font-family:var(--mono);font-weight:800;font-size:112px;line-height:1.05;letter-spacing:-.03em;white-space:nowrap}
+  .kb .ar,.kb2 .ar{font-size:70px;color:var(--muted);font-weight:400}
+  .kb .vs{font-size:44px;color:var(--muted);font-weight:400;letter-spacing:0}
+  .kl{font-size:36px;font-weight:800;margin-top:10px;line-height:1.35}
+  .kl i{display:block;font-style:normal;font-weight:400;font-size:29px;color:var(--muted);margin-top:4px}
+
+  /* S4 */
+  .big{font-family:var(--mono);font-weight:800;font-size:190px;line-height:1;letter-spacing:-.04em;margin-top:48px}
+  .kl2{font-size:38px;font-weight:800;margin-top:14px}
+  .mini{font-size:31px;color:var(--ink-soft);margin-top:14px;font-family:var(--mono)}
+  .pyr{display:grid;gap:22px;margin-top:18px}
+  .pl{display:flex;align-items:baseline;justify-content:space-between;font-size:34px;font-weight:700}
+  .pl b{font-family:var(--mono);font-size:42px}
+  .pb{display:block;height:40px;background:#AEB7C2;margin-top:8px;min-width:7px}
+  .pb.au{background:var(--gold-b)!important}
+
+  /* S6 */
+  .row56{display:flex;align-items:baseline;gap:28px;margin-top:12px;border-top:3px solid var(--ink);padding-top:14px}
+  .kb2{font-family:var(--mono);font-weight:800;font-size:104px;line-height:1.05;letter-spacing:-.03em;white-space:nowrap}
+
+  /* S7 */
+  .stats{display:grid;grid-template-columns:1.2fr 1fr;column-gap:40px;margin-top:40px}
+  .st{border-top:3px solid var(--ink);padding-top:14px}
+  .sn{font-family:var(--mono);font-weight:800;font-size:104px;line-height:1.05;letter-spacing:-.03em;white-space:nowrap}
+  .sl{font-size:30px;color:var(--ink-soft);margin-top:8px}
+  .tbl{margin-top:44px}
+  .grp{display:flex;align-items:baseline;gap:14px;font-size:32px;font-weight:800;margin-top:22px;border-bottom:2px solid var(--ink);padding-bottom:8px}
+  .grp i{font-style:normal;font-weight:400;font-size:26px;color:var(--muted)}
+  .sr{display:grid;grid-template-columns:1fr auto auto;column-gap:26px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--hair-soft)}
+  .sr .co{font-size:38px;font-weight:800}
+  .sr .tk{font-family:var(--mono);font-size:26px;color:var(--muted)}
+  .sr .up2{font-family:var(--mono);font-size:42px;font-weight:800;min-width:190px;text-align:right}
+
+  /* S8 */
+  .quote{font-family:var(--serif);font-size:68px;line-height:1.38;margin-top:44px;font-weight:700}
+  .recap{list-style:none;margin-top:48px;display:grid;gap:18px}
+  .recap li{font-size:34px;color:var(--ink-soft);border-top:2px solid var(--hair);padding-top:14px}
+  .recap li b{color:var(--ink);margin-right:18px}
+  .qr{display:flex;align-items:center;gap:36px;margin-top:56px}
+  .qr img{width:260px;height:260px;display:block}
+  .qr b{display:block;font-size:44px}
+  .qr span{display:block;font-size:31px;color:var(--ink-soft);margin-top:12px}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<div id="head"><span>大摩 · 工业 5.0 ·</span><span class="lab" id="lab">开场</span><span class="r" id="cnt">01 / 09</span></div>
+
+<!-- ============ S0 开场 0–8s ============ -->
+<section class="scene" id="s0">
+  <div class="eye a" data-fx="fade" data-t="0" data-d="0.5">摩根士丹利 · 2026.09.21</div>
+  <div class="hero1">
+    <span class="bn a" data-fx="num" data-t="0.3" data-d="1.2" data-from="0" data-to="12">12</span><!--src: MS p21 标题 US$12tn-->
+    <span class="bu a" data-fx="fade" data-t="0.9" data-d="0.4">万亿美元</span>
+  </div>
+  <p class="hl a" data-fx="up" data-t="1.3">未来十年，中国多出的工业资本开支</p>
+  <div class="rule a" data-fx="gx" data-t="3.9" data-d="0.5"></div>
+  <div class="hero2"><span class="bn b2 au a" data-fx="num" data-t="4.3" data-d="1.0" data-from="0" data-to="89" data-suf="%">89%</span></div><!--src: 测算 = (15+23+33)/80=88.75%，据 MS p21 图-->
+  <p class="hl a" data-fx="up" data-t="4.9">落在 2030 年之后<span class="calc">（本文测算）</span></p>
+  <p class="tag a" data-fx="up" data-t="6.1">工业 5.0：先搬的是利润池，不是产能</p>
+</section>
+
+<!-- ============ S1 节奏 8–22s ============ -->
+<section class="scene" id="s1">
+  <div class="eye">节奏</div>
+  <h2 class="a" data-fx="up" data-t="0">账单前轻后重</h2>
+  <div class="cap1 a" data-fx="fade" data-t="0.2">工业资本开支（万亿元人民币，每两年合计）<br><i>灰＝基线　金＝工业 5.0 增量</i></div>
+  {{SVG_CAPEX}}
+  <p class="note a" data-fx="up" data-t="9.8">基线几乎走平；2030 年起的六年拿走增量的 <b class="au">89%</b><span class="calc">（本文测算）</span></p>
+</section>
+
+<!-- ============ S2 三条腿 + J 曲线 22–35s ============ -->
+<section class="scene" id="s2">
+  <div class="eye">节奏</div>
+  <h2 class="a" data-fx="up" data-t="0">三条投资腿，只有工业向上</h2>
+  <div class="cap1 a" data-fx="fade" data-t="0.2">投资占 GDP<i>　2025 → 2035E</i></div>
+  <div class="legs">
+    <div class="a" data-fx="up" data-t="0.4">
+      <div class="ln">工业（含电力）</div>
+      <div class="bar"><span class="yr">2025</span><i class="a" data-fx="gx" data-t="0.6" style="width:522px"></i><span class="v">17.4%</span></div>
+      <div class="bar"><span class="yr">2035E</span><i class="up a" data-fx="gx" data-t="1.0" style="width:588px"></i><span class="v up"><b>19.6%</b> ▲</span></div>
+    </div><!--src: MS p21 右图 Industrial Sector (incl. Electricity) 17.4% → 19.6%-->
+    <div class="a" data-fx="up" data-t="4.9">
+      <div class="ln">传统基建</div>
+      <div class="bar"><span class="yr">2025</span><i class="a" data-fx="gx" data-t="5.1" style="width:228px"></i><span class="v">7.6%</span></div>
+      <div class="bar"><span class="yr">2035E</span><i class="dn a" data-fx="gx" data-t="5.4" style="width:126px"></i><span class="v dn"><b>4.2%</b> ▼</span></div>
+    </div><!--src: MS p21 右图 Traditional Infrastructure excl. Electricity 7.6% → 4.2%-->
+    <div class="a" data-fx="up" data-t="5.5">
+      <div class="ln">地产</div>
+      <div class="bar"><span class="yr">2025</span><i class="a" data-fx="gx" data-t="5.7" style="width:99px"></i><span class="v">3.3%</span></div>
+      <div class="bar"><span class="yr">2035E</span><i class="dn a" data-fx="gx" data-t="6.0" style="width:90px"></i><span class="v dn"><b>3.0%</b> ▼</span></div>
+    </div><!--src: MS p21 右图 Real Estate 3.3% → 3.0%-->
+  </div>
+  <div class="cap1 a" data-fx="fade" data-t="8.3" style="margin-top:40px">对潜在 GDP 增速的拉动<i>　百分点 · J 曲线</i></div>
+  {{SVG_JCURVE}}
+</section>
+
+<!-- ============ S3 钱花在哪 35–52s ============ -->
+<section class="scene" id="s3">
+  <div class="eye">改工厂</div>
+  <h2 class="a" data-fx="up" data-t="0">12 万亿美元花在哪</h2>
+  <div class="cap1 a" data-fx="fade" data-t="0.2">未来十年增量工业资本开支<i>　单位：万亿美元</i></div>
+  {{SVG_ALLOC}}
+  <div class="kpi a" data-fx="up" data-t="5.0">
+    <div class="kb au">7%<span class="ar"> → </span>17%</div>
+    <div class="kl">工业软件占制造业设备资本开支<i>2025 → 2035E；没有 AI 升级只到 ~8%</i></div>
+  </div><!--src: MS p26 正文 ~7% → ~17% in 2035 (vs ~8%)-->
+  <div class="kpi a" data-fx="up" data-t="10.8">
+    <div class="kb">30%<span class="vs"> vs </span>15%</div>
+    <div class="kl">机器人市场年复合增速，2026–35<i>有 / 无工业 5.0，差出约 10 万亿元</i></div>
+  </div><!--src: MS p25 左图标题 +30% vs +15% CAGR, ~Rmb10tn value uplift-->
+</section>
+
+<!-- ============ S4 智能工厂 52–65s ============ -->
+<section class="scene" id="s4">
+  <div class="eye">改工厂</div>
+  <h2 class="a" data-fx="up" data-t="0">回报已验证，铺开才开始</h2>
+  <div class="big a" data-fx="num" data-t="0.4" data-d="1.0" data-from="0" data-to="-50.2" data-dec="1" data-suf="%">−50.2%</div><!--src: MS p15 第 2 栏 Defect rate −50.2%-->
+  <div class="kl2 a" data-fx="fade" data-t="0.6">卓越级智能工厂的次品率（均值）</div>
+  <div class="mini a" data-fx="up" data-t="1.6">研发周期 −28.4%　生产效率 +22.3%　碳排放 −20.4%</div><!--src: MS p15 第 2 栏 −28.4% / +22.3% / −20.4%-->
+  <div class="cap1 a" data-fx="fade" data-t="4.6" style="margin-top:56px">智能工厂数量<i>　2025 年初</i></div>
+  <div class="pyr">
+    <div class="a" data-fx="up" data-t="4.8"><div class="pl"><span>基础级</span><b>&gt;30,000</b></div><i class="pb a" data-fx="gx" data-t="5.0" data-d="0.8" style="width:920px"></i></div><!--src: MS p8 >30,000 Basic-level-->
+    <div class="a" data-fx="up" data-t="5.6"><div class="pl"><span>先进级</span><b>&gt;1,200</b></div><i class="pb a" data-fx="gx" data-t="5.8" style="width:36.8px"></i></div><!--src: MS p8 >1,200 Advanced-level-->
+    <div class="a" data-fx="up" data-t="6.4"><div class="pl"><span>卓越级</span><b class="au">&gt;230</b></div><i class="pb au a" data-fx="gx" data-t="6.6" style="width:7.1px"></i></div><!--src: MS p8 >230 Excellence-level-->
+  </div>
+  <p class="note a" data-fx="up" data-t="7.6">卓越级不到基础级的 1%<span class="calc">（本文测算）</span>：回报已验证，但远未铺开</p><!--src: 测算 = 230/30,000=0.77%，据 MS p8-->
+  <p class="fn a" data-fx="fade" data-t="7.8">回报为 230+ 家卓越级工厂的均值，非全国平均（原报告注）</p>
+</section>
+
+<!-- ============ S5 卡脖子 65–81s ============ -->
+<section class="scene" id="s5">
+  <div class="eye">卡脖子</div>
+  <h2 class="a" data-fx="up" data-t="0">国产化率越低，空间越大</h2>
+  <div class="cap1 a" data-fx="fade" data-t="0.2">国产化率 2025 → 2030E<i>　空心＝当前　金＝大摩目标</i></div>
+  {{SVG_LOCAL}}
+  <p class="fn a" data-fx="fade" data-t="3.0">半导体设备指晶圆制造设备（WFE），为 2024 → 2027–29E；工业机器人 2030E 原报告两处不一致（70–80% / 60–70%），取 P41 表</p>
+</section>
+
+<!-- ============ S6 利润池与出海 81–97s ============ -->
+<section class="scene" id="s6">
+  <div class="eye">利润池与出海</div>
+  <h2 class="a" data-fx="up" data-t="0">利润往 0-1 和海外走</h2>
+  {{SVG_UCURVE}}
+  <div class="row56 a" data-fx="up" data-t="3.5">
+    <span class="kb2">5%<span class="ar"> → </span>8%</span>
+    <span class="kl">工业企业利润率<i>2025 → 2035E（大摩预计）</i></span>
+  </div><!--src: MS p30 标题 ~5% in 2025 to ~8% by 2035-->
+  <div class="cap1 a" data-fx="fade" data-t="8.3" style="margin-top:30px">中国对美出口，按“中国以外可替代产能”分档</div><!--src: MS p39 右图标题 only ~40% of China-to-US exports can be readily substituted-->
+  {{SVG_SUBST}}
+</section>
+
+<!-- ============ S7 落到股票 97–112s ============ -->
+<section class="scene" id="s7">
+  <div class="eye">落到股票</div>
+  <h2 class="a" data-fx="up" data-t="0">大摩名单：45 只</h2>
+  <div class="stats">
+    <div class="st a" data-fx="up" data-t="0.5"><div class="sn">37／7／1</div><div class="sl">增持／中性／减持（本文统计）</div></div><!--src: MS p46 表 MS stock rating 计数 37/7/1-->
+    <div class="st a" data-fx="up" data-t="3.0"><div class="sn au"><span class="a" data-fx="num" data-t="3.0" data-d="1.0" data-from="0" data-to="46" data-suf="%">46%</span></div><div class="sl">上行空间中位数（本文测算）</div></div><!--src: 测算 = 45 只上行空间中位数 46.0%，据 MS p46 表-->
+  </div>
+  <div class="tbl">
+    <div class="grp a" data-fx="fade" data-t="6.0">改工厂<i>部件／装备</i></div>
+    <div class="sr a" data-fx="up" data-t="6.2"><span class="co">绿的谐波</span><span class="tk">688017.SS</span><span class="up2">118.4%</span></div><!--src: MS p46 表 Leaderdrive OW 118.4%-->
+    <div class="sr a" data-fx="up" data-t="6.5"><span class="co">恒立液压</span><span class="tk">601100.SS</span><span class="up2">55.1%</span></div><!--src: MS p46 表 Hengli OW 55.1%-->
+    <div class="grp a" data-fx="fade" data-t="7.2">卡脖子<i>芯片／材料</i></div>
+    <div class="sr a" data-fx="up" data-t="7.4"><span class="co">兆易创新</span><span class="tk">603986.SS</span><span class="up2">91.5%</span></div><!--src: MS p46 表 Gigadevice OW 91.5%-->
+    <div class="sr a" data-fx="up" data-t="7.7"><span class="co">中国巨石</span><span class="tk">600176.SS</span><span class="up2">92.9%</span></div><!--src: MS p46 表 China Jushi OW 92.9%-->
+    <div class="grp a" data-fx="fade" data-t="8.4">出海<i>电力／电池</i></div>
+    <div class="sr a" data-fx="up" data-t="8.6"><span class="co">阳光电源</span><span class="tk">300274.SZ</span><span class="up2">160.8%</span></div><!--src: MS p46 表 Sungrow OW 160.8%-->
+    <div class="sr a" data-fx="up" data-t="8.9"><span class="co">宁德时代</span><span class="tk">300750.SZ</span><span class="up2">100.3%</span></div><!--src: MS p46 表 CATL OW 100.3%-->
+  </div>
+  <p class="fn a" data-fx="fade" data-t="9.4">目标价上行空间，按 2026-09-21 收盘价；以上均为大摩增持；分组为本文归类</p>
+</section>
+
+<!-- ============ S8 结尾 112–120s ============ -->
+<section class="scene" id="s8">
+  <div class="eye">一句话</div>
+  <p class="quote a" data-fx="up" data-t="0.2">别只盯 12 万亿美元的总量，<br>盯利润池往哪搬。</p>
+  <ul class="recap">
+    <li class="a" data-fx="up" data-t="1.0"><b>节奏</b>近九成增量在 2030 年后</li>
+    <li class="a" data-fx="up" data-t="1.4"><b>改工厂</b>软件与机器人是放大器</li>
+    <li class="a" data-fx="up" data-t="1.8"><b>卡脖子与出海</b>国产化率最低处、海外市场</li>
+  </ul>
+  <div class="qr a" data-fx="up" data-t="2.6">
+    <img src="data:image/png;base64,{{QR_B64}}" alt="THE PORT 微信二维码">
+    <div><b>全球投行研报精选</b><span>微信扫码 · 每日研报精华</span></div>
+  </div>
+  <p class="fn a" data-fx="fade" data-t="3.0">整理自 Morgan Stanley 研报（2026-09-21），观点属原机构，不构成投资建议；标“本文测算／统计／归类”者为整理方所作。</p>
+</section>
+
+<div id="sub"></div>
+<div id="src">来源：Morgan Stanley · 2026-09-21 · 研报提炼，非投资建议</div>
+
+<script>
+const SCENES = {{SCENES_JSON}};
+const CUES = {{CUES_JSON}};
+const DUR = {{DURATION}};
+const clamp = x => Math.max(0, Math.min(1, x));
+const ease = p => 1 - Math.pow(1 - p, 3);
+const start = {}; SCENES.forEach(s => start[s[0]] = s[1]);
+const ELS = [...document.querySelectorAll('.a')].map(el => {
+  const sc = el.closest('.scene');
+  const o = {el, fx: el.dataset.fx, t0: start[sc.id] + parseFloat(el.dataset.t || 0), d: parseFloat(el.dataset.d || 0.6)};
+  if (o.fx === 'draw') { o.L = el.getTotalLength(); el.style.strokeDasharray = o.L; }
+  if (o.fx === 'num') { o.from = +el.dataset.from; o.to = +el.dataset.to; o.dec = +(el.dataset.dec || 0);
+                        o.pre = el.dataset.pre || ''; o.suf = el.dataset.suf || ''; }
+  return o;
+});
+function fmt(v, dec) {
+  let s = Math.abs(v).toFixed(dec);
+  const [i, d] = s.split('.');
+  s = i.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (d ? '.' + d : '');
+  return (v < 0 && +s.replace(/,/g, '') !== 0 ? '−' : '') + s;
+}
+window.renderAt = function (t) {
+  document.getElementById('prog').style.transform = `scaleX(${Math.min(1, t / DUR)})`;
+  let idx = 0;
+  SCENES.forEach(([id, s, e], i) => {
+    const el = document.getElementById(id);
+    const last = i === SCENES.length - 1;
+    const on = t >= s && (t < e || last);
+    const fin = i === 0 ? 1 : clamp((t - s) / 0.35);
+    const fout = last ? 1 : clamp((e - t) / 0.35);
+    el.style.opacity = on ? Math.min(fin, fout) : 0;
+    el.style.visibility = on ? 'visible' : 'hidden';
+    if (t >= s) idx = i;
+  });
+  document.getElementById('cnt').textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(SCENES.length).padStart(2, '0');
+  document.getElementById('lab').textContent = SCENES[idx][3];
+  for (const o of ELS) {
+    const p = ease(clamp((t - o.t0) / o.d)), st = o.el.style;
+    switch (o.fx) {
+      case 'fade': st.opacity = p; break;
+      case 'up': st.opacity = p; st.transform = `translateY(${(1 - p) * 36}px)`; break;
+      case 'gx': st.transform = `scaleX(${p})`; break;
+      case 'gy': st.transform = `scaleY(${p})`; break;
+      case 'pop': st.opacity = p > 0 ? 1 : 0; st.transform = `scale(${p})`; break;
+      case 'draw': st.strokeDashoffset = o.L * (1 - p); break;
+      case 'num': st.opacity = Math.min(1, p * 4); o.el.textContent = o.pre + fmt(o.from + (o.to - o.from) * p, o.dec) + o.suf; break;
+    }
+  }
+  const sub = document.getElementById('sub');
+  let txt = '', op = 0;
+  for (const [s, e, x] of CUES) { if (t >= s && t < e) { txt = x; op = Math.min(clamp((t - s) / 0.15), clamp((e - t) / 0.15)); break; } }
+  if (sub.dataset.txt !== txt) { sub.textContent = txt; sub.dataset.txt = txt; }
+  sub.style.opacity = op;
+};
+renderAt(0);
+</script>
+</body>
+</html>

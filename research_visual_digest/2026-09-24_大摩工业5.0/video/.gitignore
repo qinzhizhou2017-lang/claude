@@ -1,0 +1,5 @@
+seg_*.mp4
+segs.txt
+snap_*.png
+sheet_*.png
+__pycache__/

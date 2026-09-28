@@ -10,7 +10,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 VID = os.path.dirname(HERE); ROOT = os.path.dirname(VID)
 sys.path.insert(0, VID)
 from build_video import ORIG_SCENES, ORIG_CUES, DURATION   # 原始（无配音）时间轴
-from ttslib import kokoro, asr, cer, pinyin_err
+from ttslib import kokoro, asr, cer, pinyin_err, aac_roundtrip
 
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 SID = 9
@@ -29,7 +29,7 @@ SPOKEN = [
     "对GDP的拉动是J曲线：头两年是零，后面才显现。",
     "钱花在哪？六万亿美元建新的产能，五点五万亿用来改造工厂。",
     "改造工厂有两个放大器：软件占设备投资的比重，从百分之七升到百分之十七；",
-    "有工业五点零，机器人年增速是百分之三十；没有，只有百分之十五。",
+    "有工业五点零，机器人的年增速是百分之三十；没有，只有百分之十五。",
     "回报已被验证：卓越级智能工厂的次品率降了一半。",
     "但这样的工厂只有二百三十多家，不到基础级的百分之一。",
     "第二条线是卡脖子。",
@@ -78,7 +78,8 @@ def synth_all(tts, speed, pick=False):
         for sp in ([round(speed + d, 3) for d in (0, -0.02, -0.04, -0.06, -0.08, 0.02, 0.04)] if pick else (speed,)):
             a = tts.generate(txt, sid=SID, speed=sp)
             x = np.array(a.samples, dtype=np.float32)
-            err = pinyin_err(txt, asr(x, a.sample_rate)) if pick else 0.0
+            err = max(pinyin_err(txt, asr(x, a.sample_rate)),                       # 原始音频
+                      pinyin_err(txt, asr(aac_roundtrip(x, a.sample_rate), 16000))) if pick else 0.0  # 成品编码后
             cands.append((err, abs(sp - speed), x, a.sample_rate))
         err, _, x, sr = min(cands, key=lambda c: (round(c[0], 4), c[1]))
         out.append((x, sr))
@@ -156,8 +157,14 @@ def mix():
     pcm = subprocess.run([FF, "-loglevel", "error", "-i", out, "-f", "f32le", "-ac", "1", "-ar", "16000", "-"],
                          capture_output=True, check=True).stdout
     y = np.frombuffer(pcm, dtype=np.float32)
-    hyp = "".join(asr(y[int(s * 16000):int(e * 16000) + 8000], 16000) for s, e, _ in tl["cues"])
-    print(f"写出 {out}  {os.path.getsize(out)/1e6:.1f} MB；成品整轨按字幕切段回听 CER {cer(''.join(SPOKEN), hyp):.3f}")
+    rep = json.load(open(os.path.join(HERE, "asr_report.json"), encoding="utf-8"))
+    tp = n = 0; bad = []
+    for r, st in zip(rep, tl["voice_starts"]):              # 按每句实际开口与时长切段，避免串到下一句
+        h = asr(y[int((st - 0.05) * 16000):int((st + r["dur"] + 0.15) * 16000)], 16000)
+        e = pinyin_err(r["text"], h); tp += e * len(r["text"]); n += len(r["text"])
+        if e > 0.05:
+            bad.append((r["i"], round(e, 2), h))
+    print(f"写出 {out}  {os.path.getsize(out)/1e6:.1f} MB；成品整轨逐句回听读音错误率 {tp/n:.3f}；>5% 的句：{bad}")
 
 
 if __name__ == "__main__":

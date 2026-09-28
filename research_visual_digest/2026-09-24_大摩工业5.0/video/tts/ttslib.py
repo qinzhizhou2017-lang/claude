@@ -75,3 +75,15 @@ def pinyin_err(ref, hyp):
     r1 = lazy_pinyin(norm(ref), style=Style.TONE3, neutral_tone_with_five=True)
     h1 = lazy_pinyin(norm(hyp), style=Style.TONE3, neutral_tone_with_five=True)
     return (ed(r0, h0) + 0.5 * ed(r1, h1)) / max(1, len(r0))
+
+
+def aac_roundtrip(x, sr):
+    """按成品同样的链路（响度归一 + AAC 128k）编码再解码，返回 16kHz 单声道，用于"成品听感"回听。"""
+    import subprocess, imageio_ffmpeg
+    ff = imageio_ffmpeg.get_ffmpeg_exe()
+    enc = subprocess.run([ff, "-loglevel", "error", "-f", "f32le", "-ar", str(sr), "-ac", "1", "-i", "-",
+                          "-af", "loudnorm=I=-16:TP=-1.5:LRA=11,aresample=44100", "-c:a", "aac", "-b:a", "128k", "-f", "adts", "-"],
+                         input=np.asarray(x, dtype=np.float32).tobytes(), capture_output=True, check=True).stdout
+    dec = subprocess.run([ff, "-loglevel", "error", "-f", "aac", "-i", "-", "-f", "f32le", "-ac", "1", "-ar", "16000", "-"],
+                         input=enc, capture_output=True, check=True).stdout
+    return np.frombuffer(dec, dtype=np.float32)

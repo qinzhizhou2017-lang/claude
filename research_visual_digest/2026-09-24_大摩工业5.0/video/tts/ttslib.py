@@ -29,7 +29,9 @@ _asr = None
 def asr(samples, sr):
     global _asr
     if _asr is None:
-        d = f"{M}/sherpa-onnx-paraformer-zh-small-2024-03-09"
+        d = f"{M}/sherpa-onnx-paraformer-zh-2024-03-09"            # 大模型，回听更准
+        if not os.path.exists(d):
+            d = f"{M}/sherpa-onnx-paraformer-zh-small-2024-03-09"
         _asr = sherpa_onnx.OfflineRecognizer.from_paraformer(paraformer=f"{d}/model.int8.onnx", tokens=f"{d}/tokens.txt", num_threads=4)
     s = _asr.create_stream(); s.accept_waveform(sr, np.asarray(samples, dtype=np.float32)); _asr.decode_stream(s)
     return s.result.text
@@ -57,3 +59,19 @@ def f0_median(x, sr):
         k = lo + int(np.argmax(ac[lo:hi]))
         if ac[k] / ac[0] > 0.45: out.append(sr / k)
     return float(np.median(out)) if out else 0.0
+
+
+def pinyin_err(ref, hyp):
+    """读音层面的错误率：(无声调拼音编辑距离 + 0.5×带声调) / 字数。同音字不算错。"""
+    from pypinyin import lazy_pinyin, Style
+    def ed(a, b):
+        d = list(range(len(b) + 1))
+        for i, x in enumerate(a, 1):
+            p, d[0] = d[0], i
+            for j, y in enumerate(b, 1):
+                p, d[j] = d[j], min(d[j] + 1, d[j - 1] + 1, p + (x != y))
+        return d[len(b)]
+    r0, h0 = lazy_pinyin(norm(ref)), lazy_pinyin(norm(hyp))
+    r1 = lazy_pinyin(norm(ref), style=Style.TONE3, neutral_tone_with_five=True)
+    h1 = lazy_pinyin(norm(hyp), style=Style.TONE3, neutral_tone_with_five=True)
+    return (ed(r0, h0) + 0.5 * ed(r1, h1)) / max(1, len(r0))

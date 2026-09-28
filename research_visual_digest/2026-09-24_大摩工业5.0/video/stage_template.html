@@ -281,10 +281,10 @@ const CUES = {{CUES_JSON}};
 const DUR = {{DURATION}};
 const clamp = x => Math.max(0, Math.min(1, x));
 const ease = p => 1 - Math.pow(1 - p, 3);
-const start = {}; SCENES.forEach(s => start[s[0]] = s[1]);
+const start = {}, scale = {}; SCENES.forEach(s => { start[s[0]] = s[1]; scale[s[0]] = s[4] || 1; });
 const ELS = [...document.querySelectorAll('.a')].map(el => {
   const sc = el.closest('.scene');
-  const o = {el, fx: el.dataset.fx, t0: start[sc.id] + parseFloat(el.dataset.t || 0), d: parseFloat(el.dataset.d || 0.6)};
+  const o = {el, fx: el.dataset.fx, t0: start[sc.id] + parseFloat(el.dataset.t || 0) * scale[sc.id], d: parseFloat(el.dataset.d || 0.6)};
   if (o.fx === 'draw') { o.L = el.getTotalLength(); el.style.strokeDasharray = o.L; }
   if (o.fx === 'num') { o.from = +el.dataset.from; o.to = +el.dataset.to; o.dec = +(el.dataset.dec || 0);
                         o.pre = el.dataset.pre || ''; o.suf = el.dataset.suf || ''; }

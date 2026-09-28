@@ -3,3 +3,5 @@ segs.txt
 snap_*.png
 sheet_*.png
 __pycache__/
+tts/clips/
+tts/voiceover*.wav

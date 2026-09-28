@@ -165,6 +165,8 @@ def mix():
         if e > 0.05:
             bad.append((r["i"], round(e, 2), h))
     print(f"写出 {out}  {os.path.getsize(out)/1e6:.1f} MB；成品整轨逐句回听读音错误率 {tp/n:.3f}；>5% 的句：{bad}")
+    json.dump(dict(final_pyerr=round(tp / n, 4), flagged=bad), open(os.path.join(HERE, "final_check.json"), "w"),
+              ensure_ascii=False, indent=1)
 
 
 if __name__ == "__main__":

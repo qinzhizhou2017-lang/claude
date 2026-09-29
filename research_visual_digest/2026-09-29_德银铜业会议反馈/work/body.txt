@@ -1,0 +1,2471 @@
+
+
+===== P1 =====
+7T2se3r0Ot6kwoPa
+7T2se3r0Ot6kwoPa
+28 September 2026
+Deutsche Bank
+Research
+       Global       
+      
+          Metals & Mining          
+          Metals & Mining          
+            
+      Industry      
+      Global Copper     
+      Date      
+            
+      
+Industry Update
+     
+DB Copper Conference: Feedback & Key 
+Themes
+Last week, we hosted our annual Virtual Copper CEO Conference, featuring senior 
+executives from many of the world's largest copper producers, alongside leading 
+industry experts. Within this report, we summarise the key discussion points and 
+conclusions from each session. Replays are available for a limited period via the 
+conference platform (registration link).
+Key industry themes – illustrated by our favourite quotes
+n The market is facing an acute supply squeeze: “We are in an environment 
+for the foreseeable future of high and probably very volatile copper pricing... 
+There is a very genuine risk of seeing the first stock-out in China in all our 
+careers... Social inventory cover in China is exceptionally low... Any price 
+dip is seeing aggressive buying". Many investor questions focused on 
+downside risks to copper prices, suggesting a degree of scepticism around 
+the sustainability of recent price strength.
+n Under-supply is structural and will take years to solve:  “The entire 
+ecosystem [for building large-scale projects] in the West has atrophied, 
+creating major challenges in adding supply… The biggest constraints to 
+adding supply fundamentally sit above ground rather than below ground… 
+The equivalent of 12 mines the size of Cobre Panama need to come on line 
+over the next 6-7 years in order to meet demand".
+n Demand is resilient and underpinned by electrification: "For every $2bn of 
+spend on hyperscalers, you need about 150-170 kt of copper… For each 
+megawatt of capacity in a data center, you need between 30-50 kt of 
+copper… there will be substitution, but it won't be disruptive to the market". 
+Despite elevated copper prices and ongoing macroeconomic uncertainty, 
+companies broadly reported no material signs of demand weakness across 
+key markets.
+n Companies are looking to grow and increase copper exposure: "We have 
+a huge commitment to grow in copper… We're working on ways to unlock 
+new copper supply from new technologies [in order to help fill the supply-
+gap]…We have incredible organic growth options in copper". While 
+companies are clearly preparing to increase investment in growth projects, 
+permitting and labour were consistently highlighted as key constraints on 
+future supply growth.
+Liam Fitzpatrick
+Research Analyst
++44-20-754-13233
+Bastian Synagowitz
+Research Analyst
++41-44-227-3377
+Cody Hayden
+Research Analyst
++44-20-754-13230
+Deutsche Bank AG
+IMPORTANT RESEARCH DISCLOSURES AND ANALYST CERTIFICATIONS LOCATED IN APPENDIX 1. Deutsche Bank does 
+and seeks to do business with companies covered in its research reports. Thus, investors should be aware that the firm may 
+have a conflict of interest that could affect the objectivity of this report. Investors should consider this report as only a single 
+factor in making their investment decision.    
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P2 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 2 Deutsche Bank AG
+Attending companies: First Quantum Minerals (Tristan Pascall, CEO), BHP (Jess 
+Farrell, President North and South America), Freeport-McMoRan (Kathleen Quirk, 
+CEO), Antofagasta (Mauricio Ortiz, CFO), Aurubis (Steffen Hoffman, CFO), Boliden 
+(Mikael Staffas, CEO), Rio Tinto (Katie Jackson, Chief Executive, Copper), Vale 
+(Shaun Usmar, CEO VBM), Lundin Mining (Jack Lundin, CEO) and copper market 
+experts (Colin Hamilton & Nick Snowdon).
+Although our price target for Freeport-
+McMoRan is below the current price, we 
+maintain our Buy and will revisit valuation 
+after the company reports quarterly 
+numbers.
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P3 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 3
+Table Of Contents
+Copper Conference Themes...............................................4
+Our favourite quotes from the conference.........................................................4
+Record prices: driven by fundamentals or the tariff threat?...............................5
+Acute market tightness, demand holding up.....................................................6
+Supply crunch....................................................................................................7
+Is the copper investment cycle about to takeoff?..............................................7
+Demand outlook and risks.................................................................................8
+Industry consolidation and M&A.......................................................................8
+Recommendations & Valuations........................................9
+Session summaries..........................................................11
+Conference Agenda.........................................................................................11
+Expert Copper Market Panel............................................................................12
+First Quantum Minerals: Tristan Pascall, Chief Executive Officer.....................14
+BHP: Jessica Farrell, President North & South America .................................17
+Freeport-McMoRan: Kathleen Quirk, Chief Executive Officer..........................19
+Antofagasta: Mauricio Ortiz, Chief Financial Officer........................................22
+Aurubis: Steffen Hoffmann, Chief Financial Officer.........................................25
+Boliden: Mikael Staffas, Chief Executive Officer..............................................27
+Rio Tinto: Katie Jackson, Chief Executive, Copper...........................................30
+Vale Base Metals: Shaun Usmar, Chief Executive Officer................................32
+Lundin Mining: Jack Lundin, Chief Executive Officer......................................34
+Copper outlook in charts..................................................36
+Inventory & high frequency trends..................................................................36
+US imports and copper tariffs..........................................................................37
+Mine supply trends & capital costs..................................................................38
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P4 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 4 Deutsche Bank AG
+Copper Conference Themes
+Our favourite quotes from the conference
+“We are in an environment for the foreseeable future of high and 
+probably very volatile copper pricing”
+“There is a very genuine risk of seeing the first stock-out in China in all 
+our careers”
+“Social inventory cover in China is exceptionally low. Any price dip is 
+seeing aggressive buying"
+“There's been underinvestment for 30 years in the industry, so our ability 
+to have the people that can deliver these projects is very challenging”
+“The entire ecosystem [for large-scale industrial projects] in the West 
+has atrophied, creating major challenges in adding supply”
+“The biggest constraints to adding supply fundamentally sit above 
+ground rather than below ground”
+"900 kt of new copper supply is required every year in order to meet 
+demand, equivalent to 12 mines the size of Cobre Panama coming on 
+line over the next 6-7 years"
+“For every $2bn of spend on hyperscalers, you need about 150-170 kt of 
+copper”
+“For each MW of capacity in a data center, you need 30-50t of copper”
+"There will be substitution, but it won't be disruptive to the market"
+"We have a huge commitment to grow in copper"
+"We're working on ways to unlock new copper supply from new 
+technologies [in order to help fill the supply-gap]"
+"We have incredible organic growth options in copper"
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P5 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 5
+Record prices: driven by fundamentals or the tariff threat?
+Figure 1: LME copper price at record levels
+Source : Deutsche Bank, Bloomberg Finance LP
+The potential introduction of a US tariff on refined copper has been a dominant 
+theme across the copper market over the past 18 months, driving inventory 
+movements, reshaping trade flows, and contributing to much tighter physical 
+market conditions and higher prices. The US has accumulated around 1.6 mt of 
+copper inventory since the start of 2025 (including ~0.7 mt held on exchange), but 
+this material remains effectively unavailable to the ex-US market. Outside the US, 
+inventories are ~300 kt, equivalent to only 2.5 days of consumption, leaving China 
+at risk of a potential stock-out if current trends persist.
+Figure 2: Global copper inventories
+6,000
+7,000
+8,000
+9,000
+10,000
+11,000
+12,000
+13,000
+14,000
+15,000
+16,000
+0
+200
+400
+600
+800
+1,000
+1,200
+1,400
+Sep-21
+Dec-21
+Mar-22
+Jun-22
+Sep-22
+Dec-22
+Mar-23
+Jun-23
+Sep-23
+Dec-23
+Mar-24
+Jun-24
+Sep-24
+Dec-24
+Mar-25
+Jun-25
+Sep-25
+Dec-25
+Mar-26
+Jun-26
+Sep-26
+LME copper (kt) Comex copper (kt)
+SHFE copper (kt) China bonded warehouse (kt)
+LME Cu price (US$/t)- rhs
+Source : Deutsche Bank, Bloomberg Finance LP
+Figure 3: LME & Comex copper inventories
+0
+100
+200
+300
+400
+500
+600
+700
+Sep-20
+Jan-21
+May-21
+Sep-21
+Jan-22
+May-22
+Sep-22
+Jan-23
+May-23
+Sep-23
+Jan-24
+May-24
+Sep-24
+Jan-25
+May-25
+Sep-25
+Jan-26
+May-26
+Sep-26
+LME copper inventories (kt) Comex copper inventory (kt)
+Source : Deutsche Bank, Bloomberg Finance LP
+If the tariff threat was removed entirely, the excess inventory accumulated in the US 
+could become a significant overhang on the market. However, given the US 
+government's focus on supply chain security, re-shoring and building strategic 
+inventory buffers, our central case remains that the administration will maintain the 
+tariff threat and potentially introduce some form of tariff on refined copper imports. 
+That said, it is worth remembering that alternative policy tools remain available to 
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P6 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 6 Deutsche Bank AG
+the administration, including 45X tax credits and other measures designed to 
+incentivise domestic production.
+The attending management teams broadly expect prices to remain high and 
+volatile. Most believe that the threat of US tariffs and related inventory movements 
+have inflated prices, but also noted that prices have a strong underpin from tight 
+supply-demand fundamentals . The concentrate market is viewed as 
+“exceptionally tight”, the industry’s project pipeline remains limited and strong 
+demand growth is expected from a number of sectors, including grids, renewables, 
+energy storage, and AI/data centres. Most believe that sustained higher prices will 
+be required to incentivise new supply.
+Acute market tightness, demand holding up
+Figure 4: China copper inventories
+0
+100
+200
+300
+400
+500
+600
+Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+2022 2023 2024 2025 2026
+China SHFE + bonded stocks, 
+kt copper cathode
+Source : Deutsche Bank, Bloomberg Finance LP
+Figure 5: China copper physical premium
+-25
+0
+25
+50
+75
+100
+125
+150
+China Yangshan copper cathode premium (USD/t)
+Source : Deutsche Bank, Bloomberg Finance LP
+Despite prices closing in on $15,000/t, demand has remained resilient and supply 
+continues to underperform. According to our Expert Panel, available inventories are 
+very low, with social inventory cover in China exceptionally low, and physical 
+buying emerges quickly on even small pullbacks. The Panel believes near-term 
+price risks remain skewed to the upside. Physical indicators including LME and 
+SHFE backwardation and rising Chinese premiums point to increasing scarcity. If 
+US inflows continue, the panel sees scope for copper prices to move even higher, 
+particularly given exceptionally low ex-US inventory cover.
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P7 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 7
+Figure 6: Copper availability at unprecedented critical lows
+0
+20
+40
+60
+80
+100
+00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26
+Chinese SRB copper reserves est (demand days)
+WIP inventories (demand days)
+Unencumbered copper stocks (demand days)
+Global AGS (demand days)
+Source : Deutsche Bank Research, Wood Mackenzie, Bloomberg Finance LP, various media reports
+Figure 7: Today, most copper inventories aren't for sale
+0%
+10%
+20%
+30%
+40%
+50%
+60%
+70%
+80%
+90%
+100%
+25y ago 5y ago Today
+%total AGS
+Unencumbered AGS China encumbered USA encumbered Industry encumbered
+Source : Deutsche Bank Research, Wood Mackenzie, Bloomberg Finance LP, various media reports
+Our DB colleague Daniel Ghali highlights that the market is experiencing an 
+unprecedented scarcity of freely available metal despite rising visible inventories. 
+US tariff-driven inventory movements and ongoing stockpiling in the US are 
+masking tightening physical availability, with a growing share of global inventories 
+effectively unavailable to the market.
+Supply crunch
+Figure 8: China refined copper output monthly
+-4%
+0%
+4%
+8%
+12%
+16%
+20%
+24%
+0
+250
+500
+750
+1,000
+1,250
+1,500
+China refined copper production monthly (kt) % change YoY
+Source : Deutsche Bank, Bloomberg Finance LP, Wind
+Figure 9: DB global copper mine production proxy
+-12%
+-9%
+-6%
+-3%
+0%
+3%
+6%
+9%
+2,000
+2,250
+2,500
+2,750
+3,000
+3,250
+3,500
+3,750 kt
+Source : Deutsche Bank estimates, company data
+The persistent weakness in global mine supply remains a key area of fundamental 
+support for the copper market, and has been a major driver of price strength over 
+the past 12 months. Years of underinvestment, declining ore grades, and 
+disruptions at several major operations have constrained supply growth, with 
+recent company updates and high-frequency data suggesting global mine supply 
+could decline in 2026 following growth of less than 1% in 2025. Most participants 
+at the conference see downside risk to industry based production guidance of a 
+5-6% increase in YoY mine supply in 2027, with disruption-adjusted concentrate 
+growth potentially closer to 2-3% according to our Expert Panel. Concentrate 
+tightness looks increasingly structural according to corporates. Smelting 
+capacity continues to exceed concentrate availability, driving spot treatment 
+charges to record negative levels.
+Chinese refined production is now constrained by raw-material availability (scrap 
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P8 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 8 Deutsche Bank AG
+and concentrate) following strong growth in H2’25 and early 2026. After several 
+years of strong growth, refined output is expected to flatline or modestly decline 
+through Q4 and into early 2027 as concentrate and scrap availability tighten. This 
+removes what had previously been one of the more bearish elements of the copper 
+balance. Due to policy changes in China, copper scrap is providing less of a release 
+valve to weak mine supply than historically.
+Is the copper investment cycle about to takeoff?
+Following years of underinvestment, a significant copper investment cycle is 
+drawing closer as the industry seeks to develop new sources of supply. A key debate 
+with investors is whether permitting challenges and capital discipline will constrain 
+investment relative to the previous major investment cycle or if the sector is at risk 
+of overinvesting. On the project front, the attending companies continue to view 
+lengthy and complex permitting as a key challenge, although a shortage of skilled 
+labour is emerging as the biggest bottleneck on adding new supply. While there 
+are a large number of projects globally, these vary considerably in scale and 
+readiness, with permitting, water and the industry's ability to develop multiple 
+projects simultaneously influencing how quickly new supply can reach the market.
+Higher incentive prices are needed to unlock new supply. Long-run consensus 
+copper prices have already increased ~20-25% over the past 18 months, but rising 
+capital costs and competition for project-development resources could require 
+further increases. The panel suggested that the market has become increasingly 
+comfortable with long-term copper price assumptions above ~$12,000/t.
+Demand outlook and risks
+On the demand front, corporates did not highlight any major signs of weakness 
+from the recent surge in prices and see a strong structural demand outlook, 
+supported by electrification, renewable energy investments and accelerating AI/
+data-centre investment. Demand appears increasingly price-inelastic in key 
+growth areas, including grid investment, US policy-driven demand (i.e. inventory 
+building) and AI-related infrastructure. Ongoing thrifting and substitution towards 
+aluminium is expected at higher prices, although these are not seen as major 
+threats and not expected to materially alter the medium-term outlook. Key 
+downside risks are seen as a US policy reversal (removing the tariff threat) and 
+macro weakness.
+Industry consolidation and M&A
+Discussion on and interest in M&A was considerably lower compared to last year, 
+largely due to several large deals announced or attempted in 2025 (less so in 2026). 
+We expect industry consolidation to remain a key trend as producers seek to secure 
+future copper growth in an increasingly constrained supply environment. 
+Corporates did not give much away on M&A strategies, highlighting an 
+opportunistic, value-based approach, and also stressing the strength of organic 
+opportunities. The Anglo Teck merger is expected to complete within the next six 
+months, we believe merger talks between RIO and GLEN could be revised at some 
+stage, and strategic mergers between existing copper companies is also a 
+possibility, in our view.
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P9 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 9
+Recommendations & 
+Valuations
+Figure 10: Metals & Mining Recommendations & Valuations (based on DB estimates)
+2026 2027 2028 2026 2027 2028 2026 2027 2028 2026 2027 2028 2026 202 7 2028
+Diversified
+Anglo American Buy GBP 4,500 3,980 13% 62,026 76,739 42.4 19.9 20.7 10.5 8.7 8.8 5.0 5 .8 5.7 0.9 0.3 0.1 0.9 2.0 1.9
+Glencore Buy GBP 630 549 15% 85,211 101,636 12.1 14.9 14.4 5.2 5.1 4.8 8.3 7.6 8. 0 0.4 0.3 0.2 3.8 2.9 3.0
+BHP Billiton Hold GBP 2,700 3,190 -15% 214,555 228,647 16.2 18.8 17.8 8.2 8.9 8.4 4.6 3.0 4.0 0.3 0.3 0 .3 4.1 3.2 3.4
+Rio Tinto Hold GBP 7,400 7,070 5% 160,873 180,056 11.1 11.9 11.8 6.0 6.0 5.8 6.0 6 .0 6.6 0.4 0.4 0.3 6.3 5.0 5.1
+Vale Hold USD 18 14 33% 57,708 69,580 7.7 7.4 7.5 4.3 4.3 4.1 9.7 9.5 9.2 0.8 0. 9 0.8 7.1 6.6 6.6
+Base metals
+China Hongqiao Buy HKD 33 21 59% 26,068 30,395 4.8 4.7 5.0 3.1 3.1 3.4 17.5 19.1 17.5 0. 2 0.3 0.3 13.0 11.5 10.5
+First Quantum Buy CAD 50 45 11% 26,506 31,910 117.0 21.0 11.6 15.4 7.3 4.9 (0.5) 6.9 13.3 2.5 0.8 (0.0) 0.0 0.0 0.0
+Freeport-Mcmoran Buy USD 70 72 -3% 103,508 120,700 24.6 18.0 15.5 13.4 10.2 8.7 3.5 4.8 5.8 0.2 (0.1) (0.3) 0.8 0.8 0.8
+Teck Buy USD 68 67 2% 32,635 33,138 13.9 19.0 24.0 6.5 7.6 8.8 3.7 5.2 4.7 (0.2) (0.5) (1.0) 0.5 0.5 0.5
+Boliden Ab Hold SEK 620 518 20% 14,847 16,417 12.7 9.2 9.1 6.3 5.0 4.7 2.0 7.9 8.7 0. 6 0.3 0.2 3.1 6.5 6.6
+Lundin Hold CAD 36 35 4% 20,883 22,306 19.7 17.6 20.1 8.6 8.2 9.1 4.1 2.8 0.1 0.0 (0.1) (0.0) 0.3 0.3 0.3
+Norsk Hydro Asa Hold NOK 102 83 23% 17,267 18,793 9.8 10.6 11.1 4.7 4.5 4.5 7.3 8.8 8.2 0. 3 0.2 0.1 6.1 6.6 5.4
+Antofagasta Plc Sell GBP 3,400 3,718 -9% 48,490 55,300 27.1 30.3 25.6 11.7 11.5 9.3 0.2 2.6 4.1 0.6 0.5 0 .2 1.8 1.6 2.0
+870,579 985,617 19.4 15.1 14.5 7.7 7.1 6.7 5.6 5.7 6.3 0.4 0.3 0 .2 3.9 3.4 3.4
+Current
+price
+Upside
+ to TP
+Mkt cap 
+($m)Company New 
+TP
+Curren
+cy Rating EV 
+US$m
+Net debt/EBITDA Dividend yieldPE ratio EV/EBITDA FCF yield
+Source : Deutsche Bank estimates, Bloomberg Finance LP. Price data as on 24 Sep 2026; calendarised data for BHP
+Figure 11: Metals & Mining Recommendations & Valuations (at spot prices)
+2026 2027 2028 2026 2027 2028 2026 2027 2028 2026 2027 2028 2026 202 7 2028
+Diversified
+Anglo American Buy GBP 4,500 3,980 13% 62,026 76,739 40.4 15.7 15.7 10.3 7.3 7.1 5.2 7 .8 8.0 0.9 0.1 (0.1) 1.0 2.5 2.5
+Glencore Buy GBP 630 549 15% 85,211 101,636 10.4 10.0 8.6 4.8 4.2 3.6 9.7 11.0 12 .9 0.4 0.1 (0.1) 3.8 2.9 3.0
+BHP Billiton Hold GBP 2,700 3,190 -15% 214,555 228,647 16.0 17.8 16.1 8.1 8.6 7.8 4.8 3.6 5.0 0.3 0.3 0 .2 4.1 3.4 3.7
+Rio Tinto Hold GBP 7,400 7,070 5% 160,873 180,056 11.6 12.7 11.8 5.8 5.8 5.5 5.6 5 .4 6.5 0.4 0.4 0.4 6.0 4.7 5.1
+Vale Hold USD 18 14 33% 57,708 69,580 8.0 7.7 7.7 4.4 4.5 4.2 9.2 8.8 9.0 0.9 0. 9 0.9 6.9 6.3 6.5
+Base metals
+China Hongqiao Buy HKD 33 21 59% 26,068 30,395 4.9 4.7 3.8 3.2 3.1 2.7 17.2 19.2 23.7 0. 2 0.3 0.1 11.2 11.7 14.2
+First Quantum Buy CAD 50 45 11% 26,506 31,910 59.4 12.0 6.8 13.4 5.7 3.6 0.4 10.7 19.6 2.1 0.4 (0.4) 0.0 0.0 0.0
+Freeport-Mcmoran Buy USD 70 72 -3% 103,508 120,700 21.3 12.1 10.2 12.0 7.7 6.2 4.1 7.7 9.4 0.2 (0.2) (0.6) 0.8 0.8 0.8
+Teck Buy USD 68 67 2% 32,635 33,138 12.2 11.8 13.4 5.8 5.4 5.6 5.1 9.7 9.1 (0.3) (0.7) (1.2) 0.5 0.5 0.5
+Boliden Ab Hold SEK 620 518 20% 14,847 16,417 11.2 7.1 6.6 5.8 4.2 3.7 3.4 11.1 12.8 0.5 0.1 (0.1) 3.6 8.5 9.0
+Lundin Hold CAD 36 35 4% 20,883 22,306 17.5 12.9 13.8 7.9 6.5 6.9 4.9 5.4 2.9 (0.0) (0.3) (0.4) 0.3 0.3 0.3
+Norsk Hydro Asa Hold NOK 102 83 23% 17,267 18,793 9.7 10.0 9.2 4.8 4.3 4.0 7.4 9.4 10.6 0. 3 0.1 (0.0) 6.2 7.0 6.5
+Antofagasta Plc Sell GBP 3,400 3,718 -9% 48,490 55,300 24.2 22.1 18.1 10.6 9.1 7.2 0.8 3.9 5.9 0.5 0.3 0. 0 2.1 2.3 2.8
+870,579 985,618 16.8 12.8 11.6 7.3 6.3 5.7 5.9 7.0 8.4 0.4 0.2 0 .0 3.8 3.5 3.7
+Upside
+ to TP
+Mkt cap 
+($m)
+EV 
+US$mCompany New 
+TP
+Current
+price
+Curren
+cy Rating 
+PE ratio EV/EBITDA FCF yield Net debt/EBITDA Dividend yield
+Source : Deutsche Bank estimates. Bloomberg Finance LP. Price data as on 24 Sep 2026; calendarised data for BHP
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P10 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 10 Deutsche Bank AG
+Figure 12: Key commodity and FX moves
+Unit Spot 1 week 1 month 3  months 6months YTD 12 months
+Base metals
+Aluminium - LME $/t 3,257 -1.0% 0.9% 2.7% -3.0% 9.7% 22.9%
+Aluminium - SHFE CNY/t 24,240 -0.6% 1.3% 5.9% 1.8% 7.9% 16. 7%
+Cobalt $/t 39,213 -0.1% -14.2% -29.8% -29.8% -25.9% 13.4%
+Copper - LME $/t 14,728 1.3% 1.9% 10.4% 21.5% 18.3% 45.2%
+Copper - Comex $/t 14,761 1.2% 1.6% 9.0% 22.5% 17.8% 42.0%
+Lead $/t 1,907 1.0% 1.5% 2.0% 2.5% -3.1% -2.7%
+Nickel $/t 16,150 0.8% -3.4% -2.2% -5.0% -2.1% 7.8%
+Zinc $/t 3,996 -0.5% -2.9% 14.7% 28.2% 29.7% 36.5%
+Molybdenum $/t 34 0.0% 0.6% 8.2% 25.3% 56.4% 32.4%
+Alumina - LME $/t 349 0.0% -1.7% 12.6% 11.9% 11.5% 8.0%
+Alumina - SHFE CNY/t 2,652 -0.4% 1.1% -3.4% -8.0% 1.9% -7.6 %
+Bauxite - SHFE CNY/t 513 0.0% 0.0% 5.8% 4.5% 0.8% 0.8%
+Precious metals
+Gold $/oz 4,285 -2.1% -6.8% 4.8% -4.7% -0.8% 14.0%
+Palladium $/oz 1,271 -2.5% -6.2% 4.8% -8.1% -21.6% 0.4%
+Platinum $/oz 1,782 -1.1% -3.7% 9.7% -4.6% -13.5% 12.8%
+Silver $/oz 64.3 -3.0% -7.1% 8.7% -7.8% -10.3% 39.5%
+Rhodium $/oz 9,350 3.9% 5.9% 20.6% -13.4% 1.9% 31.2%
+Bulks &  Energy
+Iron ore fines $/t 96.8 -0.7% 0.9% -3.5% -9.0% -9.7% -8.1%
+Coking coal $/t 265.0 1.1% -0.4% 9.5% 9.7% 19.4% 23.8%
+Thermal Coal (Newcastle FOB) $/t 144 0.3% 2.0% 13.9% -6.2% 34.0% 21.3%
+Europe Coal 6000 Kcal $/t 134 -1.0% 3.2% 18.9% 8.3% 38.8% 42.5%
+South Africa Coal 6000 Kcal $/t 124 -0.3% 12.9% 9.2% 12.4% 43.3% 47.0%
+Brent Oil $/bbl 104 0.4% 16.3% 44.9% -7.3% 71.4% 48.8%
+European natural gas EUR/MWh 72 -9.4% 5.8% 76.7% 33.0% 144.5% 120.9%
+China Qinghuangdao Port Thermal $/t 137 -0.8% 6.5% 6.9% 23.8% 33.0% 40.7%
+Lump Premium (PLATTS 62% Fe  CFR CH) $/t 14.3 -1.1% -11 .3% 27.0% 30.6% 329.6% 32.4%
+Baltic Freight Index $ 3,426 1.7% 10.3% 35.7% 68.7% 82.5% 5 1.7%
+Freight (W. Australia-Qingdao) $/t 17 0.0% 13.7% 62.0% 50.9% 64.4% 52.3%
+Freight (Tubarao-Qingdao) $/t 43 0.0% 20.0% 51.5% 40.8% 77.5% 65.5%
+SHFE Rebar Futures CNY/t 3,050 0.0% 0.3% -3.1% -1.8% -1.8 % 0.0%
+China HRC Shanghai Index CNY/t 3,310 0.0% -0.6% -0.5% 0.4 % 1.2% -2.9%
+US$ vs key currencies
+Euro USD/EUR 0.88 -0.8% -2.3% 0.1% -1.0% -3.0% -2.7%
+Canadian dollar USD/CAD 1.41 -1.1% -2.0% 0.4% -1.8% -3.0% - 1.5%
+Australian dollar USD/AUD 1.42 -1.4% -2.4% 1.8% 2.2% 5.2% 7 .4%
+South African Rand USD/ZAR 16.31 -0.4% -1.9% 1.0% 5.0% 1.5 % 6.3%
+Norwegian Kroner USD/NOK 9.51 -1.0% -2.0% 4.5% 2.5% 6.2% 5. 0%
+Swedish Kroner USD/SEK 9.92 -0.9% -4.0% -1.8% -4.5% -7.1% - 5.1%
+Chilean Peso USD/CLP 962 -0.2% -3.7% -3.9% -4.1% -6.4% -0.2%
+Kazakhstani Tenge USD/KZT 443 0.9% 4.7% 9.8% 9.2% 14.5% 23.0%
+Brazilian Real USD/BRL 5.18 -0.8% -0.4% -0.2% 1.1% 5.7% 3.1 %
+Source : Bloomberg Finance LP, Spot prices as on 27 September 2026
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P11 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 11
+Session summaries
+Conference Agenda
+Figure 13: Virtual Copper CEO Conference Agenda
+Source : Deutsche Bank. Based in BST (British Summer Time)
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P12 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 12 Deutsche Bank AG
+Expert Copper Market Panel
+The Deutsche Bank Copper Expert Panel included Colin Hamilton (Market 
+Research and Economic Analysis, Teck Resources), Nicholas Snowdon (Head of 
+Metals Research, Mercuria).
+n The copper market remains very tight. Despite prices closing in on $15,000/
+t, demand has remained resilient and supply continues to underperform. 
+Available inventories are very low, with social inventory cover in China 
+exceptionally low, and physical buying emerges quickly on even small 
+pullbacks.
+n Regional inventory dislocation is central to current market tightness. The 
+US has accumulated around 1.6 mt of copper inventory since the start of 
+2025 (including ~0.7 mt held on exchange), but this material remains 
+effectively unavailable to the ex-US market. The US remains the most 
+attractive destination for swing units and the panel expects inflows to 
+continue into year-end while tariff uncertainty persists. Outside the US, 
+inventories are ~300 kt, equivalent to only 2.5 days of consumption, leaving 
+China at risk of a potential stock-out if current trends persist.
+n Near-term price risks remain skewed to the upside.  Physical indicators 
+including LME and SHFE backwardation and rising Chinese premiums 
+point to increasing scarcity. If US inflows continue, the panel sees scope for 
+copper prices to move further higher, particularly given exceptionally low 
+ex-US inventory cover.
+n Mine supply remains the key structural constraint. Global mine 
+production was close to flat in 2025 and a similar outcome is expected in 
+2026, with recent weather-related disruptions adding further pressure. The 
+panel sees downside risk to industry based production guidance of a 5-6% 
+increase in mine supply in 2027, with disruption-adjusted concentrate 
+growth potentially closer to ~2-2.5.
+n Concentrate tightness looks increasingly structural. Smelting capacity 
+continues to exceed concentrate availability, driving spot treatment 
+charges to record negative levels. With limited new concentrate production 
+on the horizon, the panel sees little prospect of the market escaping this 
+deficit without sustained mine supply growth.
+n Chinese refined production is now constrained by raw-material 
+availability (scrap and concentrate) following strong growth in H2’25 and 
+early 2026. After several years of strong growth, refined output is expected 
+to flatline or modestly decline through Q4 and into early 2027 as 
+concentrate and scrap availability tighten. This removes what had 
+previously been one of the more bearish elements of the copper balance.
+n Scrap is providing less of a release valve than historically. Chinese policy 
+changes have reduced scrap-market liquidity, while several years of 
+destocking has also limited underlying availability. Policy adjustments 
+could improve scrap flows in 2027, but the panel cautioned against 
+expecting this to materially loosen the market given already-low 
+inventories.
+n Demand appears increasingly price-inelastic in key growth areas. Grid 
+investment, US policy-driven demand and AI-related infrastructure were 
+highlighted as areas where buyers may be less sensitive to copper prices 
+than traditional consumers. This could mean higher prices are required to 
+balance the market, although some copper thrifting and substitution are 
+already taking place.
+n Copper-to-aluminium substitution is accelerating. The panel estimates 
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P13 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 13
+~400 kt of copper demand could be substituted by aluminium globally in 
+2026, ~80% of which is in China. Further substitution is considered likely as 
+additional aluminium supply emerges from 2027, although this is not 
+currently expected to be sufficient to materially loosen the copper market.
+n Key downside risks are US policy reversal and macro weakness.  A 
+sudden cessation of US imports would require the ex-US market to absorb 
+~150kt per month of additional copper, while the release of the large US 
+inventory pool could materially loosen availability, but the panel would not 
+expect a flood of material from the US. A broader macro risk-off 
+environment was also highlighted as a potential downside risk.
+n Medium-term fundamentals remain supportive. Underinvestment in mine 
+supply is expected to coincide with continued copper-intensive investment 
+across grids, AI infrastructure and defence. AI/data-centre-related copper 
+demand was estimated at ~600 kt in 2026, potentially rising to ~1.5 mt by 
+2030, supporting expectations for elevated and volatile copper prices over 
+the medium term.
+n Higher incentive prices are likely required to unlock new supply. Long-run 
+consensus copper prices have already increased ~20-25% over the past 18 
+months, but rising capital costs and competition for project-development 
+resources could require further increases. The panel suggested that the 
+market has become increasingly comfortable with long-term copper price 
+assumptions above ~$12,000/t.
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P14 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 14 Deutsche Bank AG
+First Quantum Minerals: Tristan Pascall, Chief Executive 
+Officer
+n Tristan Pascall ('TP') outlined that FM began 2026 with four key priorities: 
+strengthening the balance sheet for future growth; advance its greenfield 
+projects; continued safe and production operational performance; and 
+advance Cobre Panamá ('CP') towards a resolution. Progress has been 
+strong on these priorities YTD, and efforts continue towards the reopening 
+of CP.
+n The discussion focused heavily on CP. The June environmental audit was 
+an important milestone, with the mine compliant with >97% of its ESIA 
+commitments and receiving an overall compliance score of ~88%. A 
+ministerial commission is reviewing the findings and is expected to make a 
+recommendation to the President of Panama on the future of the mine 
+before year-end. TP expects any new agreement to be based around three 
+pillars: (1) a new legal structure; (2) commercial terms; and (3) 
+environmental commitments. He stressed that it remains too early to 
+speculate on the specifics of any agreement, with the government 
+expected to dictate the timing.
+Figure 14: Copper production following a Cobre Panamá restart (2020-30E), kt
+0
+100
+200
+300
+400
+500
+600
+700
+800
+900
+1,000
+2020 2021 2022 2023 2024 2025 2026E 2027E 2028E 2029E 2030E
+Kansanshi Guelb Moghrein Sentinel Cobre Panama
+Source : Deutsche Bank estimates
+n The processing of stockpiled ore at CP is progressing well, involving nearly 
+all areas of the operation (except drill and blast). Over ~3,000 employees are 
+currently on site, two concentrate shipments have already been completed, 
+and stockpiles are sufficient to support processing through to mid-2027. 
+Importantly, TP highlighted that the ongoing activity is helping to re-
+establish the workforce and demonstrate that preservation and 
+maintenance activities have been effective. If CP receives approval to 
+restart, TP expects that it could reach ~80-90% of design capacity within 
+6-9 months, although rebuilding the mining workforce, particularly skilled 
+labour, was cited as a main challenge.
+n FM’s capital allocation priority remains focused on strengthening the 
+balance sheet. TP noted that the company continues to target further debt 
+reduction before committing to its next major growth projects, including 
+Taca Taca, La Granja and Haquira. Although FM will consider M&A where 
+its capabilities can add value, TP argued that the industry's principal 
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P15 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 15
+challenge is building new copper supply rather than consolidating existing 
+production. FM completes ~70% of its project work in-house, which is a key 
+differentiator versus its peers.
+n Taca Taca remains the most advanced greenfield growth opportunity, with 
+the next key milestones including ESIA approval, submission of the RIGI 
+application ahead of the July 2027 deadline, and financing. The company 
+is considering a broad range of funding options, including project finance, 
+strategic partnerships, development financing and streaming, although no 
+structure or development timelines have been committed at this stage.
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P16 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 16 Deutsche Bank AG
+Figure 15: First Quantum Minerals operational & financial summary
+FX/COMMODITIES Units 2024 2025 2026E 2027E 2028E Valuation (2026)
+Copper US$/lb 4.15 4.51 5.98 5.67 5.70
+Nickel US$/lb 7.63 6.88 7.87 7.89 8.07
+Gold US$/oz 2,387 3,440 4,470 4,910 5,023
+KEY FINANCIAL METRICS
+Revenue $m 4,891 5,237 6,583 9,109 11,554
+Underlying EBITDA $m 1,491 1,676 2,070 4,361 6,170
+Depreciation & Amorisation $m 671 718 957 1,796 2,651
+EBIT/Operating Profit $m 791 966 1,381 2,565 3,519
+Tax expense/(credit) $m 396 521 649 819 1,012
+Comparative earnings $m -17 8 40 1,260 2,272
+Comparative EPS US$/sh -0.02 -0.06 0.27 1.51 2.73
+Basic EPS US$/sh -0.02 -0.06 0.27 1.51 2.73
+DPS US$/sh 0.00 0.00 0.00 0.00 0.00
+Operating Cash Flow $m 1,651 2,082 1,600 3,662 5,300
+Capex $m 1,286 1,134 1,227 1,285 1,550
+Equity free cash flow $m -154 512 -126 1,837 3,515
+FCF yield % -0.5% 1.8% -0.4% 6.5% 12.5%
+Dividend yield % 0.0% 0.0% 0.0% 0.0% 0.0% Net debt & ND/EBITDA
+EV/EBITDA x 23.01 20.04 16.05 7.62 5.38
+Net debt/(cash) $m 5,499 5,120 5,187 3,350 -230
+Leverage (D/D+E) % 35% 34% 34% 31% 27%
+Consolidated ND/EBITDA x 3.76 3.04 2.22 0.77 -0.04
+PRODUCTION VOLUMES
+Kansanshi kt 171 181 189 224 255
+Las Cruces  kt 0 0 0 0 0
+Guelb Moghrein  kt 18 15 7 10 0
+Phyasalmi  kt 0 0 0 0 0
+Cayeli  kt 11 11 4 0 0
+Sentinel  kt 231 189 202 214 216
+Cobre Panama kt 0 0 38 205 377
+Copper kt 431 396 440 654 848
+Nickel kt 24 23 40 35 30
+Gold Koz 139 152 161 263 330
+NET CASH COST PER UNIT
+Kansanshi $/lb 1.59 1.45 1.99 1.65 1.55
+Sentinel $/lb 1.94 2.67 2.87 2.24 2.32
+Cobre Panama $/lb n/a n/a 4.37 2.55 1.80
+Group net cash cost (excl. Cobre) $/lb 1.67 1.94 2.55 2.10 1.86
+Guidance $/lb 1.65-1.85 1.95-2.10 2.15-2.40
+EBITDA Copper production by operation
+Kansanshi $m 765 1,061 1,283 1,754 2,074
+Las Cruces $m 0 0 0 0 0
+Guelb Moghrein  $m 67 102 57 0 0
+Ravensthorpe $m -144 0 -11 0 0
+Cayeli $m 37 40 26 0 0
+Phyasalmi $m 0 0 0 0 0
+Sentinel $m 1,067 785 1,443 1,628 1,550
+Cobre $m -190 15 -141 1,225 2,799
+Other $m -143 -177 -242 -254 -260
+Adjusted EBITDA $m 1,491 1,676 2,070 4,361 6,170
+CONSOLIDATED CAPEX
+Total Capex $m 1,329 1,148 1,233 1,285 1,550
+Growth Capex $m 916 648 439 221 123
+Sustaining Capex $m 413 500 794 1,064 1,427
+Kansanshi
+25%
+Sentinel
+16%Cobre Panama
+40%
+Taca Taca
+11%
+La Granja
+2%
+Haquira
+6%
+-1.0
+0.0
+1.0
+2.0
+3.0
+4.0
+5.0
+6.0
+-1,000
+0
+1,000
+2,000
+3,000
+4,000
+5,000
+6,000
+2024 2025 2026E 2027E 2028E
+Net debt/(cash) Consolidated ND/EBITDA
+kt
+0
+100
+200
+300
+400
+500
+600
+700
+800
+900
+2022A 2023 2024 2025 2026E 2027E 2028E
+Kansanshi Sentinel Cobre Panama
+Source : Deutsche Bank estimates, Company data
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P17 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 17
+BHP: Jessica Farrell, President North & South America 
+n BHP's copper growth pipeline is progressing towards several major 
+investment decisions, with the company focused on carefully sequencing 
+projects and de-risking execution. At Escondida, ~$800m of pre-
+commitment funding has been approved for engineering and long-lead 
+equipment ahead of a potential sanctioning decision of the new 
+concentrator in CY27-28 (capex is guided to $5.4-6.3bn).
+n At Vicuña, management reiterated that the previously disclosed ~$7.1bn 
+(real) Stage 1 capex was a preliminary estimate. The current focus is on 
+completing a bottom-up estimate of Stage 1 capex, updating the 
+construction schedule and refining the mine plan, with construction 
+potentially starting in CY27 following a final investment decision.  Key de-
+risking milestones include the recent RIGI approval, the ESIA, as well as the 
+power infrastructure and the royalty agreement signed with San Juan 
+Province. However, the company emphasised the importance of 
+appropriately incorporating altitude, inflation, and execution risks into the 
+revised capex estimate , suggesting a higher figure (we would not be 
+surprised with a headline figure of over $8bn)
+n Following its unsuccessful approach for Anglo, BHP continues to prioritise 
+its organic copper growth pipeline, which the company views as attractive 
+from both a scale and capital intensity perspective. BHP also continues to 
+assess external opportunities and alternative partnership structures, but 
+the focus remains on progressing and delivering its current projects, 
+including Escondida, Vicuña and at Copper South Australia.
+n The company acknowledged the lessons from Jansen's cost and schedule 
+overruns are being incorporated into future copper projects, including more 
+detailed bottom-up estimates, greater scrutiny of inflation and contingency 
+assumptions, six-monthly project reviews and greater focus on the 
+appropriate contracting/EPCM model. These measures are particularly 
+relevant for Vicuña, given it is viewed as a high-risk project and investor 
+concerns around capex escalation.
+Figure 16: Major copper projects
+Projects 
+Capex 
+($m) 100% 
+basis
+Capex 
+intensity
+(S$k/t CuEq)
+Final 
+Investment 
+Decision
+Date of initial 
+production 
+Potential
+production profile 
+(ktpa)
+Remaining  
+capex ($m)
+Copper
+Escondida new concentrator 5.4-6.3 19-22 CY27-28 CY31-32 230-270
+260-300 CcuEq 5.4-6.3
+Vicuna (100%) stage 1 7-8 20-30 ~CY26 CY30 ~200
+300 CuEq 7-8
+Spence chalcopyrite leaching 0.6-0.9 11-18 CY26 CY28 40-60
+40-60 CuEq 0.6-0.9
+Copper SA Phase 1 Growth 3.2-4.1 not appicable CY27 CY32 380-50 0 Cu 3-5
+Copper SA Phase 1 Growth 5.8-7.5 18-23 CY28 / CY29 CY29 ~220 Cu
+~330 CuEq 3-5
+Cerro Colorado  restart 1.4-2.0 16-22 CY28-31 CY31-34 74-80
+74-80 CuEq 1.4-2.0
+Vicuna (100%) all stages ~18 20-30 CY27-30s CY30-mid 30s ~500
+~800 CuEq 10-11
+Copper SA Phase 2 Growth 4.5-5.8 20-26 CY32 CY38 ~190 Cu
+~230CuEq 3-5
+Source : BHP, Deutsche Bank
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P18 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 18 Deutsche Bank AG
+Figure 17: BHP operational & financial summary
+BHP BILLITON OPERATIONAL AND FINANCIAL SUMMARY DATA
+2,022 2,022 2,022
+FX/COMMODITIES (Nominal) FY25A FY26A FY27F FY28F FY29F
+AUDUSD /usd 0.65 0.68 0.71 0.72 0.72 Net debt & Net debt/EBITDA
+Oil - Brent US$/bbl 74 77 71 70 72
+Oil - WTI US$/bbl 70 72 68 66 68
+Copper US$/lb 423 534 585 568 576
+Iron ore - lump - CIF $/t 111 113 110 111 113
+Iron ore - fines $/t 101 104 100 100 101
+Coking coal $/t 197 213 228 222 222
+KEY FINANCIAL METRICS
+Revenue $/m 51,262 58,760 57,253 56,802 59,597
+Underlying EBITDA $/m 25,978 32,947 30,379 29,502 31,494
+Depreciation $/m 5,863 6,126 6,628 6,944 7,491
+Operating profit $/m 19,464 23,869 23,752 22,558 24,004
+Underlying EBIT $/m 20,240 26,640 23,752 22,558 24,004
+Underlying attributable profit $/m 10,157 13,204 12,007 11,539 12,510
+Underlying basic per share Usc/sh 200 260 236 227 246
+Dividend declared per share Usc/sh 110 172 142 136 148
+Payout ratio % 55% 66% 60% 60% 60% FY27 underlying EBITDA breakdown 
+Net debt $m 12,924 8,694 10,558 8,992 7,248
+Total capex & exploration $m 9,794 10,257 11,033 10,755 11,943
+Attribuitable FCF before Samarco payments $m 6,791 8,945 5,180 8,918 9,477
+Attribuitable FCF after Samarco payments $m 2,807 9,107 4,780 8,518 9,077
+Total dividend paid (cash basis ex special) $m 6,286 6,761 8,744 6,852 7,233
+Total cash return $m 6,286 6,761 8,744 6,852 7,233
+BALANCE SHEET AND RETURNS
+Net debt to equity x 0.20x 0.13x 0.15x 0.12x 0.09x
+EV/EBITDA- attributable x 6.8x 5.6x 5.8x 6.0x 5.5x
+ROCE pre tax % 33% 41% 35% 32% 32%
+ROCE post tax % 21% 27% 23% 21% 21%
+ROE % 21% 26% 22% 20% 20%
+Net Debt:EBITDA x 0.2x 0.1x 0.2x 0.2x 0.1x
+PRODUCTION
+Escondida (100%) kt 1,305 1,261 1,082 1,007 987
+Other copper kt 450 464 426 402 463
+Copper (consolidated) kt 2,017 1,953 1,744 1,670 1,787
+Iron ore (100% basis) mt 290 291 290 297 302
+Pilbara (attribuitable) mt 257 257 258 264 268
+Samarco (attribuitable) mt 6.4 7.8 8.0 8.0 8.0
+Iron ore (attrib) mt 263 265 266 272 276 FY27 consolidated capex and exploration
+Metallurgical coal mt 18 19 19 20 20
+Energy coal mt 15 16 15 14 14
+Nickel kt 30 0 0 0 0
+Underlying EBITDA
+Copper $m 12,326 18,187 15,910 14,255 15,101
+Iron ore $m 14,396 14,529 14,161 14,656 15,622
+Coal $m 573 832 1,268 1,167 1,035
+Nickel -589 -255 -300 -200 0
+Potash -284 -326 -360 -75 237
+Central & others $m -444 -20 -300 -300 -300
+Total underlying EBITDA $m 25,978 32,947 30,379 29,502 31,694
+Consolidated capex and exploration
+Copper $m 4,531 4,712 5,285 5,746 6,392
+Iron ore $m 2,721 3,170 3,105 2,923 2,878
+Coal $m 540 443 513 529 539
+Potash 1,642 1,814 1,900 1,426 1,840
+Nickel 176 0 100 0 0
+Others $m 184 118 104 132 135
+Total capex including exploration $m 9,794 10,257 11,008 10,755 11,783
+Copper
+51%
+Iron ore
+45%
+Coal 
+4%
+Iron ore
+54%
+Coal 
+9%
+Potash
+33%
+Nickel
+2%
+Others
+2%
+0.0x
+0.1x
+0.1x
+0.2x
+0.2x
+0.3x
+0.3x
+0
+2,000
+4,000
+6,000
+8,000
+10,000
+12,000
+14,000
+Net Debt:EBITDA Net Debt:EBITDA
+Source : Deutsche Bank estimates, Company data
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P19 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 19
+Freeport-McMoRan: Kathleen Quirk, Chief Executive Officer
+n Grasberg's recovery remains on track, with the Block Cave restarting in 
+late March and throughput ramping from ~34 ktpd in April to ~69 ktpd in 
+June. The operation is expected to run at ~65% of capacity in H2'26, before 
+increasing to ~80% by mid-2027 and approaching full capacity by year-end 
+2027. Upgrades to the material handling system are expected to be 
+completed around year-end and are expected to support consistent 
+production across different ore moisture conditions.
+n Unusually dry conditions at Grasberg have been helpful for mining 
+activities, helping to reduce ore moisture levels and “wet” drawpoints. 
+However, lower than normal rainfall has constrained water availability for 
+the milling circuit. This could result in some changes to Q3/Q4 sales 
+guidance, in our view.
+Figure 18: Grasberg copper production guidance (pre-incident versus new 
+guidance)
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4
+1.6
+1.8
+2.0 (bn lbs)
+Pre-incident guidance New Guidance
+Source : Deutsche Bank estimates, company data
+n The US leaching initiative remains a major organic growth opportunity, 
+targeting recovery of copper from ~40 bnlbs of material already mined and 
+historically considered waste (and currently stockpiled). Current 
+production is just over ~200 mlbs pa, with the company targeting ~300 
+mlbs in 2027 and potentially up to ~800 mlbs pa by 2030. New proprietary 
+additives and heat-assisted leaching are showing encouraging results, with 
+larger-scale field testing expected through late 2026/27. FCX sees its US 
+leaching initiatives as attractive given the relatively low incremental capex 
+and operating requirements to support the production uplift.
+n Bagdad is FCX's next major growth project, with the company expected to 
+make a final investment decision on the project before year-end. Subject to 
+approval, construction is expected t o take ~3 years. FCX is currently 
+undertaking extensive front-end engineering and is working closely with 
+equipment and labour providers to finalise capex estimates (latest 
+guidance of ~$4.6bn and up from the ~$3.5bn provided in 2023), while 
+automation and increased use of prefabrication are intended to mitigate 
+skilled-labour constraints.
+n On M&A, FCX continues to assess opportunities where there is a clear 
+strategic fit, identifiable synergies and scope for its capabilities to add 
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P20 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 20 Deutsche Bank AG
+value. FCX highlighted its leaching technology and operating expertise as 
+a potential differentiator, with opportunities to deploy these capabilities 
+across a broader asset base.
+n Higher copper prices could support an increase in shareholder returns. 
+FCX's existing financial framework prioritises a strong balance sheet and 
+currently allocates ~50% of available cash after non-discretionary capex 
+towards shareholder returns, with the remainder allocated to future growth 
+projects. FCX indicated that if cash generation exceeds the company's 
+ability to deploy capital into attractive growth projects, the Board may 
+consider increasing its shareholder distributions (likely via share buy backs, 
+in our view).
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P21 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 21
+Figure 19: Freeport-McMoRan operational & financial summary
+Units 2024 2025 2026E 2027E 2028E
+PRICES
+Copper (LME) $/lb 4.15 4.51 5.98 5.67 5.70 EBITDA by division (2026, %)
+Copper (Comex) $/lb 4.32 4.99 6.13 5.67 5.70
+Gold $/oz 2,387 3,440 4,470 4,910 5,023
+Molybdenum $/lb 21.3 22.1 28.7 26.0 24.1
+KEY FINANCIAL METRICS
+Revenue $m 25,455 25,914 28,380 31,943 34,800
+Adjusted EBITDA $m 10,033 9,941 12,215 16,443 18,840
+Depreciation & Amorisation $m 2,241 2,244 2,419 3,017 3,134
+EBIT/Operating Profit $m 6,864 6,517 9,320 13,095 15,484
+Net income $m 4,385 4,151 6,295 9,088 10,728
+EPS $/sh 1.30 1.53 2.93 4.00 4.66
+DPS $/sh 0.60 0.60 0.60 0.60 0.60
+Dividend $m 867 866 865 864 864 COPPER PRODUCTION BY REGION
+Buyback $m 59 107 403 0 0
+Cash Flow
+Net operating cash flow $m 7,146 5,611 9,063 12,348 14,109
+Capex (excl smelter) $m -3,766 -3,872 -4,279 -5,058 -5,271
+Capex (incl smelter) $m -5,028 -4,472 -4,279 -5,058 -5,271
+Free cash flow $m 2,297 1,080 4,741 7,290 8,837
+Free cash flow (excl smelter capex) $m 4,559 3,080 6,341 8,990 10,837
+Equity free cash flow (post minority distributions) $m 464 -194 3,574 4,964 6,023
+Balance sheet
+Net Debt (US$m) $m 4,137 5,325 2,922 -1,178 -6,336
+Net debt exc PTFI downstream (US$m) $m 937 2,125 -278 -4,378 -9,536 BALANCE SHEET
+Leverage (ND/ND+E) % 13% 15% 8% -3% -15%
+ND/EBITDA x 0.5x 0.6x 0.3x -0.1x -0.3x
+PRODUCTION VOLUMES & CASH COSTS
+Copper m lb 4,214 3,383 3,245 3,796 4,162
+North America m lb 1,246 1,304 1,361 1,490 1,570
+South America m lb 1,168 1,064 1,052 1,080 1,080
+Indonesia m lb 1,800 1,015 832 1,226 1,512
+Gold koz 1,861 937 751 1,034 1,244
+Molybdenum m lb 80 92 91 91 93
+P&D cash cost (gross cash cost) $/lb 2.49 2.75 3.20 2.69 2.52
+C1 cash cost $/lb 1.57 1.66 1.86 1.09 0.85 EBITDA
+North America $/lb 3.11 3.05 2.98 2.69 2.60
+South America $/lb 2.46 2.43 2.47 2.34 2.36
+Indonesia $/lb -0.26 -0.52 -1.34 -1.96 -2.05
+EBITDA
+North America $m 1,196 2,157 3,942 4,112 4,534
+South America $m 1,917 2,448 3,689 3,585 3,355
+Indonesia $m 6,815 4,934 4,221 8,621 11,041
+Molybdenum $m 62 190 359 290 195
+Other $m -885 -968 -585 -496 -507
+Adjusted EBITDA $m 10,033 9,941 12,215 16,443 18,840
+North 
+America
+32%
+South America
+30%
+Indonesia
+35%
+Molybdenum
+3%
+0
+1,000
+2,000
+3,000
+4,000
+5,000
+2024 2025 2026E 2027E 2028E
+North America South America Indonesia
+-0.6x
+-0.4x
+-0.2x
+0.0x
+0.2x
+0.4x
+0.6x
+0.8x
+0
+1,000
+2,000
+3,000
+4,000
+5,000
+6,000
+2024 2025 2026E 2027E 2028E
+Net Debt (US$m) ND/EBITDA
+0
+5,000
+10,000
+15,000
+20,000
+25,000
+2024 2025 2026E 2027E 2028E
+North America South America Indonesia Molybdenum
+Source : Deutsche Bank estimates, Company data
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P22 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 22 Deutsche Bank AG
+Antofagasta: Mauricio Ortiz, Chief Financial Officer
+n The Centinela Second Concentrator project remains on track, although the 
+CFO stated that it would be an extended period of commissioning and 
+ramp-up. ANTO expects 2029 to represent the first full year of production 
+and contribute around ~170 ktpa of copper equivalent production. 
+Combined with the Los Pelambres ‘Growth Enabling Projects’ (comprising 
+the concentrate pipeline and desalination plant) higher expected grades, 
+this should deliver the company's targeted ~30% production growth.
+n Capex is expected to materially decline as the current investment cycle 
+concludes. Following peak capex in 2025 and guidance of ~$3.4bn for 
+2026, some project-related expenditure will continue into 2027, but from 
+2028 the majority of capex should be related to sustaining. As part of the 
+discussion, the company reiterated its disciplined capital allocation 
+framework, including its ~35% minimum dividend payout, with excess 
+cash to be allocated between additional shareholder returns and future 
+growth.
+n Beyond the current growth projects, management highlighted a capital-
+efficient pipeline of brownfield opportunities, including life of mine 
+extension at Los Pelambres' and potential debottlenecking at both 
+Centinela concentrators. Longer-term optionality includes its greenfield 
+explorations projects in Chile and Peru, and Twin Metals in the US, although 
+management stressed that completing the current projects and delivering 
+the targeted 30% growth remains the near-term priorities.
+n 2026 copper production guidance was recently reduced by ~5% at the 
+midpoint to 625-655 kt (from 650-700 kt), due to weather-related 
+disruptions at Los Pelambres. The disruption was driven by an exceptionally 
+severe snowfall, with ~3.5m falling over four days. Operations were 
+temporarily suspended and the pit required around 3-4 weeks of clearing, 
+shifting some production from 2026 into future periods. Importantly, ANTO 
+highlighted that its infrastructure on site suffered no material damage and 
+the company remains confident that it can meet its revised 2026 guidance.
+Figure 20: Group copper production profile (2025-30E), kt
+0
+100
+200
+300
+400
+500
+600
+700
+800
+900
+2025 2026E 2027E 2028E 2029E 2030E
+Los Pelambres Centinela Antucoya Zaldivar (50%)
+Source : Deutsche Bank estimates
+n A water solution at Zaldívar's was recently announced, which provides 
+relatively capital-efficient mine-life extension. The ~$900m ($450m ANTO 
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P23 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 23
+share) project is expected to support ~70-80 ktpa of copper production for 
+a further ~12 years. Construction commenced in Q2'26 and is expected to 
+complete by mid-2028.
+n ANTO holds a large minority stake in the Peruvian mining company 
+Buenaventura. The company continues to view the investment primarily as 
+a strategic platform for building knowledge and experience in Peru, rather 
+than signalling a near-term takeover. According to ANTO, it is providing the 
+company with a greater understanding of the country's regulatory and 
+stakeholder environment as it progresses its own exploration activities.
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P24 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 24 Deutsche Bank AG
+Figure 21: Antofagasta operational & financial summary
+ANTOFAGASTA OPERATIONAL & FINANCIAL SUMMARY
+Units 2024A 2025A 2026E 2027E 2028E Net debt & ND/EBITDA
+FX/COMMODITY ASSUMPTIONS
+Copper Usc/lb 415 451 598 567 570
+Gold $/oz 2,387 3,440 4,470 4,910 5,023
+Silver $/oz 28 40 72 74 75
+Molybdenum Usc/lb 2,129 2,212 2,872 2,353 2,407
+Chilean Peso CLP/USD 944 951 902 900 900
+KEY FINANCIAL METRICS 
+Revenue $m 6,613 8,620 10,208 10,379 12,419
+EBITDA (inc Zaldivar) $m 3,427 5,202 6,718 6,896 8,169
+Net Income attributable $m 829 1,329 1,786 1,598 1,892
+Operating Cash Flow $m 2,285 3,072 3,969 4,227 5,142
+Capex $m 2,415 3,685 3,433 2,426 2,474
+Dividend $m 558 760 1,206 1,440 1,503
+Equity free cash flow $m -130 -613 537 1,801 2,668
+Net debt/(cash) - consolidated $m 1,629 2,750 3,806 3,175 1,710
+Net debt/EBITDA x 0.48 0.53 0.57 0.46 0.21
+Gearing % 13% 19% 24% 19% 9%
+ROE % 6% 9% 11% 9% 10%
+ROA % 4% 5% 6% 5% 6% Copper production by operation
+EPS Usc/sh 84 135 181 162 192
+EPS Change % -1% 60% 34% -11% 18%
+DPS Usc/sh 31 65 91 81 96
+Payout ratio % 37% 48% 50% 50% 50%
+FCF yield % -0.3% -1.2% 1.1% 3.6% 5.4%
+Dividend yield % 0.8% 1.7% 2.4% 2.2% 2.6%
+EV/EBITDA x 21.2 14.0 11.2 10.7 8.8
+PRODUCTION (CONSOLIDATED)
+Los Pelambres kt 320 295 318 367 367
+Centinela kt 224 241 203 218 333
+Antucoya kt 80 81 85 83 83
+Zaldivar kt 40 37 33 40 40
+Copper kt 664 654 638 708 823
+Production uplift (vs 2023) % 1% -1% -3% 7% 25%
+Molybdenum kt 10.6 15.8 12.8 13.6 15.5
+Gold koz 187 209 215 237 342
+Copper guidance kt 625-655
+Gold guidance kt 215-235
+MINE GRADES EBITDA by mine (FY26E)
+Los Pelambres % 0.55 0.54 0.59 0.60 0.60
+Centinela % 0.53 0.52 0.50 0.51 0.52
+Antucoya % 0.32 0.32 0.34 0.34 0.34
+Zaldivar % 0.67 0.67 0.61 0.65 0.65
+EBITDA
+Los Pelambres $m 1,861 2,548 3,525 3,704 3,648
+Centinela $m 1,130 2,234 2,276 2,355 3,777
+Antucoya $m 276 327 584 475 466
+Zaldivar $m 100 62 161 214 210
+Transport (rail and road) $m 76 70 69 92 97
+Corp & Others $m 36 17 -98 -93 -96
+Exploration and evaluation $m -53 -56 -51 -58 -60
+Total EBITDA $m 3,427 5,202 6,466 6,688 8,043
+EBITDA ex Zaldivar $m 3,327 5,140 6,305 6,474 7,833
+GROSS CASH COST PER UNIT Net cash costs by operation
+Los Pelambres $/lb 2.09 2.21 2.35 2.16 2.21
+Centinela $/lb 2.62 2.27 2.80 2.87 2.76
+Antucoya $/lb 2.53 2.82 2.92 2.88 2.94
+Zaldivar $/lb 3.02 3.44 3.69 3.22 3.29
+Group gross cash cost $/lb 2.38 2.37 2.63 2.52 2.56
+Guidance 2.40-2.60
+NET CASH COST PER UNIT
+Los Pelambres $/lb 1.26 0.83 0.81 0.95 1.05
+Centinela $/lb 1.63 0.76 0.65 0.70 0.49
+Antucoya $/lb 2.53 2.82 2.92 2.88 2.94
+Zaldivar $/lb 3.02 3.44 3.69 3.22 3.29
+Group net cash cost $/lb 1.64 1.19 1.19 1.23 1.12
+Guidance 1.15-1.35
+0.00
+0.25
+0.50
+0.75
+0
+1,000
+2,000
+3,000
+4,000 $m
+Net debt/(cash) - consolidated Net debt/EBITDA
+Los Pelambres
+54%Centinela
+35%
+Antucoya
+9%
+Zaldivar
+2%
+-10%
+-5%
+0%
+5%
+10%
+15%
+20%
+25%
+30%
+0
+200
+400
+600
+800
+1,000
+2024A 2025A 2026E 2027E 2028E
+kt
+Los Pelambres Centinela
+Antucoya Zaldivar
+Production uplift (vs 2023)
+0.0
+0.5
+1.0
+1.5
+2.0
+2.5
+3.0
+3.5
+4.0
+2024A 2025A 2026E 2027E 2028E
+kt
+Los Pelambres Centinela Antucoya
+Zaldivar Group net cash cost
+Source : Deutsche Bank estimates, Company data
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P25 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 25
+Aurubis: Steffen Hoffmann, Chief Financial Officer
+n The discussion focused on the very tight concentrate market and 
+implications for TC/RCs. While Hoffmann acknowledged that current 
+market conditions will put pressure on terms in CY27 contract negotiations, 
+Aurubis' long-term contracts and ability to process complex concentrates 
+continue to support terms above spot levels. Importantly, this headwind 
+should be partly mitigated by higher free-metal contributions, strong 
+sulfuric acid pricing, and the downstream product business, with around 
+half of next year's expected metal result hedged.
+n On sulfuric acid, current market conditions remain favourable, supported 
+by supply disruptions and trade restrictions, although management 
+cautioned against extrapolating spot prices given ~85% of the company’s 
+portfolio is primarily based on annual contracts. Higher pricing should 
+therefore roll into earnings gradually and with the reset of the longer-term 
+contracts, although a planned six-week Hamburg shutdown means acid 
+volumes are expected to be lower YoY. Management also highlighted that 
+sulfuric acid will likely play a role in the annual TC/RC discussions.
+n Richmond remains strategically important, but the ramp-up of the 
+secondary smelter is taking longer than initially expected, reflecting a 
+combination of technical commissioning issues and challenges building 
+the required feed mix in the US market. Phase 1 ramp-up is now expected 
+to complete during FY26/27 and Phase 2 in FY27/28. While management no 
+longer expects the original EUR170m EBITDA target to be reached, it 
+remains confident Richmond can ultimately generate above EUR100m 
+EBITDA contribution.
+n Despite the slower Richmond ramp-up, management reiterated the 
+EUR260m mid-term EBITDA uplift target across the broader EUR1.7bn 
+strategic investment programme. Other projects are performing well, 
+including Complex Recycling Hamburg, where the initial ramp-up has 
+exceeded internal targets. With ~90% of the programme's investment 
+already deployed, the focus is increasingly shifting towards harvesting 
+returns and reducing capex, with baseline spending expected at EUR300-
+400m pa plus up to ~EUR100m pa for strategic projects.
+n Longer term, the company remains open to further organic growth and 
+M&A, with North America a particularly attractive market, although future 
+investments will need to meet its strategic criteria and ~15% return 
+threshold.
+Figure 22: Timeline of strategic projects
+Source : Company data
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P26 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 26 Deutsche Bank AG
+Figure 23: Aurubis operational & financial summary
+Source : Deutsche Bank estimates, company data
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P27 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 27
+Boliden: Mikael Staffas, Chief Executive Officer
+n The Nexa transaction provides BOL with entry into South America, a region 
+the company has been targeting for a number of years given its attractive 
+base-metals geology. BOL highlighted Nexa's existing cash-generative 
+operations, local management team and partnership with Votorantim as 
+important factors in reducing execution and geopolitical risk. The 
+transaction also increases BOL's exposure to zinc, where management 
+remains constructive and sees relative value versus copper.
+n From a funding perspective, BOL emphasised that the transaction does not 
+require an equity raise or dividend cut. Integration will depend partly on the 
+uptake of the offer for the remaining 35% minority interest, although longer-
+term opportunities include procurement and technical synergies. Beyond 
+the existing asset base, Nexa also provides further growth optionality, 
+although management stressed that its development projects are not close 
+to investment decisions, with further detail on the combined project 
+portfolio expected at the March 2027 CMD.
+Figure 24: Boliden and Nexa Resources mining and smelting production
+Source : Boliden company presentation
+n At Odda, the initial mechanical problems associated with the expansion 
+appear to have been addressed following recent modifications, with the 
+new facilities running for around four weeks without further issues at the 
+time of the discussion. The focus is now shifting towards optimisation of the 
+leaching circuit. BOL expects part of the targeted EUR 250m EBITDA uplift 
+in Q4'26, with the remainder from Q1'27, although further optimisation 
+remains necessary.
+n At Garpenberg, the recovery is progressing broadly to plan, and the 
+company still guides production to average 30% of pre-incident capacity 
+(~3.6 mt) in H2 and 60-65% in 2027, while describing the outlook for next 
+year as promising, but with challenges. The investigation into the earlier 
+incident is nearing completion and will inform the future mining method in 
+time, particularly for deeper and wider mineralised zones. However, 2028-
+30 remain less certain as the mine plan is being reworked with updated 
+guidance expected in December.
+n At Aitik, BOL noted that throughput is progressing well, with 2026 
+guidance of 41 mt expected to be achieved and volumes continuing to 
+move towards the 45 mt nameplate level. However, grades remain the key 
+near-term uncertainty, with performance tracking below expectations 
+following some waste-rock dilution on the benches currently being 
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P28 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 28 Deutsche Bank AG
+mined. However, the company views these issues as relatively isolated and 
+does not expect them to impact the longer-term grade profile.
+n The Rönnskär tankhouse rebuild project remains on track to ramp up 
+through Q4’26. Cathode production should follow shortly thereafter, 
+although management highlighted a 3-6 month process to regain LME 
+brand approval, which could temporarily result in lower realised premiums 
+and additional logistics costs.
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P29 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 29
+Figure 25: Boliden operational & financial summary
+FX/COMMODITY ASSUMPTIONS 2024 2025 2026F 2027F 2028F
+Copper $/t 9147 9944 13190 12496 12555 EBIT breakdown
+Zinc $/t 2777 2866 3374 3199 3034
+Lead $/t 2071 1962 1921 2045 2092
+Nickel $/t 16824 15159 17352 17386 17786
+Gold US$/oz 2387 3440 4470 4910 5023
+Silver US$/oz 28.2 40.1 71.7 73.7 75.4
+EUR/USD 1.08 1.13 1.16 1.18 1.18
+USD/SEK 10.6 9.8 9.4 9.0 9.0
+KEY FINANCIAL METRICS 
+Revenue SEK mn 89,207 93,507 140,989 163,939 174,667
+EBITDA SEK mn 20,497 21,989 25,980 32,492 33,324
+Operating profit  (EBIT) SEK mn 13,692 13,190 15,821 21,433 21,330
+EBIT ex PIR SEK mn 19,171 10,443 15,821 21,433 21,330
+Net profit SEK mn 10,026 9,407 11,572 16,037 16,123
+EBITDA margin % 23% 24% 18% 20% 19%
+EBIT margin % 15% 14% 11% 13% 12%
+Capital expenditure (inc Ronnskar rebuild) SEK mn 14,988 15,494 15,537 15,437 15,307
+Free cash flow (inc insurance proceeds) SEK mn 2,670 5,190 2,918 11,659 12,810
+Gearing (ND/E) % 40% 41% 19% 10% 6%
+ROE % 15% 12% 13% 16% 15%
+ROCE (post tax) % 15% 12% 13% 16% 15%
+EPS SEK/sh 36.7 33.1 40.7 56.5 56.8
+DPS (inc share repurchase) SEK/sh 0.0 11.0 16.3 33.9 34.1 Mines: 2026 revenue split by commodity
+FCF ex WC and M&A SEK/sh 2.7 4.0 17.1 41.0 45.1
+Cash and equivalents SEK mn 7,052 9,237 7,430 14,453 17,640
+Gross debt SEK mn 16,057 23,437 22,432 22,432 22,432
+Pension provisions SEK mn 1,208 1,170 1,176 1,176 1,176
+Net debt SEK mn 10,663 15,728 16,468 9,445 6,258
+Net debt/EBITDA x 0.52 0.72 0.63 0.29 0.19
+Net debt inc reclamation liability SEK mn 14,502 21,206 21,946 14,923 11,736
+PRODUCTION
+Mine production
+Zinc kt 164 360 346 424 437
+Copper kt 91 106 129 147 162
+Nickel kt 12 12 11 12 14
+Lead kt 45 69 67 94 95
+Gold t 5.9 5.1 4.6 6.6 7.0
+Silver t 348 410 334 400 411
+Smelter production
+Zinc kt 454 457 501 646 646
+Copper kt 159 162 211 385 385
+Lead kt 19 27 26 28 28
+Lead alloys kt 47 50 57 52 52
+Nickel kt 40 34 35 36 36
+Gold t 15.0 12.9 14.1 15.8 15.8
+Silver t 282 276 325 395 395
+P&L BREAKDOWN
+EBITDA
+Ronnskar SEK mn 3951 1643 1888 2800 2864 CAPEX vs FCF
+Bergsoe SEK mn 110 130 124 119 121
+Harjavalta SEK mn 2324 2194 2575 2476 2533
+Kokkola SEK mn 1574 1024 1634 1635 1800
+Odda SEK mn 179 211 746 2275 2327
+Other SEK mn 524 162 390 517 526
+Total Smelters SEK mn 10,500 5,364 7,356 9,821 10,173
+Aitik SEK mn 2,803 3,424 6,246 8,975 9,988
+The Boliden Area SEK mn 2,900 3,021 3,761 3,225 2,986
+Garpenberg SEK mn 4,334 5,061 1,945 3,606 3,872
+Tara SEK mn -794 446 802 988 598
+Kevitsa SEK mn 2,433 2,269 2,506 2,766 3,250
+Neves-Corvo SEK mn 0 963 3,289 2,802 2,392
+Zinkgruvan SEK mn 0 657 2,278 2,410 2,216
+Other SEK mn -1,415 -1,728 -1,800 -1,841 -1,884
+Total Mines SEK mn 10,300 14,114 18,328 22,931 23,418
+Other SEK mn -363 -945 -260 -261 -267
+Total SEK mn 20,437 18,533 25,423 32,492 33,324
+Smelter EBITDA margin % 12% 5% 5% 6% 6%
+Mines EBITDA margin % 49% 49% 50% 54% 52%
+EBIT ex PIR
+Smelter SEK mn 8,815 3,660 5,262 6,975 7,104
+Mines SEK mn 5,240 7,728 10,819 14,718 14,493
+Other SEK mn -363 -945 -260 -261 -267
+Total SEK mn 13,692 10,443 15,821 21,433 21,330
+CAPEX
+Mines SEK mn 8,450 10,280 11,100 11,258 11,118
+Smelter SEK mn 6,900 4,900 4,438 3,179 3,189
+Other/unapproved allowance SEK mn 8 8 0 1,000 1,000
+Total SEK mn 15,358 15,188 15,538 15,437 15,307
+Source: Company data, Deutsche Bank
+0
+2,500
+5,000
+7,500
+10,000
+12,500
+15,000
+17,500
+20,000
+22,500
+25,000
+2024 2025 2026F 2027F 2028F
+Mines Smelters
+Zinc
+25%
+Copper
+37%
+Nickel
+4%
+Lead
+3%
+Gold
+14%
+Silver
+17%
+0
+2,000
+4,000
+6,000
+8,000
+10,000
+12,000
+14,000
+16,000
+18,000
+2022 2023 2024 2025F 2026F
+Capex (SEKm)
+Smelter
+Source : Deutsche Bank estimates, Company data
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P30 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 30 Deutsche Bank AG
+Rio Tinto: Katie Jackson, Chief Executive, Copper
+n RIO is on track to achieve its 1 mtpa copper production target by 2030, with 
+Oyu Tolgoi (‘OT’) the largest growth driver, alongside higher production 
+from Kennecott. OT's underground ramp-up continues to progress well, 
+with H1 production up 31% YoY and copper recoveries reaching a record 
+91% in August. According to the company, the focus over the next 12 
+months is on increasing underground development rates, maintaining 
+infrastructure reliability and further improving recoveries, supporting OT’s 
+target of ~500 ktpa average production over 2028-36.
+Figure 26: Copper growth potential
+Source : Rio Tinto company presentation
+n On the recent Rusal court ruling, RIO noted that the dispute relates to 
+actions taken in its Australian aluminium business following the 
+introduction of international sanctions, rather than OT. In 2024, the 
+Australian courts had determined that the company acted in accordance 
+with international sanctions, and said it intends to defend its rights as Rusal 
+seeks to relitigate the matter through the Russian courts.
+n In the US, Kennecott is targeting a 40-50% recovery in volumes by 2028. 
+The uplift is expected to be driven by higher-grade ore from H2'27 from the 
+continued ramp-up of underground production. An investment decision on 
+the Apex pushback may also be made later this year, potentially extending 
+Kennecott's mine life into the 2040s.
+n Resolution continues to progress following completion of the land 
+exchange with the US government in March. This provides access to ~30% 
+of the ore body that had not previously been drilled. The company has 
+committed ~$500m ($275m RIO share) of preliminary expenditure over two 
+years, covering drilling, underground characterisation, infrastructure 
+upgrades and community support. The current development concept 
+envisages an initial two-shaft block cave expandable to ~500 ktpa, with the 
+potential for first production in the mid to late 2030s.
+n Beyond the 1 mtpa copper production target, RIO has a number of 
+greenfield copper growth options , including Winu and La Granja, with 
+Winu highlighted as the likely next project to progress towards an 
+investment decision. On M&A, the company would consider opportunities 
+where there is a clear strategic fit, industrial logic and potential for value 
+creation.
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P31 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 31
+Figure 27: Rio Tinto operational & financial summary
+RIO TINTO OPERATIONAL AND FINANCIAL SUMMARY FY24 A FY25 E FY26 E FY27 E FY28 E
+PRICE AND FX EBITDA mix (FY26e)
+AUD/USD 0.66 0.64 0.70 0.72 0.72
+Iron ore fines CFR - 62% $/dmt 110 102 102 100 99
+Iron ore fines FOB $/wmt 92 85 84 83 83
+Iron ore lump FOB $/wmt 101 94 93 93 95
+Bauxite - CIF $/t 60 67 54 60 63
+Alumina $/t 502 389 322 350 408
+Aluminium c/lb 110 119 150 144 136
+Aluminium $/t 2,420 2,631 3,315 3,175 3,000
+Copper c/lb 415 451 598 567 570
+Copper $/t 9,150 9,947 13,194 12,500 12,558
+Lithium carbonate $/t 0 11,058 20,970 15,500 13,605
+Gold $/oz 2,387 3,440 4,470 4,910 5,023
+KEY FINANCIAL METRICS
+Revenue $mn 53,658 57,638 61,769 62,906 64,415
+Underlying EBITDA $mn 23,314 25,363 29,971 30,090 30,990
+Depreciation $mn 5,918 6,577 7,647 8,518 9,233
+Underlying EBIT $mn 15,653 14,936 18,413 18,624 18,890
+Underlying net income $mn 10,867 10,868 13,730 12,754 12,905 Net debt & ND/EBITDA
+Underlying EPS c/sh 670 669 845 785 794
+Dividend per share (DPS) c/sh 402 402 592 472 476
+Payout ratio % 60% 60% 70% 60% 60%
+Net Debt                           $mn 5,491 14,362 12,153 12,409 10,702
+Capex (100% Simandou) $mn 9,621 12,335 11,807 11,049 10,508
+Capex (attributable for Simandou) $mn 9,493 11,403 10,786 10,810 10,310
+Free cash flow (ex divestments/M&A) $mn 3,741 5,524 9,346 9,580 10,946
+Attributable FCF $mn 6,414 5,068 9,131 9,080 9,978
+Total dividend paid (cash basis) $mn 7,055 6,055 7,559 9,335 8,272
+Total buyback (cash basis) $mn 0 0 0 0 0
+Total cash return $mn 7,055 6,055 7,559 9,335 8,272
+BALANCE SHEET AND RETURNS
+Net debt to equity % 0.1x 0.2x 0.2x 0.2x 0.1x
+ROCE pre tax % 24% 23% 26% 24% 24%
+ROCE post tax % 17% 16% 18% 17% 17%
+ROE % 20% 17% 20% 18% 18%
+Net Debt:EBITDA x 0.3x 0.6x 0.2x 0.2x 0.2x
+PRODUCTION
+Global iron ore production (100% basis) mt 344 345 359 379 408
+Iron ore Pilbara 100% production mt 328 327 334 337 341 Capital expenditure
+Global iron ore sales (100% basis) mt 342 354 378 402 414
+Iron ore Pilbara 100% shipments mt 329 326 333 337 341
+Copper  (consolidated) kt 793 883 876 959 1,011
+Bauxite mt 59 62 60 60 60
+Alumina kt 7,303 7,592 8,084 7,168 7,168
+Aluminium kt 3,297 3,379 3,383 3,383 3,383
+Lithium carbonate equivalent kt LCE 0 53 60 71 90
+Underlying EBITDA
+Bauxite & alumina $m 2,049 2,850 974 1,295 1,740
+Aluminium $m 1,624 1,548 4,938 3,671 2,385
+Total aluminium $m 3,673 4,398 5,913 4,966 4,125
+Lithium $m 0 176 557 430 253
+Aluminium & Lithium $m 3,673 4,574 6,470 5,396 4,378
+Copper $m 3,437 7,369 10,695 9,919 10,496
+Iron ore (ex Simandou) $m 16,249 15,194 14,276 15,180 15,777
+Simandou $m -22 -96 -72 364 1,153
+Non-core operations $m 1,123 50 -37 363 371
+Corporate & others $m -1,146 -1,728 -1,360 -1,133 -1,186 
+Underlying EBITDA $m 23,314 25,363 29,971 30,090 30,990
+Capital expenditure
+Aluminium $m 1,694 1,981 2,159 2,275 2,113
+Lithium $m 0 1,365 1,210 1,320 1,023
+Aluminium & Lithium $m 1,694 3,346 3,369 3,595 3,136
+Copper $m 2,055 1,872 1,619 1,749 1,789
+Iron ore (ex Simandou) $m 3,012 4,422 4,621 4,762 4,721
+Simandou $m 1,832 2,219 1,732 508 420
+Non-core operations $m 998 426 259 435 442
+Others / non-approved $m 30 50 207 0 0
+Total consolidated capex (100% SimFer) $m 9,621 12,335 11,807 11,049 10,508
+Received/due from NCI $m -98 -882 -814 -239 -198
+Total capex (attributable for Simandou) $m 9,523 11,453 10,993 10,810 10,310
+Source: Deutsche Bank estimates, Company data
+0.00x
+0.05x
+0.10x
+0.15x
+0.20x
+0.25x
+0
+2,000
+4,000
+6,000
+8,000
+10,000
+12,000
+14,000
+16,000
+Net Debt Net debt to equity
+0
+5,000
+10,000
+15,000
+FY24 A FY25 E FY26 E FY27 E FY28 E
+Aluminium Lithium
+Copper Iron ore (ex Simandou)
+Non-core operations Simandou
+Others / non-approved
+Total 
+aluminium
+19%
+Lithium
+2%
+Copper 
+34%
+Iron ore (ex 
+Simandou)
+45%
+Non-core 
+operations
+0%
+Source : Deutsche Bank estimates, Company data
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P32 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 32 Deutsche Bank AG
+Vale Base Metals: Shaun Usmar, Chief Executive Officer
+n For Vale Base Metals (‘VBM’), copper growth remains the key strategic 
+priority. VBM is targeting production of ~500 kt by 2030 and ~700 kt by 
+2035, with ambitions to ultimately move beyond this level over the longer 
+term. Much of the growth is expected to come from low-capex intensity 
+brownfield projects that leverage existing infrastructure.
+Figure 28: Copper production targets (2026-35E)
+Source : Vale Base Metals company presentation
+Figure 29: Polymetallic business production targets (2026-
+30E)
+Source : Vale Base Metals company presentation
+n Project execution and capital efficiency have improved materially, with 
+management highlighting a >30% reduction in capex across the project 
+portfolio following changes to its project development model. Its first two 
+projects under the new approach are running 9-12 months ahead of 
+previous schedules.
+n Alemão is the next major project approaching sanctioning, with VBM 
+targeting FID during 2027 and production as early as 2030. A revised mining 
+approach has reduced the expected capex and has improved expected 
+returns, while also simplifying the permitting process. Longer term, further 
+regional projects and exploration underpin the pathway towards the ~700 
+kt target and potentially beyond.
+n VBM's operating and financial performance has improved significantly 
+over recent years, with the unit’s contribution to Vale’s EBITDA increasing 
+from ~10% in 2024 to nearly ~30% currently. VBM is expected to generate 
+~$4.5-5bn of EBITDA and >$1bn of FCF this year under current estimates.
+n When asked about VBM strategy and a potential IPO, the company said the 
+immediate priority is to continue improving operating performance, 
+enhance value through project delivery and exploration. A disposal of the 
+nickel business remains a potential option.
+n Elsewhere across the portfolio, Hu'u remains a potentially significant 
+longer-term growth opportunity in Indonesia. The company is favouring a 
+partnership approach that brings complementary execution capabilities 
+alongside capital. The project could ultimately produce >300 ktpa of copper 
+and up to ~400 kozpa of gold over ~50 years, although management is 
+taking a patient approach and does not currently envisage development 
+before 2030.
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P33 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 33
+Figure 30: Vale operational & financial summary
+Vale operational & financial summary Units FY24 FY25 FY26E FY27E FY28E
+Price & FX assumptions EBITDA by division (2025)
+Iron ore CFR 62% $/t 110 102 102 100 99
+Copper c/lb 415 451 598 567 570
+Nickel c/lb 763 688 787 789 807
+CAD /usd 1.4 1.4 1.4 1.4 1.4
+BRL /usd 5.4 5.6 5.1 5.0 5.0
+Freight (Tubaro to Qingdao) $/t 25.1 22.1 28.2 24 22
+Financials
+Revenue $m 38,057 38,405 42,240 43,141 44,274
+Adjusted EBITDA $m 14,841 15,459 16,347 16,554 17,362
+Adjusted EBIT $m 11,784 12,354 12,897 13,476 13,331
+Net attributable income $m 6,166 2,352 7,534 7,754 7,557
+Basic EPS $/sh 1.44 0.56 1.77 1.84 1.81
+DPS $/sh 0.86 1.00 0.97 0.90 0.89
+Pay-out ratio % 60% 178% 55% 49% 49%
+Total capital expenditure $m 5,887 5,507 5,504 5,972 6,093
+FCF (excluding Brumadinho payments) $m 4,811 3,669 5,603 5,390 5,226
+Total CF on Brumadinho, dams & Samarco 1,968 3,172 2,566 1,600 1,200 Adjusted EBITDA ($bn)
+FCF (including Brumadinho & Samarco) $m 2,843 497 3,037 3,790 4,026
+Total dividend paid (cash basis) $m 3,914 3,561 4,847 3,905 3,763
+Share buybacks (cash basis) $m 409 0 514 600 600
+Total shareholder return (cash basis) $m 4,323 3,561 5,361 4,505 4,363
+Balance sheets & returns
+Financial net debt inc IFRS 16 Leases $m 10,499 11,236 13,555 14,270 14,607
+Revised expanded net debt 16,466 15,579 16,509 16,477 16,499
+Financial net debt to equity x 0.30x 0.33x 0.33x 0.33x 0.32x
+Financial net debt : EBITDA x 0.71x 0.73x 0.21x 0.22x 0.22x
+ROCE pre tax % 26% 27% 24% 23% 22%
+ROCE post tax % 18% 19% 17% 16% 15%
+ROE % 18% 7% 19% 18% 17%
+Production
+Iron ore production inc pellet feed mt 328 336 341 342 350
+Pellets mt 37 31 32 45 45
+Nickel kt 160 177 191 195 195
+Copper kt 348 382 392 399 399 Capital expenditure ($mn)
+Cobalt mt 2,080 3,242 3,501 3,588 3,588
+Gold koz 445 494 449 464 464
+Iron ore guidance mt 335-345
+Pellet guidance mt 30-34
+Copper guidance kt 360-380
+Nickel guidance kt 185-200
+Adjusted EBITDA
+Ferrous minerals $m 15,085 13,803 13,275 13,522 14,353
+Base metals $m 1,454 3,356 4,735 4,398 4,413
+Corporate, Energy & Other $m -1,207 -1,289 -1,008 -1,066 -1,104
+Brumadinho & Covid $m -277 -411 -366 -300 -300
+Total $m 15,055 15,459 16,636 16,554 17,362
+Total capital expenditure
+Ferrous minerals 3,943 3,852 3,849 3,740 3,651
+Base metals 1,827 1,571 1,555 1,932 1,942
+Energy & others 117 84 100 300 500
+Total 5,887 5,507 5,504 5,972 6,093
+Guidance
+0
+1,000
+2,000
+3,000
+4,000
+5,000
+6,000
+7,000
+FY24 FY25 FY26E
+Ferrous minerals Base metals Energy & others
+-5
+0
+5
+10
+15
+20
+FY24 FY25 FY26E
+Ferrous minerals Base metals Corporate, Energy & Other
+Ferrous 
+minerals
+80%
+Base metals
+20%
+Source : Deutsche Bank estimates, Company data
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P34 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 34 Deutsche Bank AG
+Lundin Mining: Jack Lundin, Chief Executive Officer
+n Vicuña Stage 1 remains on track for a potential sanctioning decision by 
+year-end, with RIGI fiscal stability and provincial agreements secured and 
+early site preparation well underway. The company’s current focus is on 
+completing the detailed engineering and budgeting for Stage 1, with a final 
+investment decision expected later this year. Stage 1 capex is likely to 
+increase from the current $7.1bn (real) estimate, reflecting inflationary 
+pressures and fully incorporating project risks and contingencies. We 
+would not be surprised to see Stage 1 capex increase to over $8bn.
+n The company remains confident in Vicuña's execution strategy, 
+highlighting the depth of technical work completed at Josemaria, a strong 
+ownership team (50:50 JV with BHP), and integration of the mine plan with 
+engineering and independent technical reviews. Recent severe weather in 
+Chile is also feeding directly into Vicuña's design, including greater 
+consideration of backup power, winter access and operating contingency.
+n In terms of funding Vicuña, the company has various options available. The 
+company recently increased its revolving credit facility (‘RCF’) to $4.5bn 
+and is of the view that it could fund its 50% share of Vicuña through its RCF 
+and internally generated cash flow. However, LUN and BHP are evaluating 
+alternative financing structures including project finance and streaming, 
+which could potentially be introduced further down the line during the 
+construction phase.
+n Looking ahead to Stages 2 and 3, further information is expected to be 
+released to the market during 2027 as the near-term focus remains firmly on 
+sanctioning Stage 1. Longer term, the development could utilise LUN’s 
+existing Chilean infrastructure, including port and expandable desalination 
+capacity, with potential cross-border water and concentrate infrastructure. 
+Discussions with Chilean and Argentine authorities around extending the 
+existing binational framework into the exploitation phase are progressing.
+n LUN recently reduced its 2026 production guidance to 300-325 kt (from 
+310-335 kt) after a second severe winter storm disrupted recovery efforts at 
+Caserones and delayed the planned return to normal operations. 
+Operations have since returned to steady state and the company is 
+confident that it can meet its revised guidance, although Q3 is expected to 
+show a significant impact.
+n LUN continues to progress its low-capex intensity brownfield growth 
+across its existing operations, targeting 30-40ktpa of incremental copper 
+production over the next 2-4 years. The Saúva deposit at Chapada is the 
+most advanced opportunity, followed by a potential ~10 ktpa cathode 
+expansion at Caserones, as well as underground expansion at Candelaria.
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P35 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 35
+Figure 31: Long-term copper growth potential
+Source : Lundin Mining company presentation
+Figure 32: Long-term gold growth potential
+Source : Lundin Mining company presentation
+Figure 33: Lundin Mining operational & financial summary
+2024A 2025A 2026E 2027E 2028E OCF, capex & FCF
+FX/COMMODITY ASSUMPTIONS
+Copper Usc/lb 415 451 598 567 570
+Nickel Usc/lb 763 688 787 789 807
+Zinc Usc/lb 126 130 153 145 138
+Gold $/oz 2,387 3,440 4,470 4,910 5,023
+Silver $/oz 28.2 40.1 71.7 73.7 75.4
+KEY FINANCIAL METRICS 
+Revenue $m 4,117 4,463 4,680 4,824 4,588
+EBITDA $m 1,684 2,034 2,580 2,819 2,598
+Operating Cash Flow $m 694 1,247 1,861 2,101 1,964
+Net Income attributable $m 378 1,283 1,064 1,178 1,026
+Capex $m -951 -685 -964 -1,442 -1,828 Net debt & ND/EBITDA
+Equity free cash flow $m -387 495 864 591 27
+Net Debt / (Cash) - excluding leases $m 1,400 -59 -76 -465 -305
+Net Debt/ (Cash) - consolidated $m 1,649 153 126 -263 -103
+Net Debt/EBITDA x 0.83 -0.03 -0.03 -0.16 -0.12
+ROE % 7% 16% 12% 12% 9%
+ROA % 4% 12% 9% 9% 7%
+EPS Usc/sh 0.49 1.50 1.25 1.39 1.22
+EPS Change % 55% 207% -17% 12% -12%
+DPS c/sh 0.26 0.12 0.08 0.08 0.08
+Payout ratio % 54% 8% 6% 6% 7%
+FCF yield (%) % -2% 2% 4% 3% 0%
+Dividend yield (%) % 1% 0.5% 0.3% 0.3% 0.3%
+EV/EBITDA x 14.22 12.10 8.98 8.34 9.17 Copper production profile
+PRODUCTION (Consolidated)
+Copper kt 369 331 311 330 310
+Nickel kt 7 10 0 0 0
+Zinc kt 192 0 0 0 0
+Gold koz 158 142 143 155 144
+Copper production uplift (vs 2024) % 0% -10% -16% 5% -2%
+EBITDA
+Chapada $m 226 270 565 580 563
+Eagle $m 41 44 0 0 0
+Candelaria $m 892 985 1,146 1,418 1,209 EBITDA by mine (2026E)
+Caserones $m 377 764 1,064 1,101 1,109
+Vicuna $m 0 0 0 0 0
+Total EBITDA (attributable) $m 1,376 1,682 2,200 2,477 2,298
+Capex
+Chapada $m 108 99 142 130 129
+Eagle $m 21 0 0 0 0
+Candelaria $m 276 246 251 257 165
+Caserones $m 144 156 242 104 110
+Vicuna $m 244 167 395 947 1,420
+Total capex $m 948 689 961 1,442 1,828
+Chapada 
+21%
+Candelaria 
+41%
+Caserones
+38%
+-0.5
+0.0
+0.5
+1.0
+-500
+0
+500
+1,000
+1,500
+2,000
+2,500
+2024A 2025A 2026E 2027E 2028E
+Net Debt/ (Cash) - consolidated Net Debt/EBITDA
+-10%
+-5%
+0%
+5%
+10%
+-2,000
+-1,500
+-1,000
+-500
+0
+500
+1,000
+1,500
+2024A 2025A 2026E 2027E 2028E
+OCF Capex FCFy
+0
+100
+200
+300
+400
+2024A 2025A 2026E 2027E 2028E
+Copper production kt Gold production koz
+Source : Deutsche Bank estimates, Company data
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P36 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 36 Deutsche Bank AG
+Copper outlook in charts
+Inventory & high frequency trends
+Figure 34: China inventories
+0
+100
+200
+300
+400
+500
+600
+Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+2022 2023 2024 2025 2026
+China SHFE + bonded stocks, 
+kt copper cathode
+Source : Deutsche Bank, Wind
+Figure 35: Global visible inventories
+6,000
+7,000
+8,000
+9,000
+10,000
+11,000
+12,000
+13,000
+14,000
+15,000
+16,000
+0
+200
+400
+600
+800
+1,000
+1,200
+1,400
+Sep-21
+Dec-21
+Mar-22
+Jun-22
+Sep-22
+Dec-22
+Mar-23
+Jun-23
+Sep-23
+Dec-23
+Mar-24
+Jun-24
+Sep-24
+Dec-24
+Mar-25
+Jun-25
+Sep-25
+Dec-25
+Mar-26
+Jun-26
+Sep-26
+LME copper (kt) Comex copper (kt)
+SHFE copper (kt) China bonded warehouse (kt)
+LME Cu price (US$/t)- rhs
+Source : Deutsche Bank, Bloomberg Finance LP
+Figure 36: Copper positioning
+6,000
+7,000
+8,000
+9,000
+10,000
+11,000
+12,000
+13,000
+14,000
+15,000
+-40
+-20
+0
+20
+40
+60
+80
+Long Copper Short Copper Net Copper Copper price (US$/t)
+Source : CFTC, LME, Bloomberg Finance LP. LME & COMEX positioning combined
+Figure 37: China's Yangshan copper cathode premium
+-25
+0
+25
+50
+75
+100
+125
+150
+China Yangshan copper cathode premium (USD/t)
+Source : Deutsche Bank, Bloomberg Finance L.P
+Figure 38: China spot TCs have collapsed due to tightness 
+in the concentrate market and high acid prices
+-250
+-200
+-150
+-100
+-50
+0
+50
+100
+Sep-21
+Dec-21
+Mar-22
+Jun-22
+Sep-22
+Dec-22
+Mar-23
+Jun-23
+Sep-23
+Dec-23
+Mar-24
+Jun-24
+Sep-24
+Dec-24
+Mar-25
+Jun-25
+Sep-25
+Dec-25
+Mar-26
+Jun-26
+Sep-26
+China copper concentrate spot TC 24% (USD/t)
+Source : Deutsche Bank, Bloomberg Finance LP
+Figure 39: LME copper: 3m-cash spread
+4,000
+6,000
+8,000
+10,000
+12,000
+14,000
+16,000
+-400
+-300
+-200
+-100
+0
+100
+200
+LME Cu 3M-Cash spread: Contango (+) / Backwardation (-) LME 3M Cu price- rhs
+USD/t
+Source : Deutsche Bank, Bloomberg Finance LP
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P37 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Deutsche Bank AG Page 37
+US imports and copper tariffs
+Figure 40: Comex copper price premium over LME
+-5%
+0%
+5%
+10%
+15%
+20%
+25%
+30%
+-500
+0
+500
+1,000
+1,500
+2,000
+2,500
+3,000
+Jan-25
+Feb-25
+Mar-25
+Apr-25
+May-25
+Jun-25
+Jul-25
+Aug-25
+Sep-25
+Oct-25
+Nov-25
+Dec-25
+Jan-26
+Feb-26
+Mar-26
+Apr-26
+May-26
+Jun-26
+Jul-26
+Aug-26
+Sep-26
+Comex copper premium/(discount) to LME (USD/t) % premium/(discount)- rhs
+Source : Deutsche Bank, Bloomberg Finance L.P
+Figure 41: US annual refined copper consumption and 
+output
+0
+250
+500
+750
+1,000
+1,250
+1,500
+1,750
+2,000
+2021 2022 2023 2024 2025
+Refined copper consumption (kt) Refined copper production (kt)
+Source : Deutsche Bank, Wood Mackenzie
+Figure 42: US copper imports weekly
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+kt
+Source : Deutsche Bank, Bloomberg Finance L.P
+Figure 43: US copper exports weekly
+0
+5
+10
+15
+20
+25
+30
+kt
+Source : Deutsche Bank, Bloomberg Finance L.P
+Figure 44: LME & COMEX copper inventories
+0
+100
+200
+300
+400
+500
+600
+700
+Sep-20
+Jan-21
+May-21
+Sep-21
+Jan-22
+May-22
+Sep-22
+Jan-23
+May-23
+Sep-23
+Jan-24
+May-24
+Sep-24
+Jan-25
+May-25
+Sep-25
+Jan-26
+May-26
+Sep-26
+LME copper inventories (kt) Comex copper inventory (kt)
+Source : Deutsche Bank, Bloomberg Finance LP
+Figure 45: US copper imports monthly
+-50%
+-25%
+0%
+25%
+50%
+75%
+100%
+125%
+0
+500
+1,000
+1,500
+2,000
+2,500
+3,000
+3,500
+4,000
+Jul-21
+Oct-21
+Jan-22
+Apr-22
+Jul-22
+Oct-22
+Jan-23
+Apr-23
+Jul-23
+Oct-23
+Jan-24
+Apr-24
+Jul-24
+Oct-24
+Jan-25
+Apr-25
+Jul-25
+Oct-25
+Jan-26
+Apr-26
+Jul-26
+US copper imports monthly (USD millions) % change 3mma YoY
+Source : Deutsche Bank, Bloomberg Finance LP
+This document is provided for the exclusive use of portnews portnews@qq.com.
+
+===== P38 =====
+28 September 2026
+Metals & Mining
+Global Copper
+Page 38 Deutsche Bank AG
+Mine supply trends & capital costs
+Figure 46: Incentive copper prices for greenfield projects 
+have risen to over $12,000/t
+4,000
+6,000
+8,000
+10,000
+12,000
+14,000
+16,000
+18,000
+10.0% 12.5% 15.0% 17.5% 20.0%
+IRR %
+Copper price $/t
+$20k/t Cu $25k/t Cu $30k/t Cu $35k/t Cu $40k/t Cu
+Source : Deutsche Bank estimates
+Figure 47: DB global copper mine production proxy
+-12%
+-9%
+-6%
+-3%
+0%
+3%
+6%
+9%
+2,000
+2,250
+2,500
+2,750
+3,000
+3,250
+3,500
+3,750 kt
+Source : Deutsche Bank estimates, company data
+Figure 48: Chile and Peru combined monthly copper 
+output
+-9%
+-6%
+-3%
+0%
+3%
+6%
+9%
+0
+100
+200
+300
+400
+500
+600
+700
+800
+900
+Chile & Peru copper output monthly (kt) % change YoY 3mma
+Source : Bloomberg Finance LP, Cochilco.cl, MINEM
+Figure 49: Chile and Peru combined seasonal copper 
+output
+500
+550
+600
+650
+700
+750
+800
+850
+Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+2021 2022 2023 2024 2025 2026
+kt
+Source : Bloomberg Finance LP, Cochilco.cl, MINEM
+Figure 50: Copper production guidance tracker
+Initial Current Current vs Initial YoY
+FM 396 -8% 405 405 0% 2%
+ANTO 654 -2% 675 640 -5% -2%
+LUN 331 -2% 323 313 -3% -6%
+FCX 1,535 -20% 1,542 1,406 -9% -8%
+Teck 454 2% 493 493 0% 9%
+BHP 2,014 3% 1,839 1,839 0% -9%
+GLEN 852 -11% 840 840 0% -1%
+RIO 883 11% 835 835 0% -5%
+Anglo 695 -10% 790 730 -8% 5%
+Vale 382 10% 365 370 1% -3%
+SCCO 956 -2% 911 917 1% -4%
+Codelco 1,332 0% 1,344 1,344 0% 1%
+KGHM 710 -3% 740 740 0% 4%
+Ivanhoe 386 -12% 400 310 -23% -20%
+South32 71 5% 70 70 0% -1%
+MMG 507 27% 511 511 0% 1%
+HBM 118 -14% 124 124 0% 5%
+CMOC 741 14% 790 790 0% 7%
+Zijin 1,085 2% 1,200 1,200 0% 11%
+Total 14,101 -2% 14,196 13,877 -2% -2%
+Companies 2026 Guidance (kt)2025 Production (kt)
+Source : Deutsche Bank estimates, company data. FCX based on annual sales guidance; FM guidance shown excludes Cobre Panamá stockpiles; 
+BHP and South32 adjusted to reflect June FYE. Bloomberg Finance LP
+This document is provided for the exclusive use of portnews portnews@qq.com.

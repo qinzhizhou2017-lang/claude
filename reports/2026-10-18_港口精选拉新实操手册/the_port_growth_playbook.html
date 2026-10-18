@@ -1,0 +1,1270 @@
+<title>港口精选拉新实操手册</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="THE PORT 港口精选在小红书与抖音的拉新实操手册：定位、选题、封面、标题、模板、转化、矩阵与 30 天执行日历">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* 版式：沿用 THE PORT 研报精华的纸色、墨色、海军蓝与红点；左侧目录 + 正文栏，工具与样张占满内容栏。 */
+:root{
+  --bg:#F4F1EA; --surface:#FFFDF8; --sunk:#EDE8DD; --ink:#17191E; --ink-2:#4C535D; --muted:#7D838D; --rule:#E0D9CB;
+  --accent:#1B2440; --accent-soft:#E6E8F0; --on-accent:#FFFFFF;
+  --red:#C0271C; --red-soft:#F4E5E1; --gold:#9A7B3F; --gold-soft:#F0E8D6;
+  --g:#12705C; --g-soft:#E2ECE7; --y:#8A5A00; --y-soft:#F6ECD3; --r:#B3261E; --r-soft:#F6E2DE;
+  --f-display:"Fraunces","Noto Serif SC","Songti SC",Georgia,serif;
+  --f-head:"Noto Serif SC","Songti SC","Fraunces",serif;
+  --f-body:"Inter","Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11141C; --surface:#181C26; --sunk:#1F2431; --ink:#ECE8DF; --ink-2:#BDB8AE; --muted:#8E929B; --rule:#2B3140;
+    --accent:#A9B8E6; --accent-soft:#232B42; --on-accent:#11141C;
+    --red:#E5685C; --red-soft:#3A1E1B; --gold:#CDAE6E; --gold-soft:#332A18;
+    --g:#4FBF9C; --g-soft:#16302A; --y:#E2AE4C; --y-soft:#33280F; --r:#F07167; --r-soft:#3B1C19;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11141C; --surface:#181C26; --sunk:#1F2431; --ink:#ECE8DF; --ink-2:#BDB8AE; --muted:#8E929B; --rule:#2B3140;
+  --accent:#A9B8E6; --accent-soft:#232B42; --on-accent:#11141C;
+  --red:#E5685C; --red-soft:#3A1E1B; --gold:#CDAE6E; --gold-soft:#332A18;
+  --g:#4FBF9C; --g-soft:#16302A; --y:#E2AE4C; --y-soft:#33280F; --r:#F07167; --r-soft:#3B1C19;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.78;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,label:focus-within{outline:2px solid var(--red);outline-offset:2px;border-radius:4px}
+.page{max-width:1280px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 96px;display:grid;grid-template-columns:196px minmax(0,1fr);gap:56px}
+main{min-width:0;max-width:1000px}
+.toc{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;max-height:calc(100vh - 48px);overflow:auto;font-size:13px;line-height:1.5;padding-top:8px}
+.brandmark{display:flex;align-items:center;gap:8px;margin-bottom:18px}
+.brandmark .dot{width:14px;height:14px;border-radius:50%;background:var(--red);flex:none}
+.brandmark b{font-family:var(--f-body);font-weight:800;font-size:12px;letter-spacing:.16em}
+.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.toc a{display:grid;grid-template-columns:26px 1fr;gap:4px;padding:6px 8px;border-radius:6px;color:var(--ink-2);text-decoration:none}
+.toc a:hover{background:var(--sunk);color:var(--ink)}
+.toc a.on{background:var(--accent-soft);color:var(--ink)}
+.toc .n{font-family:var(--f-mono);color:var(--muted);font-size:12px}
+.toc-inline{display:none;margin:24px 0 0;padding:16px;background:var(--surface);border:1px solid var(--rule);border-radius:10px}
+.toc-inline ol{margin:0;padding-left:1.4em;columns:2;column-gap:24px;font-size:14px}
+@media (max-width:1000px){.page{grid-template-columns:minmax(0,1fr);gap:0}.toc{display:none}.toc-inline{display:block}}
+@media (max-width:520px){.toc-inline ol{columns:1}}
+
+.prose{max-width:68ch}
+p{margin:0 0 1em}
+h1,h2,h3,h4{margin:0;text-wrap:balance}
+h1{font-family:var(--f-head);font-weight:900;font-size:clamp(34px,5.4vw,60px);line-height:1.14;letter-spacing:.01em}
+h2{font-family:var(--f-head);font-weight:900;font-size:clamp(25px,3.2vw,34px);line-height:1.28;margin:6px 0 18px}
+h3{font-weight:700;font-size:19px;line-height:1.45;margin:36px 0 12px}
+h4{font-weight:700;font-size:16px;margin:0 0 6px}
+.eyebrow,.sec-no{font-family:var(--f-mono);font-size:12px;letter-spacing:.1em;color:var(--muted)}
+.sec-no{color:var(--red);font-size:13px}
+section{padding-block:56px 8px;border-top:1px solid var(--rule);margin-top:40px;scroll-margin-top:16px}
+.lead{font-size:18px;color:var(--ink-2);line-height:1.75}
+.small{font-size:13px;color:var(--muted);line-height:1.6}
+.mono{font-family:var(--f-mono)}
+.num{font-variant-numeric:tabular-nums}
+sup{line-height:0}
+.cite{font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--accent);text-decoration:none;padding:0 1px}
+.cite:hover{text-decoration:underline}
+.est{font-size:.85em;color:var(--muted);white-space:nowrap}
+.hl{color:var(--red);font-weight:700}
+
+/* hero */
+.hero{padding-block:16px 8px}
+.hero .dek{font-size:clamp(17px,2vw,20px);color:var(--ink-2);max-width:62ch;margin:20px 0 0;line-height:1.7}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin:18px 0 0;font-size:13px;color:var(--muted)}
+.hero .meta b{color:var(--ink-2);font-weight:500}
+
+/* 一页纸方案 */
+.onepager{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0 8px}
+.op{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:16px 18px;min-width:0}
+.op .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--muted)}
+.op .v{font-family:var(--f-head);font-weight:900;font-size:20px;line-height:1.35;margin:4px 0 6px}
+.op p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.65}
+.op.wide{grid-column:1/-1}
+@media (max-width:800px){.onepager{grid-template-columns:minmax(0,1fr)}}
+.path{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:8px}
+.path span{background:var(--sunk);border-radius:6px;padding:5px 9px;font-size:13px;color:var(--ink)}
+.path i{font-style:normal;color:var(--muted);font-family:var(--f-mono)}
+
+/* 状态药丸 */
+.z{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;line-height:1;padding:5px 8px;border-radius:999px;white-space:nowrap;vertical-align:middle}
+.z::before{font-family:var(--f-mono);font-weight:600}
+.z-g{background:var(--g-soft);color:var(--g)} .z-g::before{content:"✓"}
+.z-y{background:var(--y-soft);color:var(--y)} .z-y::before{content:"!"}
+.z-r{background:var(--r-soft);color:var(--r)} .z-r::before{content:"✕"}
+.tag{display:inline-block;font-family:var(--f-mono);font-size:11px;letter-spacing:.04em;padding:3px 7px;border-radius:5px;background:var(--sunk);color:var(--ink-2);white-space:nowrap}
+
+/* 表格 */
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:10px;background:var(--surface);margin:16px 0 8px}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:1.6}
+.tbl table{min-width:660px}
+th,td{padding:11px 14px;border-bottom:1px solid var(--rule);text-align:left;vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-weight:700;background:var(--sunk);font-size:13px;color:var(--ink-2);white-space:nowrap}
+td.k{font-weight:700;white-space:nowrap}
+.caption{font-size:13px;color:var(--muted);margin:6px 0 0;line-height:1.6}
+
+/* 判断框 */
+.judge{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:16px 18px;margin:20px 0}
+.judge .lab{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;color:var(--red);margin-bottom:6px}
+.judge p:last-child,.judge ul:last-child,.judge ol:last-child{margin-bottom:0}
+.judge ul,.judge ol{margin:0 0 1em;padding-left:1.3em}
+.judge li{margin:4px 0}
+
+/* 工具外框 */
+.tool{background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:18px;margin:18px 0}
+.tool-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;align-items:baseline;margin-bottom:12px}
+.tool-head h4{font-size:16px;margin:0}
+.btn{font:inherit;font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--accent)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:inherit;font-size:13px;padding:6px 11px;border-radius:999px;border:1px solid var(--rule);background:var(--bg);color:var(--ink-2);cursor:pointer}
+.seg button:hover{border-color:var(--accent);color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+
+/* 选题打分器 */
+.score-rows{display:flex;flex-direction:column;gap:12px}
+.score-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px 14px;align-items:center}
+.score-row .q{font-size:14px;font-weight:600}
+.score-row .q small{display:block;font-weight:400;color:var(--muted);font-size:12px;line-height:1.4}
+@media (max-width:640px){.score-row{grid-template-columns:minmax(0,1fr)}}
+.verdict{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:16px;padding-top:14px;border-top:1px dashed var(--rule)}
+.verdict .big{font-family:var(--f-display);font-weight:800;font-size:40px;line-height:1}
+.verdict .big small{font-size:16px;color:var(--muted);font-family:var(--f-body);font-weight:500;margin-left:2px}
+.verdict .say{font-size:15px;color:var(--ink-2);flex:1;min-width:220px}
+
+/* 封面样张 */
+.covers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0 6px}
+@media (max-width:900px){.covers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cv{min-width:0}
+.cv-art{aspect-ratio:3/4;max-width:100%;border-radius:10px;padding:9% 8% 7%;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative;container-type:inline-size}
+.cv-art .org{align-self:flex-start;font-size:max(10px,5.2cqw);font-weight:700;padding:.3em .7em;border-radius:99px;letter-spacing:.04em}
+.cv-art .hd{font-family:var(--f-head);font-weight:900;font-size:10.5cqw;line-height:1.22;letter-spacing:.01em}
+.cv-art .hd em{font-style:normal}
+.cv-art .sb{font-size:max(10px,5cqw);line-height:1.45;margin-top:.6em;opacity:.85}
+.cv-art .ft{display:flex;align-items:center;gap:.5em;font-size:max(9px,4.2cqw);font-weight:700;letter-spacing:.12em}
+.cv-art .ft i{display:inline-block;width:.9em;height:.9em;border-radius:50%;background:#C0271C}
+.cv-dark{background:#1B2440;color:#F4F1EA}
+.cv-dark .org{background:#C0271C;color:#FFFFFF}
+.cv-dark .hd em{color:#E2C27F}
+.cv-light{background:#F4F1EA;color:#17191E;border:1px solid #E0D9CB}
+.cv-light .org{background:#1B2440;color:#F4F1EA}
+.cv-light .hd em{color:#C0271C}
+.cv-bad{background:#FFFFFF;color:#17191E;border:1px solid #E0D9CB;padding:7% 7%;justify-content:flex-start;gap:3%}
+.cv-bad .tiny{font-size:max(6px,2.6cqw);line-height:1.5;color:#4C535D}
+.cv-bad .tinyh{font-size:max(8px,4cqw);font-weight:700;font-family:var(--f-head)}
+.cv-bad .bars{display:flex;align-items:flex-end;gap:3%;height:22%;margin-top:4%}
+.cv-bad .bars span{flex:1;background:#B4B0A6;border-radius:2px 2px 0 0}
+.cv-bad .qr{position:absolute;right:7%;bottom:6%;width:18%;aspect-ratio:1;background:repeating-linear-gradient(45deg,#17191E 0 3px,#FFFFFF 3px 6px);border:2px solid #17191E}
+.cv-cap{font-size:13px;color:var(--ink-2);margin-top:8px;line-height:1.55}
+.cv-cap b{color:var(--ink)}
+
+/* 卡片结构条 */
+.slots{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:6px;margin:14px 0}
+.slot{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:10px 8px;min-width:0;aspect-ratio:3/4;display:flex;flex-direction:column;gap:4px}
+.slot .n{font-family:var(--f-mono);font-size:11px;color:var(--red)}
+.slot b{font-size:13px;line-height:1.3}
+.slot span{font-size:11.5px;color:var(--ink-2);line-height:1.45}
+.slot.first{background:var(--accent);border-color:var(--accent)}
+.slot.first .n{color:var(--gold-soft)} .slot.first b,.slot.first span{color:var(--on-accent)}
+@media (max-width:860px){.slots{grid-template-columns:repeat(3,minmax(0,1fr))}.slot{aspect-ratio:auto}}
+
+/* 标题生成器 */
+.gen-in{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 12px}
+@media (max-width:640px){.gen-in{grid-template-columns:minmax(0,1fr)}}
+.field{display:flex;flex-direction:column;gap:4px;min-width:0}
+.field label{font-size:12px;color:var(--ink-2)}
+.field input,.field select{font:inherit;font-size:14px;padding:8px 10px;border-radius:8px;border:1px solid var(--rule);background:var(--bg);color:var(--ink);width:100%}
+.field input[type=number]{font-family:var(--f-mono)}
+.gen-out{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:0}
+.gen-out li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--rule)}
+.gen-out .f{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.gen-out .t{font-size:15px;font-weight:600}
+.gen-out .t small{display:block;font-weight:400;font-size:12px;color:var(--muted)}
+.warn{font-size:13px;color:var(--r);margin-top:8px}
+
+/* 模板 */
+.tpl{background:var(--surface);border:1px solid var(--rule);border-radius:10px;margin:14px 0;overflow:hidden}
+.tpl-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 14px;background:var(--sunk);border-bottom:1px solid var(--rule)}
+.tpl-h h4{margin:0;font-size:15px}
+.tpl pre{margin:0;padding:14px 16px;font-family:var(--f-mono);font-size:13px;line-height:1.8;white-space:pre-wrap;word-break:break-word;color:var(--ink);overflow-x:auto}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.two > *{min-width:0}
+@media (max-width:760px){.two{grid-template-columns:minmax(0,1fr)}}
+
+/* 技巧列表 */
+.tricks{list-style:none;margin:12px 0 0;padding:0;counter-reset:t;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.tricks{grid-template-columns:minmax(0,1fr)}}
+.tricks li{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;counter-increment:t;min-width:0}
+.tricks li::before{content:counter(t,decimal-leading-zero);font-family:var(--f-mono);font-size:12px;color:var(--red);display:block;margin-bottom:2px}
+.tricks h4{font-size:16px;margin-bottom:4px}
+.tricks p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.7}
+.tricks .do{display:block;margin-top:8px;font-size:13px;color:var(--ink);background:var(--sunk);border-radius:6px;padding:6px 9px}
+
+/* 测算器 */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:22px}
+@media (max-width:860px){.calc{grid-template-columns:minmax(0,1fr)}}
+.inputs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 12px}
+@media (max-width:420px){.inputs{grid-template-columns:minmax(0,1fr)}}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.kpi{background:var(--sunk);border-radius:8px;padding:10px 12px;min-width:0}
+.kpi .k{font-size:12px;color:var(--ink-2)}
+.kpi .v{font-size:22px;font-weight:700;line-height:1.25}
+.mtable td,.mtable th{padding:7px 10px;font-size:13px}
+.mtable td{font-variant-numeric:tabular-nums}
+.reverse{margin-top:14px;padding:12px 14px;background:var(--gold-soft);border-radius:8px;font-size:14px;color:var(--ink);line-height:1.7}
+.reverse .field{flex-direction:row;align-items:center;gap:8px;margin-bottom:6px}
+.reverse .field input{width:130px}
+.figure{position:relative}
+.chart-wrap{overflow-x:auto}
+.chart-wrap svg{display:block;width:100%;height:auto;min-width:420px}
+.wide-svg svg{min-width:860px}
+svg text{font-family:var(--f-body)}
+.ax{fill:var(--muted);font-size:11px;font-family:var(--f-mono)}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;line-height:1.45;padding:7px 9px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-115%);opacity:0;transition:opacity .12s}
+.tip.on{opacity:1}
+
+/* 日历 */
+.weeks{display:flex;flex-direction:column;gap:14px;margin-top:12px}
+.week{background:var(--surface);border:1px solid var(--rule);border-radius:10px;overflow:hidden}
+.week-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;padding:10px 14px;background:var(--sunk);border-bottom:1px solid var(--rule)}
+.week-h b{font-size:15px}
+.week-h span{font-size:13px;color:var(--ink-2)}
+.days{list-style:none;margin:0;padding:0}
+.days li{border-bottom:1px solid var(--rule)}
+.days li:last-child{border-bottom:0}
+.days label{display:grid;grid-template-columns:20px 74px minmax(0,1fr);gap:10px;padding:9px 14px;font-size:14px;color:var(--ink-2);cursor:pointer;align-items:start}
+.days input{width:16px;height:16px;margin-top:4px;accent-color:var(--red)}
+.days .d{font-family:var(--f-mono);font-size:12px;color:var(--muted);padding-top:2px}
+.days b{color:var(--ink);font-weight:600}
+.days input:checked ~ span{color:var(--muted);text-decoration:line-through}
+.days input:checked ~ span b{color:var(--muted)}
+@media (max-width:520px){.days label{grid-template-columns:20px minmax(0,1fr);row-gap:2px}.days .d{grid-column:2}.days label > span:last-child{grid-column:2}}
+.progress{font-family:var(--f-mono);font-size:12px;color:var(--ink-2)}
+
+/* 红线 */
+.redlines{list-style:none;margin:12px 0 0;padding:0}
+.redlines li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:8px;padding:12px 0;border-bottom:1px solid var(--rule);font-size:15px}
+.redlines li::before{content:"✕";color:var(--r);font-family:var(--f-mono);font-weight:700}
+.redlines b{color:var(--ink)}
+.redlines span{color:var(--ink-2)}
+
+.sources{font-size:13px;line-height:1.6;color:var(--ink-2);padding-left:2.4em;margin:12px 0 0}
+.sources li{padding:4px 0;scroll-margin-top:16px}
+.sources li:target{background:var(--accent-soft);border-radius:4px}
+.sources a{word-break:break-all}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);font-size:13px;color:var(--muted)}
+</style>
+
+<div class="page">
+<nav class="toc" aria-label="目录">
+  <div class="brandmark"><span class="dot"></span><b>THE PORT</b></div>
+  <ol>
+    <li><a href="#plan"><span class="n">00</span><span>一页纸方案</span></a></li>
+    <li><a href="#setup"><span class="n">01</span><span>定位与装修</span></a></li>
+    <li><a href="#columns"><span class="n">02</span><span>栏目与节奏</span></a></li>
+    <li><a href="#hits"><span class="n">03</span><span>爆款制作</span></a></li>
+    <li><a href="#growth"><span class="n">04</span><span>低粉增长技巧</span></a></li>
+    <li><a href="#convert"><span class="n">05</span><span>转化与变现</span></a></li>
+    <li><a href="#matrix"><span class="n">06</span><span>一人矩阵</span></a></li>
+    <li><a href="#days"><span class="n">07</span><span>30 天日历</span></a></li>
+    <li><a href="#review"><span class="n">08</span><span>复盘与红线</span></a></li>
+    <li><a href="#sources"><span class="n">09</span><span>来源</span></a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="eyebrow">THE PORT · 港口精选 · 小红书 / 抖音 · 编制于 2026-10-18</div>
+  <h1>港口精选<br>拉新实操手册</h1>
+  <p class="dek">这份手册只讲怎么做：账号怎么装修、每天发什么、封面和标题怎么写、评论区和粉丝群怎么接、多少阅读能换来多少付费，以及从 10 月 19 日开工的 30 天日历。示例全部用 THE PORT 已经做过的大摩、高盛、美银、摩根大通精华改写，复制就能用。</p>
+  <div class="meta">
+    <span>对象 <b>THE PORT 全球投行研报精选</b></span>
+    <span>阶段 <b>0 → 5 万粉</b></span>
+    <span>投入 <b>每天约 2 小时</b></span>
+  </div>
+  <nav class="toc-inline" aria-label="目录">
+    <ol>
+      <li><a href="#plan">一页纸方案</a></li>
+      <li><a href="#setup">定位与装修</a></li>
+      <li><a href="#columns">栏目与节奏</a></li>
+      <li><a href="#hits">爆款制作</a></li>
+      <li><a href="#growth">低粉增长技巧</a></li>
+      <li><a href="#convert">转化与变现</a></li>
+      <li><a href="#matrix">一人矩阵</a></li>
+      <li><a href="#days">30 天日历</a></li>
+      <li><a href="#review">复盘与红线</a></li>
+      <li><a href="#sources">来源</a></li>
+    </ol>
+  </nav>
+</header>
+
+<section id="plan">
+  <div class="sec-no">00 · 一页纸方案</div>
+  <h2>先看这一页，后面每节都是它的展开</h2>
+  <div class="onepager">
+    <div class="op">
+      <div class="k">定位</div>
+      <div class="v">把 50 页英文报告，压成 9 张中文图</div>
+      <p>只讲大行的观点和逻辑，不荐股，不发原文。用户关注你，是因为你替他读完了他读不完的东西。</p>
+    </div>
+    <div class="op">
+      <div class="k">主战场</div>
+      <div class="v">小红书为主，抖音为辅</div>
+      <p>小红书近两年金融相关搜索增长 314%<sup><a class="cite" href="#src-5">5</a></sup>，用户是带着问题来搜的。THE PORT 现成的精华页改成 3:4 卡片就能发；抖音同步图文，再加口播。</p>
+    </div>
+    <div class="op">
+      <div class="k">第一个月目标</div>
+      <div class="v">30 篇 · 1,000–3,000 粉 · 群 100+ 人</div>
+      <p>再跑出 2–3 个可以反复套用的爆款模板。这是经验目标，第 2 周按你自己的数据校准。</p>
+    </div>
+    <div class="op wide">
+      <div class="k">转化路径（全程在平台规则内）</div>
+      <div class="path"><span>笔记（搜索 + 推荐）</span><i>→</i><span>关注</span><i>→</i><span>平台内粉丝群</span><i>→</i><span>群里每天一张观点卡</span><i>→</i><span>付费产品（平台内店铺 / 专栏，或合规留资工具）</span></div>
+    </div>
+    <div class="op">
+      <div class="k">时机</div>
+      <div class="v">赶上 11 月的年度展望季</div>
+      <p>每年 11 月中旬起，高盛、大摩、摩根大通等密集发布下一年展望，是研报内容需求最集中的窗口。10 月 19 日开工，30 天后刚好赶上。</p>
+    </div>
+    <div class="op">
+      <div class="k">每天 2 小时</div>
+      <div class="v">30 + 45 + 15 + 30 分钟</div>
+      <p>选题 30 分钟，用现有研报 skill 出卡片 45 分钟，发布 15 分钟，发布后 1 小时内回评论 30 分钟。</p>
+    </div>
+    <div class="op">
+      <div class="k">三条红线</div>
+      <div class="v">不发原文 · 不留微信 · 不荐股</div>
+      <p>5 月小红书刚清理过"研报倒卖"笔记和店铺<sup><a class="cite" href="#src-2">2</a></sup>；平台内留联系方式属于交易导流违规<sup><a class="cite" href="#src-3">3</a></sup>。细则见第 08 节。</p>
+    </div>
+  </div>
+</section>
+
+<section id="setup">
+  <div class="sec-no">01 · 定位与装修</div>
+  <h2>账号资料：直接照抄这一套</h2>
+
+  <h3>一句话定位，三选一</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>版本</th><th>文案</th><th>适合</th></tr></thead>
+      <tbody>
+        <tr><td class="k">A · 具体</td><td>把 50 页英文报告，压成 9 张中文图</td><td>小红书首选。数字具体，用户一眼知道能拿到什么</td></tr>
+        <tr><td class="k">B · 机构名</td><td>高盛、大摩、摩根大通在看什么？我替你读完了</td><td>抖音首选。机构名自带权威和搜索量</td></tr>
+        <tr><td class="k">C · 时间</td><td>每天 3 分钟，看懂华尔街大行在想什么</td><td>做口播视频时的开场白</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>资料逐项填写</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>项目</th><th>怎么填</th><th>为什么</th></tr></thead>
+      <tbody>
+        <tr><td class="k">昵称</td><td><b>THE PORT港口精选</b>，两个平台完全一致</td><td>全网统一才会被记住、被搜到。昵称里不要带"研报"二字：5 月研报倒卖整治后，小红书下线了"免费获取外资投行研报渠道"等联想词，并处置了一批无资质的研报服务账号<sup><a class="cite" href="#src-2">2</a></sup></td></tr>
+        <tr><td class="k">头像</td><td>现有红点 P 标，白底或纸色底</td><td>小尺寸下红点最醒目，和卡片里的品牌标识一致</td></tr>
+        <tr><td class="k">简介</td><td>见下方模板，四行以内</td><td>回答三件事：你是谁、多久更新、不做什么</td></tr>
+        <tr><td class="k">置顶 3 篇</td><td>① 我们是谁 + 栏目表 ② 怎么读一份投行报告 ③ 本月数据最好的一篇（每月换）</td><td>新访客点进主页只看置顶，这三篇负责把"路过"变成"关注"</td></tr>
+        <tr><td class="k">认证</td><td>个人号即可，不申请金融类认证</td><td>小红书金融认证只发给持牌机构<sup><a class="cite" href="#src-4">4</a></sup>。抖音对证券、保险、贷款等专业讲解要求财经资质认证<sup><a class="cite" href="#src-16">16</a></sup>，所以抖音侧以产业、科技、宏观类报告为主，避开个股</td></tr>
+        <tr><td class="k">设备</td><td>一号一机一卡，各号单独实名</td><td>多号同机登录容易被判为关联营销号</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="two">
+    <div class="tpl">
+      <div class="tpl-h"><h4>小红书简介</h4><button class="btn" type="button" data-copy="bio-x">复制</button></div>
+<pre id="bio-x">华尔街大行观点精选｜每天 9 张图
+高盛 · 大摩 · 摩根大通 · 美银
+只讲观点和逻辑，不荐股
+每周日更新「本周大行 TOP5」</pre>
+    </div>
+    <div class="tpl">
+      <div class="tpl-h"><h4>抖音简介</h4><button class="btn" type="button" data-copy="bio-d">复制</button></div>
+<pre id="bio-d">高盛、大摩、摩根大通在看什么？我替你读完了
+每天 3 分钟｜AI · 科技 · 宏观 · 全球资金
+只讲观点，不荐股，不构成投资建议</pre>
+    </div>
+  </div>
+
+  <h3>说什么、不说什么</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>可以这样说</th><th>不要这样说</th></tr></thead>
+      <tbody>
+        <tr><td>大摩这份报告的核心判断是……</td><td>研报下载 / 原文 PDF / 免费领研报 / 研报渠道</td></tr>
+        <tr><td>报告给出的逻辑有三层……</td><td>目标价 XX，赶紧上车</td></tr>
+        <tr><td>原报告 51 页，这里提炼 9 个要点</td><td>我建议你买 / 我的持仓</td></tr>
+        <tr><td>对普通人来说，这意味着……</td><td>内部消息 / 独家渠道</td></tr>
+        <tr><td>不同大行的看法并不一致……</td><td>私信我 / 加 V / 看主页暗号</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="columns">
+  <div class="sec-no">02 · 栏目与节奏</div>
+  <h2>四个固定栏目 + 一个季节栏目</h2>
+  <div class="prose"><p class="lead">固定栏目让用户知道下次来能看到什么，也让你每天不用从零想选题。示例都是 THE PORT 已经做过的精华，换个标题就能发。</p></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>栏目</th><th>发什么</th><th>频率</th><th>主要作用</th><th>示例标题</th></tr></thead>
+      <tbody>
+        <tr><td class="k">一图看懂大行</td><td>一份报告拆成 9 张图</td><td>每周 3 篇</td><td>拉新、吃搜索</td><td>高盛：上天成本40年跌了97%</td></tr>
+        <tr><td class="k">华尔街在想什么</td><td>美银全球 / 亚洲基金经理调查、外汇利率调查等月度调查</td><td>每月 2–3 篇，跟发布日走</td><td>让人追更</td><td>全球基金经理现金只剩 3.5%，他们在怕什么</td></tr>
+        <tr><td class="k">大行吵架</td><td>同一主题，2–4 家大行观点并排对比</td><td>每周 1 篇</td><td>评论、转发</td><td>锂价见顶了吗？高盛和汇丰、瑞银、德银唱反调<sup><a class="cite" href="#src-15">15</a></sup></td></tr>
+        <tr><td class="k">读研报</td><td>评级、目标价、调查怎么看、报告结构、术语</td><td>每周 1–2 篇</td><td>收藏，吸引学生和金融新人</td><td>投行报告里的 OW、UW 到底什么意思</td></tr>
+        <tr><td class="k">本周大行 TOP5</td><td>周日合集，每份报告一句话</td><td>每周 1 篇</td><td>关注、进群的钩子</td><td>本周大行观点 TOP5｜No.03</td></tr>
+        <tr><td class="k">2027 大行展望</td><td>11 月中旬起，每家大行年度展望一篇 + 总合集</td><td>展望季每天 1 篇</td><td>一年里最大的流量窗口</td><td>高盛 2027 展望：9 张图看完</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>一周排班</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>星期</th><th>小红书</th><th>抖音</th><th>粉丝群</th></tr></thead>
+      <tbody>
+        <tr><td class="k">周一</td><td>读研报 · 12:00</td><td>同步图文</td><td>08:00 观点卡</td></tr>
+        <tr><td class="k">周二</td><td>一图看懂 · 20:30</td><td>口播 #1 · 18:30</td><td>08:00 观点卡</td></tr>
+        <tr><td class="k">周三</td><td>大行吵架 · 20:30</td><td>同步图文</td><td>08:00 观点卡 + 投票选下周吵架题</td></tr>
+        <tr><td class="k">周四</td><td>一图看懂 · 20:30</td><td>同步图文</td><td>08:00 观点卡</td></tr>
+        <tr><td class="k">周五</td><td>一图看懂 · 20:30</td><td>口播 #2 · 18:30</td><td>08:00 观点卡 + TOP5 预告</td></tr>
+        <tr><td class="k">周六</td><td>数字卡（一个数字一张图）· 12:00</td><td>休息</td><td>答疑</td></tr>
+        <tr><td class="k">周日</td><td>本周 TOP5 · 20:30</td><td>同步图文</td><td>同步 TOP5</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="caption">发布时间是常用经验值。第 2 周起改用后台"粉丝活跃时段"里最高的两个小时。</p>
+
+  <h3>选题从哪来：大行的固定发布节奏</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>报告</th><th>大致时间</th><th>放进哪个栏目</th></tr></thead>
+      <tbody>
+        <tr><td class="k">美银全球基金经理调查</td><td>每月中旬</td><td>华尔街在想什么</td></tr>
+        <tr><td class="k">美银亚洲基金经理调查、外汇利率调查</td><td>每月</td><td>华尔街在想什么</td></tr>
+        <tr><td class="k">大摩美股策略周报</td><td>每周一</td><td>一图看懂 / 大行吵架</td></tr>
+        <tr><td class="k">摩根大通 Flows &amp; Liquidity</td><td>每周</td><td>一图看懂（全球资金流向）</td></tr>
+        <tr><td class="k">各大行年度展望</td><td>11 月中旬至 12 月初</td><td>2027 大行展望</td></tr>
+        <tr><td class="k">财报季点评</td><td>1、4、7、10 月下旬</td><td>一图看懂（只讲行业，不讲个股买卖）</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="caption">发布节奏为常见规律，以实际发布日为准。</p>
+
+  <h3>第一个月的选题：直接用你已有的精华</h3>
+  <div class="prose"><p>THE PORT 7–8 月已经做了 30 多份精华。下面挑出 25 篇排进第一个月，标题按第 03 节的规则改写好了（都不超过 20 字）。"常青"可以直接改卡片发；"换最新一期"的用同一栏目的最新报告；个股类先不进首月。</p></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>#</th><th>栏目</th><th>小红书标题</th><th>来自哪份精华</th><th>状态</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>读研报</td><td>投行报告里的 OW、UW 到底什么意思</td><td>新写</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">2</td><td>一图看懂</td><td>高盛：上天成本40年跌了97%</td><td>高盛 · 第二太空时代</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">3</td><td>数字卡</td><td>81%的美国科技公司已在为AI付钱</td><td>摩根大通 · 企业 AI 支出</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">4</td><td>一图看懂</td><td>大摩：AI 数据中心光有钱拿不下一块地</td><td>大摩 · 数据中心政治阻力</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">5</td><td>一图看懂</td><td>摩根大通：人形机器人先赚钱的是卖铲人</td><td>摩根大通 · 人形机器人</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">6</td><td>华尔街在想什么</td><td>美银基金经理调查：这个月他们在怕什么</td><td>美银 · 全球基金经理调查</td><td><span class="z z-y">换最新一期</span></td></tr>
+        <tr><td class="num">7</td><td>宏观翻译</td><td>大摩：失业率没升，是因为有人不找了</td><td>大摩 · 劳动参与率</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">8</td><td>一图看懂</td><td>大摩 AI 主权报告：两个世界，两套算力</td><td>大摩 · AI 主权</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">9</td><td>一图看懂</td><td>大摩：中国 AI 芯片单颗落后，总账不输</td><td>大摩 · 中国 AI GPU</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">10</td><td>大行吵架</td><td>AI赚不赚钱？大摩和摩根大通说法不同</td><td>大摩 Alphabet + 摩根大通企业 AI 支出</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">11</td><td>一图看懂</td><td>瑞银：AI 撑起中国贸易半壁，靠的是涨价</td><td>瑞银 · AI 重塑中国贸易</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">12</td><td>读研报</td><td>目标价是怎么算出来的？3 种方法</td><td>新写</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">13</td><td>一图看懂</td><td>摩根大通：硬件订单排到明年，卡在供货</td><td>摩根大通 · 亚洲硬件科技</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">14</td><td>读研报</td><td>美银基金经理调查怎么看？盯 3 个指标</td><td>用基金经理调查当教材</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">15</td><td>宏观翻译</td><td>大摩：30 年美债回到了 2007 年</td><td>大摩 · 跨资产聚焦</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">16</td><td>一图看懂</td><td>美银：中国少买的是后道设备，前道在加</td><td>美银 · 半导体设备进口跟踪</td><td><span class="z z-y">换最新一期</span></td></tr>
+        <tr><td class="num">17</td><td>一图看懂</td><td>大摩：公司上调指引创新高，市场不买单</td><td>大摩 · 美股策略</td><td><span class="z z-y">换最新一期</span></td></tr>
+        <tr><td class="num">18</td><td>一图看懂</td><td>大摩：被 AI 冷落的港股，该加回来了</td><td>大摩 · 中国股票策略</td><td><span class="z z-y">换最新一期</span></td></tr>
+        <tr><td class="num">19</td><td>复刻</td><td>巴克莱看 SpaceX：关键在现金流</td><td>巴克莱 · SpaceX 信用覆盖</td><td><span class="z z-g">太空篇爆了再发</span></td></tr>
+        <tr><td class="num">20</td><td>华尔街在想什么</td><td>看空日元的声音，四年来最强</td><td>美银 · 外汇利率调查</td><td><span class="z z-y">换最新一期</span></td></tr>
+        <tr><td class="num">21</td><td>华尔街在想什么</td><td>全球资金这个月往哪跑？大摩月度复盘</td><td>大摩 · 跨资产月度复盘</td><td><span class="z z-y">换最新一期</span></td></tr>
+        <tr><td class="num">22</td><td>一图看懂</td><td>大摩：美股广度降温，不是见顶</td><td>大摩 · 质量轮动</td><td><span class="z z-y">换最新一期</span></td></tr>
+        <tr><td class="num">23</td><td>读研报</td><td>一份投行报告的 5 个部分，先看哪页</td><td>新写</td><td><span class="z z-g">常青</span></td></tr>
+        <tr><td class="num">24</td><td>算账</td><td>存款1.6%、股息4.7%，高盛在看什么</td><td>高盛 · 中国四大行</td><td><span class="z z-y">只讲利差逻辑</span></td></tr>
+        <tr><td class="num">25</td><td>大行吵架</td><td>2027 年美股，几家大行分歧在哪</td><td>11 月中旬的年度展望</td><td><span class="z z-y">展望季发</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="caption">另有 4 篇周日 TOP5 合集。宁德时代、长鑫存储、中国券商这类以个股为主的精华，等账号稳定后只讲行业逻辑再发。</p>
+</section>
+
+<section id="hits">
+  <div class="sec-no">03 · 爆款制作</div>
+  <h2>选题、封面、标题、内页、正文，一条流水线</h2>
+
+  <h3>第一步：给选题打分</h3>
+  <div class="prose"><p>每天早上把当天能做的 3–5 份报告各打一次分，只做最高的那份。下面预填的是"高盛 · 第二太空时代"。</p></div>
+  <div class="tool" id="scorer">
+    <div class="tool-head"><h4>选题打分器</h4><button class="btn" type="button" id="score-reset">恢复示例</button></div>
+    <div class="score-rows" id="score-rows"></div>
+    <div class="verdict"><div class="big" id="score-big">13<small>/15</small></div><div class="say" id="score-say"></div></div>
+  </div>
+
+  <h3>第二步：做封面</h3>
+  <div class="prose">
+    <p>封面决定有没有人点进来。规则只有五条：3:4 竖版（1080×1440）；标题两行，每行不超过 8 个字；一个数字或关键词用强调色；左上角写机构名；底部只放品牌和编号，不放二维码，也不放原报告页面截图。下面是用 THE PORT 已有精华做的样张。</p>
+  </div>
+  <div class="covers">
+    <div class="cv"><div class="cv-art cv-dark" role="img" aria-label="封面样张：高盛太空经济"><span class="org">高盛 · 太空经济</span><div><div class="hd">一公斤上天的价格<br>40 年跌了 <em>97%</em></div><div class="sb">太空正在变成一门生意</div></div><div class="ft"><i></i>THE PORT · No.001</div></div><div class="cv-cap"><b>数字反差</b>：最稳的爆款结构，适合一图看懂。</div></div>
+    <div class="cv"><div class="cv-art cv-light" role="img" aria-label="封面样张：美银基金经理调查"><span class="org">美银 · 基金经理调查</span><div><div class="hd">全球基金经理<br>现金只剩 <em>3.5%</em></div><div class="sb">所有人都投了"不会"</div></div><div class="ft"><i></i>THE PORT · No.002</div></div><div class="cv-cap"><b>内部视角</b>：月度调查固定用这个版式，形成系列感。</div></div>
+    <div class="cv"><div class="cv-art cv-dark" role="img" aria-label="封面样张：大摩AI数据中心"><span class="org">大摩 · AI 数据中心</span><div><div class="hd">光有钱<br>已经<em>拿不下</em>一块地</div><div class="sb">AI 数据中心卡在哪</div></div><div class="ft"><i></i>THE PORT · No.003</div></div><div class="cv-cap"><b>反常识</b>：一句话制造疑问，正文第 2 张给答案。</div></div>
+    <div class="cv"><div class="cv-art cv-light" role="img" aria-label="封面样张：摩根大通人形机器人"><span class="org">摩根大通 · 人形机器人</span><div><div class="hd">人形机器人<br>先赚钱的是<em>卖铲人</em></div><div class="sb">9 张图看懂整条产业链</div></div><div class="ft"><i></i>THE PORT · No.004</div></div><div class="cv-cap"><b>热门行业</b>：讲产业链，不点名个股买卖。</div></div>
+    <div class="cv"><div class="cv-art cv-light" role="img" aria-label="封面样张：读研报第一课"><span class="org">读研报 · 第 1 课</span><div><div class="hd">投行报告里的<br><em>OW / UW</em> 是什么</div><div class="sb">3 分钟看懂大行评级</div></div><div class="ft"><i></i>THE PORT · 读研报</div></div><div class="cv-cap"><b>学习向</b>：收藏率最高的一类，学生和金融新人爱存。</div></div>
+    <div class="cv"><div class="cv-art cv-dark" role="img" aria-label="封面样张：大摩劳动参与率"><span class="org">大摩 · 美国就业</span><div><div class="hd">失业率没升<br>是因为有人<em>不找了</em></div><div class="sb">劳动参与率在说什么</div></div><div class="ft"><i></i>THE PORT · No.005</div></div><div class="cv-cap"><b>宏观翻译</b>：把一个指标翻译成人话。</div></div>
+    <div class="cv"><div class="cv-art cv-light" role="img" aria-label="封面样张：数字卡"><span class="org">摩根大通 · AI 支出</span><div><div class="hd"><em>81%</em> 的美国<br>科技公司已在<br>为 AI 付钱</div><div class="sb">谁在为 AI 买单</div></div><div class="ft"><i></i>THE PORT · 数字卡</div></div><div class="cv-cap"><b>数字卡</b>：周六轻量更新，一个数字一张图。</div></div>
+    <div class="cv"><div class="cv-art cv-bad" role="img" aria-label="错误示范：直接发A4原页"><div class="tinyh">AI 主权 · 研报精华</div><div class="tiny">两个世界，两套算力。这轮资本开支被拉长了。各国政府对本土算力的投入……数据来源……原报告第 12 页……分析师……免责声明……</div><div class="bars"><span style="height:40%"></span><span style="height:65%"></span><span style="height:55%"></span><span style="height:90%"></span><span style="height:75%"></span></div><div class="tiny">表 3：主权 AI 项目一览（单位：十亿美元）……</div><div class="qr"></div></div><div class="cv-cap"><b class="hl">✕ 错误示范</b>：A4 原页直接发，手机上字太小；带二维码会被判导流。</div></div>
+  </div>
+
+  <h3>第三步：写标题</h3>
+  <div class="prose"><p>小红书标题最多 20 个字，抖音建议 30 字以内。前 8 个字放用户会搜的词（机构名 + 主题），后半句放钩子。填进去，生成 8 个候选。</p></div>
+  <div class="tool" id="titlegen">
+    <div class="tool-head"><h4>标题生成器</h4><span class="small">超过 20 字或含高危词会标红</span></div>
+    <div class="gen-in">
+      <div class="field"><label for="tg-org">机构</label><select id="tg-org"><option>高盛</option><option>大摩</option><option>摩根大通</option><option>美银</option><option>瑞银</option><option>汇丰</option><option>花旗</option><option>巴克莱</option><option>德银</option></select></div>
+      <div class="field"><label for="tg-topic">主题（4–8 字）</label><input id="tg-topic" type="text" value="太空经济"></div>
+      <div class="field"><label for="tg-hook">反常识数字或事实</label><input id="tg-hook" type="text" value="上天成本 40 年跌了 97%"></div>
+      <div class="field"><label for="tg-why">和普通人的关系</label><input id="tg-why" type="text" value="太空正在变成一门生意"></div>
+      <div class="field"><label for="tg-n">卡片张数</label><input id="tg-n" type="number" min="3" max="18" value="9"></div>
+      <div class="field"><label for="tg-no">期号</label><input id="tg-no" type="number" min="1" value="1"></div>
+    </div>
+    <ol class="gen-out" id="tg-out"></ol>
+  </div>
+
+  <h3>第四步：排 9 张卡片</h3>
+  <div class="slots">
+    <div class="slot first"><span class="n">01</span><b>封面</b><span>钩子：数字反差或反常识</span></div>
+    <div class="slot"><span class="n">02</span><b>一句话结论</b><span>直接回答封面的问题</span></div>
+    <div class="slot"><span class="n">03</span><b>为什么是现在</b><span>背景 + 报告是谁、何时发的</span></div>
+    <div class="slot"><span class="n">04</span><b>证据一</b><span>一张图 + 一句话</span></div>
+    <div class="slot"><span class="n">05</span><b>证据二</b><span>一张图 + 一句话</span></div>
+    <div class="slot"><span class="n">06</span><b>证据三</b><span>一张图 + 一句话</span></div>
+    <div class="slot"><span class="n">07</span><b>反方与风险</b><span>报告自己提到的风险</span></div>
+    <div class="slot"><span class="n">08</span><b>对普通人</b><span>和钱包、工作、行业的关系</span></div>
+    <div class="slot"><span class="n">09</span><b>总结 + 预告</b><span>三句话总结，下期预告，"关注追更"</span></div>
+  </div>
+  <div class="judge">
+    <div class="lab">卡片制作规格</div>
+    <ul>
+      <li>尺寸 1080×1440；以 1080 宽计，标题字号不小于 64px，正文不小于 36px。每张只放一个观点。</li>
+      <li>图表用中文重画，删掉原报告的水印、限用说明和分析师邮箱。</li>
+      <li>卡片底部只留"THE PORT"品牌字样和期号；二维码、微信号只出现在付费版和私域版里。</li>
+      <li>现有研报 skill 产出的是 A4 分页版，需要加一个"小红书卡片版"导出模式，同一份内容一次出两个版本。</li>
+    </ul>
+  </div>
+
+  <h3>第五步：写正文和口播</h3>
+  <div class="two">
+    <div class="tpl">
+      <div class="tpl-h"><h4>小红书正文模板</h4><button class="btn" type="button" data-copy="tpl-note">复制</button></div>
+<pre id="tpl-note">{一句话结论，直接回答标题}
+
+来源：{机构}《{英文标题}》（{日期}）
+原报告 {N} 页，这里提炼 {M} 个要点👇
+
+1｜{要点一，一句话}
+2｜{要点二}
+3｜{要点三}
+
+对普通人来说：{一句话影响}
+
+不同大行看法并不一致，下周放一起对比。
+你更认同哪种判断？评论区聊聊👇
+
+以上为机构观点整理，不构成投资建议
+#{机构} #{主题} #{长尾词1} #{长尾词2}
+#华尔街 #大行观点 #投资者教育</pre>
+    </div>
+    <div class="tpl">
+      <div class="tpl-h"><h4>抖音 45 秒口播脚本</h4><button class="btn" type="button" data-copy="tpl-voice">复制</button></div>
+<pre id="tpl-voice">【0–3 秒｜封面卡】
+一公斤东西送上天，40 年便宜了 97%。
+【3–10 秒】
+高盛最新报告说：太空正在从国家工程，
+变成一门生意。
+【10–30 秒｜翻 3 张证据卡】
+第一……第二……第三……
+【30–40 秒】
+对普通人意味着什么：……
+【40–45 秒】
+我是港口精选，每天替你读一份华尔街报告。
+关注，下期讲大摩怎么看 AI 数据中心。
+
+画面：9 张卡片推镜翻页，字幕全程
+配音：真人优先；用 AI 配音时发布页勾选 AI 声明</pre>
+    </div>
+  </div>
+  <p class="caption">搜索小技巧：正文前 50 个字里放 2 个长尾词，比如"高盛 太空经济""美银基金经理调查 10 月"；话题 5–8 个，按"机构 + 主题 + 长尾词 + 栏目"组合。</p>
+
+  <h3>完整示范：高盛太空这一篇</h3>
+  <div class="prose"><p>下面是第一篇"一图看懂"从卡片到正文的全部文字，数字都来自 THE PORT 8 月做的高盛《The Second Space Age》精华。照这个写法，每篇的产出就是固定的一张清单。</p></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>卡片</th><th>大字（标题）</th><th>小字（一句话 + 图）</th></tr></thead>
+      <tbody>
+        <tr><td class="k">01 封面</td><td>一公斤上天的价格<br>40 年跌了 97%</td><td>高盛 · 太空经济；太空正在变成一门生意；THE PORT · No.001</td></tr>
+        <tr><td class="k">02 结论</td><td>太空正在变成工业经济的新支柱</td><td>决定谁赢的，不是谁飞得更远，而是谁卡住了瓶颈：发射、制造、轨道基础设施和数据</td></tr>
+        <tr><td class="k">03 为什么是现在</td><td>出钱的人换了</td><td>20 世纪是政府定任务，如今是资本市场直接给钱：2025 年以来航空航天公司 IPO 融资 890 亿美元，SpaceX 一家超过 860 亿</td></tr>
+        <tr><td class="k">04 证据一</td><td>65,400 → 1,500 美元</td><td>1981 年航天飞机 vs 今天猎鹰重型，每公斤入轨成本。图：两根柱子</td></tr>
+        <tr><td class="k">05 证据二</td><td>低轨赢了</td><td>星链运营 4 年，客户超过 1,000 万，2025 年收入超过 110 亿美元，在轨近 1 万颗。图：GEO / MEO / LEO 三层轨道</td></tr>
+        <tr><td class="k">06 证据三</td><td>2035 年 1.8 万亿美元</td><td>高盛对全球太空经济规模的预测；2025 年投入太空生态的资金超过 550 亿美元</td></tr>
+        <tr><td class="k">07 风险</td><td>规则还停在冷战</td><td>五份太空条约都谈于冷战；轨道槽位先到先得；低轨碰撞和碎片风险最高</td></tr>
+        <tr><td class="k">08 对普通人</td><td>太空早就在你手机里</td><td>GPS 自 1980 年创造的经济价值约 1.4 万亿美元；下一步是手机直连卫星</td></tr>
+        <tr><td class="k">09 总结</td><td>三句话记住这份报告</td><td>成本跌了 97%；低轨赢了；下一轮竞赛在中美之间。下期：大摩讲 AI 数据中心为什么拿不到地</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tpl">
+    <div class="tpl-h"><h4>这一篇的小红书正文</h4><button class="btn" type="button" data-copy="tpl-ex">复制</button></div>
+<pre id="tpl-ex">高盛全球研究院的判断：太空正在从"探索的边疆"，变成工业经济的一根新支柱。
+
+来源：Goldman Sachs Global Institute《The Second Space Age》（2026 年 8 月）
+正文 15 页，这里提炼 3 个要点👇
+
+1｜成本塌了：1981 年送 1 公斤上近地轨道要 65,400 美元，今天猎鹰重型只要 1,500 美元
+2｜低轨赢了：星链运营 4 年，客户超过 1,000 万，2025 年收入超过 110 亿美元
+3｜钱在回流：2025 年以来航空航天公司 IPO 融资 890 亿美元；高盛预测 2035 年全球太空经济 1.8 万亿美元
+
+对普通人来说：GPS、卫星通信早就在你的手机和导航里，下一步是手机直连卫星。
+
+太空经济，你觉得是下一个 AI，还是又一轮概念？评论区聊聊👇
+
+以上为机构观点整理，不构成投资建议
+#高盛 #太空经济 #商业航天 #星链 #低轨卫星 #华尔街 #大行观点</pre>
+  </div>
+
+</section>
+
+<section id="growth">
+  <div class="sec-no">04 · 低粉增长技巧</div>
+  <h2>5 万粉以下的账号，靠什么涨</h2>
+  <div class="prose">
+    <p class="lead">先说清楚：小红书和抖音的账号页需要登录才能看，这次的运行环境也访问不了，所以我没法逐个点开 5 万粉以下的同类账号去数数据。这一节用两样东西代替：2025 年以后公开的小号复盘，加上一套你自己 30 分钟就能做完的对标拆解法。</p>
+  </div>
+
+  <h3>公开复盘里能直接用的四条</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>发现</th><th>出处</th><th>对 THE PORT 意味着什么</th></tr></thead>
+      <tbody>
+        <tr><td>小红书整体增粉偏慢，月涨 40 万以上的头部屈指可数，但同一批账号能反复上榜，流量相对稳定</td><td>卡思统计 2024 年涨粉最快的 500 个账号<sup><a class="cite" href="#src-13">13</a></sup></td><td>别指望一次爆发，靠固定栏目一周一周攒</td></tr>
+        <tr><td>一位新手博主用数据复盘代替凭感觉选题，2 个月从 800 多粉涨到 2 万多</td><td>个人复盘<sup><a class="cite" href="#src-12">12</a></sup></td><td>"精准发"比"多发"重要，每周复盘一次（模板见第 08 节）</td></tr>
+        <tr><td>从搜索进入笔记的用户，转化率比刷信息流的高 30% 以上；加入粉丝团的用户购买转化约为普通用户的 3 倍</td><td>小红书商家大会数据，媒体转述<sup><a class="cite" href="#src-8">8</a></sup></td><td>标题和正文要写搜索词；尽早建群</td></tr>
+        <tr><td>抖音上已有人做"高盛 vs 汇丰、瑞银、德银：锂价见顶了吗"这类大行观点对立的视频</td><td>抖音视频<sup><a class="cite" href="#src-15">15</a></sup></td><td>"大行吵架"在抖音有现成需求，适合做口播</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>对标拆解：30 分钟找到 20 个可以抄的号</h3>
+  <div class="two">
+    <div class="judge" style="margin:0">
+      <div class="lab">五步</div>
+      <ol>
+        <li>小红书和抖音分别搜：高盛观点、大摩报告、美银基金经理调查、华尔街观点、外资怎么看、投行报告怎么读。</li>
+        <li>只留三类号：粉丝 1,000–50,000；近 30 天有一篇点赞过 1,000；仍在更新。</li>
+        <li>选够 20 个，每个只看最近 10 篇里数据最好和最差的各 2 篇。</li>
+        <li>填右边的表，一个号一行。</li>
+        <li>最后只写三条结论：哪类封面点击高、哪类选题收藏高、评论区最常问什么（这就是你下周的选题）。</li>
+      </ol>
+    </div>
+    <div class="tpl" style="margin:0">
+      <div class="tpl-h"><h4>对标拆解表（粘贴到表格软件）</h4><button class="btn" type="button" data-copy="tpl-bench">复制</button></div>
+<pre id="tpl-bench">账号	平台	粉丝	爆文标题	封面类型（深底/浅底/截图/真人）	机构	话题（宏观/行业/个股/学习）	发布时间	赞	藏	评	评论区高频问题	我能抄的一点
+示例号	小红书	1.2万	……	深底大字	高盛	行业	周二 20:30	2100	3400	180	求原文 / 下期讲什么	标题前 8 字放机构名</pre>
+    </div>
+  </div>
+
+  <h3>十个具体技巧</h3>
+  <ol class="tricks">
+    <li><h4>发布后第一个小时最关键</h4><p>1 小时内回复每一条评论，再在评论区自己补一条"本期要点"，带起第二轮互动。</p><span class="do">做法：发布前后 1 小时不排别的事。</span></li>
+    <li><h4>爆款 72 小时内复刻</h4><p>某篇数据超过账号均值 3 倍，72 小时内用同一结构再做 2 篇：换一家大行，或换一个相近主题。</p><span class="do">例：高盛太空爆了 → 下一篇"大摩：卫星互联网的账怎么算"。</span></li>
+    <li><h4>一份报告切三篇</h4><p>同一份精华拆成三篇：9 图全景、一个数字深挖、"这份报告教会我的 3 个分析方法"。</p><span class="do">做法：每份精华至少出 3 篇，分 3 天发。</span></li>
+    <li><h4>标题前 8 个字放搜索词</h4><p>"高盛太空报告：……"比"太空要变天了"更容易被搜到。小红书近两年金融相关搜索增长 314%<sup><a class="cite" href="#src-5">5</a></sup>，2025 年前 8 月理财搜索增长 142%<sup><a class="cite" href="#src-6">6</a></sup>。</p><span class="do">做法：每篇定 1 个主搜索词，写进标题和正文第一句。</span></li>
+    <li><h4>结尾给二选一</h4><p>"你站高盛还是汇丰？"比"你怎么看？"更容易让人开口，评论数决定下一轮推荐。</p><span class="do">做法：正文最后一行固定放一个二选一问题。</span></li>
+    <li><h4>封面写期号</h4><p>No.001、No.002……让人有收集感；第 10、30、50 期做合集，合集通常是收藏最高的笔记。</p><span class="do">做法：期号写在封面底部，和品牌放一起。</span></li>
+    <li><h4>蹭固定大事件</h4><p>美联储议息、财报季、美银基金经理调查发布日、年度展望季，前后 48 小时搜索最集中。</p><span class="do">做法：日历里提前一周标出这些日子，提前备好卡片。</span></li>
+    <li><h4>评论区就是选题池</h4><p>每周把评论区问得最多的 3 个问题做成下周的"读研报"或"大行吵架"，发布后回到原评论下告诉提问的人。</p><span class="do">做法：周日复盘时顺手抄下高频问题。</span></li>
+    <li><h4>两个平台做封面测试</h4><p>同一篇内容，小红书用深底版、抖音用浅底版，记录两边的点击率。两周后统一用赢的版式。</p><span class="do">做法：复盘表里加一列"封面版式"。</span></li>
+    <li><h4>没量的笔记别删</h4><p>7 天没量的笔记不要删也不要反复改，换个角度把同一主题重做一篇，往往第二次才起量。</p><span class="do">做法：没量的选题放进"重做池"，两周后再发。</span></li>
+  </ol>
+</section>
+
+<section id="convert">
+  <div class="sec-no">05 · 转化与变现</div>
+  <h2>从读者到付费：路径、价格、群、话术、算账</h2>
+
+  <h3>能走的路和不能走的路</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>路径</th><th>状态</th><th>怎么走</th></tr></thead>
+      <tbody>
+        <tr><td class="k">A · 平台内闭环</td><td><span class="z z-g">主路径</span></td><td>笔记 → 关注 → 小红书群聊 / 抖音粉丝群 → 群里每天一张观点卡 → 平台内店铺或付费专栏成交。粉丝团用户购买转化约为普通用户 3 倍<sup><a class="cite" href="#src-8">8</a></sup>。</td></tr>
+        <tr><td class="k">B · 官方留资工具</td><td><span class="z z-y">有门槛</span></td><td>小红书 2025 年 3 月起，站外转化只能走商城、直播购物车和官方留资组件<sup><a class="cite" href="#src-3">3</a></sup>，需要企业主体和投放预算，月收入稳定后再上。</td></tr>
+        <tr><td class="k">C · 平台内留微信</td><td><span class="z z-r">不走</span></td><td>笔记、评论、私信、主页、群聊、图片水印里出现微信号、二维码、外链、谐音暗号，或小号配合引导，都属交易导流违规，可致警告、限流、封号<sup><a class="cite" href="#src-3">3</a></sup>。</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="judge">
+    <div class="lab">马上要改的一处</div>
+    <p>现在每份研报精华末页右下角都有 THE PORT 微信二维码。发到小红书、抖音的版本必须去掉；带码的完整版只发给群里的付费用户和已经在私域里的读者。</p>
+  </div>
+
+  <h3>引流品：借"1 元资料包"的结构，卖自己的东西</h3>
+  <div class="prose">
+    <p>小红书上有教培机构靠 1 元虚拟资料包单月拿到 5,000 多条线索，一位雅思博主靠资料包引流 1.8 万人、成交超过 118 万元<sup><a class="cite" href="#src-7">7</a></sup>。结构是"极低价筛出真正有需要的人，再承接高客单"。THE PORT 可以照搬结构，但商品必须是你自己的编辑成果，比如"10 月大行观点合集 · 原创可视化版"。原报告和"研报获取渠道"正是 5 月被冻结的商品类型<sup><a class="cite" href="#src-2">2</a></sup>，也有媒体点名过"盗用海外研报、打上自己水印收费"的社群<sup><a class="cite" href="#src-11">11</a></sup>。</p>
+  </div>
+
+  <h3>价格梯度</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>档位</th><th>内容</th><th>建议价</th><th>作用</th></tr></thead>
+      <tbody>
+        <tr><td class="k">免费</td><td>平台笔记 + 群里每天一张观点卡</td><td class="num">0</td><td>拉新、建立信任</td></tr>
+        <tr><td class="k">引流品</td><td>月度大行观点合集（当月精华里选 10 篇，原创可视化）</td><td class="num">9.9 元</td><td>筛出愿意付费的人</td></tr>
+        <tr><td class="k">月卡</td><td>每日精华 + 周合集 + 群内答疑</td><td class="num">49–69 元 / 月</td><td>试用</td></tr>
+        <tr><td class="k">年卡</td><td>月卡全部内容 + 2027 年度展望合集 + 主题专场</td><td class="num">399–599 元 / 年</td><td>主要收入</td></tr>
+        <tr><td class="k">专场</td><td>行业专题深度合集（AI 产业链、人形机器人等）</td><td class="num">99–199 元 / 份</td><td>提高客单价</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <p>参照系：头部财经 IP 的付费社群年费在 899–1,499 元。唐朝的星球 1,499 元一年，6,000 个名额 10 分钟售罄，之前先用 21 元的付费文章筛出 1 万多人<sup><a class="cite" href="#src-9">9</a></sup>；洪灏的星球 11 天收入超过 800 万元<sup><a class="cite" href="#src-10">10</a></sup>。THE PORT 没有个人 IP 背书，建议价定在头部的三分之一到一半，年卡的主卖点放"2027 年度展望合集"，11 月展望季开卖（本文建议）。</p>
+  </div>
+
+  <h3>粉丝群怎么运营</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>时间</th><th>做什么</th><th>目的</th></tr></thead>
+      <tbody>
+        <tr><td class="k">进群当天</td><td>欢迎语 + 群规 + 最近一期 TOP5</td><td>第一印象：这个群有东西</td></tr>
+        <tr><td class="k">每天 08:00</td><td>一张"今日大行观点卡"，只讲一个观点</td><td>养成打开习惯</td></tr>
+        <tr><td class="k">每周三</td><td>群内投票选下周"大行吵架"的题目</td><td>让群成员参与内容</td></tr>
+        <tr><td class="k">每周日</td><td>TOP5 同步到群</td><td>沉淀，给新人看</td></tr>
+        <tr><td class="k">月底一周</td><td>上线 9.9 元月度合集；年卡开放</td><td>集中转化</td></tr>
+        <tr><td class="k">付费提醒时点</td><td>进群第 3 天、第 7 天、月底合集上线时，各提一次，不多提</td><td>在感受到价值之后再开口</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tpl">
+    <div class="tpl-h"><h4>话术库</h4><button class="btn" type="button" data-copy="tpl-talk">复制</button></div>
+<pre id="tpl-talk">【进群欢迎】
+欢迎来到 THE PORT 港口精选 👋
+每天早上 8 点发一张「今日大行观点卡」，周日发本周 TOP5。
+群规三条：不荐股、不发广告、不讨论个股买卖。
+
+【有人问"有原文吗 / 求 PDF"】
+原报告是机构给客户的，我们不分发原文哈。
+这里做的是观点提炼和中文可视化，核心逻辑都在图里了。
+
+【有人问"这个能买吗"】
+不做个股建议哦～这份报告的核心逻辑是：____。
+具体还是结合自己的情况判断。
+
+【有人问"想看更多 / 怎么付费"】
+群里每天的观点卡一直免费。
+完整的每日精华和年度展望合集在群公告里有说明（平台内店铺）。
+
+【笔记评论区置顶】
+本期 9 张图的要点：①____ ②____ ③____
+每天的观点卡在主页「群聊」同步，关注后可以加入。</pre>
+  </div>
+
+  <h3>算一笔账：多少阅读能换多少收入</h3>
+  <div class="prose"><p>默认值是起号期的经验估计，不是行业基准。跑满 4 周后，把你后台的真实数字填进去。</p></div>
+  <div class="tool figure" id="calc">
+    <div class="calc">
+      <div>
+        <div class="tool-head"><h4>输入</h4><button class="btn" type="button" id="calc-reset">恢复默认</button></div>
+        <div class="inputs">
+          <div class="field"><label for="c-n">每月发布篇数</label><input id="c-n" type="number" min="0" step="1" value="30"></div>
+          <div class="field"><label for="c-e">普通笔记篇均曝光</label><input id="c-e" type="number" min="0" step="500" value="4000"></div>
+          <div class="field"><label for="c-ctr">封面点击率（%）</label><input id="c-ctr" type="number" min="0" max="100" step="0.5" value="8"></div>
+          <div class="field"><label for="c-b">每月爆款篇数</label><input id="c-b" type="number" min="0" step="1" value="2"></div>
+          <div class="field"><label for="c-eb">爆款篇均曝光</label><input id="c-eb" type="number" min="0" step="5000" value="40000"></div>
+          <div class="field"><label for="c-gr">曝光月增长（%）</label><input id="c-gr" type="number" min="0" max="200" step="1" value="15"></div>
+          <div class="field"><label for="c-f">阅读 → 关注（%）</label><input id="c-f" type="number" min="0" max="100" step="0.1" value="2.5"></div>
+          <div class="field"><label for="c-g">新粉 → 进群（%）</label><input id="c-g" type="number" min="0" max="100" step="1" value="15"></div>
+          <div class="field"><label for="c-cv">进群 → 付费（%）</label><input id="c-cv" type="number" min="0" max="100" step="0.5" value="6"></div>
+          <div class="field"><label for="c-p">月均客单价（元）</label><input id="c-p" type="number" min="0" step="1" value="59"></div>
+          <div class="field"><label for="c-r">月续费率（%）</label><input id="c-r" type="number" min="0" max="100" step="1" value="70"></div>
+        </div>
+      </div>
+      <div>
+        <div class="kpis">
+          <div class="kpi"><div class="k">第 6 个月累计粉丝</div><div class="v num" id="k-fans">—</div></div>
+          <div class="kpi"><div class="k">第 6 个月付费会员</div><div class="v num" id="k-mem">—</div></div>
+          <div class="kpi"><div class="k">6 个月累计收入</div><div class="v num" id="k-rev">—</div></div>
+        </div>
+        <div class="chart-wrap" id="c-chart"></div>
+        <div class="tip" id="c-tip" role="status" aria-live="polite"></div>
+        <div class="tbl" style="margin-top:10px"><table class="mtable" style="min-width:0"><thead><tr><th>月</th><th>阅读</th><th>新粉</th><th>累计粉</th><th>新进群</th><th>会员</th><th>月收入</th></tr></thead><tbody id="c-rows"></tbody></table></div>
+        <p class="small" id="c-lever" style="margin:8px 0 0"></p>
+      </div>
+    </div>
+    <div class="reverse">
+      <div class="field"><label for="c-target">目标月收入（元）</label><input id="c-target" type="number" min="0" step="1000" value="10000"></div>
+      <div id="c-rev-out"></div>
+    </div>
+  </div>
+</section>
+
+<section id="matrix">
+  <div class="sec-no">06 · 一人矩阵</div>
+  <h2>一个人跑四个号：一份报告切成六份内容</h2>
+  <div class="prose">
+    <p class="lead">成熟矩阵打法的核心是"内容原子化"：一份母内容拆成多份子内容，分发到定位不同的账号。THE PORT 的母内容就是每天那份研报精华。开子号的时机：主号连续 2 周稳定日更，并出过至少一篇爆款（本文建议）。</p>
+  </div>
+
+  <div class="figure" style="background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:16px 16px 10px;margin:16px 0">
+    <div class="chart-wrap wide-svg">
+      <svg viewBox="0 0 960 340" role="img" aria-labelledby="atom-t atom-d">
+        <title id="atom-t">一份报告切成六份内容</title>
+        <desc id="atom-d">左侧是一份大行报告精华，右侧是它拆出的六份内容：主号一图看懂、读研报子号、科技产业子号、抖音口播、粉丝群观点卡、周日TOP5素材。</desc>
+        <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--muted)"/></marker></defs>
+        <rect x="16" y="110" width="240" height="118" rx="12" style="fill:var(--accent);stroke:none"/>
+        <circle cx="40" cy="138" r="7" style="fill:var(--red)"/>
+        <text x="54" y="143" style="fill:var(--on-accent);font-size:12px;font-weight:700;letter-spacing:.12em">THE PORT</text>
+        <text x="34" y="176" style="fill:var(--on-accent);font-size:17px;font-weight:700">1 份大行报告精华</text>
+        <text x="34" y="200" style="fill:var(--on-accent);font-size:12px;opacity:.85">A4 2–4 页 · 现有研报 skill 产出</text>
+        <text x="34" y="218" style="fill:var(--on-accent);font-size:12px;opacity:.85">→ 5 篇平台内容 + 1 张群卡</text>
+        <g style="stroke:var(--muted);stroke-width:1.5;fill:none">
+          <path d="M256,169 C320,169 320,38 378,38" marker-end="url(#ah2)"/>
+          <path d="M256,169 C320,169 320,92 378,92" marker-end="url(#ah2)"/>
+          <path d="M256,169 C320,169 320,146 378,146" marker-end="url(#ah2)"/>
+          <path d="M256,169 C320,169 320,200 378,200" marker-end="url(#ah2)"/>
+          <path d="M256,169 C320,169 320,254 378,254" marker-end="url(#ah2)"/>
+          <path d="M256,169 C320,169 320,308 378,308" marker-end="url(#ah2)"/>
+        </g>
+        <g>
+          <rect x="380" y="16" width="564" height="44" rx="8" style="fill:var(--bg);stroke:var(--rule)"/>
+          <text x="396" y="43" style="fill:var(--ink);font-size:14px;font-weight:700">主号 · 一图看懂</text>
+          <text x="590" y="43" style="fill:var(--ink-2);font-size:13px">9 张图全景，周二 / 四 / 五 20:30</text>
+          <rect x="380" y="70" width="564" height="44" rx="8" style="fill:var(--bg);stroke:var(--rule)"/>
+          <text x="396" y="97" style="fill:var(--ink);font-size:14px;font-weight:700">子号 · 读研报</text>
+          <text x="590" y="97" style="fill:var(--ink-2);font-size:13px">"这份报告教会我的 3 个分析方法"</text>
+          <rect x="380" y="124" width="564" height="44" rx="8" style="fill:var(--bg);stroke:var(--rule)"/>
+          <text x="396" y="151" style="fill:var(--ink);font-size:14px;font-weight:700">子号 · 科技产业</text>
+          <text x="590" y="151" style="fill:var(--ink-2);font-size:13px">挑一个数字做数字卡，深挖一层</text>
+          <rect x="380" y="178" width="564" height="44" rx="8" style="fill:var(--bg);stroke:var(--rule)"/>
+          <text x="396" y="205" style="fill:var(--ink);font-size:14px;font-weight:700">抖音 · 45 秒口播</text>
+          <text x="590" y="205" style="fill:var(--ink-2);font-size:13px">9 张卡片翻页 + 真人配音</text>
+          <rect x="380" y="232" width="564" height="44" rx="8" style="fill:var(--bg);stroke:var(--rule)"/>
+          <text x="396" y="259" style="fill:var(--ink);font-size:14px;font-weight:700">粉丝群 · 观点卡</text>
+          <text x="590" y="259" style="fill:var(--ink-2);font-size:13px">次日 08:00，一张图一个观点</text>
+          <rect x="380" y="286" width="564" height="44" rx="8" style="fill:var(--bg);stroke:var(--rule)"/>
+          <text x="396" y="313" style="fill:var(--ink);font-size:14px;font-weight:700">周日 · TOP5 素材</text>
+          <text x="590" y="313" style="fill:var(--ink-2);font-size:13px">每份报告留一句话，周日合成一篇</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <h3>账号分工</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>账号</th><th>平台</th><th>定位与人群</th><th>频率</th><th>封面风格</th><th>话题词簇</th></tr></thead>
+      <tbody>
+        <tr><td class="k">THE PORT港口精选</td><td>小红书</td><td>全部栏目；投资者、白领</td><td>每天 1 篇</td><td>深底 / 浅底品牌封面</td><td>机构名 + 主题</td></tr>
+        <tr><td class="k">港口精选·读研报</td><td>小红书</td><td>学习向；学生、金融新人、求职者</td><td>每周 3 篇</td><td>课程笔记风，标"第 N 课"</td><td>术语 + 怎么读 + 求职</td></tr>
+        <tr><td class="k">港口精选·科技产业</td><td>小红书</td><td>AI、半导体、机器人；产业从业者</td><td>每周 3 篇</td><td>数字卡风</td><td>行业 + 产业链</td></tr>
+        <tr><td class="k">THE PORT港口精选</td><td>抖音</td><td>图文同步 + 口播；以产业、科技、宏观为主</td><td>每天 1 图文，每周 2 口播</td><td>竖版 9:16 视频封面</td><td>机构名 + 行业</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>矩阵六条规矩</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>规矩</th><th>为什么</th></tr></thead>
+      <tbody>
+        <tr><td>每个号独立手机号、实名和设备</td><td>避免被判为关联营销号</td></tr>
+        <tr><td>号与号之间不互相 @、不在评论区互相引导</td><td>多账号配合导流属于违规<sup><a class="cite" href="#src-3">3</a></sup></td></tr>
+        <tr><td>同一份报告在不同号上间隔 24 小时以上发，文字改写一半以上，封面风格不同</td><td>避免同质化判定，也让每个号有自己的样子</td></tr>
+        <tr><td>每个号的搜索词簇不重叠</td><td>矩阵账号别在同一个搜索结果里互相抢位置</td></tr>
+        <tr><td>不用 AI 托管工具自动发布和互动</td><td>小红书 2026 年 3 月起封禁 AI 托管注册、发布、互动的账号<sup><a class="cite" href="#src-14">14</a></sup></td></tr>
+        <tr><td>所有号的数据每周进同一张复盘表</td><td>看清楚哪个号、哪个栏目在带粉和带付费</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="caption">时间预算：主号每天约 2 小时；每加一个子号每天约多 20 分钟，因为子号内容主要来自主号内容的再切分。</p>
+</section>
+
+<section id="days">
+  <div class="sec-no">07 · 30 天日历</div>
+  <h2>从 10 月 19 日开工，11 月中旬接上展望季</h2>
+  <div class="prose"><p>勾选状态只保存在你自己的浏览器里。日期里的报告按你当周实际能拿到的替换，栏目节奏不变。</p></div>
+  <div class="tool">
+    <div class="tool-head"><h4>执行清单</h4><span class="progress" id="day-progress">0 / 31</span></div>
+    <div class="weeks" id="weeks"></div>
+  </div>
+
+  <h3>第 31 天以后：2027 展望季作战表</h3>
+  <div class="prose"><p>11 月中旬到 12 月中旬，各大行陆续发布 2027 年展望。这一个月按下面的打法日更，并把"12 家大行展望总合集"做成年卡的主卖点（本文建议）。</p></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>内容</th><th>做法</th><th>频率</th></tr></thead>
+      <tbody>
+        <tr><td class="k">展望拆解</td><td>每家大行一篇，统一封面："2027 展望 · 高盛"+ 一句核心判断 + 编号 01–12</td><td>出一份拆一份</td></tr>
+        <tr><td class="k">大行吵架</td><td>按主题对比：美股、A 股与港股、美元与利率、黄金、AI</td><td>每周 1–2 篇</td></tr>
+        <tr><td class="k">展望季周报</td><td>本周发布的展望各取一句，周日合成一篇</td><td>每周日</td></tr>
+        <tr><td class="k">抖音口播</td><td>"高盛说 2027 年的三件事"，每家一条 45 秒</td><td>出一份做一条</td></tr>
+        <tr><td class="k">搜索词</td><td>标题前半句固定用"2027 展望""高盛 2027""大摩 2027 年展望"这类词</td><td>每篇</td></tr>
+        <tr><td class="k">总合集</td><td>12 月中旬做"12 家大行 2027 展望总合集"，作为年卡主卖点，群内和平台内店铺首发</td><td>1 次</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="review">
+  <div class="sec-no">08 · 复盘与红线</div>
+  <h2>每周看 6 个数，永远不碰 6 件事</h2>
+
+  <h3>每周看的 6 个数</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>指标</th><th>怎么算</th><th>低于这个数</th><th>高于这个数</th></tr></thead>
+      <tbody>
+        <tr><td class="k">封面点击率</td><td>后台"封面点击率"</td><td>5%：换封面模板</td><td>10%：模板锁定，多用</td></tr>
+        <tr><td class="k">赞藏率</td><td>（赞 + 藏）÷ 阅读</td><td>3%：选题离读者太远</td><td>8%：这个方向加量</td></tr>
+        <tr><td class="k">藏赞比</td><td>收藏 ÷ 点赞</td><td>0.5：偏观点，适合引发讨论</td><td>1：工具型内容，做成合集</td></tr>
+        <tr><td class="k">涨粉率</td><td>新增关注 ÷ 阅读</td><td>0.5%：主页和置顶没给出关注理由</td><td>2%：这个栏目升为主栏目</td></tr>
+        <tr><td class="k">进群率</td><td>新进群 ÷ 新粉</td><td>5%：加群说明不够显眼</td><td>15%：群钩子有效，保持</td></tr>
+        <tr><td class="k">付费率</td><td>新付费 ÷ 新进群</td><td>2%：引流品或价格不对</td><td>8%：可以试着提价</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="caption">阈值是起号期的经验值。跑满 4 周后，用你自己账号的中位数替换。</p>
+
+  <div class="tpl">
+    <div class="tpl-h"><h4>周复盘模板</h4><button class="btn" type="button" data-copy="tpl-week">复制</button></div>
+<pre id="tpl-week">【THE PORT 周复盘】第 __ 周（__ 月 __ 日 – __ 日）
+一、结果
+    新粉 __（累计 __）｜新进群 __（群总人数 __）｜新付费 __｜收入 __ 元
+二、本周最好的一篇
+    标题 ____｜封面版式 __｜点击率 __%｜赞藏率 __%｜涨粉 __
+    它为什么好：____
+三、本周最差的一篇
+    标题 ____｜问题出在：封面 / 选题 / 发布时间 / 其他 ____
+四、评论区高频问题（= 下周选题）
+    1. ____  2. ____  3. ____
+五、下周动作
+    复刻：____｜停掉：____｜测试：____</pre>
+  </div>
+
+  <h3>永远不碰的 6 件事</h3>
+  <ul class="redlines">
+    <li><span><b>不发原报告 PDF、原页截图、原文链接，不卖"研报获取渠道"。</b>5 月 25 日每经曝光外资研报低价倒卖后，小红书几天内处置了 141 篇相关笔记、冻结 132 件商品，并下线"免费获取外资投行研报渠道"等联想词<sup><a class="cite" href="#src-1">1</a></sup><sup><a class="cite" href="#src-2">2</a></sup>。</span></li>
+    <li><span><b>付费内容只卖你自己的编辑成果：</b>提炼、可视化、筛选、合集，不卖原报告<sup><a class="cite" href="#src-11">11</a></sup>。</span></li>
+    <li><span><b>平台内任何位置不留联系方式：</b>笔记、评论、私信、主页、群聊、图片水印里不出现微信号、二维码、外链、谐音暗号，小号之间不配合导流<sup><a class="cite" href="#src-3">3</a></sup>。</span></li>
+    <li><span><b>不荐股：</b>不说买卖、不晒持仓、不把个股目标价放封面，个股类报告只讲行业和逻辑。小红书公约把非法荐股、违规导流、虚假人设列为禁止内容<sup><a class="cite" href="#src-4">4</a></sup>。</span></li>
+    <li><span><b>不冒充机构或持牌身份，</b>不申请金融类认证<sup><a class="cite" href="#src-4">4</a></sup>。</span></li>
+    <li><span><b>不用 AI 托管工具批量发布和互动</b><sup><a class="cite" href="#src-14">14</a></sup>；用了 AI 配音或 AI 画面，发布时勾选 AI 声明。</span></li>
+  </ul>
+</section>
+
+<section id="sources">
+  <div class="sec-no">09 · 来源</div>
+  <h2>来源</h2>
+  <div class="prose"><p class="small">只采用 2025 年及以后发布的资料。运行环境的网络受限，多数原文无法直接打开，以下内容来自媒体转述；平台规则执行前以官方公告和后台为准。标"经验值""本文建议"的数字和做法是推断，不是平台公布的数据。</p></div>
+  <ol class="sources">
+    <li id="src-1">每日经济新闻，外资投行研报低价倒卖调查，2026-05-25。<a href="https://www.nbd.com.cn/articles/2026-05-25/4406824.html" target="_blank" rel="noopener">nbd.com.cn</a></li>
+    <li id="src-2">楚天都市报 / 极目新闻，小红书处置研报倒卖笔记与商品，2026-05。<a href="https://www.ctdsb.net/c1476_202605/2756510.html" target="_blank" rel="noopener">ctdsb.net</a> · 虎嗅，<a href="https://www.huxiu.com/article/4864410.html" target="_blank" rel="noopener">huxiu.com</a></li>
+    <li id="src-3">光明网，小红书《交易导流违规管理细则》2025 年 3 月 12 日起施行，2025-03-12。<a href="https://m.gmw.cn/2025-03/12/content_1303989067.htm" target="_blank" rel="noopener">gmw.cn</a></li>
+    <li id="src-4">北京日报，小红书发布《社区金融生态公约》，2026-09-15。<a href="https://news.bjd.com.cn/2026/09/15/11959968.shtml" target="_blank" rel="noopener">bjd.com.cn</a></li>
+    <li id="src-5">21 世纪经济报道，小红书金融相关搜索与用户数据，2026-09-16。<a href="https://www.sfccn.com/2026/9-16/wMMDE0MDZfMjI0MzQwMA.html" target="_blank" rel="noopener">sfccn.com</a></li>
+    <li id="src-6">第一财经，小红书理财搜索增长 142%，2025-09-16。<a href="https://www.yicai.com/news/102827351.html" target="_blank" rel="noopener">yicai.com</a></li>
+    <li id="src-7">虎嗅，小红书虚拟资料新玩法：商家月引流 5000+，博主变现上百万。<a href="https://m.huxiu.com/article/4824915.html" target="_blank" rel="noopener">huxiu.com</a></li>
+    <li id="src-8">虎嗅，小红书商家大会与经营方法论报道（粉丝团转化、搜索转化数据，媒体转述）。<a href="https://www.huxiu.com/article/4852133.html" target="_blank" rel="noopener">huxiu.com</a></li>
+    <li id="src-9">新浪财经，财经博主开知识星球 10 分钟到手 900 万，2025-03-19。<a href="https://finance.sina.com.cn/roll/observe/baijiu/2025-03-19/doc-ineqehuu1677948.shtml" target="_blank" rel="noopener">sina.com.cn</a></li>
+    <li id="src-10">新浪财经，洪灏开通知识星球 11 天收入超 800 万元，2025-11-04。<a href="https://finance.sina.com.cn/roll/2025-11-04/doc-infwfawv0193951.shtml" target="_blank" rel="noopener">sina.com.cn</a></li>
+    <li id="src-11">21 世纪经济报道，《25 元批发"股神"，起底财经大 V 知识付费生意经》，2026-02-05。<a href="https://www.21jingji.com/article/20260205/herald/ace39b060a4656b1512f0d023bd147ee.html" target="_blank" rel="noopener">21jingji.com</a></li>
+    <li id="src-12">人人都是产品经理，《小红书涨粉的秘密不是"多发"而是"精准发"，2 个月涨粉到 2 万+》。<a href="https://www.woshipm.com/operate/6303211.html" target="_blank" rel="noopener">woshipm.com</a></li>
+    <li id="src-13">新浪科技（卡思数据），《从涨粉最快的 500 个账号，看到了小红书 2025 年的"起飞"密码》，2025-02-08。<a href="https://finance.sina.com.cn/tech/roll/2025-02-08/doc-ineitvck6727414.shtml" target="_blank" rel="noopener">sina.com.cn</a></li>
+    <li id="src-14">界面新闻，小红书将封禁 AI 托管代发账号，2026-03-10。<a href="https://m.jiemian.com/article/14095143.html" target="_blank" rel="noopener">jiemian.com</a></li>
+    <li id="src-15">抖音，《高盛研报对锂股影响》（四大投行观点对立）。<a href="https://www.douyin.com/shipin/7637308031398840366" target="_blank" rel="noopener">douyin.com</a></li>
+    <li id="src-16">IT 之家，抖音发布《社区财经行业公约（试行）》，2025-12-16。<a href="https://www.ithome.com/0/905/343.htm" target="_blank" rel="noopener">ithome.com</a></li>
+  </ol>
+  <footer>港口精选拉新实操手册 · THE PORT · 编制于 2026-10-18 · 内容为运营方法建议，不构成投资建议或法律意见。</footer>
+</section>
+</main>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var NS = "http://www.w3.org/2000/svg";
+  function el(tag, attrs, parent){ var n = document.createElementNS(NS, tag); for (var k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.appendChild(n); return n; }
+  function txt(parent, x, y, s, attrs){ var t = el("text", Object.assign({x:x, y:y}, attrs || {}), parent); t.textContent = s; return t; }
+  function $(id){ return document.getElementById(id); }
+  function store(k, v){ try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} }
+  function load(k, d){ try { var v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch(e) { return d; } }
+  function copyText(text, btn){
+    function done(msg){ var o = btn.textContent; btn.textContent = msg; setTimeout(function(){ btn.textContent = o === "已复制" ? "复制" : o; }, 1600); }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){ done("已复制"); }, function(){ done("请手动复制"); });
+      } else { done("请手动复制"); }
+    } catch(e){ done("请手动复制"); }
+  }
+
+  /* 目录高亮 */
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll(".toc a"));
+  if ("IntersectionObserver" in window && tocLinks.length){
+    var map = {}; tocLinks.forEach(function(a){ map[a.getAttribute("href").slice(1)] = a; });
+    var io = new IntersectionObserver(function(es){ es.forEach(function(en){ if (en.isIntersecting){ tocLinks.forEach(function(a){ a.classList.remove("on"); }); var a = map[en.target.id]; if (a) a.classList.add("on"); } }); }, {rootMargin:"-30% 0px -60% 0px"});
+    document.querySelectorAll("main section[id]").forEach(function(s){ io.observe(s); });
+  }
+
+  /* 复制按钮（模板） */
+  document.querySelectorAll("[data-copy]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var pre = $(b.getAttribute("data-copy"));
+      var text = pre.textContent;
+      var ok = false;
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(text).then(function(){ b.textContent = "已复制"; setTimeout(function(){ b.textContent = "复制"; }, 1600); }, sel);
+          ok = true;
+        }
+      } catch(e) {}
+      if (!ok) sel();
+      function sel(){ var r = document.createRange(); r.selectNodeContents(pre); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "已选中"; setTimeout(function(){ b.textContent = "复制"; }, 1600); }
+    });
+  });
+
+  /* 选题打分器 */
+  var CRIT = [
+    {k:"时效", d:"报告发布多久了", o:["一周以上","一周内","3 天内","24 小时内"]},
+    {k:"机构", d:"机构的知名度", o:["不知名","其他外资","美银 / 瑞银 / 汇丰 / 花旗","高盛 / 大摩 / 摩根大通"]},
+    {k:"离普通人多近", d:"和钱包、工作、行业的距离", o:["冷门话题","专业市场话题","热门行业","钱包 / 工作 / 存款"]},
+    {k:"反常识数字", d:"有没有让人愣一下的数字", o:["没有数字","数字一般","有清晰数字","让人愣住的数字"]},
+    {k:"可收藏", d:"看完想不想存", o:["以个股目标价为主","纯观点","有一张好图","清单 / 对比表 / 框架"]}
+  ];
+  var DEF_SCORE = [3,3,2,3,2];
+  var score = load("port-score", DEF_SCORE.slice());
+  if (!Array.isArray(score) || score.length !== CRIT.length) score = DEF_SCORE.slice();
+  var rowsHost = $("score-rows");
+  function renderScore(){
+    rowsHost.innerHTML = "";
+    CRIT.forEach(function(c, i){
+      var row = document.createElement("div"); row.className = "score-row";
+      var q = document.createElement("div"); q.className = "q"; q.innerHTML = c.k + "<small>" + c.d + "</small>"; row.appendChild(q);
+      var seg = document.createElement("div"); seg.className = "seg"; seg.setAttribute("role","group"); seg.setAttribute("aria-label", c.k);
+      c.o.forEach(function(label, v){
+        var b = document.createElement("button"); b.type = "button"; b.id = "sc-" + i + "-" + v;
+        b.textContent = label + " · " + v; b.setAttribute("aria-pressed", score[i] === v ? "true" : "false");
+        b.addEventListener("click", function(){ score[i] = v; store("port-score", score); renderScore(); });
+        seg.appendChild(b);
+      });
+      row.appendChild(seg); rowsHost.appendChild(row);
+    });
+    var total = score.reduce(function(a, b){ return a + b; }, 0);
+    $("score-big").innerHTML = total + "<small>/15</small>";
+    var say;
+    if (total >= 12) say = "主号黄金时段发（20:30），做满 9 张，并提前想好 72 小时内的复刻选题。";
+    else if (total >= 9) say = "正常发，或交给对应子号；封面用数字反差结构补强。";
+    else say = "不单独发，放进周日 TOP5 里一句话带过。";
+    if (score[4] === 0) say += " 个股目标价为主的报告只讲行业和逻辑，封面不放目标价。";
+    $("score-say").textContent = say;
+  }
+  if (rowsHost){
+    renderScore();
+    $("score-reset").addEventListener("click", function(){ score = DEF_SCORE.slice(); store("port-score", score); renderScore(); });
+  }
+
+  /* 标题生成器 */
+  var BAN = /研报下载|下载|原文|PDF|pdf|免费领|免费获取|渠道|必涨|买入|目标价|加V|加v|微信|vx|VX|内部|私信|稳赚/;
+  function pad(n){ n = Math.max(1, parseInt(n, 10) || 1); return ("00" + n).slice(-3); }
+  function gen(){
+    var org = $("tg-org").value.trim(), topic = $("tg-topic").value.trim(), hook = $("tg-hook").value.trim(), why = $("tg-why").value.trim();
+    var n = parseInt($("tg-n").value, 10) || 9, no = $("tg-no").value;
+    var F = [
+      ["数字反差", org + topic + "报告：" + hook],
+      ["机构问句", org + "最新：" + topic + "到底怎么了？"],
+      ["普通人关系", why + "？" + org + "这样说"],
+      ["清单收藏", n + " 张图看懂" + org + topic + "报告"],
+      ["大行吵架", org + "和其他大行，" + topic + "看法不一样"],
+      ["学习向", "读完" + org + topic + "报告，我学到 3 件事"],
+      ["系列编号", "大行观点 No." + pad(no) + "｜" + org + "：" + topic],
+      ["华尔街视角", "华尔街怎么看" + topic + "？" + org + "给了答案"]
+    ];
+    var out = $("tg-out"); out.innerHTML = "";
+    F.forEach(function(f, i){
+      var len = Array.from(f[1]).length;
+      var li = document.createElement("li");
+      var tag = document.createElement("span"); tag.className = "f"; tag.textContent = "F" + (i + 1);
+      var t = document.createElement("span"); t.className = "t"; t.textContent = f[1];
+      var meta = document.createElement("small");
+      var bad = BAN.test(f[1]);
+      meta.textContent = f[0] + " · " + len + " 字" + (len > 20 ? " · 超出小红书 20 字上限" : "") + (bad ? " · 含高危词" : "");
+      if (len > 20 || bad) meta.style.color = "var(--r)";
+      t.appendChild(meta);
+      var b = document.createElement("button"); b.type = "button"; b.className = "btn"; b.textContent = "复制";
+      b.addEventListener("click", function(){ copyText(f[1], b); });
+      li.appendChild(tag); li.appendChild(t); li.appendChild(b); out.appendChild(li);
+    });
+  }
+  if ($("tg-out")){
+    ["tg-org","tg-topic","tg-hook","tg-why","tg-n","tg-no"].forEach(function(id){ $(id).addEventListener("input", gen); $(id).addEventListener("change", gen); });
+    $("tg-hook").value = "上天成本跌了 97%";
+    gen();
+  }
+
+  /* 转化测算器 */
+  var CDEF = {n:30, e:4000, ctr:8, b:2, eb:40000, gr:15, f:2.5, g:15, cv:6, p:59, r:70, target:10000};
+  var CIDS = {n:"c-n", e:"c-e", ctr:"c-ctr", b:"c-b", eb:"c-eb", gr:"c-gr", f:"c-f", g:"c-g", cv:"c-cv", p:"c-p", r:"c-r", target:"c-target"};
+  function v(k){ var x = parseFloat($(CIDS[k]).value); return isFinite(x) && x >= 0 ? x : 0; }
+  function fmt(n){ if (!isFinite(n)) return "—"; if (n >= 1e4) return (n / 1e4).toFixed(1) + " 万"; return Math.round(n).toLocaleString("zh-CN"); }
+  function money(n){ return isFinite(n) ? "¥" + Math.round(n).toLocaleString("zh-CN") : "—"; }
+  function sim(o){
+    var months = [], cum = 0, mem = 0, cumRev = 0;
+    for (var m = 1; m <= 6; m++){
+      var gf = Math.pow(1 + o.gr / 100, m - 1);
+      var reads = (Math.max(o.n - o.b, 0) * o.e + o.b * o.eb) * gf * o.ctr / 100;
+      var fans = reads * o.f / 100; cum += fans;
+      var grp = fans * o.g / 100;
+      var pay = grp * o.cv / 100;
+      mem = mem * o.r / 100 + pay;
+      var rev = mem * o.p; cumRev += rev;
+      months.push({m:m, reads:reads, fans:fans, cum:cum, grp:grp, mem:mem, rev:rev});
+    }
+    return {months:months, cumRev:cumRev};
+  }
+  function current(){ var o = {}; Object.keys(CDEF).forEach(function(k){ o[k] = v(k); }); return o; }
+  function drawBars(months){
+    var host = $("c-chart"); host.innerHTML = "";
+    var W = 420, H = 170, ml = 40, mr = 12, mt = 18, mb = 26, pw = W - ml - mr, ph = H - mt - mb;
+    var max = Math.max.apply(null, months.map(function(d){ return d.rev; })) || 1;
+    var step = Math.pow(10, Math.floor(Math.log10(max))); var top = Math.ceil(max / step) * step; if (top / step > 6) step *= 2; top = Math.ceil(max / step) * step || 1;
+    var svg = el("svg", {viewBox:"0 0 " + W + " " + H, role:"img", "aria-label":"未来6个月每月收入柱状图"}, host);
+    function Y(x){ return mt + ph - x / top * ph; }
+    for (var t = 0; t <= top + 1e-9; t += step){
+      el("line", {x1:ml, x2:W - mr, y1:Y(t), y2:Y(t), style:"stroke:var(--rule);stroke-width:1"}, svg);
+      txt(svg, ml - 6, Y(t) + 4, t >= 1e4 ? (t / 1e4) + "万" : String(Math.round(t)), {"class":"ax", "text-anchor":"end"});
+    }
+    var slot = pw / months.length, bw = 22, tip = $("c-tip");
+    months.forEach(function(d, i){
+      var cx = ml + slot * (i + .5), y = Y(d.rev), h = mt + ph - y, x = cx - bw / 2, r = Math.min(4, h);
+      var p = "M" + x + "," + (y + h) + " V" + (y + r) + " Q" + x + "," + y + " " + (x + r) + "," + y + " H" + (x + bw - r) + " Q" + (x + bw) + "," + y + " " + (x + bw) + "," + (y + r) + " V" + (y + h) + " Z";
+      if (h > 0.5) el("path", {d:p, style:"fill:var(--accent)"}, svg);
+      txt(svg, cx, H - 8, "第" + d.m + "月", {"class":"ax", "text-anchor":"middle"});
+      if (i === months.length - 1) txt(svg, cx, y - 6, money(d.rev), {"text-anchor":"middle", style:"fill:var(--ink);font-size:11px;font-weight:700;font-family:var(--f-mono)"});
+      var hit = el("rect", {x:cx - slot / 2, y:mt, width:slot, height:ph, fill:"transparent", tabindex:"0", "aria-label":"第" + d.m + "月收入 " + money(d.rev)}, svg);
+      function show(){ var rr = svg.getBoundingClientRect(), fr = $("calc").getBoundingClientRect(), s = rr.width / W; tip.textContent = "第" + d.m + "月 · " + money(d.rev) + " · 会员 " + Math.round(d.mem) + " 人"; tip.style.left = (rr.left - fr.left + cx * s) + "px"; tip.style.top = (rr.top - fr.top + y * s) + "px"; tip.classList.add("on"); }
+      function hide(){ tip.classList.remove("on"); }
+      hit.addEventListener("mouseenter", show); hit.addEventListener("mouseleave", hide); hit.addEventListener("focus", show); hit.addEventListener("blur", hide);
+      hit.addEventListener("touchstart", show, {passive:true});
+    });
+    el("line", {x1:ml, x2:W - mr, y1:mt + ph, y2:mt + ph, style:"stroke:var(--muted);stroke-width:1"}, svg);
+  }
+  function calc(){
+    var o = current(), s = sim(o), last = s.months[5];
+    $("k-fans").textContent = fmt(last.cum);
+    $("k-mem").textContent = fmt(last.mem);
+    $("k-rev").textContent = money(s.cumRev);
+    var rows = $("c-rows"); rows.innerHTML = "";
+    s.months.forEach(function(d){
+      var tr = document.createElement("tr");
+      [d.m, fmt(d.reads), fmt(d.fans), fmt(d.cum), fmt(d.grp), fmt(d.mem), money(d.rev)].forEach(function(x){ var td = document.createElement("td"); td.textContent = x; tr.appendChild(td); });
+      rows.appendChild(tr);
+    });
+    drawBars(s.months);
+    var a = sim(Object.assign({}, o, {cv:o.cv * 1.5})).cumRev;
+    var b = sim(Object.assign({}, o, {n:o.n + 10})).cumRev;
+    var c = sim(Object.assign({}, o, {b:o.b + 1, n:o.n + 1})).cumRev;
+    var best = [["进群 → 付费提高一半", a], ["每月多发 10 篇", b], ["每月多 1 篇爆款", c]].sort(function(x, y){ return y[1] - x[1]; })[0];
+    $("c-lever").textContent = "同样 6 个月，累计收入：现在 " + money(s.cumRev) + "；进群 → 付费提高一半 " + money(a) + "；每月多发 10 篇 " + money(b) + "；每月多 1 篇爆款 " + money(c) + "。按这组参数，最划算的杠杆是「" + best[0] + "」。";
+    var T = o.target, out = $("c-rev-out");
+    if (!(o.p > 0 && o.cv > 0 && o.g > 0 && o.f > 0 && o.r < 100)){ out.textContent = "客单价、各环节转化率需大于 0，续费率需小于 100%，才能反推。"; return; }
+    var M = T / o.p, newPay = M * (1 - o.r / 100), grp = newPay / (o.cv / 100), fans = grp / (o.g / 100), reads = fans / (o.f / 100);
+    var perPost = o.e * o.ctr / 100, perHit = o.eb * o.ctr / 100;
+    out.innerHTML = "";
+    var p1 = document.createElement("div");
+    p1.textContent = "要稳定月入 " + money(T) + "，需要约 " + fmt(M) + " 位付费会员 → 每月新增 " + fmt(newPay) + " 位付费 → 每月新进群 " + fmt(grp) + " 人 → 每月新粉 " + fmt(fans) + " → 每月阅读 " + fmt(reads) + " 次。";
+    var p2 = document.createElement("div");
+    p2.textContent = "按现在的数据，相当于每月 " + (perPost > 0 ? fmt(reads / perPost) : "—") + " 篇普通笔记，或 " + (perHit > 0 ? fmt(reads / perHit) : "—") + " 篇爆款。数字很大时，优先提客单价（年卡）和进群 → 付费，而不是硬加篇数。";
+    out.appendChild(p1); out.appendChild(p2);
+  }
+  if ($("calc")){
+    Object.keys(CIDS).forEach(function(k){ $(CIDS[k]).addEventListener("input", calc); });
+    $("calc-reset").addEventListener("click", function(){ Object.keys(CDEF).forEach(function(k){ $(CIDS[k]).value = CDEF[k]; }); calc(); });
+    calc();
+  }
+
+  /* 30 天日历 */
+  var WEEKS = [
+    {h:"第 1 周 · 10/19–10/25", s:"搭架子 + 首发", d:[
+      ["10/19 周一","<b>装修</b>：昵称、头像、简介、背景图；关注 30 个对标账号并正常互动"],
+      ["10/20 周二","<b>对标拆解</b> 20 个号，填拆解表；定下深底、浅底两套封面模板"],
+      ["10/21 周三","<b>存稿 6 篇</b>：高盛太空、大摩数据中心、摩根大通机器人、美银基金经理调查、大摩劳动参与率、读研报第 1 课"],
+      ["10/22 周四","发「我们是谁 + 栏目表」并置顶；发「读研报 第 1 课：OW / UW 是什么」"],
+      ["10/23 周五","发「一图看懂：高盛太空经济」"],
+      ["10/24 周六","发数字卡「81% 的美国科技公司已在为 AI 付钱」"],
+      ["10/25 周日","发「本周大行 TOP5 No.01」；第一次周复盘"]
+    ]},
+    {h:"第 2 周 · 10/26–11/01", s:"稳定日更 + 开群", d:[
+      ["10/26 周一","「读研报 第 2 课：目标价是怎么算出来的」"],
+      ["10/27 周二","「一图看懂：大摩 AI 数据中心拿不到地」"],
+      ["10/28 周三","「大行吵架」第 1 期，选评论区问得最多的主题"],
+      ["10/29 周四","<b>开通群聊</b>（以平台入口为准），评论区置顶加群说明"],
+      ["10/30 周五","「一图看懂：摩根大通人形机器人」"],
+      ["10/31 周六","复刻第 1 周数据最好的那篇：同结构，换一家大行"],
+      ["11/01 周日","TOP5 No.02；周复盘，锁定点击率高的封面模板"]
+    ]},
+    {h:"第 3 周 · 11/02–11/08", s:"抖音同步 + 群运营", d:[
+      ["11/02 周一","<b>抖音开号装修</b>，同步 3 篇已验证的图文"],
+      ["11/03 周二","抖音第 1 条 45 秒口播（用数据最好的那篇）"],
+      ["11/04 周三","「大行吵架」第 2 期"],
+      ["11/05 周四","群里每天 08:00 观点卡正式开始"],
+      ["11/06 周五","「华尔街在想什么」：美银最新一期基金经理调查"],
+      ["11/07 周六","预热帖：「11 月起，各大行 2027 年展望一份份拆」"],
+      ["11/08 周日","TOP5 No.03；周复盘，决定是否开「读研报」子号"]
+    ]},
+    {h:"第 4 周 · 11/09–11/15", s:"引流品 + 展望季准备", d:[
+      ["11/09 周一","主号出过爆款就开「读研报」子号"],
+      ["11/10 周二","做「10 月大行观点合集 · 原创可视化版」（10 篇精选）"],
+      ["11/11 周三","「大行吵架」：2027 年美股，大行分歧在哪"],
+      ["11/12 周四","群里上线 9.9 元合集，记录购买人数"],
+      ["11/13 周五","抖音口播 #2；小红书「一图看懂」"],
+      ["11/14 周六","搭好「2027 大行展望」的封面和编号体系"],
+      ["11/15 周日","月度复盘：粉丝、进群、合集转化；排好展望季日更表"]
+    ]},
+    {h:"第 5 周 · 11/16–11/18", s:"展望季开打", d:[
+      ["11/16 周一","第一份 2027 年度展望拆解（按实际发布顺序）"],
+      ["11/17 周二","第二份展望；群里开放年卡预约"],
+      ["11/18 周三","30 天总复盘：留下哪 3 个模板，砍掉哪个栏目"]
+    ]}
+  ];
+  var dayState = load("port-days", {});
+  var wk = $("weeks");
+  if (wk){
+    var total = 0;
+    WEEKS.forEach(function(w, wi){
+      var box = document.createElement("div"); box.className = "week";
+      var h = document.createElement("div"); h.className = "week-h"; h.innerHTML = "<b>" + w.h + "</b><span>" + w.s + "</span>"; box.appendChild(h);
+      var ul = document.createElement("ul"); ul.className = "days";
+      w.d.forEach(function(d, di){
+        total++;
+        var id = "day-" + wi + "-" + di;
+        var li = document.createElement("li");
+        li.innerHTML = "<label><input type=\"checkbox\" id=\"" + id + "\"><span class=\"d\">" + d[0] + "</span><span>" + d[1] + "</span></label>";
+        var cb = li.querySelector("input");
+        cb.checked = !!dayState[id];
+        cb.addEventListener("change", function(){ dayState[id] = cb.checked; store("port-days", dayState); prog(); });
+        ul.appendChild(li);
+      });
+      box.appendChild(ul); wk.appendChild(box);
+    });
+    function prog(){ var n = wk.querySelectorAll("input:checked").length; $("day-progress").textContent = n + " / " + total; }
+    prog();
+  }
+})();
+</script>
